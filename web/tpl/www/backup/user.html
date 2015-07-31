@@ -1,0 +1,26 @@
+<!-- inc:head -->
+<div class="body">
+	<div class="left"><!-- inc:inc/usercp --><!-- inc:inc/left --></div>
+	<div class="right">
+		<div class="vmenu"><h3>会员明细</h3></div>
+
+		<div class="box pd5">
+			<table width="100%">
+			<tr>
+				<td width="120px" align="right">账号：</td>
+				<td>{:$rs[name]}</td>
+			</tr>
+			<tr>
+				<td align="right">会员组：</td>
+				<td>{:$group_rs[title]}</td>
+			</tr>
+			<tr>
+				<td align="right">头像：</td>
+				<td><img src="{:$rs[picture] ? $rs[picture] : 'images/nopic.gif'}" /></td>
+			</tr>
+			</table>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<!-- inc:foot -->

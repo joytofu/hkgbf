@@ -1,0 +1,17 @@
+<!-- if($cid) -->
+<!-- run:$_catelist = phpok_catelist($cid) -->
+<!-- if($_catelist[rslist]) -->
+<h3 class="title">相关分类</h3>
+<div class="content">
+	<ul class="catelist">
+		<!-- $_catelist[rslist] AS $key=>$value -->
+		<li class="{:$value[id] == $cid ? 'parent_over' : 'parent'}"><a href="{:list_url($value)}" title="{:$value[cate_name]}">{:$value[cate_name]}</a></li>
+			<!-- $value[sonlist] AS $k=>$v -->
+			<li class="{:$v[id] == $cid ? 'son_over' : 'son'}"><a href="{:list_url($v)}" title="{:$v[cate_name]}">·{:$v[cate_name]}</a></li>
+			<!-- end -->
+		<!-- end -->
+	</ul>
+</div>
+<!-- end -->
+<!-- run:unset($_catelist) -->
+<!-- end -->

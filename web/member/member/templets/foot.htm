@@ -1,0 +1,45 @@
+<script language="javascript" type="text/javascript">
+	window.onload=function (){
+		setInterval("document.getElementById('time').innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());",1000);
+	}
+</script>
+
+<div id="footer">
+  <div class="fLeft"></div>
+  <div id="time" class="fRight"></div>
+</div>
+<div class="index_1">
+  <a style="cursor:pointer" onmouseover="gg1()" onmouseout="gg2()"><img src="/tpl/www/images/w1.jpg"></a>
+  <a href="http://www.sina.com.cn/" target="_blank"><img style="margin:0 50px;" src="/tpl/www/images/w2.jpg"></a>
+ <a href="tencent://message/?uin=1337330816&amp;Site=im.qq.com&amp;Menu=yes" onfocus="blur()" target="_blank"><img src="/tpl/www/images/w3.jpg"></a>
+ <p id="none"><img src="/upfiles/2015/04/18/7cfef120a38caeca.png" width="88" style="margin-right:220px;"></p>
+</div>
+<script>
+function gg1(){
+x=document.getElementById("none")  //找到元素
+x.style.display="block";
+}
+
+function gg2(){
+x=document.getElementById("none")  //找到元素
+x.style.display="none";
+}
+
+</script>
+
+<div class="index_2">全国热线：4006-822-812</div>
+
+
+<div class="foot" style="margin-bottom:100px;">
+ <a href="/index.php?c=msg&amp;ts=contact">联系我们</a> | <a href="/index.php?c=msg&amp;id=2563&amp;">使用条款</a> | <a href="/index.php?c=msg&amp;id=2697&amp;">隐私条款</a> | <a href="/index.php?c=msg&amp;id=2698&amp;">风险提示</a> | <a href="/index.php?c=list&amp;ms=joinus">加入巨牛</a> | <a href="/index.php?c=msg&amp;ts=aboutus&amp;">关于巨牛</a><br />Copyright&copy;1990-2015HKGBF All rights reseved 粤ICP备11064298号<br />香港巨牛金融集团版权所有 
+
+</div>
+
+<div id="bottom" style="position:fixed; bottom:0; left:0; width:100%; z-index:99999">
+  <div class="bottom">
+     <a href="/index.php?c=list&cs=kehu&login"><img src="/tpl/www/images/f1.jpg"></a>     <a href="/index.php?c=msg&ts=down&"><img src="/tpl/www/images/f2.jpg"></a>
+     <a href="/index.php?c=list&ms=kaihui"><img src="/tpl/www/images/f3.jpg"></a>
+     <a href="/index.php?c=msg&ts=suoqu"><img src="/tpl/www/images/f4.jpg"></a>
+     <a href="/index.php?c=msg&ts=contact"><img src="/tpl/www/images/f5.jpg"></a>
+  </div>
+</div>

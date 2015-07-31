@@ -1,0 +1,12 @@
+<!-- if(function_exists("imagecreate") && defined("SYS_VCODE_USE") && SYS_VCODE_USE == true) -->
+<div class="table">
+	<div class="left">验证码：</div>
+	<div class="right">
+		<input name="sys_check" id="sys_check" type="text" style="width:50px;" />
+		<span id="phpok_update_code"><img src="{:site_url('login,codes')}" border="0" align="absmiddle" style="cursor:pointer;" onclick="phpok_update_code()"></span>
+	</div>
+	<div class="clear"></div>
+</div>
+<!-- else -->
+<input type="hidden" id="hidden" value="sys_check" name="sys_check" id="chk" />
+<!-- end -->

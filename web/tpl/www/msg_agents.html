@@ -1,0 +1,226 @@
+<!-- inc:head -->
+
+<!-- inc:banner-->
+
+
+<div class="main">
+   <div class="left">
+      <div class="left1">
+         <div class="lefttop">{:$m_rs[title]}</div>
+         <div class="leftmain">
+       <!-- inc:inc/catelist-->
+         </div>
+      </div>
+
+   </div>
+   
+   <div class="right">
+       <div class="righttop"><div class="ll" style="width:300px;">渠道代理商</div><div class="rr" style="width:600px;">您当前的位置是：<a href="{:$_sys[siteurl]}">网站首页</a> > {:$rs[title]} >合伙人</div></div>
+      
+      <div class="rightmain">
+
+          <div style="font-size:14px;">
+              <p>诚征各区域代理合作伙伴，产品可包括私募基金、固定收益类信托、香港保险以及资产管理项目等。
+
+              </p><br>
+
+              <p><strong>合作条件：</strong><br>个人或机构不限，有行业经验优先；注重商誉，共享共赢。</p><br>
+
+              <p><strong>限制：</strong><br>设立一区一代制，以城市为单位，不重复设立分部或授权代理人员。
+              </p><br>
+
+          </div>
+          <form id="form1" name="cooperation" method="post" onsubmit="return check()" action="submit.php">
+              <input name="title" type="text" id="title" size="50" value="渠道代理商申请"   style="display:none"/>
+              <table width="100%" border="0" cellspacing="1" cellpadding="0" style="margin:10px auto" id="cvf">
+                  <tbody>
+                  <tr>
+                      <td width="7%" align="left">
+                          姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：
+                      </td>
+                      <td width="100%">
+                          <input name="fullname" type="text" id="fullname" size="50" class="text1" required="required" pattern="[\u4E00-\u9FA5]{2,4}" />          <span class="hover">*</span>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td align="left">
+                          单位名称：
+                      </td>
+                      <td>
+                          <input name="danwei" type="text" id="danwei" size="50" class="text1" required="required" />  <span class="hover">*</span>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td align="left">
+                          手机号码：
+                      </td>
+                      <td>
+                          <input name="mobile" type="text" id="mobile" size="50" class="text1" required="required" />          <span class="hover">*</span>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td align="left">
+                          E-mail：
+                      </td>
+                      <td>
+                          <input name="email" type="email" id="email" size="50" class="text1" />
+                      </td>
+                  </tr>
+                  <tr>
+                      <td align="left">
+                          传&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;真：
+                      </td>
+                      <td>
+                          <input name="fax" type="text" id="fax" size="50" class="text1" />
+                      </td>
+                  </tr>
+                  <tr>
+                      <td align="left">
+                          合作方向：
+                      </td>
+                      <td>
+                          <textarea placeholder="请填写贵公司与巨牛的合作方向" name="content" cols="50" class="ta" rows="10" id="content"></textarea>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td align="right" height="40">
+                          &nbsp;
+                      </td>
+                      <td>
+                          <input type="submit" name="button2" id="button2" value="提交" style=" width:50px; height:25px;  float:left" />           <input type="reset" name="button2" id="button2" value="重置" style=" width:50px; height:25px; margin-left:30px;float:left" />
+                      </td>
+                  </tr>
+                  <tr>
+                      <td align="left" style="padding-left:100px;" colspan="2">
+                          <span class="hover">注：带*为必填项！</span>
+                      </td>
+                  </tr>
+                  </tbody>
+              </table>
+          </form>
+          <script type="text/javascript">
+              function check()
+              {
+                  if (document.form1.title.value=="")
+                  {
+                      window.alert("请输入标题!!       ");
+                      document.form1.title.focus();
+                      return false;
+                  }
+                  if (document.form1.fullname.value=="")
+                  {
+                      window.alert("请输入联系人姓名!!       ");
+                      document.form1.fullname.focus();
+                      return false;
+                  }else{
+                      var name=document.getElementById("fullname");
+                      var namereg = /^[u4E00-u9FA5]{2,4}+$/;
+                      if(!namereg.test(name.value))
+                      {window.alert("请输入正确的姓名！");
+                          return false;
+                      }
+                      return true;
+                  }
+                  if (document.form1.mobile.value=="")
+                  {
+                      window.alert("请输入电话!       ");
+                      document.form1.mobile.focus();
+                      return false;
+                  }
+//
+                  String.prototype.Trim = function() {
+                      var m = this.match(/^\s*(\S+(\s+\S+)*)\s*$/);
+                      return (m == null) ? "" : m[1];
+                  }
+                  String.prototype.isMobile = function() {
+                      return (/^(?:18\d|14\d|13\d|15[123456789])-?\d{5}(\d{3}|\*{3})$/.test(this.Trim()));
+                  }
+                  String.prototype.isTel = function(){
+//"兼容格式: 国家代码(2到3位)-区号(2到3位)-电话号码(7到8位)-分机号(3位)"
+                      //return (/^(([0\+]\d{2,3}-)?(0\d{2,3})-)?(\d{7,8})(-(\d{3,}))?$/.test(this.Trim()));
+                      return (/^(([0\+]\d{2,3}-)?(0\d{2,3}))(\d{7,8})(-(\d{3,}))?$/.test(this.Trim()));
+                  }
+
+                  with(document.form1){
+                      if (mobile.value.isMobile())  {
+
+                      }
+                      else {
+                          alert("请输入正确的电话号码或手机\n\n例如:13534596987");
+                          mobile.focus();
+                          return false;
+
+                      }
+                  }
+//
+
+                  if (document.form1.email.value!="")
+                  {
+
+
+
+                      var temp = document.getElementById("email");
+                      var myreg = /(\S)+[@]{1}(\S)+[.]{1}(\w)+/;
+                      if(temp.value!="")
+                      {
+                          if(!myreg.test(temp.value))
+                          {
+                              window.alert("您的E-mail格式有误，请重新输入!!       ");
+                              document.form1.email.focus();
+                              return false;
+                          }
+
+                      }
+
+                      if (document.form1.fax.value!="")
+                      {
+
+                      }
+
+
+                      //
+                      String.prototype.Trim = function() {
+                          var m = this.match(/^\s*(\S+(\s+\S+)*)\s*$/);
+                          return (m == null) ? "" : m[1];
+                      }
+                      String.prototype.isMobile = function() {
+                          return (/^(?:18\d|14\d|13\d|15[123456789])-?\d{5}(\d{3}|\*{3})$/.test(this.Trim()));
+                      }
+                      String.prototype.isTel = function()
+                      {
+//"兼容格式: 国家代码(2到3位)-区号(2到3位)-电话号码(7到8位)-分机号(3位)"
+                          //return (/^(([0\+]\d{2,3}-)?(0\d{2,3})-)?(\d{7,8})(-(\d{3,}))?$/.test(this.Trim()));
+                          return (/^(([0\+]\d{2,3}-)?(0\d{2,3}))(\d{7,8})(-(\d{3,}))?$/.test(this.Trim()));
+                      }
+
+                      with(document.form1){
+                          if (fax.value.isTel())  {
+
+                          }
+                          else {
+                              alert("请输入正确的传真号码\n\n例如:020123456789");
+                              fax.focus();
+                              return false;
+
+                          }
+                      }
+//
+
+
+
+                  }
+
+
+              }
+          </script>
+ 
+      </div>
+      
+   </div>
+   
+   
+   
+</div>
+
+
+<!-- inc:foot -->

@@ -1,0 +1,11 @@
+<!-- inc:head -->
+
+<!-- inc:banner-->
+<!--run:-->
+require_once('libs/checkLogined.php');
+if($_SESSION['username']==""&&$_COOKIE['username']==""){
+alertMes("您还没有登录，请先登录","index.php?c=list&cs=kehu&login");
+}else{
+echo "<script>window.location.href='http://www.hkgbf.com/index.php?c=list&ms=kehuuser&p=218';</script>";
+}
+<!--/run-->

@@ -1,0 +1,335 @@
+<!-- inc:header -->
+<script type="text/javascript">
+function get_ext(val)
+{
+	var url = base_file + "?"+base_ctrl+"=excel&"+base_func+"=in_ajax&mid="+val;
+	get_ajax(url,rs_in);
+}
+
+function rs_in(rs)
+{
+	if(rs)
+	{
+		$("#in_ext").html(rs);
+		$("#in_ext").show();
+	}
+}
+
+function in_data()
+{
+	var url = base_file + "?"+base_ctrl+"=excel&"+base_func+"=in";
+	var mid = $("#in_mid").val();
+	if(!mid)
+	{
+		alert("请选择要导入模块！");
+		return false;
+	}
+	url += "&mid="+mid;
+	var cateid = $("#in_cateid").val();
+	if(!cateid)
+	{
+		alert("请选择要导入的分类！");
+		return false;
+	}
+	if(cateid && cateid != "empty")
+	{
+		url += "&cateid="+cateid;
+	}
+	//设置货币类型
+	var currency = $("#in_currency").val();
+	if(currency)
+	{
+		url += "&currency="+currency;
+	}
+	//导入的字段
+	var fie = $.input.checkbox_join("field_list");
+	url += "&idlist="+$.str.encode(fie);
+	//指定要导入的Excel文件
+	var exfile = $("#excelfile").val();
+	if(!exfile)
+	{
+		alert("请选择Excel文件！");
+		return false;
+	}
+	url += "&excelfile="+exfile;
+	//开始执行导入
+	var in_charset = $("#in_charset").val();
+	if(!in_charset)
+	{
+		alert("请选择文件编码！一般国内常用的GBK编码");
+		return false;
+	}
+	url += "&charset="+$.str.encode(in_charset);
+	direct(url);
+}
+</script>
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; 数据导入</span></td>
+	</tr>
+	</table>
+</div></div>
+<div class="main">
+	<div style="padding:3px 5px">
+		注意事项：
+		<ol>
+			<li>请选择要导入的模块，及分类（如果模块支持的话，会提供下拉菜单选择）</li>
+			<li>请将要导入的字段打上勾</li>
+			<li>要导入的文件第一行对应的值为字段名（如 title，note等）</li>
+			<li>上传文件前，请先确认附件类型支持：xls或csv格式，<a href="javascript:parent.$.desktop.win({'title':'附件管理','iframe_url':'{:site_url('files,set')}'});void(0);"><span class="darkred">点这里进行查看或修改</span></a></li>
+			<li>日期长格式：yyyy-mm-dd hh:ii:ss，短格式：yyyy-mm-dd</li>
+			<li>摘要不支持HTML代码，请注意</li>
+			<li>扩展字段是：图片，影音，下载，联动及模块等，暂时不支持导入</li>
+			<li>图片字段调用：请在文件中保留相对路径，在导入前先将相应的文件通过FTP上传到指定路径下<br />图片路径中不支持空格，不支持中文，请注意</li>
+			<li>CSV格式请用英文的逗号隔开“,”</li>
+			<li class="darkred">数据导入操作有风险，建议在使用前先备份数据</li>
+		</ol>
+	</div>
+</div>
+
+<div class="table">
+	<div class="left">&nbsp;模块：</div>
+	<select name="in_mid" id="in_mid" onchange="get_ext(this.value)">
+		<option value="">请选择模块</option>
+		<!-- $mlist AS $key=>$value -->
+		<option value="{:$value[id]}"{if($mid == $value[id])} selected{end}>{:$value[title]}</option>
+		<!-- end -->
+	</select>
+</div>
+
+
+
+<div id="in_ext" style="display:none;"></div>
+
+<script type="text/javascript" src="libs/swfupload/swfupload.js"></script>
+<script type="text/javascript" src="libs/swfupload/swfupload.queue.js"></script>
+<script type="text/javascript" src="libs/swfupload/fileprogress.js"></script>
+<script type="text/javascript" src="libs/swfupload/handlers.js"></script>
+
+<div class="table">
+	<div class="left">&nbsp;选择文件：</div>
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td id="excelfile_td">
+			<select name="excelfile" id="excelfile">
+				<option value="">请选择要导入的文件</option>
+				<!-- $filelist AS $key=>$value -->
+				<option value="{:$value[id]}">{:$value[title] ? $value[title] : basename($value[filename])} 【{:date("Y-m-d H:i:s",$value[postdate])}】</option>
+				<!-- end -->
+			</select>
+		</td>
+		<td>&nbsp;</td>
+		<td><div id="divStatus"></div></td>
+		<td>&nbsp;</td>
+		<td><span id="spanButtonPlaceHolder"></span></td>
+		<td>&nbsp;</td>
+		<td style="display:none;"><input id="btnCancel" type="button" value="取消上传" onclick="swfu.cancelQueue();" disabled="disabled" /></td>
+	</tr>
+	</table>
+</div>
+
+<div id="fsUploadProgress" class="swfupload_progress"></div>
+
+<div class="table">
+	<div class="left">&nbsp;文件编码：</div>
+	<select name="in_charset" id="in_charset">
+		<option value="">请选择Excel编码</option>
+		<option value="gbk">GBK</option>
+		<option value="utf-8">UTF-8</option>
+		<option value="big5">BIG5</option>
+	</select>
+</div>
+
+
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<input type="button" value="数据导入" class="btn4" onclick="in_data()" />
+</div>
+
+
+<script type="text/javascript">
+function update_excel_filelist(file)
+{
+	if (this.getStats().files_queued === 0) {
+		//更新Ajax
+		var url = base_file + "?"+base_ctrl+"=excel&"+base_func+"=filelist";
+		get_ajax(url,end_excel_filelist);
+	}
+}
+
+function end_excel_filelist(rs)
+{
+	if(rs)
+	{
+		$("#excelfile_td").html(rs);
+	}
+}
+
+function excel_queueComplete(numFilesUploaded)
+{
+	//
+}
+var settings = {
+	flash_url : "libs/swfupload/swfupload.swf",
+	upload_url: "{:site_url('open,upload','','&')}",
+	post_params: {"{:SYS_SESSION_ID}" : "{:$sys_app->session_lib->sessid()}"},
+	file_size_limit : "500 MB",
+	file_types : "*.xls;*.csv;*.xlsx",
+	file_types_description : "Excel 文件",
+	file_upload_limit : 1,
+	file_queue_limit : 0,
+	custom_settings : {
+		progressTarget : "fsUploadProgress",
+		cancelButtonId : "btnCancel"
+	},
+	debug: false,
+
+	// Button settings
+	button_image_url: "images/swfupload.png",
+	button_placeholder_id : "spanButtonPlaceHolder",
+	button_width: "62",
+	button_height: "22",
+
+	// The event handler functions are defined in handlers.js
+	file_queued_handler : fileQueued,
+	file_queue_error_handler : fileQueueError,
+	file_dialog_complete_handler : fileDialogComplete,
+	upload_start_handler : uploadStart,
+	upload_progress_handler : uploadProgress,
+	upload_error_handler : uploadError,
+	upload_success_handler : uploadSuccess,
+	upload_complete_handler : update_excel_filelist,
+	queue_complete_handler : excel_queueComplete	// Queue plugin event
+};
+swfu = new SWFUpload(settings);
+</script>
+
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; 数据导出</td>
+	</tr>
+	</table>
+</div></div>
+
+<div class="main">
+	<div style="padding:3px 5px">
+		注意事项：
+		<ol>
+			<li>支持导出格式有：EXCEL2007，EXCEL2003和CSV三种格式，推荐使用EXCEL2003，兼容性好</li>
+			<li>如果导出的数据带有图片，建议不超过500个主题（CSV不支持图片功能）</li>
+			<li>所有导出的数据中均清除HTML代码信息</li>
+			<li>部分扩展字段仅导出存储值，显示值与存储值有一定出入</li>
+			<li>所有导出的信息，均使用文本处理，如需用于统计，请在Excel表中转换</li>
+			<li>导出响应较慢时，请耐心等候。</li>
+			<li class="darkred">数据较多时，请缩小结果范围</li>
+		</ol>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+function out_ext(val)
+{
+	var url = base_file + "?"+base_ctrl+"=excel&"+base_func+"=out_ajax&mid="+val;
+	get_ajax(url,rs_out);
+}
+
+function rs_out(rs)
+{
+	if(rs)
+	{
+		$("#out_ext").html(rs);
+		$("#out_ext").show();
+	}
+}
+
+function out_data()
+{
+	var url = base_file + "?"+base_ctrl+"=excel&"+base_func+"=out";
+	var mid = $("#out_mid").val();
+	if(!mid)
+	{
+		alert("请选择要导出模块！");
+		return false;
+	}
+	url += "&mid="+mid;
+	var cateid = $("#out_cateid").val();
+	if(cateid && cateid != "empty")
+	{
+		url += "&cateid="+cateid;
+	}
+	//设置货币类型
+	var currency = $("#out_currency").val();
+	if(currency)
+	{
+		url += "&currency="+currency;
+	}
+	//导出的字段
+	var fie = $.input.checkbox_join("out_field_list");
+	url += "&idlist="+$.str.encode(fie);
+	//导出的数量
+	var count = $("#out_count").val();
+	url += "&count="+$.str.encode(count);
+	//导出格式
+	var type = $("#out_type").val();
+	url += "&type="+$.str.encode(type);
+	//
+	var out_name = $("#out_name").val();
+	if(out_name)
+	{
+		url += "&outname="+$.str.encode(out_name);
+	}
+	//开始执行导出
+	direct(url);
+}
+</script>
+
+
+<div class="table">
+	<div class="left">&nbsp;模块：</div>
+	<select name="out_mid" id="out_mid" onchange="out_ext(this.value)">
+		<option value="">请选择模块</option>
+		<!-- $mlist AS $key=>$value -->
+		<option value="{:$value[id]}"{if($mid == $value[id])} selected{end}>{:$value[title]}</option>
+		<!-- end -->
+	</select>
+</div>
+
+<div class="table">
+	<div class="left">&nbsp;导出格式：</div>
+	<select name="out_type" id="out_type">
+		<option value="xls">Excel 2003(*.xls)</option>
+		<option value="xlsx">Excel 2007(*.xlsx)</option>
+		<option value="csv">CSV(*.csv)</option>
+	</select>
+</div>
+
+<div class="table">
+	<div class="left">&nbsp;导出数量：</div>
+	<input type="text" id="out_count" name="out_count" class="short_input" value="0" />
+	<span class="clue_on"> 0为不限制，如带图片建议不超过500</span>
+</div>
+
+<div id="out_ext" style="display:none;"></div>
+
+<div class="table">
+	<div class="left">&nbsp;导出文件名：</div>
+	<input type="text" id="out_name" name="out_name" value="" />
+	<span class="clue_on"> 设置导出的文件名称，不含后缀</span>
+</div>
+
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<input type="button" value="数据导出" class="btn4" onclick="out_data()" />
+</div>
+
+<!-- if($mid) -->
+<script type="text/javascript">
+get_ext('{:$mid}');
+out_ext('{:$mid}');
+</script>
+<!-- end -->
+
+<!-- inc:footer -->

@@ -1,0 +1,91 @@
+<div class="main">
+<table width="100%" style="layout:fixed;" cellpadding="0" cellspacing="0">
+<tr>
+	<td class="t_sub" width="33px">&nbsp;</td>
+	<td class="t_sub" width="30px">状态</td>
+	<!-- if($ifcate) -->
+	<td class="t_sub" width="120px">主分类</td>
+	<!-- end -->
+	<td class="t_sub">{:$m_rs[title_nickname] ? $m_rs[title_nickname] : '主题'}</td>
+
+	<!-- $mlist AS $key=>$value -->
+		<td class="t_sub">{:$value}</td>
+	<!-- end -->
+	<td class="t_sub" width="120px">发布时间</td>
+	<td class="t_sub" width="50px">排序</td>
+	<td class="t_sub" width="{:$m_rs[if_reply] ? '65' : '45'}px">操作</td>
+</tr>
+<!-- $rslist AS $key=>$value -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)" id="list_{:$m_rs[id]}_{:$value[id]}">
+	<td align='center' class="tc_left"><input type="checkbox" value="{:$value[id]}" /></td>
+	<td align="center" class="tc_right" id="status_{:$value[id]}"><a href="javascript:status({:$value[id]},{:intval($value[status])});void(0);" class="status{:intval($value[status])}"></a></td>
+	<!-- if($ifcate) -->
+	<td align="center" class="tc_right">{:$value[cate_name] ? $value[cate_name] : '-'}</td>
+	<!-- end -->
+	<td align='left' class="tc_right">
+		<div style="padding:2px 5px;">
+			【{:$value[id]}】
+			<span class="tips" style="{:$value[style]}" title="{:$value[title]}" rel="{:site_url('list,ajax')}id={:$value[id]}">{:$value[title]}</span>
+            <!--if($value[zprice])-->[订单总额：￥{:$value[zprice]}]&nbsp;<!--end-->
+            <!--if($value[pay])-->[{:$value[pay]}]&nbsp;<!--end-->
+            <!--if($value[picnews]==1)--><span style="color:#F00">[图片新闻]</span>&nbsp;<!--end-->
+            <!--if($value[pays]==1)-->[已支付]&nbsp;<!--end-->
+            <!--if($value[ttxx]==1)-->[已使用]&nbsp;<!--end-->
+            <!--if($value[lianjie]==true)--><span style="color:#F00">[使用外链]</span>&nbsp;<!--end-->
+            <!--if($value[istop]==1 and $value[qx]==1)--><!--end-->
+            <!-- if($value[uid]) --><a href="javascript:show_user('{:$value[uid]}');void(0);">[查看会员资料]</a><!-- end -->
+            
+            <!--if($value[values])-->&nbsp;<a href="/upload/{:$value[values]}" style="color:#F00" target="_blank">[查看附件]</a><!--end-->
+			<!-- if($value[thumb]) --><a href="javascript:phpjs_preview('{:$value[thumb_id]}');void(0);"><span class="darkred">【图片】</span></a><!-- end -->
+			<!-- if($value[istop]) --> <span class="red">[顶]</span><!-- end -->
+			<!-- if($value[isvouch]) --> <span class="darkblue">[荐]</span><!-- end -->
+			<!-- if($value[isbest]) --> <span class="darkred">[热销]</span><!-- end -->
+			<!-- if($value[identifier]) --><span class="clue_on">【{:$value[identifier]}】</span><!-- end -->
+		</div>
+	</td>
+
+	<!-- $mlist AS $k=>$v -->
+		<td  align="center" class="tc_right">{:$value[$k]}</td>
+	<!-- end -->
+	<td  align="center" class="tc_right">{:date('Y-m-d H:i',$value[post_date])}</td>
+	<td  align="center" class="tc_right"><input type="text" class="center" style="width:40px;" id="taxis_{:$value[id]}" value="{:$value[taxis]}" /></td>
+	<td align="center" class="tc_right">
+		<!-- if($m_rs[if_reply]) --><a href="{:site_url('reply')}tid={:$value[id]}" class="btn reply" title="留言"></a><!-- end -->
+		<a href="{:site_url('list,set')}id={:$value[id]}" class="btn edit" title="编辑"></a>
+		<a href="javascript:del({:$value['id']});void(0);" class="btn del" title="删除"></a>
+	</td>
+</tr>
+<script type="text/javascript">
+var right_menu = [[
+	{
+		text:"设为快捷键",
+		func:function(){
+			parent.$.phpok.shortcut_ajax($.str.encode('{:$value[title]}'),$.str.encode("{admin}?{c}=list&{f}=set&id={:$value[id]}"));
+		}
+	},{
+		text:"编辑(E)",
+		func:function(){
+			direct("{:site_url('list,set')}id={:$value[id]}");
+		}
+	},{
+		text:"删除(D)",
+		func:function(){
+			del("{:$value['id']}");
+		}
+	}
+]];
+$("#list_{:$m_rs[id]}_{:$value[id]}").smartMenu(right_menu, {name: "list_{:$m_rs[id]}_{:$value[id]}"});
+right_menu = null;
+</script>
+<!-- end -->
+</table>
+</div>
+<script type="text/javascript">
+/* 自定义提示 */
+$.include("js/cluetip/jquery.cluetip.css");
+$.include("js/cluetip/jquery.cluetip.all.min.js",function(){
+	$(".tips").cluetip({
+		width: 400
+	});
+});
+</script>

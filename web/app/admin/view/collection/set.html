@@ -1,0 +1,213 @@
+<!-- inc:header -->
+<script type="text/javascript">
+function to_submit()
+{
+	var name = getid("title").value;
+	if(!name)
+	{
+		alert("主题不允许为空");
+		getid("title").focus();
+		return false;
+	}
+	var linkurl = getid("linkurl").value;
+	if(!linkurl)
+	{
+		alert("网址不允许为空");
+		getid("linkurl").focus();
+		return false;
+	}
+	var cateid = getid("cateid").value;
+	if(!cateid)
+	{
+		alert("请选择设置一个目标分类");
+		return false;
+	}
+	getid("_phpok_submit").disabled = true;
+	return true;
+}
+
+function collect_creat()
+{
+	var thisurl = $("#longurl").attr("value");
+	if(!thisurl)
+	{
+		alert("请选设置网址！");
+		return false;
+	}
+	if(thisurl.indexOf("[pageid]")>0)
+	{
+		var start_count = $("#start_count").attr("value");
+		var end_count = $("#end_count").attr("value");
+		var string_array = new Array();
+		var m = 0;
+		for(var i=start_count;i<=end_count;i++)
+		{
+			string_array[m] = thisurl.replace("[pageid]",i);
+			m++;
+		}
+		var string = string_array.join("\n");
+		$("#listurl").attr("value",string);
+	}
+	else
+	{
+		$("#listurl").attr("value",thisurl);
+	}
+}
+</script>
+
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; <a href="{:site_url('collection')}">采集管理</a> &raquo; 添加/编辑采集信息</span></td>
+	</tr>
+	</table>
+</div></div>
+
+<form method="post" action="{:site_url('collection,setok')}id={:$id}" onsubmit="return to_submit();">
+
+<div class="table">
+	<div class="left"><span class="red">*</span> 主题：</div>
+	<input type="text" name="title" id="title" value="{:$rs[title]}" class="long_input">
+</div>
+
+<div class="table">
+	<div class="left"><span class="red">*</span> 网址：</div>
+	<input type="text" name="linkurl" id="linkurl" value="{:$rs[linkurl]}" class="long_input">
+	<span class="clue_on">采集的网址必须以http://开头，以/结尾</span>
+</div>
+
+<div class="table">
+	<div class="left">网站编码：</div>
+	<select name="url_charset">
+		<option value="utf-8">UTF-8编码</option>
+		<option value="gbk"{if($rs[url_charset] == "gbk")} selected{end}>GBK编码</option>
+		<option value="big5"{if($rs[url_charset] == "big5")} selected{end}>BIG5</option>
+	</select>
+	<span class="clue_on">仅支持三种编码，如无法满足要求，建议您使用第三方采集器。GB2312编码的网站可选用GBK</span>
+</div>
+
+
+<div class="table">
+	<div class="left"><span class="red">*</span> 发布目标：</div>
+	<select name="cateid" id="cateid">
+		<!-- if($modulelist && count($modulelist)>0) -->
+		<optgroup label="模块">
+			<!-- $modulelist AS $key=>$value -->
+			<option value="{:$value[id]}:0"{if($value[id].'0' == $rs[mid_cid])} selected{end}>{:$value[title]}</option>
+			<!-- end -->
+		</optgroup>
+		<!-- end -->
+		<!-- if($catelist) -->
+		<optgroup label="分类">
+			<!-- $catelist AS $key=>$value -->
+			<option value="{:$value[module_id]}:{:$value[id]}"{if($value[module_id].":".$value[id] == $rs[mid_cid])} selected{end}>{:$value[space]}{:$value[cate_name]}</option>
+			<!-- end -->
+		</optgroup>
+		<!-- end -->
+	</select>
+</div>
+
+<div class="table">
+	<div class="left"><span class="red">*</span> 列表页地址：</div>
+	<textarea id="listurl" name="listurl" style="width:600px;height:200px;max-width:600px;min-width:600px;">{:$rs[listurl]}</textarea>
+</div>
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<span class="clue_on">一行一个列表页地址，须完整带有http://</span>
+</div>
+
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<table cellspacing="0">
+	<tr>
+		<td><input type="text" id="longurl" class="long_input" /></td>
+		<td>&nbsp;页码开始值：</td>
+		<td><input type="text" id="start_count" value="1" style="width:30px" /></td>
+		<td>&nbsp;结束值：</td>
+		<td><input type="text" id="end_count" value="10" style="width:30px" /></td>
+		<td><input type="button" value="创建" onclick="collect_creat()" class="btn2" /></td>
+		<td class="clue_on">&nbsp;</td>
+	</tr>
+	</table>
+</div>
+
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<span class="clue_on">页码标识：<span class="red">[pageid]</span>，本系统仅提供简单的网址规则，需要更强大的采集功能，建议使用第三方采集</span>
+</div>
+
+<div class="table">
+	<div class="left">网址采集范围：</div>
+	<span class="clue_on">支持 <span class="red">(*)</span>，建议设定</span>
+</div>
+
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<table>
+	<tr>
+		<td><textarea name="list_tags_start" id="list_tags_start" style="width:200px;height:90px;">{:$rs[list_tags_start]}</textarea></td>
+		<td>＜－＞</td>
+		<td><textarea name="list_tags_end" id="list_tags_end" style="width:200px;height:90px;">{:$rs[list_tags_end]}</textarea></td>
+	</tr>
+	</table>
+</div>
+
+
+<div class="table">
+	<div class="left"><span class="red">*</span> 网址必须包含：</div>
+	<input type="text" id="url_tags" name="url_tags" value="{:$rs[url_tags]}" class="long_input" />
+	<span class="clue_on">设置内容网址必须包含哪些字符，多个字符用“|”分隔，不限设置为空</span>
+</div>
+
+<div class="table">
+	<div class="left">需要GZIP：</div>
+	<table cellspacing="0">
+	<tr>
+		<td><input type="radio" name="is_gzip" value="0"{if(!$rs[is_gzip])} checked{end} /></td>
+		<td>&nbsp;不需要 &nbsp;</td>
+		<td><input type="radio" name="is_gzip" value="1"{if($rs[is_gzip])} checked{end} /></td>
+		<td>&nbsp;需要</td>
+		<td class="clue_on">&nbsp;一般情况下，都是需要启用的！我们推荐您启用此功能</td>
+	</tr>
+	</table>
+</div>
+
+
+<div class="table">
+	<div class="left">使用代理访问：</div>
+	<table cellspacing="0">
+	<tr>
+		<td><input type="radio" name="is_proxy" value="0"{if(!$rs[is_proxy])} checked{end} /></td>
+		<td>&nbsp;不需要 &nbsp;</td>
+		<td><input type="radio" name="is_proxy" value="1"{if($rs[is_proxy])} checked{end} /></td>
+		<td>&nbsp;需要</td>
+		<td class="clue_on">&nbsp;本采集器仅支持HTTP代理，不支持SOCKS5代理，请注意！</td>
+	</tr>
+	</table>
+</div>
+
+<div class="table">
+	<div class="left">代理服务器：</div>
+	<input type="text" id="proxy_service" name="proxy_service" value="{:$rs[proxy_service]}" class="long_input" />
+	<span class="clue_on">填写服务器，格式如：<span class="red">http://192.168.1.100:8080</span>，注意端口号</span>
+</div>
+
+<div class="table">
+	<div class="left">代理账号：</div>
+	<input type="text" id="proxy_user" name="proxy_user" value="{:$rs[proxy_user]}" />
+	<span class="clue_on">如果代理服务器需要登录账号，请在这里设置</span>
+</div>
+
+<div class="table">
+	<div class="left">代理密码：</div>
+	<input type="text" id="proxy_pass" name="proxy_pass" value="{:$rs[proxy_pass]}" />
+	<span class="clue_on">同上，如需要密码，请设置，返之留空</span>
+</div>
+
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<input type="submit" class="btn3" id="_phpok_submit" name="article_submit" value=" 提交 ">
+</div>
+
+</form>
+<!-- inc:footer -->

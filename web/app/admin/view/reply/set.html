@@ -1,0 +1,97 @@
+<!-- inc:header -->
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="130px"><span class="lead">&nbsp;&raquo; 管理/回复 评论信息</span></td>
+		<td align="right"><a href="{:site_url('reply')}" class="button">评论列表</a></td>
+	</tr>
+	</table>
+</div></div>
+
+
+<form method="post" action="{:site_url('reply,setok')}id={:$id}" onsubmit="return to_reply()">
+<div class="table">
+	<div class="left"><span class="red">*</span> 主题：</div>
+	{:$rs[t_title]}
+</div>
+<div class="table">
+	<div class="left"><span class="red">*</span> 回复标题：</div>
+	<input type="text" name="subject" id="subject" value="{:$rs[title]}">
+	<span class="clue_on"> 标题不允许为空</span>
+</div>
+<div class="table">
+	<div class="left">评论人昵称：</div>
+	{:$rs[username]}
+</div>
+<div class="table">
+	<div class="left">IP地址：</div>
+	{:$rs[ip]}
+</div>
+<div class="table">
+	<div class="left">评论时间：</div>
+	{:date("Y-m-d H:i:s",$rs[postdate])}
+</div>
+
+<div class="table">
+	<div class="left">热销：</div>
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td><input type="radio" name="ifbest" value="1"{if($rs[ifbest])} checked{end} /></td>
+		<td>是&nbsp;</td>
+		<td><input type="radio" name="ifbest" value="0"{if(!$rs[ifbest])} checked{end} /></td>
+		<td>否</td>
+	</tr>
+	</table>
+</div>
+
+<div class="table">
+	<div class="left">星数：</div>
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td><select name="star" style="color:darkred;">
+	<option value="1"{if($rs[star] == 1)} selected{end}>&#9733;</option>
+	<option value="2"{if($rs[star] == 2)} selected{end}>&#9733;&#9733;</option>
+	<option value="3"{if($rs[star] == 3)} selected{end}>&#9733;&#9733;&#9733;</option>
+	<option value="4"{if($rs[star] == 4)} selected{end}>&#9733;&#9733;&#9733;&#9733;</option>
+	<option value="5"{if($rs[star] == 5)} selected{end}>&#9733;&#9733;&#9733;&#9733;&#9733;</option>
+	</select></td>
+	</tr>
+	</table>
+</div>
+
+<div class="table">
+	<div class="left">内容：</div>
+	<textarea id="content" name="content" style="width:545px;height:80px;">{:$rs[content]}</textarea>
+</div>
+<div class="table">
+	<div class="left">管理员回复：</div>
+	{:sys_fckeditor('admreply',$rs[admreply],'200px','630px')}
+</div>
+
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<input type="submit" id="qgbutton" class="btn3" value="提 交">
+</div>
+</form>
+
+<script type="text/javascript">
+function to_reply()
+{
+	var subject = getid("subject").value;
+	if(!subject || subject == "undefined")
+	{
+		alert("标题不允许为空");
+		return false;
+	}
+	var msg = getid("content").value;
+	if(!msg)
+	{
+		alert("内容不允许为空！");
+		return false;
+	}
+	getid("qgbutton").disabled = true;
+	return true;
+}
+</script>
+
+<!-- inc:footer -->

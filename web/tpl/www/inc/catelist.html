@@ -1,0 +1,11 @@
+<!-- if($cid) -->
+<!-- run:$_catelist = phpok_catelist($cid) -->
+<!-- if($_catelist[rslist]) -->
+
+		<!-- $_catelist[rslist] AS $key=>$value -->
+		<li><a href="{:list_url($value)}" id="{:$value[id] == $cid ? 'hov' : 'parent'}" title="{:$value[cate_name]}">+&nbsp;&nbsp;{:$value[cate_name]}</a></li>
+		<!-- end -->
+	
+<!-- end -->
+<!-- run:unset($_catelist) -->
+<!-- end -->

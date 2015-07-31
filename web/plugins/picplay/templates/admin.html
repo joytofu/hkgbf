@@ -1,0 +1,61 @@
+<script type="text/javascript">
+function plugin_picplay()
+{
+	var phpok = $("#plugin_phpok").val();
+	if(!phpok)
+	{
+		alert("数据来源不允许为空！");
+		return false;
+	}
+	return true;
+}
+</script>
+<div class="notice"><div class="p">&nbsp;&raquo; 插件扩展配置</div></div>
+<div class="table">
+	<div class="left"><span class="red">*</span> 数据来源：</div>
+	<select name="plugin_phpok" id="plugin_phpok">
+		<!-- $phpoklist AS $key=>$value -->
+		<option value="{:$value[identifier]}"{if($myext[phpok] == $value[identifier])} selected{end}>{:$value[title]}</option>
+		<!-- end -->
+		<!-- if($_i == 0) -->
+		<option value="">请在【数据调用中心】里设置相关调用，且【图片不为空】</option>
+		<!-- end -->
+	</select>
+</div>
+
+<div class="table">
+	<div class="left">宽度：</div>
+	<input type="text" name="plugin_width" id="plugin_width" value="{:$myext[width]}">
+	<span class="clue_on"> 请填写播放器的宽度，纯数字，单位是px</span>
+</div>
+
+<div class="table">
+	<div class="left">高度：</div>
+	<input type="text" name="plugin_height" id="plugin_height" value="{:$myext[height]}">
+	<span class="clue_on"> 同上</span>
+</div>
+
+
+<div class="table">
+	<div class="left">标题：</div>
+	<table>
+	<tr>
+		<td><input type="radio" name="plugin_showtitle" value="1"{if($myext[showtitle])} checked{end} /></td>
+		<td>显示&nbsp;</td>
+		<td><input type="radio" name="plugin_showtitle" value="0"{if(!$myext[showtitle])} checked{end} /></td>
+		<td>隐藏</td>
+	</tr>
+	</table>
+</div>
+
+<div class="table">
+	<div class="left">按钮：</div>
+	<table>
+	<tr>
+		<td><input type="radio" name="plugin_showbtn" value="1"{if($myext[showbtn])} checked{end} /></td>
+		<td>显示&nbsp;</td>
+		<td><input type="radio" name="plugin_showbtn" value="0"{if(!$myext[showbtn])} checked{end} /></td>
+		<td>隐藏</td>
+	</tr>
+	</table>
+</div>

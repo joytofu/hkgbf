@@ -1,0 +1,50 @@
+<!-- inc:header -->
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; 添加/修改权限</span></td>
+		<td align="right"><a href="javascript:parent.Layer.over();void(0);" class="button">关闭</a></td>
+	</tr>
+	</table>
+</div></div>
+<form method="post" action="{:site_url('popedom,setok')}id={:$id}">
+
+<!-- if($id) -->
+<div class="table">
+	<div class="left">权限：</div>
+	<select name="identifier_id" id="identifier_id">
+	<option value="0">请选择一个权限动作</option>
+	<!-- $act_list AS $key=>$value -->
+	<option value="{:$value[id]}"{if($value[id] == $rs[identifier_id])} selected{end}>{:$value[title]}</option>
+	<!-- end -->
+	</select>
+</div>
+<!-- else -->
+<div class="table">
+	<div class="left">权限：</div>
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+		<!-- $act_list AS $key=>$value -->
+		<td><input type="checkbox" name="identifier_id[]" value="{:$value[id]}"> {:$value[title]} &nbsp;</td>
+		<!-- row:4 -->
+		<!-- end -->
+	</tr>
+	</table>
+</div>
+<!-- end -->
+
+<div class="table">
+	<div class="left">模块：</div>
+	<select name="module_id" id="module_id">
+	<option value="0">请选择模块</option>
+	<!-- $module_list AS $key=>$value -->
+	<option value="{:$value[id]}"{if($value[id] == $rs[module_id])} selected{end}>{:$value[title]}</option>
+	<!-- end -->
+	</select>
+</div>
+
+
+</form>
+
+
+<!-- inc:footer -->

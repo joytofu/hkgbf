@@ -1,0 +1,75 @@
+*{margin:0;padding:0;}
+body{background:#E3F5FB;font:normal 12px "Tahoma","Arial","Microsoft YaHei"}
+a:link{color: #000000;text-decoration: none;}
+a:visited{color: #000000;text-decoration: none;}
+a:hover{color: #ff0000;text-decoration: underline;}
+select{border:1px #DDD solid;}
+
+.hander{cursor:pointer}
+.f-left{float:left;}
+.f-right{float:right}
+.clear{clear:both;height:0;}
+/*.button{padding:0 4px;*padding:2px 4px 0 4px;font-size:12px;height:23px;background-color:#ece9d8;border-width:1px;}*/
+.button{}
+
+#foot{position:relative;clear:both;text-align:center;margin:5px auto;border:1px solid #1496C0;width:99%;}
+#foot p{background:#D6F1FA;line-height:130%;margin:1px;padding:5px 0px;border:1px #FFF solid;}
+
+img{border:0}
+form{margin:0;padding:0}
+
+.pagelist{margin:2px 3px;padding:1px;border:0px}
+.pagelist .n{border:1px #DDDDDD solid;padding:0 5px;background:#FFFFFF;font-size:11px;}
+.pagelist .m{border:1px #FF0000 solid;padding:0 5px;background:#DFDFDF;color:red;font-size:11px;}
+.pagelist a{font-size:11px;font-family:"Arial","Tahoma","Microsoft YaHei"}
+
+.clear{clear:both}
+.none{display:none}
+
+
+.t_sub{background:#0C5870;color:white;height:25px;text-align:center}
+.tc_left{border-left:1px #0C5870 solid;border-right:1px #0C5870 solid;border-bottom:1px #0C5870 solid}
+.tc_right{border-right:1px #0C5870 solid;border-bottom:1px #0C5870 solid}
+.tr_over{background-color:#DEFFFF;height:23px}
+.tr_out{height:23px}
+
+.notice{position:relative;clear:both;margin:2px auto;border:1px solid #1496C0;width:99%;}
+.notice .p{background:#D6F1FA;margin:1px;padding:2px;border:1px #FFF solid;}
+.notice a.button{padding:2px 4px 0px 21px;background:#D6F1FA url("comment.gif") no-repeat 2px center;}
+
+.main{position:relative;clear:both;margin:2px auto;border:1px solid #1496C0;width:99%;}
+
+.table{margin:1px auto;border:1px #E3F5FB solid;width:99%;clear:both;}
+.table1{margin:1px auto;border:1px #1496C0 solid;width:99%;}
+.table .left{float:left;width:145px;*width:150px;text-align:right;*padding:3px 1px;}
+.table .right{float:left;text-align:left;padding:1px;}
+.table1 .left{float:left;width:145px;*width:150px;text-align:right;padding:1px;}
+.table1 .right{float:left;text-align:left;padding:1px;}
+.hand{cursor:pointer;}
+.clear{clear:both}
+.none{display:none}
+.clue_on{color:#808080}
+.red{color:red;}
+.darkblue{color:darkblue}
+.padding_left{padding-left:22px;line-height:130%}
+.long_input{width:300px}
+.short_input{width:55px}
+.submit{padding:0px 4px;*padding:2px 4px 0 4px;font-size:12px;background-color:#ece9d8;border-width:1px;}
+
+.tab{border-bottom:1px solid #1496C0;position:relative;clear:both;margin:2px auto;width:99%;height:26px;}
+.tab ul{list-style: none;padding:0;margin:0;}
+.tab ul li{float:left;text-align:center;padding:5px 15px;margin-right:15px;cursor:pointer;}
+.tab ul li.over{background:#1496C0;font-weight:bold;border:1px solid #0E6C8B;border-bottom:0px;margin-bottom:-1px;}
+.tab ul li.out{border:1px solid #1496C0;margin-bottom:-1px;border-bottom:0px;}
+
+/* swfupload 上传涉及到的样式效果 */
+.swfupload_progress{padding:1px;}
+.progressWrapper {overflow: hidden;}
+.progressContainer {margin: 5px;padding: 4px;border: solid 1px #E8E8E8;background-color: #F7F7F7;overflow: hidden;}
+.progressName {font-size: 8pt;font-weight: 700;color: #555;height: 14px;text-align: left;white-space: nowrap;overflow: hidden;}
+.progressBarInProgress,.progressBarComplete,.progressBarError{font-size: 0;width: 0%;height: 2px;background-color: blue;margin-top: 2px;}
+.progressBarComplete {width: 100%;background-color: green;visibility: hidden;}
+.progressBarError {width: 100%;background-color: red;visibility: hidden;}
+.progressBarStatus {margin-top: 2px;width: 337px;font-size: 7pt;font-family: Arial;text-align: left;white-space: nowrap;}
+a.progressCancel {font-size: 0;display: block;height: 14px;width: 14px;background-image: url(cancelbutton.gif);background-repeat: no-repeat;background-position: -14px 0px;float: right;}
+a.progressCancel:hover {background-position: 0px 0px;}

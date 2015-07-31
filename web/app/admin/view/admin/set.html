@@ -1,0 +1,136 @@
+<!-- inc:header -->
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; <a href="{:site_url('admin')}">管理员列表</a> &raquo; 添加/编辑信息</span></td>
+	</tr>
+	</table>
+</div></div>
+
+<form method="post" action="{:site_url('admin,setok')}id={:$id}" onsubmit="return to_submit();">
+<div class="table">
+	<div class="left"><span class="red">*</span> 账号：</div>
+	<input type="text" name="name" id="name" value="{:$rs[name]}">
+</div>
+
+<div class="table">
+	<div class="left"><!-- if(!$id) --><span class="red">*</span> <!-- end -->密码：</div>
+	<input type="text" name="pass" id="pass" value="">
+	<span class="clue_on"> <!-- if($id) -->不修改密码请保留为空<!-- else -->请填写密码<!-- end --></span>
+</div>
+
+<div class="table">
+	<div class="left"><span class="red">*</span> 邮箱：</div>
+	<input type="text" name="email" id="email" value="{:$rs[email]}">
+</div>
+
+<div class="table">
+	<div class="left">权限：</div>
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td><input type="radio" name="if_system" id="if_system_1" value="1"{if($rs[if_system])} checked{end} onclick="to_system(1)"></td>
+		<td>&nbsp;系统管理员&nbsp; &nbsp;</td>
+		<td><input type="radio" name="if_system" id="if_system_0" value="0"{if(!$rs[if_system])} checked{end} onclick="to_system(0)"></td>
+		<td>&nbsp;常规管理员&nbsp; &nbsp;</td>
+		<td class="clue_on"> 请慎用启用超级管理员权限！</td>
+	</tr>
+	</table>
+</div>
+
+<div id="no_system_admin"{if($rs[if_system])} style="display:none;"{end}>
+
+	<div class="table tr_out" onmouseover="this.className='table tr_over'" onmouseout="this.className='table tr_out'">
+		<div class="left">&nbsp;</div>
+		<table cellpadding="0" cellspacing="0">
+		<tr id="id_lang_list_0">
+			<td valign="top"><a href="javascript:select_anti('id_lang_list_0');void(0);">【反选】</a></td>
+			<td style="width:140px;height:23px;" valign="top">语言权限</td>
+			<td valign="top"><table cellpadding="0" cellspacing="0"><tr>
+					<!-- $langlist AS $k=>$v -->
+					<td><input type="checkbox" name="mylangid[]" value="{:$v[langid]}"{if(in_array($v[langid],$lang_popedom ))} checked{end}></td>
+					<td>&nbsp;{:$v[title]} &nbsp;</td>
+					<!-- row:4 -->
+					<!-- end -->
+				</tr></table></td>
+		</tr>
+		</table>
+	</div>
+
+
+<!-- $mlist AS $key=>$value -->
+	<!-- if($value[popedom]) -->
+	<div class="table tr_out" onmouseover="this.className='table tr_over'" onmouseout="this.className='table tr_out'">
+		<div class="left">&nbsp;</div>
+		<table cellpadding="0" cellspacing="0">
+		<tr id="id_popedom_list_{:$value[id]}">
+			<td><a href="javascript:select_anti('id_popedom_list_{:$value[id]}');void(0);">【反选】</a></td>
+			<td style="width:140px;height:23px;">{:$value[title]}</td>
+			<!-- run:$p_id = explode(",",$value[popedom]) -->
+			<!-- $p_id AS $k=>$v -->
+			<td><input type="checkbox" name="popedom[]" value="{:$value[id]}:{:$v}"{if(in_array($value[id].":".$v,$popedom))} checked{end}></td>
+			<td>&nbsp;{:$plist[$v]} &nbsp;</td>
+			<!-- end -->
+		</tr>
+		</table>
+	</div>
+	<!-- end -->
+<!-- end -->
+</div>
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<input type="submit" class="btn2" id="_phpok_submit" name="article_submit" value=" 提交 ">
+</div>
+
+</form>
+
+<script type="text/javascript">
+function to_system(v)
+{
+	if(v == 1)
+	{
+		getid("no_system_admin").style.display = "none";
+	}
+	else
+	{
+		getid("no_system_admin").style.display = "";
+	}
+	return true;
+}
+function to_submit()
+{
+	var name = getid("name").value;
+	if(!name)
+	{
+		alert("会员名不允许为空");
+		getid("name").focus();
+		return false;
+	}
+	var email = getid("email").value;
+	if(!email)
+	{
+		alert("邮箱不允许为空");
+		getid("email").focus();
+		return false;
+	}
+	<!-- if(!$id) -->
+	var pass = getid("pass").value;
+	if(!pass)
+	{
+		alert("密码不允许为空");
+		getid("pass").focus();
+		return false;
+	}
+	<!-- end -->
+	//通过Ajax检测会员账号和邮箱是否重复
+	var url = "{:site_url('admin,chk')}id={:$id}&email="+EncodeUtf8(email)+"&name="+EncodeUtf8(name);
+	var msg = get_ajax(url);
+	if(!msg) msg = "error: 检测失败";
+	if(msg != "ok")
+	{
+		alert(msg);
+		return false;
+	}
+	getid("_phpok_submit").disabled = true;
+}
+</script>
+<!-- inc:footer -->

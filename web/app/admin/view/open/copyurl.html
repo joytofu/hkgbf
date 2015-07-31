@@ -1,0 +1,49 @@
+<!-- inc:header -->
+<script type="text/javascript">
+function js_copy(id)
+{
+	var base_folder = "{:base_url()}";
+	var str = $("#"+id).attr("href");
+	var content = base_folder + str.toString();
+	if($.browser.msie == true) {
+        clipboardData.setData('Text',content);
+        alert ("该地址已经复制到剪切板");
+    } else {    
+        alert("浏览器不支持此操作，请移到内容区，点右键【复制链接地址】");
+    }
+	return false;
+}
+</script>
+<div class="main">
+<table width="100%" style="layout:fixed;" cellpadding="0" cellspacing="0">
+<tr>
+	<td class="t_sub" style="width:30%">说明</td>
+	<td class="t_sub">内容</td>
+</tr>
+<!-- if($ifimg) -->
+<tr class="tr_out">
+	<td align='left' class="tc_left">&nbsp;图片：<a class="btn reply"></a></td>
+	<td align='left' class="tc_right"><img src="{:$rs[thumb]}" style="margin:3px;" /></td>
+</tr>
+<!-- end -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)">
+	<td align='left' class="tc_left">&nbsp;文件名称：<a class="btn reply"></a></td>
+	<td align='left' class="tc_right">&nbsp;{:$rs[title]}</td>
+</tr>
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)">
+	<td align='left' class="tc_left">&nbsp;上传时间：<a class="btn reply"></a></td>
+	<td align='left' class="tc_right">&nbsp;{:date("Y-m-d H:i:s",$rs[postdate])}</td>
+</tr>
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)">
+	<td align='left' class="tc_left">&nbsp;原文件地址：<a href="javascript:js_copy('_filename_{:$rs[id]}');void(0);" class="btn copy" title="复制此链接"></a></td>
+	<td align='left' class="tc_right">&nbsp;<a href="{:$rs[filename]}" id="_filename_{:$rs[id]}" target="_blank">{:$rs[filename]}</a></td>
+</tr>
+<!-- $rslist AS $key=>$value -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)">
+	<td align='left' class="tc_left">&nbsp;{:$value[picsubject]}：<a href="javascript:js_copy('{:$value[gdtype]}_{:$rs[id]}');void(0);" class="btn copy" title="复制此链接"></a></td>
+	<td align='left' class="tc_right">&nbsp;<a href="{:$value[filename]}" target="_blank" id="{:$value[gdtype]}_{:$rs[id]}">{:$value[filename]}</a></td>
+</tr>
+<!-- end -->
+</table>
+</div>
+<!-- inc:footer_open -->

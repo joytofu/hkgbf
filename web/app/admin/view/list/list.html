@@ -1,0 +1,124 @@
+<!-- inc:header -->
+<script type="text/javascript">
+function set_price_currency(val)
+{
+	var gourl = "{:site_url('index,set_default')}code="+val+"&";
+	var backurl = "{:rawurlencode(site_url('list','module_id='.$module_id))}";
+	gourl += "backurl="+backurl+"&";
+	direct(gourl);
+}
+</script>
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td>
+			<table cellpadding="0" cellspacing="0">
+			<form method="post" id="search_list" onsubmit="return search_list('search_list','{:$module_id}',{:$ifcate ? 'true' : 'false'});">
+			<tr>
+				<td>&nbsp;搜索：</td>
+				<td>
+					<select name="status">
+						<option value="">全部</option>
+						<option value="1"{if($status == 1)} selected{end}>已审核</option>
+						<option value="2"{if($status == 2)} selected{end}>未审核</option>
+					</select>
+				</td>
+				<!-- if($ifcate) --><td>{:$cate_html}</td><!-- end -->
+				<td>
+					<select name="keytype">
+						<option value="title"{if($keytype == "keywords")} selected{end}>{:$m_rs[title_nickname] ? $m_rs[title_nickname] : '主题'}</option>
+						<!-- if($m_rs[if_subtitle]) -->
+							<option value="subtitle"{if($keytype == "subtitle")} selected{end}>{:$m_rs[subtitle_nickname] ? $m_rs[subtitle_nickname] : '副主题'}</option>
+						<!-- end -->
+						<!-- if($m_rs[if_des]) -->
+							<!--<option value="note"{if($keytype == "note")} selected{end}>代理商</option>-->
+						<!-- end -->
+						
+					</select>
+					
+				</td>
+			<!--		<td>
+					<select name="isbest">
+						<option value="10" {if($isbest == "10")} selected{end}>全部</option>
+						<option value="0" {if($isbest == "0")} selected{end}>未售</option>
+						<option value="1" {if($isbest == "1")} selected{end}>热销</option>
+						
+					</select>
+					
+				</td>-->
+				<td><input type="text" name="keywords" id="keywords" value="{:$keywords}"></td>
+				<td><input type="submit" class="btn2" value="查询"></td>
+			</tr>
+			</form>
+			</table>
+		</td>
+		<!-- if($m_rs[if_biz] && $currency_list) -->
+		<td align="left" style="display:none;">
+			货币：
+			<select name="this_currency" id="this_currency" onchange="set_price_currency(this.value)">
+			<!-- $currency_list AS $key=>$value -->
+			<option value="{:$value[code]}"{if($value[code] == $default_currency[code])} selected{end}>{:$value[title]}（{:$value[code]}）</option>
+			<!-- end -->
+			</select>
+		</td>
+		<!-- end -->
+		<td align="right"><a href="{:site_url('list,set')}module_id={:$m_rs[id]}&" class="button">添加内容</a></td>
+	</tr>
+	</table>
+</div></div>
+
+<script type="text/javascript" src="js/smart-menu.js"></script>
+<!-- if($m_rs[tplset] == 'pic') -->
+	<!-- inc:list/list_pic -->
+<!-- else -->
+	<!-- inc:list/list_txt -->
+<!-- end -->
+
+<div class="table">
+	<table width="100%">
+	<tr>
+		<td>
+			<input type="button" value="全选" onclick="select_all()" class="btn2">
+			<input type="button" value="全不选" onclick="select_none()" class="btn3">
+			<input type="button" value="反选" onclick="select_anti()" class="btn2">
+			<select name="act_plset" id="act_plset">
+				<option value="">请选择操作方案</option>
+				<optgroup label="批处理">
+					<!-- if($m_rs[if_propety]) -->
+					<option value="istop:1">置顶</option>
+					<option value="isvouch:1">推荐</option>
+					<!--<option value="isbest:1">热销</option>-->
+					<!-- end -->
+					<option value="status:1">审核</option>
+					<option value="copy:20">复制20个主题</option>
+					<!-- if($m_rs[if_propety]) -->
+					<option value="istop:0">取消置顶</option>
+					<option value="isvouch:0">取消推荐</option>
+				<!--	<option value="isbest:0">取消热销</option>-->
+					<!-- end -->
+					<option value="status:0">取消审核</option>
+					<option value="taxis">更新排序</option>
+					<option value="del">批量删除</option>
+				</optgroup>
+				<!-- if($ifcate) -->
+				<optgroup label="移动主题分类">
+					<!-- $cate_list_array AS $key=>$value -->
+						<option value="cate:{:$value[id]}">{:$value[space]}{:$value[cate_name]}<!-- if(!$value[status]) -->【暂停使用】<!-- end --></option>
+					<!-- end -->
+				</optgroup>
+				<!-- end -->
+			</select>
+			<input type="button" value="提交" onclick="update_pl()" class="btn2">
+		</td>
+		<td align="right">{:$pagelist}</td>
+	</tr>
+	</table>
+</div>
+<!-- inc:footer -->
+<script language="">
+function show_user(id)
+{
+	var url = base_file + "?"+base_ctrl+"=user&"+base_func+"=view&id="+id;
+	Layer.init(url,550,400);
+}
+</script>

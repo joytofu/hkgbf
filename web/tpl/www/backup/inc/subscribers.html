@@ -1,0 +1,36 @@
+<script type="text/javascript">
+function subscribers_email()
+{
+	var email = $("#subscribers_email").attr("value");
+	if(!email)
+	{
+		alert("邮箱不允许为空！");
+		return false;
+	}
+	var str_reg=/^\w+((-\w+)|(\.\w+))*\@{1}\w+\.{1}\w{2,4}(\.{0,1}\w{2}){0,1}/ig;
+	if(email.search(str_reg) == -1)
+	{
+		alert("邮箱格式不正确！");
+		return false;
+	}
+	return true;
+}
+</script>
+
+<div class="line"></div>
+<h3>邮件订阅</h3>
+<div class="border-lr">
+<form method="post" action="{:site_url('subscribers,setok')}" onsubmit="return chk_email()">
+<input type="hidden" name="goback" value="{:site_url('index')}" />
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+	<td width="21%" height="35">邮箱：</td>
+	<td width="79%"><input type="text" name="email" id="subscribers_email" /></td>
+</tr>
+<tr>
+<td height="35" colspan="2"><input type="submit" value="提 交" class="but01" /></td>
+</tr>
+</table>
+</form>
+</div>
+<div class="bottom"></div>

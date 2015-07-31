@@ -1,0 +1,20 @@
+<!-- inc:head -->
+<div class="body">
+	<div class="left">
+		<!-- inc:inc/usercp -->
+		<!-- inc:inc/left -->
+	</div>
+	<div class="right">
+		<div class="vmenu"><h3>搜索结果<!-- if($keywords) -->：{:$keywords}<!-- end --></h3></div>
+		<div class="box pd5">
+			<ul class="newslist">
+			<!-- $rslist AS $key=>$value -->
+			<li><span class="date">{:date("Y-m-d",$value[post_date])}&nbsp;</span><a href="{:msg_url($value)}"{if($value[target])} target="_blank"{end} style="{:$value[style]}">{:$value[title]}</a></li>
+			<!-- end -->
+			</ul>
+			<!-- inc:inc/pagelist -->
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<!-- inc:foot -->

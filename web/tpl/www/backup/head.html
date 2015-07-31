@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><!-- if($sitetitle) -->{:$sitetitle} - <!-- end --><!-- if($_sys[seotitle]) --> {:$_sys[seotitle]} - <!-- end -->{:$_sys[sitename]}</title>
+<!-- if($_sys[google_site_verification]) --><meta name="google-site-verification" content="{:$_sys[google_site_verification]}" /><!-- end -->
+<!-- if($_sys[yahoo_site_key]) --><meta name="y_key" content="{:$_sys[yahoo_site_key]}" /><!-- end -->
+<!-- if($_sys[ms_site_validate]) --><meta name="msvalidate.01" content="{:$_sys[ms_site_validate]}" /><!-- end -->
+<!-- if($_sys[baidu_union_verify]) --><meta name="baidu_union_verify" content="{:$_sys[baidu_union_verify]}" /><!-- end -->
+<meta name="keywords" content="{:$_sys[keywords]},qinggan,phpok">
+<meta name="description" content="{:$_sys[description]} - PHPOK.COM">
+<script type="text/javascript">
+var base_file = "{:HOME_PAGE}";
+var base_url = "{:$sys_app->url}";
+var base_ctrl = "{:$sys_app->config->c}";
+var base_func = "{:$sys_app->config->f}";
+var base_dir = "{:$sys_app->config->d}";
+var phpok_data = "";
+var iframe_id = "";
+</script>
+<!-- if($_sys[siteurl] && $_sys[site_type] == 'html') --><base href="{:$_sys[siteurl]}" /><!-- end -->
+<link rel="stylesheet" type="text/css" href="images/style.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="js/www.js"></script>
+<!-- if($sys_app->control_name && file_exists(ROOT."js/www/".$sys_app->control_name.".js")) -->
+<script type="text/javascript" src="js/www/{:$sys_app->control_name}.js"></script>
+<!-- end -->
+</head>
+
+<body>
+<div class="header">
+	<div class="logo"><img src="{:$_sys[logo] ? $_sys[logo] : 'images/logo.jpg'}" alt="{:$_sys[sitename]}" /></div>
+	<ul class="menu">
+		<!-- run:$menulist = phpok_menu($id,$cid,$mid) -->
+		<!-- $menulist AS $key=>$value -->
+		<li{if($value[my_highlight])} class="li_a"{end}><a href="{:$value[link]}"{if($value[target])} target="_blank"{end} title="{:$value[note] ? $value[note] : $value[title]}">{:$value[title]}</a></li>
+		<!-- end -->
+		<!-- run:unset($menulist) -->
+	</ul>
+	<div class="clear"></div>
+</div>
+

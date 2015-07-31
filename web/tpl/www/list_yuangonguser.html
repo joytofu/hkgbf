@@ -1,0 +1,59 @@
+<!-- inc:head -->
+<!--if($_SESSION["username"]==false)-->
+  <script language=javascript>
+window.alert('您还没有登录，请先登录!');
+window.location.href='index.php?c=list&cs=yuangong&login';
+</script>
+<!--end-->
+<!-- inc:banner-->
+<!--if($p==false)-->
+  <script language=javascript>
+window.location.href='index.php?c=list&ms=yuangonguser&p=205';
+</script>
+
+<!--end-->
+<div class="main">
+   <div class="left">
+      <div class="left1">
+         <div class="lefttop">{:$m_rs[title]}</div>
+         <div class="leftmain">
+       <!-- inc:inc/userlist2-->
+         </div>
+      </div>
+<!-- inc:inc/left-->
+   </div>
+   <!--run:-->
+   if($p){
+  
+$result2=mysql_query("select * from juniu_cate where id='$p'");
+while ($rs2=mysql_fetch_array($result2)){
+	$pp=$rs2['cate_name'];
+	}
+
+   }
+   <!--/run-->
+   <div class="right">
+      <div class="righttop"><div class="ll">{:$pp}</div><div class="rr">您当前的位置是：<a href="{:$_sys[siteurl]}">网站首页</a> > {:$m_rs[title]} > {:$pp}</div></div>
+      
+      <div class="rightmain">
+ 
+<!--if($p==207)-->
+<!-- inc:tsjy-->
+<!--elseif($p==263)-->
+<!--inc:staff_info-->
+<!--elseif($p==200)-->
+<!--inc:wendangziliao-->
+<!--else-->
+    <!-- inc:xzzq3-->
+
+<!--end-->
+      </div>
+      
+   </div>
+   
+   
+   
+</div>
+
+
+<!-- inc:foot -->

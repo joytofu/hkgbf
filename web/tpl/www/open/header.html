@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>虚弹窗口管理器 -- www.phpok.com</title>
+<meta name="keywords" content="情感,企业,网站,建设,phpok,qinggan,phpok">
+<meta name="description" content="企业网站建设用PHPOK3.0更简单！ - PHPOK.COM">
+<script type="text/javascript">
+var base_file = "{:HOME_PAGE}";
+var base_url = "{:$sys_app->url}";
+var base_ctrl = "{:$sys_app->config->c}";
+var base_func = "{:$sys_app->config->f}";
+var base_dir = "{:$sys_app->config->d}";
+</script>
+<link href="images/open.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="js/www.js"></script>
+<!-- if($sys_app->control_name && file_exists(ROOT."js/www/".$sys_app->control_name.".js")) -->
+<script type="text/javascript" src="js/www/{:$sys_app->control_name}.js"></script>
+<!-- end -->
+</head>
+<body>

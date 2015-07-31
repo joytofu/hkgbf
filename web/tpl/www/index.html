@@ -1,0 +1,136 @@
+<!-- inc:head -->
+ <div id="banner">
+ <div id="flashBg" >
+<div id="flashLine">
+<div id="flash">
+        <!-- run:$kflist = phpok('picplayer') -->
+	<!-- $kflist[rslist] AS $key=>$value -->
+<a href="{:$value[link_url]}" {if($value[target])} target="_blank" {end} id="flash{:$key+1}"  style="background-image: url({:$value[picture]});<!--if($key==0)-->display: block; <!--else--> display: none;<!--end--> background-position: 50% 0%; background-repeat: no-repeat no-repeat; " name="#0b0b0b"></a>		
+    	<!-- end -->
+
+  <div class="flash_bar">
+	
+
+<!-- run:$kflist = phpok('picplayer') -->
+	<!-- $kflist[rslist] AS $key=>$value -->
+    <div <!--if($key==0)-->class="dq" <!--else--> class="no"<!--end-->  id="f{:$key+1}" onclick="changeflash({:$key+1})"></div>
+    	<!-- end -->
+  </div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jingxuan">
+<p align="center" style="padding:40px 0"><img src="images/01.jpg"></p>
+<div class="clear"></div>
+<!-- run:$catelist = phpok_s_catelist('pros','ts') -->  
+	<!-- $catelist AS $key=>$value -->
+<div class="index_aa" id="aa{:$key}"><a href="{:list_url($value)}" title="{:$value[cate_name]}"><img src="{:$value[ico]}"></a><p><a href="{:list_url($value)}" title="{:$value[cate_name]}">{:$value[cate_name]}</a></p></div>
+     <!--end-->
+
+</div>
+
+<div id="shibao">
+  <div class="shibao">
+     <p align="center" style="padding:40px 0"><a href="index.php?c=list&cs=zhixuan&"><img src="images/02.jpg"></a></p>
+     <div class="clear"></div>
+      <!--run:$thumb = phpok_c_list("zhixuan_thumb")-->
+     <div class="ipro"><a href="index.php?c=list&cs=zhixuan&"><img src="{:$thumb[rslist][0][picture]}"></a><p><a href="index.php?c=list&cs=zhixuan&">智选牛股</a></p></div>
+     <!--run:unset($thumb)-->
+      <!--run:$thumb = phpok_c_list("tianzi_stock_thumb")-->
+      <div class="ipro"><a href="index.php?c=list&cs=tianzi_stock&"><img src="{:$thumb[rslist][0][picture]}"></a><p><a href="index.php?c=list&cs=tianzi_stock&">天子港股一号</a></p></div>
+    <!--run:unset($thumb)-->
+      <!--run:$thumb = phpok_c_list("tianzi_future_thumb")-->
+     <div class="ipro" id="aa3"><a href="index.php?c=list&cs=tianzi_future&"><img src="{:$thumb[rslist][0][picture]}"></a><p><a href="index.php?c=list&cs=tianzi_future&">天子国际期货一号</a></p></div>
+      <!--run:unset($thumb)-->
+  </div>
+</div>
+
+<div id="index_news">
+   
+   <div class="index_news">
+      <div class="news_top"><a href="index.php?c=list&cs=juniugonggao">巨牛公告</a></div>
+      <div class="clear"></div>   
+      <!--run:$any = phpok_c_list('juniugonggao',2,'','','isvouch')-->
+<!--$any[rslist] AS $key=>$value-->
+<A title="{:$value[title]}" href="{:msg_url($value)}" target="_blank"><img src="{:$value[picture]}"></a>
+      <div class="news_main">
+         <div class="ititle" style="height:auto;overflow:visible"><A title="{:$value[title]}" href="{:msg_url($value)}" target="_blank">{:$value[title]}</A></div>
+         <div class="news_txt">
+           {:$value[note]}
+         </div>
+         <div class="i_more"><A title="{:$value[title]}" href="{:msg_url($value)}" target="_blank" style="color:#376db7">了解更多>></a></div>
+      </div>
+
+<!-- end -->
+      
+      
+      
+       
+   </div>
+   
+    <div class="index_news" style="float:right">
+      <div class="news_top"><a href="index.php?c=list&cs=shichangdongtai">市场动态</a></div>
+      <div class="clear"></div>   
+            <!--run:$any = phpok_c_list('shichangdongtai',2,'','','isvouch')-->
+<!--$any[rslist] AS $key=>$value-->
+<A title="{:$value[title]}" href="{:msg_url($value)}" target="_blank"><img src="{:$value[picture]}"></a>
+      <div class="news_main">
+         <div class="ititle" style="height:auto;overflow:visible"><A title="{:$value[title]}" href="{:msg_url($value)}" target="_blank">{:$value[title]}</A></div>
+         <div class="news_txt">
+           {:$value[note]}
+         </div>
+         <div class="i_more"><A title="{:$value[title]}" href="{:msg_url($value)}" target="_blank" style="color:#376db7">了解更多>></a></div>
+      </div>
+
+<!-- end -->
+       
+   </div>
+
+</div>
+
+<div class="clear"></div>
+<div class="index_tu">
+    <div class="index_tu1"><a href="index.php?c=list&ms=kaihui" title="基金预约" rel="nofollow"><div class="button red margin">
+        <div class="shine"></div>
+        立即预约
+    </div></a></div>
+</div>
+<script type="text/javascript" src="images/jquery-2.1.4.min.js"></script>
+<!-- inc:foot -->
+
+
+<script>
+var currentindex=1;
+var length = $(".flash_bar div").length;
+//$("#flashBg").css("background-color",$("#flash1").attr("name"));
+function changeflash(i) {	
+currentindex=i;
+for (j=1;j<=length;j++){
+	if (j==i) 
+	{$("#flash"+j).fadeIn("normal");
+	$("#flash"+j).css("display","block");
+	$("#f"+j).removeClass();
+	$("#f"+j).addClass("dq");
+	//$("#flashBg").css("background-color",$("#flash"+j).attr("name"));
+	}
+	else
+	{$("#flash"+j).css("display","none");
+	$("#f"+j).removeClass();
+	$("#f"+j).addClass("no");}
+}}
+function startAm(){
+timerID = setInterval("timer_tick()",3000);
+}
+function stopAm(){
+clearInterval(timerID);
+}
+function timer_tick() {
+    currentindex=currentindex>=length?1:currentindex+1;
+	changeflash(currentindex);}
+$(document).ready(function(){
+$(".flash_bar div").mouseover(function(){stopAm();}).mouseout(function(){startAm();});
+startAm();
+});
+</script>

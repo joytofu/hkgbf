@@ -1,0 +1,14 @@
+    <div class="lefttop"><img src="images/rr.gif" align="right"><span style="color:#CCC;  font-size:10px; letter-spacing:0;">MEMBER CENTER</span><br />
+会员中心</div>
+    <div class="leftmain">
+      <li><a href="index.php?c=login" <!--if($c=="login")--> id="hov"<!--end-->>会员登录</a></li>
+      <li style="font-size:16px; letter-spacing:2px; background:none; "><a>交易管理</a></li>
+      <li style="border-bottom:0; margin-bottom:5px;"><a href="index.php?c=order&f=list"<!--if($c=="order")--> id="hov"<!--end-->>我的订单</a></li>
+      <li style="font-size:16px; letter-spacing:2px; background:none; "><a>付款方式</a></li>
+      <!--run:$any = phpok_m_list('fkfs',225)-->
+<!--$any[rslist] AS $key=>$value-->
+<li style="border-bottom:0;"><a href="{:msg_url($value)}" title="{:$value[title]}"  <!--if($id==$value[id])--> id="hov"<!--end-->>{:$value[title]}</a></li>
+   <!-- end -->
+
+      <li style="border-bottom:0;"><a href="index.php?c=usercp&f=pass" <!--if($f=="pass")--> id="hov"<!--end-->>修改密码</a></li>
+    </div>

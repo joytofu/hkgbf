@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>友情提示 -- {:$_sys[sitename]}<!-- if($_sys[seotitle]) --> -- {:$_sys[seotitle]}<!-- end --> -- Powered by phpok.com</title>
+<meta name="keywords" content="{:$_sys[keywords]},qinggan,phpok">
+<meta name="description" content="{:$_sys[description]} - PHPOK.COM">
+<!-- if($_sys[siteurl]) -->
+<base href="{:$_sys[siteurl]}" />
+<!-- end -->
+<script type="text/javascript">
+var base_file = "{:HOME_PAGE}";
+var base_url = "{:$sys_app->url}";
+var base_ctrl = "{:$sys_app->config->c}";
+var base_func = "{:$sys_app->config->f}";
+var base_dir = "{:$sys_app->config->d}";
+</script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<style type="text/css">
+a{text-decoration:none;}
+.error{position:absolute;top:30%;left:50%;margin:-120px 0 0 -300px;width:600px;}
+.e_title{border:1px solid #1496C0;background:#D6F1FA;margin:1px;}
+.error td{text-align:center;font-size:12px;}
+.foot{font:normal 11px Tahoma,Arial;text-align:center;background:#D6F1FA;line-height:130%;margin:1px;padding:5px 0px;border:1px solid #1496C0;}
+</style>
+</head>
+<body>
+<div class="error">
+	<div class="e_title">
+	<table width="100%">
+	<tr>
+		<td height="33px" valign="bottom">{:$msg}{:$plugin_html}</td>
+	</tr>
+	<!-- if($error_url) -->
+	<tr>
+		<td height="30px"><a href="{:$error_url}">{:$error_note}</a></td>
+	</tr>
+	<!-- end -->
+	</table>
+	</div>
+	<div class="foot">{:sys_debug()}</div>
+</div>
+<!-- if($error_url) -->
+<script type="text/javascript">
+var micro_time = "{:$micro_time}";
+window.setTimeout("trefresh()",micro_time);
+function trefresh()
+{
+	direct("{:$error_url}");
+}
+</script>
+<!-- end -->
+</script>
+</body>
+</html>

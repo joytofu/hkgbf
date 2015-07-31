@@ -1,0 +1,20 @@
+<!-- inc:open/header -->
+<!-- if($ftype == "video") -->
+<div id="video_player" style="text-align:center;"></div>
+<script type="text/javascript">
+var htmlmsg = Media.init("{:$rs[filename]}","546","350");
+getid("video_player").innerHTML = htmlmsg;
+</script>
+<!-- elseif($ftype == "img") -->
+<div style="padding:5px;">上传时间：{:date("Y-m-d H:i:s",$rs[postdate])}</div>
+<div style="padding:1px 5px;"><img src="{:$rs[filename]}" /></div>
+	<!-- $rslist AS $key=>$value -->
+	<div style="padding:1px 5px;"><img src="{:$value[filename]}" /></div>
+	<!-- end -->
+<!-- else -->
+<div style="padding:5px;">上传时间：{:date("Y-m-d H:i:s",$rs[postdate])}</div>
+<div style="padding:1px 5px;">附件名称：<a href="{:site_url('download','id='.$rs[id])}" target="_blank">{:$rs[title] ? $rs[title] : basename($rs[filename])}</a></div>
+<div style="padding:3px 5px;color:red;">如击下载，请点击附件名称，即可下载</div>
+<!-- end -->
+
+<!-- inc:open/footer -->

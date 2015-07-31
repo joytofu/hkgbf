@@ -1,0 +1,40 @@
+<!-- inc:head -->
+
+<!-- inc:banner-->
+
+<script type="text/javascript" src="images/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="images/highcharts.js"></script>
+<div class="main">
+   <div class="left">
+      <div class="left1">
+         <div class="lefttop">{:$m_rs[title]}</div>
+         <div class="leftmain">
+       <!-- inc:inc/catelist-->
+         </div>
+      </div>
+
+   </div>
+   
+   <div class="right">
+      <div class="righttop"><div class="ll">{:$rs[cate_name]}</div><div class="rr">您当前的位置是：<a href="{:$_sys[siteurl]}">网站首页</a> > {:$m_rs[title]} > {:$rs[cate_name]}</div></div>
+
+      <div class="rightmain">
+
+          <div id="svg" style="width:850px;height:70%"></div>
+
+ 
+      </div>
+      
+   </div>
+
+   
+   
+</div>
+
+<script>
+    var title = "智选牛股";
+    var min = 0.7;
+</script>
+<!--inc:svg-->
+
+<!-- inc:foot -->

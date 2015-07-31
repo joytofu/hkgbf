@@ -1,0 +1,139 @@
+<!-- inc:header -->
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; <a href="{:site_url('lang')}">语言包管理</a> <span class="red">{:$rs[title]}</span>&nbsp;&raquo; 语言变量管理</span> <!-- if(!$rs[ifsystem]) --><span class="red"> 非系统语言包，不允许创建新变量，请到系统语言包创建相应的语言变量及值</span><!-- end --></td>
+	</tr>
+	</table>
+</div></div>
+
+<div class="main">
+<table width="100%" style="layout:fixed;" cellpadding="0" cellspacing="0">
+<tr>
+	<td class="t_sub" width="80px">范围</td>
+	<td class="t_sub" width="200px">变量名</td>
+	<td class="t_sub">值</td>
+</tr>
+<!-- if($rs[ifsystem]) -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)">
+	<td align='center' class="tc_left"><select name="ltype_add" id="ltype_add">
+		<option value="all">全局</option>
+		<option value="www">前台</option>
+		<option value="admin">后台</option></select></td>
+	<td align="left" class="tc_right">&nbsp;<input type="text" name="var_add" id="var_add" /></td>
+	<td align="left" class="tc_right" style="padding-left:5px;">
+		<input type="text" name="val_add" id="val_add" class="long_input" />
+		<input type="button" value="添加" onclick="setok('add')" class="btn2" />
+	</td>
+</tr>
+<!-- end -->
+
+<!-- $rslist AS $key=>$value -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)">
+	<td align='center' class="tc_left" height="26px">{:$ltype[$value[ltype]]}</td>
+	<td align="left" class="tc_right">&nbsp;{:$value['var']}</td>
+	<td align='left' class="tc_right" style="padding-left:5px;">
+		<input type="text" name="val_{:$value[id]}" id="val_{:$value[id]}" onblur="setok('{:$value[id]}')" value="{:$value[val]}" class="long_input" style="width:460px;" />
+		<!-- if($rs[ifsystem]) -->
+		<input type="button" value="删除" onclick="del({:$value['id']})" class="btn2" />
+		<!-- end -->
+		<span id="lang_notice_{:$value[id]}"></span>
+	</td>
+</tr>
+	<!-- if(($key+1)%20 == "") -->
+	<tr>
+		<td class="t_sub">范围</td>
+		<td class="t_sub">变量名</td>
+		<td class="t_sub">值</td>
+	</tr>
+	<!-- end -->
+<!-- end -->
+</table>
+</div>
+<script type="text/javascript">
+var str_right = '<span style="color:darkblue;">&#8730;</span>';
+var str_wrong = '<span style="color:darkred;">&#215;</span>';
+
+function del(id)
+{
+	if(!id)
+	{
+		alert("操作非法");
+		return false;
+	}
+	var q = confirm("确定要删除此信息吗？删除后是不能恢复的");
+	if(q != 0)
+	{
+		var url = base_url + base_func + "=ajax_lang_del&langid={:$id}&id="+id;
+		var msg = get_ajax(url);
+		if(!msg) msg = "error: 操作非法";
+		if(msg == "ok")
+		{
+			direct(window.location.href);
+		}
+		else
+		{
+			alert(msg);
+			return false;
+		}
+	}
+}
+
+function setok(tid)
+{
+	var url = "{:site_url('lang,ajax_setok')}langid={:$id}&";
+	if(tid != "add")
+	{
+		url += "id="+tid+"&";
+		var note = getid("val_"+tid).value;
+		if(!note)
+		{
+			alert("值不允许为空");
+			return false;
+		}
+		url += "val="+EncodeUtf8(note);
+		//异步处理添加操作
+		get_ajax(url,js_lang_notice,tid);
+		return true;
+	}
+	var ltype = getid("ltype_add").value;
+	var tvar = getid("var_add").value;
+	var val = getid("val_add").value;
+	if(!ltype || !tvar || !val)
+	{
+		alert("内容不允许为空");
+		return false;
+	}
+	url += "ltype="+ltype+"&var="+EncodeUtf8(tvar)+"&val="+EncodeUtf8(val);
+	var msg = get_ajax(url);
+	if(msg != "ok")
+	{
+		if(!msg) msg = "Error: 操作失败";
+		alert(msg);
+		return false;
+	}
+	else
+	{
+		direct(window.location.href);
+		return true;
+	}
+}
+
+function js_lang_notice(msg,tid)
+{
+	if(msg != "ok")
+	{
+		getid("lang_notice_"+tid).innerHTML = "<span class='red'>"+msg+"</span>";
+	}
+	else
+	{
+		getid("lang_notice_"+tid).innerHTML = str_right + " 更新成功";
+		eval_js(2,"clear_notice('"+tid+"')");
+	}
+}
+function clear_notice(tid)
+{
+	getid("lang_notice_"+tid).innerHTML = "";
+}
+</script>
+<!-- inc:footer -->

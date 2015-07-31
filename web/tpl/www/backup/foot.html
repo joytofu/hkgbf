@@ -1,0 +1,40 @@
+<div class="copyright">
+	<!-- run:$link = phpok("link") -->
+	<!-- if($link[rslist]) -->
+	<div class="link">
+		<h3>{:$link[me][title]}</h3>
+		<span>
+		<!-- $link[rslist] AS $key=>$value -->
+		<a href="{:$value[link_url]}" title="{:$value[title]}" target="_blank">{:$value[title]}</a>
+		<!-- end -->
+		</span>
+		<a href="{:module_url($link[me])}" class="more">更多&gt;&gt;</a>
+	</div>
+	<!-- end -->
+	<div class="bottom"><!-- run:$copyright = phpok('copyright') -->{:$copyright[content]}<!-- run:unset($copyright) --></div>
+</div>
+<!-- run:$kflist = phpok('qq') -->
+<!-- if($kflist[rslist] && is_array($kflist[rslist]) && count($kflist[rslist])>0) -->
+<script type="text/javascript">
+if($.browser.msie && parseInt($.browser.version, 10) < 7)
+{
+	$(document).ready(function(){
+		 $(window).scroll(function(){
+			 $("#qqonline_float").css({top:$(this).scrollTop()+$(this).height()-500});
+		 });
+	});
+}
+</script>
+<div id="qqonline_float">
+	<div class="qq-top"></div>
+	<div class="qq-list">
+		<!-- $kflist[rslist] AS $key=>$value -->
+		<div class="myqq">{:$value[kfcode]}</div>
+		<!-- end -->
+	</div>
+	<div class="qq-bottom"></div>
+</div>
+<!-- end -->
+{:$plugin_html}
+</body>
+</html>

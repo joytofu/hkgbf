@@ -1,0 +1,58 @@
+<!-- inc:head -->
+<!--if($_SESSION["username"])-->
+  <script language=javascript>
+window.alert('您已经登录了，请直接进入会员中心!');
+window.location.href='index.php?c=msg&id={:$_SESSION["userid"]}';
+</script>
+<!--run:-->
+exit;
+<!--/run-->
+<!--end-->
+<div class="denglu" style="background:#FFF; padding:30px 0">
+
+   <div class="denglu_1" style="border:0; background:#f7f7f7; width:1020px;">
+     <img src="images/login_2.jpg" style="float:left">
+     <div class="denglu_21">
+        
+            <p style="font-size:16px; margin-bottom:15px; border-bottom:1px solid #FFF; padding-bottom:10px;">合作伙伴登录</p>
+            <form method="post" action="login.php" name="form1" id="form1" onsubmit="return check()">
+            <input type="hidden" id="cc" value="1" name="cc">
+            <p>用户名:</p>
+<input type="text" id="username" name="username" class="text31">
+<p>密码:</p>
+<input type="password" id="password" name="password" class="text31">
+                <input type="text" id="ac" name="ac" class="auth_code" style="margin-right:7px" placeholder="请输入验证码" />
+                <img style="margin-right:10px" class="ac_img" id="auth_code" src='auth_code.php?<--run:echo rand()-->' />
+                <span><a href="javascript:void(0)" onclick="document.getElementById('auth_code').src='auth_code.php?ac='+Math.random()">看不清</a></span>
+<input type="image" name="imageField" id="imageField" src="images/button2.jpg" style="margin:10px 0" />
+<p style="height:20px; line-height:20px; margin-bottom:10px;">
+还没账号？
+
+<span style="float:right"><a href="index.php?c=register&k=huoban">立即注册</a></span>
+</p>
+  </form>
+        
+     </div>
+   </div>
+   
+</div>
+<!-- inc:foot -->
+
+<script type="text/javascript">
+function check()
+{
+if (document.form1.username.value=="用户名" || document.form1.username.value=="")
+{
+window.alert("请输入用户名   ");
+document.form1.username.focus();
+return false;
+}
+if (document.form1.password.value=="密码" || document.form1.password.value=="")
+{
+window.alert("请输入登录密码 ");
+document.form1.password.focus();
+return false;
+}
+
+}
+</script>

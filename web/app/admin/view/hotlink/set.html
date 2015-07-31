@@ -1,0 +1,107 @@
+<!-- inc:header -->
+<script type="text/javascript">
+function view_ico(val)
+{
+	if(!val || val == "undefined")
+	{
+		$("#ico_preview").html("&nbsp;");
+		return true;
+	}
+	$("#ico_preview").html("<img src='images/ico/"+val+"' />");
+	return true;
+}
+
+//[对输入的数据进行检测]
+function chk_hotlink(id)
+{
+	var subject = $("#title").val();
+	if(!subject || subject == "undefined")
+	{
+		alert("标题不允许为空");
+		return false;
+	}
+	var val = $("#linkurl").val();
+	if(!val || val == "undefined")
+	{
+		alert("链接不允许为空");
+		return false;
+	}
+	//检测ico是否为空
+	var ico = $("#ico").val();
+	if(!ico || ico == "undefined"){
+		alert("图标不允许为空！");
+		return false;
+	}
+	$("#qgbutton").attr("disabled",true);
+	return true;
+}
+
+$(document).ready(function(){
+	var myico = $("#ico").val();
+	if(myico)
+	{
+		view_ico(myico);
+	}
+});
+</script>
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="130px"><span class="lead">&nbsp;&raquo; 添加/修改快捷键</span></td>
+		<td align="right"><a href="{:site_url('hotlink')}" class="button">快捷键列表</a></td>
+	</tr>
+	</table>
+</div></div>
+
+
+<form method="post" action="{:site_url('hotlink,setok')}id={:$id}" onsubmit="return chk_hotlink()">
+<div class="table">
+	<div class="left"><span class="red">*</span> 名称：</div>
+	<input type="text" name="title" id="title" value="{:$rs[title]}">
+	<span class="clue_on"> 名称不允许为空</span>
+</div>
+<div class="table">
+	<div class="left"><span class="red">*</span> 链接地址：</div>
+	<input type="text" name="linkurl" id="linkurl" value="{:$rs[linkurl]}" class="long_input">
+	<span class="clue_on">[格式如{admin}?{c}=list&{f}=set&id=，不熟的请查看官方帮助手册]</span>
+</div>
+<div class="table">
+	<div class="left"><span class="red">*</span> ICO图标：</div>
+	<input type="text" name="ico" id="ico" value="{:$rs[ico]}" class="long_input clue_on" readonly>
+	<span class="clue_on">[图标规格：48px*48px，<span class="red">图标仅为栏目区别，无其他实质意义]</span></span>
+</div>
+<div class="table">
+	<div class="left">&nbsp;<span class="red">*</span></div>
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+		<!-- $icolist AS $key=>$value --><td><img src="images/ico/{:basename($value)}" width="48" height="48" border="0" onclick="$('#ico').attr('value','{:basename($value)}');" class="hander" /></td><!-- row:15 --><!-- end -->
+	</tr>
+	</table>
+</div>
+
+<div class="table">
+	<div class="left">状态：</div>
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td><input type="radio" name="status" value="1"{if($rs[status])} checked{end} /></td>
+		<td>使用&nbsp;</td>
+		<td><input type="radio" name="status" value="0"{if(!$rs[status])} checked{end} /></td>
+		<td>禁用</td>
+		<td class="clue_on">&nbsp;[暂时不使用时，可在这里关闭]</td>
+	</tr>
+	</table>
+</div>
+
+<div class="table">
+	<div class="left">排序：</div>
+	<input type="text" name="taxis" id="taxis" class="short_input" value="{:$rs[taxis]}">
+	<span class="clue_on"> [设置排序可以优先生成相关，此功能仅限排序，无其他作用]</span>
+</div>
+
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<input type="submit" id="qgbutton" class="btn3" value="提 交">
+</div>
+</form>
+
+<!-- inc:footer -->

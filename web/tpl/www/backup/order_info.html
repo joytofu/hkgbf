@@ -1,0 +1,178 @@
+<!-- inc:head -->
+<div class="body">
+	<div class="left">
+		<h3>订单搜索</h3>
+		<div class="box pd5">
+			<form method="post" action="{:site_url('order,list')}">
+			<table>
+			<tr>
+				<td colspan="2">关键字：<input type="text" name="keywords" id="keywords" value="{:$keywords}"></td>
+			</tr>
+			<tr>
+				<td>&nbsp; &nbsp; &nbsp;</td>
+				<td><input type="submit" class="but01" value="查询"></td>
+			</tr>
+			</form>
+			</table>
+		</div>
+		<!-- inc:inc/usercp -->
+		<!-- inc:inc/left -->
+	</div>
+	<div class="right">
+		<div class="vmenu"><h3>订单信息</h3></div>
+		<div class="box pd5">
+			<table width="100%">
+			<tr>
+				<td height="23px" width="120px" align="right">订单编号：</td>
+				<td>{:$rs[sn]}</td>
+			</tr>
+			<tr>
+				<td height="23px" align="right">订单金额：</td>
+				<td>{:sys_format_order_price($rs[price],$rs[price_currency],$rs[price_currency])}</td>
+			</tr>
+			<tr>
+				<td height="23px" align="right">下单时间：</td>
+				<td>{:date("Y-m-d H:i:s",$rs[postdate])}</td>
+			</tr>
+			<tr>
+				<td height="23px" align="right">Email：</td>
+				<td>{:$rs[email]}</td>
+			</tr>
+			<!-- if($rs[note]) -->
+			<tr>
+				<td height="23px" align="right">备注：</td>
+				<td>{:$rs[note]}</td>
+			</tr>
+			<!-- end -->
+			<tr>
+				<td height="23px" align="right">付款状态：</td>
+				<td><!-- if($rs[pay_status]) -->已付款<!-- else --><span class="red">未付款</span><!-- end --></td>
+			</tr>
+			<!-- if($rs[pay_date]) -->
+			<tr>
+				<td height="23px" align="right">付款时间：</td>
+				<td>{:date("Y-m-d H:i:s",$rs[pay_date])}</td>
+			</tr>
+			<!-- end -->
+			<!-- if($rs[pay_status] && $pay_rs) -->
+			<tr>
+				<td height="23px" align="right">付款方式：</td>
+				<td>{:$pay_rs[title]}</td>
+			</tr>
+			<tr>
+				<td height="23px" align="right">付款金额：</td>
+				<td>{:sys_format_price($rs[pay_price])} {:$rs[pay_currency]}</td>
+			</tr>
+			<!-- end -->
+			</table>
+		</div>
+		<div class="vmenu"><h3>产品信息</h3></div>
+		<div class="box pd5">
+			<div style="background:#97BEF4;">
+			<table width="100%" cellspacing="1">
+			<tr bgcolor="#DCE9FA">
+				<th align="center" height="28px">产品名称</th>
+				<th width="60px" align="center">数量</th>
+				<th width="100px" align="center">单价</th>
+			</tr>
+			<!-- $rslist AS $key=>$value -->
+			<tr bgcolor="#FFFFFF">
+				<td height="23px">&nbsp;<img src="images/lead.gif" /> {:$value[title]}</td>
+				<td class="red" align="center">{:$value[amount]}</td>
+				<td align="center">{:sys_format_order_price($value[price],$value[price_currency],$value[price_currency])}</td>
+			</tr>
+			<!-- end -->
+			</table>
+			</div>
+		</div>
+
+		<!-- if($address[billing]) -->
+		<div class="vmenu"><h3>账单地址信息</h3></div>
+		<div class="box pd5">
+			<table width="100%">
+			<tr>
+				<td width="120px" align="right">姓名：</td>
+				<td height="23px">{:$address[billing][fullname]}</td>
+			</tr>
+			<!-- if($rs[tel]) -->
+			<tr>
+				<td height="23px" align="right">电话：</td>
+				<td>{:$address[billing][tel]}</td>
+			</tr>
+			<!-- end -->
+			<tr>
+				<td height="23px" align="right">国家：</td>
+				<td>{:$address[billing][country]}</td>
+			</tr>
+			<tr>
+				<td height="23px" align="right">地址：</td>
+				<td>{:$address[billing][address]}</td>
+			</tr>
+			<tr>
+				<td height="23px" align="right">邮编：</td>
+				<td>{:$address[billing][zipcode]}</td>
+			</tr>
+			<!-- if($address[billing][note]) -->
+			<tr>
+				<td height="23px" align="right">备注：</td>
+				<td>{:$address[billing][note]}</td>
+			</tr>
+			<!-- end -->
+			</table>
+		</div>
+		<!-- end -->
+
+		<div class="vmenu"><h3>收货人信息</h3></div>
+		<div class="box pd5">
+			<table width="100%">
+			<tr>
+				<td width="120px" align="right">姓名：</td>
+				<td height="23px">{:$address[shipping][fullname]}</td>
+			</tr>
+			<!-- if($rs[tel]) -->
+			<tr>
+				<td height="23px" align="right">电话：</td>
+				<td>{:$address[shipping][tel]}</td>
+			</tr>
+			<!-- end -->
+			<tr>
+				<td height="23px" align="right">国家：</td>
+				<td>{:$address[shipping][country]}</td>
+			</tr>
+			<tr>
+				<td height="23px" align="right">地址：</td>
+				<td>{:$address[shipping][address]}</td>
+			</tr>
+			<tr>
+				<td height="23px" align="right">邮编：</td>
+				<td>{:$address[shipping][zipcode]}</td>
+			</tr>
+			<!-- if($address[shipping][note]) -->
+			<tr>
+				<td height="23px" align="right">备注：</td>
+				<td>{:$address[shipping][note]}</td>
+			</tr>
+			<!-- end -->
+			</table>
+		</div>
+
+		<!-- if(!$rs[pay_status] && $pay_rslist) -->
+		<div class="vmenu"><h3>付款方式</h3></div>
+		<div class="box pd5">
+			<table width="100%">
+			<!-- $pay_rslist AS $key=>$value -->
+			<tr>
+				<td align="left">&nbsp;<img src="images/lead.gif" /> {:$value[title]} &nbsp;<input type="button" value="我要付款" onclick="window.open('{:site_url('order,pay')}paycode={:$value[code]}&sn={:$rs[sn]}&pass={:$rs[pass]}')"></td>
+			</tr>
+			<tr>
+				<td><div style="margin:2px 15px;padding:5px 7px;border:1px #DDD solid;line-height:130%;">{:$value[note]}</div></td>
+			</tr>
+			<tr><td>&nbsp;</td></tr>
+			<!-- end -->
+			</table>
+		</div>
+		<!-- end -->
+	</div>
+	<div class="clear"></div>
+</div>
+<!-- inc:foot -->

@@ -1,0 +1,34 @@
+<!-- inc:head -->
+<div class="body">
+	<div class="left">
+		<!-- inc:inc/catelist -->
+		<!-- inc:inc/usercp -->
+		<!-- inc:inc/left -->
+	</div>
+	<div class="right">
+		<!-- $rslist AS $key=>$value -->
+		<div class="vmenu"><h3>【{:$m_rs[title]}】{:$value[title]}</h3><a href="{:site_url('post,set')}ms=apply&subject={:rawurlencode($value[title])}" target="_blank" class="apply">我要应聘</a></div>
+		<div class="box">
+			<table width="100%" cellspacing="0" cellpadding="0" class="itable">
+			<tr>
+				<td width="50%">招聘人数：{:$value[jnum]}</td>
+				<td>年龄要求：{:$value[age]}</td>
+			</tr>
+			<tr>
+				<td>工作经验：{:$value[jy]}</td>
+				<td>性别要求：{:$value[sex]}</td>
+			</tr>
+			<tr>
+				<td colspan="2">身高要求：{:$value[hight]}</td>
+			</tr>
+			<tr>
+				<td colspan="2">岗位说明：{:$value[note]}</td>
+			</tr>
+			</table>
+		</div>
+		<!-- end -->
+		<!-- inc:inc/pagelist -->
+	</div>
+	<div class="clear"></div>
+</div>
+<!-- inc:foot -->

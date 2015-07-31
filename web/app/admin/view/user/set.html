@@ -1,0 +1,176 @@
+<!-- inc:header -->
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; <a href="{:site_url('user')}">会员管理</a> &raquo; 添加/编辑信息</span></td>
+	</tr>
+	</table>
+</div></div>
+
+<form method="post" action="userupdate.php?id={:$id}" onsubmit="return to_submit();">
+<div class="table" style="display:none">
+	<div class="left"><span class="red">*</span> 会员组：</div>
+	<select name="groupid" id="groupid" onchange="direct('{:site_url('user,set')}id={:$id}&groupid='+this.value);">
+		<!-- $grouplist AS $key=>$value -->
+		<option value="{:$value[id]}"{if($value[id] == $groupid)} selected{end}>{:$value[title]}<!-- if($value[group_type] == "guest") -->【游客组】<!-- end --></option>
+		<!-- end -->
+	</select>
+	<span class="clue_on"> 注意，不要选择游客组，游客组仅限来访者权限</span>
+</div>
+
+<div class="table" style="display:none">
+	<div class="left">前台显示：</div>
+	<select name="ifshow" id="ifshow">
+		<option value="0">不限</option>
+		<option value="1"{if($rs[ifshow] == 1)} selected{end}>显示</option>
+		<option value="2"{if($rs[ifshow] == 2)} selected{end}>隐藏</option>
+	</select>
+	<span class="clue_on"> 启用“不限”时将由会员组决定是否显示会员信息。</span>
+</div>
+
+<div class="table">
+	<div class="left"><span class="red">*</span> 会员名：</div>
+	<input type="text" name="name" id="name" value="{:$rs[name]}">
+</div>
+
+<div class="table">
+	<div class="left"><span class="red">*</span> 姓名：</div>
+	<input type="text" name="rname" id="rname" value="{:$rs[rname]}">
+</div>
+
+<div class="table">
+	<div class="left"><span class="red">*</span> 电话：</div>
+	<input type="text" name="mobile" id="mobile" value="{:$rs[mobile]}">
+</div>
+
+<div class="table">
+	<div class="left"><span class="red">*</span> 邮箱：</div>
+	<input type="text" name="email" id="email" value="{:$rs[email]}">
+</div>
+
+<div class="table">
+	<div class="left"><span class="red">*</span> 预购资金：</div>
+	<input type="text" name="ygzj" id="ygzj" value="{:$rs[ygzj]}">
+</div>
+<div class="table">
+	<div class="left"><span class="red">*</span> 级别：</div>
+	<select name="jb">
+      <option value="0">--请选择级别--</option>
+      <option value="1" {if($rs[jb] == 1)} selected{end}>普通会员</option>
+      <option value="2" {if($rs[jb] == 2)} selected{end}>初级会员</option>
+      <option value="3" {if($rs[jb] == 3)} selected{end}>中级会员</option>
+      <option value="4" {if($rs[jb] == 4)} selected{end}>高级会员</option>
+    </select>
+</div>
+
+<input type="hidden" name="thumb_id" id="thumb_id" value="{:$rs[thumb_id]}">
+<!--<div class="table">
+	<div class="left">
+		<div style="padding-bottom:3px;">会员头像：</div>
+		<div style="padding-bottom:3px;"><input type="button" class="btn2" value="选择" onclick="phpjs_img('thumb_id','thumb_view');" /> &nbsp;</div>
+		<input type="button" value="删除" class="btn2" onclick="phpjs_clear_img('thumb_id','thumb_view')" /> &nbsp;
+	</div>
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td align="left" id="thumb_view"><!-- if($rs[picture]) --><img src="{:$rs[picture]}" width="80px" height="80px" border="0" /><!-- else --><img src="images/nopic.gif" border="0" /><!-- end --></td>
+	</tr>
+	</table>
+</div>-->
+
+<div class="table" style="display:none">
+	<div class="left"><!-- if(!$id) --><span class="red">*</span> <!-- end -->密码：</div>
+	<input type="text" name="pass" id="pass" value="">
+	<span class="clue_on"> <!-- if($id) -->不修改密码请保留为空<!-- else -->请填写密码<!-- end --></span>
+</div>
+
+<!--<div class="table">
+	<div class="left"><span class="red">*</span> 邮箱：</div>
+	<input type="text" name="email" id="email" value="{:$rs[email]}">
+</div>
+-->
+<div class="table">
+	<div class="left">注册时间：</div>
+	<input type="text" name="regdate" id="regdate" onfocus="show_date('regdate')" value="{:$rs[regdate] ? date('Y-m-d H:i',$rs[regdate]) : date('Y-m-d H:i',$sys_app->system_time)}">
+</div>
+
+<!--<!-- $extlist_must AS $key=>$value -->
+{:$value}
+<!-- end -->-->
+
+
+
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<input type="submit" class="btn3" id="_phpok_submit" name="article_submit" value=" 提交 ">
+</div>
+
+</form>
+
+<script type="text/javascript">
+<!-- $extlist AS $key=>$value -->
+	<!-- if($value[input] == "opt") -->
+	phpjs_parent_opt('{:$value[default_val]}','{:$value[identifier]}','{:$value[id]}','{:$value[link_id]}');
+	<!-- elseif($value[input] == "img") -->
+	phpjs_viewpic('{:$value[default_val]}','{:$value[identifier]}');
+	<!-- elseif($value[input] == "download") -->
+	phpjs_viewdown('{:$value[default_val]}','{:$value[identifier]}');
+	<!-- elseif($value[input] == "video") -->
+	phpjs_viewvideo('{:$value[default_val]}','{:$value[identifier]}');
+	<!-- end -->
+<!-- end -->
+
+function to_submit()
+{
+	var name = getid("name").value;
+	if(!name)
+	{
+		alert("会员名不允许为空");
+		getid("name").focus();
+		return false;
+	}
+	var email = getid("email").value;
+	if(!email)
+	{
+		alert("邮箱不允许为空");
+		getid("email").focus();
+		return false;
+	}
+	<!-- if(!$id) -->
+	var pass = getid("pass").value;
+	if(!pass)
+	{
+		alert("密码不允许为空");
+		getid("pass").focus();
+		return false;
+	}
+	<!-- end -->
+	<!-- $extlist AS $key=>$value -->
+	<!-- if($value[if_must] && $value[input] != "radio" && $value[input] != "checkbox") -->
+		<!-- if($value[input] != "edit") -->
+		var {:$value[identifier]} = getid("{:$value[identifier]}").value;
+		<!-- else -->
+		var oEditor_{:$value[identifier]} = FCKeditorAPI.GetInstance('{:$value[identifier]}');
+		var {:$value[identifier]} = oEditor_{:$value[identifier]}.GetXHTML(true);
+		<!-- end -->
+		if(!{:$value[identifier]})
+		{
+			alert("{:$value['error_note'] ? $value['error_note'] : '所有加红色星号信息均必须填写'}");
+			tab_set("main");
+			return false;
+		}
+	<!-- end -->
+	<!-- end -->
+
+	//通过Ajax检测会员账号和邮箱是否重复
+	var url = "{:site_url('user,chk')}id={:$id}&email="+EncodeUtf8(email)+"&name="+EncodeUtf8(name);
+	var msg = get_ajax(url);
+	if(!msg) msg = "error: 检测失败";
+	if(msg != "ok")
+	{
+		alert(msg);
+		return false;
+	}
+	getid("_phpok_submit").disabled = true;
+}
+</script>
+<!-- inc:footer -->

@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><!-- if($sitetitle) -->{:$sitetitle} - <!-- end --><!-- if($_sys[seotitle]) --> {:$_sys[seotitle]} - <!-- end -->{:$_sys[sitename]}</title>
+<!-- if($_sys[google_site_verification]) --><meta name="google-site-verification" content="{:$_sys[google_site_verification]}" /><!-- end -->
+<!-- if($_sys[yahoo_site_key]) --><meta name="y_key" content="{:$_sys[yahoo_site_key]}" /><!-- end -->
+<!-- if($_sys[ms_site_validate]) --><meta name="msvalidate.01" content="{:$_sys[ms_site_validate]}" /><!-- end -->
+<!-- if($_sys[baidu_union_verify]) --><meta name="baidu_union_verify" content="{:$_sys[baidu_union_verify]}" /><!-- end -->
+<meta name="keywords" content="{:$_sys[keywords]}">
+<meta name="description" content="{:$_sys[description]}">
+<link href="images/style.css" rel="stylesheet" type="text/css" />
+<link href="images/index.css" rel="stylesheet" type="text/css" />
+<SCRIPT src="images/jquery-1.7.2.min.js"></SCRIPT>
+     
+<SCRIPT src="images/SqAres.min.js"></SCRIPT>
+
+<script type="text/javascript" src="images/slide.js"></script>
+ 
+<SCRIPT>
+        $(document).ready(function () {
+            $("#demo").Marquee({ direction: 'left', scrollDelay: 35 });
+	    $("#demo1").Marquee({ direction: 'left', scrollDelay: 35 });
+        });
+    </SCRIPT>
+</head>
+
+<body>
+
+<div class="top">
+<div class="logo"><a href="{:$_sys[siteurl]}" title="{:$_sys[sitename]}"><img src="{:$_sys[logo] ? $_sys[logo] : 'images/logo.png'}" alt="{:$_sys[sitename]}" /></a></div>
+
+<div class="rtop"><a href="index.php?c=msg&ts=zhinan"><img src="images/zn.png"></a></div>
+<div class="sousuo">
+           <form method="post" action="index.php?c=search&amp;" name="form2" target="_parent" id="form2"  onsubmit="return to_submit()">
+<input type="hidden" id="_to_url" name="_to_url" value="" />
+    <input onblur="this.style.color='#999';if(this.value=='') this.value='输入关键字...';" 
+onkeyup="if(event.keyCode==13){doSearch();}" onfocus="this.style.color='#000';if(this.value=='输入关键字...') this.value='';" value="输入关键字..."  name="keywords" class="text">
+
+
+
+<input type="submit" name="button" style="float:right; background:#CCC; height:17px; width:20px; border:0; background:none" value=" ">
+
+</form>
+
+</div>
+
+<div class="clear"></div>
+ <ul id="nav">
+         <li class="mainlevel" id="mainlevel_01"><a href="index.php"><img src="images/m1.png"></a></li>
+    
+    <li class="mainlevel" id="mainlevel_02"><a href="index.php?c=msg&ts=aboutus"><img src="images/m2.png"></a>
+    <ul id="sub_02">
+<!--run:$any = phpok_c_list('about',255)-->
+<!--$any[rslist] AS $key=>$value-->
+<li><a <!--if($value[lianjie])-->href="{:$value[lianjie]}"<!--else-->href="{:msg_url($value)}" <!--end-->title="{:$value[title]}">{:$value[title]}</a></li>
+<!-- end -->
+
+    </ul>
+    </li>
+    
+    <li class="mainlevel" id="mainlevel_03"><a href="index.php?c=list&cs=yuanneixinwen"><img src="images/m3.png"></a>
+    <ul id="sub_03">
+<!-- run:$catelist = phpok_s_catelist('news','ts') -->  
+	<!-- $catelist AS $key=>$value -->
+	<li><a href="{:list_url($value)}" title="{:$value[cate_name]}">{:$value[cate_name]}</a></li>
+     <!--end-->
+    </ul>
+    </li>
+    
+    <li class="mainlevel" id="mainlevel_04"><a href="index.php?c=list&cs=jiankangxiaozhishi"><img src="images/m4.png"></a>
+    <ul id="sub_04">
+   <!-- run:$catelist = phpok_s_catelist('baoyubaojian','ts') -->  
+	<!-- $catelist AS $key=>$value -->
+	<li><a href="{:list_url($value)}" title="{:$value[cate_name]}">{:$value[cate_name]}</a></li>
+     <!--end-->
+    </ul>
+    </li>
+    
+    <li class="mainlevel" id="mainlevel_05"><a href="index.php?c=list&cs=guanlituandui"><img src="images/m5.png"></a>
+    <ul id="sub_05">
+    <!-- run:$catelist = phpok_s_catelist('shizituandui','ts') -->  
+	<!-- $catelist AS $key=>$value -->
+	<li><a href="{:list_url($value)}" title="{:$value[cate_name]}">{:$value[cate_name]}</a></li>
+     <!--end-->
+    </ul>
+    </li>
+    
+    <li class="mainlevel" id="mainlevel_06"><a href="index.php?c=list&cs=sileyuan"><img src="images/m6.png"></a>
+    <ul id="sub_06">
+    <!-- run:$catelist = phpok_s_catelist('sileyuan','ts') -->  
+	<!-- $catelist AS $key=>$value -->
+	<li><a href="{:list_url($value)}" title="{:$value[cate_name]}">{:$value[cate_name]}</a></li>
+     <!--end-->
+    </ul>
+    </li>
+    
+    <li class="mainlevel" id="mainlevel_07"><a href="index.php?c=list&cs=yishujiaoyu"><img src="images/m7.png"></a>
+    <ul id="sub_07">
+    <!-- run:$catelist = phpok_s_catelist('yangguangjiaoyu','ts') -->  
+	<!-- $catelist AS $key=>$value -->
+	<li><a href="{:list_url($value)}" title="{:$value[cate_name]}">{:$value[cate_name]}</a></li>
+     <!--end-->
+    </ul>
+    </li>
+    
+    <li class="mainlevel" id="mainlevel_08"><a href="index.php?c=msg&ts=contact"><img src="images/m8.png"></a></li>
+    <div class="clear"></div>
+
+</ul>
+
+</div>
+
+<!----頭部結束----->
+<div id="banner">
+<div class="container">
+  
+<div class="main_view">
+          <div class="window">	
+                <div class="image_reel">
+                    <!-- run:$kflist = phpok('picplayer') -->
+	<!-- $kflist[rslist] AS $key=>$value -->
+<a <!--if($value[link_url])-->href="{:$value[link_url]}" target="_blank"<!--end-->><img src="{:$value[picture]}" alt="" /></a>	
+    	<!-- end -->
+                </div>
+            </div>
+            <div class="paging">
+                <!-- run:$kflist = phpok('picplayer') -->
+	<!-- $kflist[rslist] AS $key=>$value -->
+<a href="#"  rel="{:$key+1}">&nbsp;</a>	
+    	<!-- end -->
+            
+            </div>
+</div>
+</div>
+</div>

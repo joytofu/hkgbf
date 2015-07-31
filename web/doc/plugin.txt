@@ -1,0 +1,10 @@
+常用插件接口标识库：【更新中】
+
+	【会员未正式验证前的脚本判断】		[www]login:ok:prev[/www]login_register
+	【会员正式登录后的脚本操作】			[www]login:ok:next[/www]login_ok
+	【会员注册前的脚本】					[www]register:setok:prev[/www]register_prev
+	【会员注册插件标识】					[www]register:setok:next[/www]register_next
+	【会员Ajax检测账号及邮箱是否存在】	[www]register:chkname:prev[/www]register_chk_prev
+	【会员Ajax检测账号及邮箱是否存在】	[www]register:chkname:next[/www]register_chk_next
+
+

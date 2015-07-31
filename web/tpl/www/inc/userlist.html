@@ -1,0 +1,21 @@
+<li style="background:#eee"><a><strong>预约</strong></a></li>
+<li><a href="index.php?c=list&ms=hehbuser&p=1" <!--if($p==1)-->id="hov"<!--end-->>+&nbsp;&nbsp;保险签单预约</a></li>
+<li><a href="index.php?c=list&ms=hehbuser&p=2" <!--if($p==2)-->id="hov"<!--end-->>+&nbsp;&nbsp;其他预约</a></li>
+<li style="background:#eee"><a><strong>行政专区</strong></a></li>
+ <!-- run:$catelist = phpok_s_catelist('xingzhengzhuanqu','ts') -->  
+
+	<!-- $catelist AS $key=>$value -->
+<li><a href="index.php?c=list&ms=hehbuser&p={:$value[id]}&g=1" <!--if($p==$value[id])-->id="hov"<!--end-->>+&nbsp;&nbsp;{:$value[cate_name]}</a></li>
+
+	
+     <!--end-->
+
+
+<li style="background:#eee"><a><strong>客户资料</strong></a></li>
+ <!-- run:$catelist = phpok_s_catelist('kehuziliao','ts') -->  
+
+	<!-- $catelist AS $key=>$value -->
+<li><a href="index.php?c=list&ms=hehbuser&p={:$value[id]}" <!--if($p==$value[id])-->id="hov"<!--end-->>+&nbsp;&nbsp;{:$value[cate_name]}</a></li>
+
+	
+     <!--end-->

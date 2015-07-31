@@ -1,0 +1,14 @@
+<!--run:-->
+$_SESSION["username"]=$_GET["username"];
+$_SESSION["userid"]=$_GET["hid"];
+$cc=$_GET["cc"];
+<!--/run-->
+<script language=javascript>
+<!--if($cc==1)-->
+window.location.href='index.php?c=list&ms=hehbuser&id={:$_SESSION["userid"]}';
+<!--elseif($cc==2)-->
+window.location.href='index.php?c=list&ms=kehuuser&id={:$_SESSION["userid"]}';
+<!--else-->
+window.location.href='index.php?c=list&ms=yuangonguser&id={:$_SESSION["userid"]}';
+<!--end-->
+</script>

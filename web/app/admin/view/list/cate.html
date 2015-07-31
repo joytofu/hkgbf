@@ -1,0 +1,54 @@
+<!-- inc:header -->
+<script type="text/javascript">
+function set_ext_cateid()
+{
+	var id = join_checkbox();
+	parent.$("#cate_string").attr("value",id);
+	parent.$("#cate_open_string").attr("value","ID:"+id);
+}
+//初始化选中
+function load_selected()
+{
+	//扩展分类
+	var ext_cateid = parent.$("#cate_string").val();
+	if(ext_cateid && ext_cateid != "undefined")
+	{
+		var ext_list = ext_cateid.split(",");
+		for(var i=0;i<ext_list.length;i++)
+		{
+			$("#cateid_"+ext_list[i]).attr("checked",true);
+		}
+	}
+	var main_cateid = parent.$("#cate_id").val();
+	if(main_cateid)
+	{
+		$("#cateid_"+main_cateid).attr("checked",false);
+		$("#cateid_"+main_cateid).attr("disabled",true);
+	}
+}
+$(document).ready(function(){
+	load_selected();
+});
+</script>
+<div class="notice"><div class="p">&nbsp;&raquo; 【{:$m_rs[title]}】选择分类</div></div>
+
+<div class="main" id="myopen_catelist">
+<table width="100%" style="layout:fixed;" cellpadding="0" cellspacing="0">
+<tr>
+	<td class="t_sub" width="50px">ID</td>
+	<td class="t_sub" width="35px">状态</td>
+	<td class="t_sub">名称</td>
+	<td class="t_sub" width="60px">扩展分类</td>
+</tr>
+<!-- $catelist AS $key=>$value -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)">
+	<td align='center' class="tc_left">{:$value[id]}</td>
+	<td align="center" class="tc_right"><a class="status{:intval($value[status])}"></a></td>
+	<td align='left' class="tc_right" style="{:$value[style]};padding:2px 0;">&nbsp;{:$value[space]}{:$value[cate_name]} <span class="clue_on">[{:$value[identifier]}]</span></td>
+	<td align="center" class="tc_right"><input type="checkbox" id="cateid_{:$value[id]}" name="ext_cateid" onclick="set_ext_cateid()" value="{:$value[id]}" /></td>
+</tr>
+<!-- end -->
+</table>
+</div>
+
+<!-- inc:footer_open -->

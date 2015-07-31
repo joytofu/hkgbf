@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>会员中心</title>
+<!-- if($_sys[google_site_verification]) --><meta name="google-site-verification" content="{:$_sys[google_site_verification]}" /><!-- end -->
+<!-- if($_sys[yahoo_site_key]) --><meta name="y_key" content="{:$_sys[yahoo_site_key]}" /><!-- end -->
+<!-- if($_sys[ms_site_validate]) --><meta name="msvalidate.01" content="{:$_sys[ms_site_validate]}" /><!-- end -->
+<!-- if($_sys[baidu_union_verify]) --><meta name="baidu_union_verify" content="{:$_sys[baidu_union_verify]}" /><!-- end -->
+<meta name="keywords" content="{:$_sys[keywords]}">
+<meta name="description" content="{:$_sys[description]}">
+<link href="images/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="images/jquery-1.4.2.js"></script>
+<script type="text/javascript">
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+</script>
+</head>
+
+<body>
+<!--if($_SESSION["username"]==false)-->
+  <script language=javascript>
+window.alert('您还没有登录，请先登录!');
+window.location.href='index.php';
+</script>
+<!--run:-->
+exit;
+<!--/run-->
+<!--end-->
+
+<div id="head">
+  <div class="ssearch">
+  <form method="post" action="{:site_url('search')}" name="form2"id="form2"  onsubmit="return to_submit()">
+  
+  <input name="bgui" type="image" src="images/sbutton.jpg" style="float:right" />
+    <input onblur="this.style.color='#999';if(this.value=='') this.value='输入关键字...';" 
+onkeyup="if(event.keyCode==13){doSearch();}" onfocus="this.style.color='#000';if(this.value=='输入关键字...') this.value='';" value="输入关键字..."  name="keywords" class="stext">
+
+
+</form>
+  </div>
+  <div class="ssr">
+  
+    <form name="form" id="form">
+    <!--if($_SESSION["username"])--><a href="index.php?c=list&cs=usercenter">会员中心</a> | <a href="index.php?c=msg&ts=exit">注销退出</a> <!--else-->
+      <select name="jumpMenu" id="jumpMenu" onchange="MM_jumpMenu('parent',this,0)">
+       <option>登录</option>
+        <option value="index.php?c=list&cs=hezuohuoban&login">合作伙伴</option>
+        <option value="index.php?c=list&cs=kehu&login">客户</option>
+        <option value="index.php?c=list&cs=yuangong&login">员工</option>
+      </select> | <a href="index.php?c=register&k=kehu">注册</a><!--end--> | <a href="mailto:{:$_sys[contactus_email]}">企业邮箱</a>
+    </form>
+  </div>
+
+</div>
+<div id="top">
+<div class="top">
+<div class="logo"><a href="{:$_sys[siteurl]}" title="{:$_sys[sitename]}"><img src="{:$_sys[logo] ? $_sys[logo] : 'images/logo.png'}" alt="{:$_sys[sitename]}" /></a></div>
+<div class="rtop">
+
+<!-- run:$menulist = phpok_menu($id,$cid,$mid) -->
+		<!-- $menulist AS $key=>$value -->
+<a href="{:$value[link]}"{if($value[target])} target="_blank"{end} title="{:$value[title]}" {if($value[my_highlight])}id=menubg{end}>{:$value[title]}</a>
+		<!-- end -->
+		<!-- run:unset($menulist) -->
+
+
+</div>
+</div></div>
+
+<div style="background:#eee; width:1168px; border:1px solid #CCC; padding:15px; margin:20px auto; margin-bottom:10px; ">
+<p style="font-size:18px; color:#F00">尊敬的{:$_SESSION["username"]}会员，欢迎您回来！</p>
+   
+</div>
+
+<div class="main">
+   <div class="left">
+      <div class="left1">
+         <div class="lefttop">{:$m_rs[title]}</div>
+         <div class="leftmain">
+       <!-- inc:inc/catelist-->
+         </div>
+      </div>
+    <!-- inc:inc/left-->
+   </div>
+   
+  <div class="right">
+      <div class="righttop"><div class="ll">{:$rs[cate_name]}</div><div class="rr">您当前的位置是：<a href="{:$_sys[siteurl]}">网站首页</a> > {:$m_rs[title]}<!--if($cs<>"usercenter")--> > {:$rs[cate_name]}<!--end--></div></div>
+      
+      <div class="rightmain">
+       <!-- $rslist AS $key=>$value -->
+        <div class="pro">
+    <div class="ptitle"><a href="{:msg_url($value)}" target="_blank" title="{:$value[title]}">• {:$value[title]}</a></div>
+    <div class="ptime">[{:date("Y-m-d",$value[post_date])}]</div>
+ </div>
+
+<!--END-->
+
+      <!-- inc:inc/pagelist -->
+      </div>
+      
+   </div>
+   
+   
+   
+</div>
+
+<!-- inc:foot -->
+
+<script type="text/javascript">
+function check()
+{
+if (document.form1.username.value=="用户名" || document.form1.username.value=="")
+{
+window.alert("请输入用户名   ");
+document.form1.username.focus();
+return false;
+}
+if (document.form1.password.value=="密码" || document.form1.password.value=="")
+{
+window.alert("请输入登录密码 ");
+document.form1.password.focus();
+return false;
+}
+
+}
+</script>

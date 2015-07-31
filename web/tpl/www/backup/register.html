@@ -1,0 +1,108 @@
+<!-- inc:head -->
+<div class="body">
+	<div class="left">
+		<!-- inc:inc/left -->
+	</div>
+	<div class="right">
+		<!-- run:$reg_condition = phpok('register_condition') -->
+		<!-- if($reg_condition) -->
+		<div class="vmenu"><h3>{:$reg_condition[title]}</h3></div>
+		<div class="box pd5">{:$reg_condition[content]}</div>
+		<!-- run:unset($reg_condition) -->
+		<!-- end -->
+		<div class="vmenu"><h3>会员注册</h3></div>
+		<div class="box pd5">
+			<form method="post" action="{:site_url('register,setok')}" onsubmit="return check_reg();">
+			<table style="padding:10px 10px 10px 25px;">
+			<tr>
+				<td>Email：</td>
+				<td><input type="text" name="email" id="email"> &nbsp;<span class="red">*</span> 邮箱不允许为空</td>
+			</tr>
+			<tr>
+				<td>账号：</td>
+				<td><input type="text" name="name" id="name"> &nbsp;<span class="red">*</span> 账号不允许</td>
+			</tr>
+			<tr>
+				<td>密码：</td>
+				<td><input type="password" name="newpass" id="newpass"> &nbsp;<span class="red">*</span> 请填写您的密码</td>
+			</tr>
+			<tr>
+				<td>确认密码：</td>
+				<td><input type="password" name="chkpass" id="chkpass"> &nbsp;<span class="red">*</span> 请确认您的密码</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td><input type="checkbox" id="ifok"> 同意我站注册条款</td>
+			</tr>
+			<!-- if(function_exists("imagecreate") && defined("SYS_VCODE_USE") && SYS_VCODE_USE == true) -->
+			<tr>
+				<td align="right">验证码：</td>
+				<td><input name="sys_check" id="sys_check" type="text" style="width:50px;" />
+				<span id="phpok_update_code"><img src="{:site_url('login,codes')}" border="0" align="absmiddle" style="cursor:pointer;" onclick="phpok_update_code()"></span></td>
+			</tr>
+			<!-- end -->
+			<tr>
+				<td>&nbsp;</td>
+				<td><input type="submit" id="phpok_submit" value="注册成为会员"></td>
+			</tr>
+			</table>
+			</form>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<script type="text/javascript">
+function check_reg()
+{
+	var chk = getid("ifok").checked;
+	if(!chk)
+	{
+		alert("注册成为会员前，请先同意本站注册协议");
+		return false;
+	}
+	var email = getid("email").value;
+	if(!email)
+	{
+		alert("邮箱不允许为空！");
+		return false;
+	}
+	var str_reg=/^\w+((-\w+)|(\.\w+))*\@{1}\w+\.{1}\w{2,4}(\.{0,1}\w{2}){0,1}/ig;
+	if(email.search(str_reg) == -1)
+	{
+		alert("邮箱格式不正确！");
+		return false;
+	}
+	//
+	var name = getid("name").value;
+	if(!name)
+	{
+		alert("账号不允许为空！");
+		return false;
+	}
+	//通过Ajax检测账号是否有相同
+	var ajaxurl = base_url + base_func + "=chkname&name="+EncodeUtf8(name);
+	var msg = ajax_get(ajaxurl);
+	if(!msg) msg = "error";
+	if(msg != "ok")
+	{
+		alert(msg);
+		return false;
+	}
+	//检测密码是否为空
+	var newpass = getid("newpass").value;
+	var chkpass = getid("chkpass").value;
+	if(!newpass || !chkpass)
+	{
+		alert("密码不允许为空！");
+		return false;
+	}
+	if(newpass != chkpass)
+	{
+		alert("两次输入密码不一致！");
+		return false;
+	}
+	getid("phpok_submit").disabled = true;
+	return true;
+}
+</script>
+<!-- inc:foot -->

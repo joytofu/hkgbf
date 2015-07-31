@@ -1,0 +1,55 @@
+<!-- inc:header -->
+<script type="text/javascript">
+function to_link(t)
+{
+	var turl = base_file + "?"+base_ctrl+"=link&"+base_func+"="+t;
+	Layer.init(turl,550,400);
+}
+
+function to_submit()
+{
+	var tid = $("#title_id").attr("value");
+	if(!tid || parseInt(tid)<1)
+	{
+		alert("请选择要发送的主题！");
+		return false;
+	}
+	getid("_phpok_submit").disabled = true;
+}
+</script>
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; 邮件群发 【<a href="{:site_url('email,one')}">单封邮件发送</a>】</span></td>
+	</tr>
+	</table>
+</div></div>
+
+<form method="post" action="{:site_url('email,postok')}" onsubmit="return to_submit();">
+
+<input type="hidden" id="title_id" name="title_id" />
+<div class="table">
+	<div class="left">请选择主题：</div>
+	<input type="text" name="title" id="title" class="long_input" disabled>
+	<input type="button" value="选择主题" onclick="to_link('email')" class="btn4" />
+</div>
+
+<div class="table">
+	<div class="left">内容开头补充：</div>
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td>{:sys_fckeditor('content','如果您不能正常浏览此邮件，请<strong>点击此处</strong><br />为了确保您能正常收到我们的邮件，请把我们 qinggan@188.com 加入到您的联系人中','270px','630px')}</td>
+	</tr>
+	<tr>
+		<td height="30px" class="clue_on">请设置邮件专题的开头补充，注意：<span class="red">点击此处</span> 尚未设置链接，请手动设置</td>
+	</tr>
+	</table>
+</div>
+
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<input type="submit" class="btn2" id="_phpok_submit" name="article_submit" value="提交">
+</div>
+
+</form>
+<!-- inc:footer -->

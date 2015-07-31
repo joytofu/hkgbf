@@ -1,0 +1,20 @@
+<!-- inc:head -->
+<div class="body">
+	<div class="left"><!-- inc:inc/usercp --><!-- inc:inc/left --></div>
+	<div class="right">
+		<div class="vmenu"><h3>{:$m_rs[title]}</h3></div>
+		<div class="box pd5">{:sys_post('book')}</div>
+		<!-- $rslist AS $key=>$value -->
+		<div class="vmenu"><h3>{:$value[title]}</h3></div>
+		<div class="box pd5">
+			<div class="content">{:$value[content]}</div>
+			<!-- if($value[admreply]) -->
+			<div class="reply"><span class="red">管理员于回复：</span>{:$value[admreply]}</div>
+			<!-- end -->
+		</div>
+		<!-- end -->
+		<!-- inc:inc/pagelist -->
+	</div>
+	<div class="clear"></div>
+</div>
+<!-- inc:foot -->

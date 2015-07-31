@@ -1,0 +1,239 @@
+<!-- inc:header -->
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;<!-- if(!$_hotid) -->&raquo; <a href="{:site_url('phpok')}">数据调用中心</a><!-- end --> &raquo; 添加/编辑信息</span></td>
+	</tr>
+	</table>
+</div></div>
+
+<form method="post" action="{:site_url('phpok,setok')}id={:$id}{if($_hotid)}&_hotid={:$_hotid}{end}" onsubmit="return to_submit();">
+
+<div class="table" {if($_hotid)} style="display:none;"{end}>
+	<div class="left">调用类型：</div>
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td><input type="radio" name="intype" value="sign"{if($rs[intype] == "sign" || !$rs[intype])} checked{end} onclick="to_intype('sign')" /></td>
+		<td>&nbsp;根据配置调用 &nbsp;</td>
+		<td><input type="radio" name="intype" value="sql"{if($rs[intype] == "sql")} checked{end} onclick="to_intype('sql')" /></td>
+		<td>&nbsp;自定义SQL&nbsp;</td>
+		<td><input type="radio" name="intype" value="html"{if($rs[intype] == "html")} checked{end} onclick="to_intype('html')" /></td>
+		<td>&nbsp;自定义HTML&nbsp;</td>
+		<td class="clue_on">&nbsp;</td>
+	</tr>
+	</table>
+</div>
+
+<div class="table">
+	<div class="left"><span class="red">*</span> 主题：</div>
+	<input type="text" name="title" id="title" value="{:$rs[title]}">
+</div>
+
+<!-- if($id) -->
+<div class="table">
+	<div class="left">标识串：</div>
+	<input type="text" disabled value="{:$rs[identifier]}">
+	<span class="clue_on"> 标识串不允许修改</span>
+</div>
+<!-- else -->
+<div class="table">
+	<div class="left"><span class="red">*</span> 标识串：</div>
+	<input type="text" id="identifier" name="identifier" value="{:$rs[identifier]}">
+	<span class="clue_on"> 标识串仅限字母、数字及下划线，且必须是字母开头</span>
+</div>
+<!-- end -->
+
+<div class="table">
+	<div class="left">备注：</div>
+	<input type="text" name="note" id="note" value="{:$rs[note]}" class="long_input">
+</div>
+
+<input type="hidden" id="vartext" name="vartext" value="" />
+
+<div id="inc_usr_html">
+	<div class="table">
+		<div class="left">调用数量：</div>
+		<input type="text" name="usr_maxcount" id="usr_maxcount" value="{:$rs[maxcount]}" class="short_input">
+		<span class="clue_on">&nbsp;范围：0-255，填写0系统将调用所有符合条件的字段信息</span>
+	</div>
+
+	<div class="table">
+		<div class="left">模块及分类：</div>
+		<table cellpadding="0" cellspacing="0">
+		<tr>
+			<td>{:$cate_html}</td>
+		</tr>
+		<tr>
+			<td height="23px" class="clue_on">请选择合适的模块或分类（以方便数据的调用）</td>
+		</tr>
+		</table>
+	</div>
+	<div class="table">
+		<div class="left">主题标签：</div>
+		<table cellpadding="0" cellspacing="0">
+		<tr>
+			<td><input type="text" name="extsign" id="extsign" value="{:$rs[extsign]}" /></td>
+			<td class="clue_on">&nbsp;只是调用一个主题，请设置主题的标签，并设置调用数量为1</td>
+		</tr>
+		</table>
+	</div>
+
+	<div class="table">
+		<div class="left">图片关联：</div>
+		<table cellpadding="0" cellspacing="0">
+		<tr>
+			<td>
+			<select name="inpic" id="inpic">
+				<option value="">原图</option>
+				<!-- $gdlist AS $key=>$value -->
+				<option value="{:$value[pictype]}"{if($rs[inpic] == $value[pictype])} selected{end}>关联：{:$value[picsubject]}</option>
+				<!-- end -->
+			</select>
+			</td>
+			<td>&nbsp;</td>
+			<td><input type="checkbox" name="pic_required" id="pic_required"{if($rs[pic_required])} checked{end}></td>
+			<td>&nbsp;图片不为空</td>
+			<td class="clue_on">&nbsp; 图片关联用于列表中，以方便读取信息。</td>
+		</tr>
+		</table>
+	</div>
+
+	<div class="table">
+		<div class="left">数据条件：</div>
+		<table cellpadding="0" cellspacing="0">
+		<tr>
+			<td><input type="radio" name="attr" value=""{if(!$rs[attr])} checked{end} /></td>
+			<td>&nbsp;不限 &nbsp;</td>
+			<td><input type="radio" name="attr" value="istop"{if($rs[attr] == "istop")} checked{end} /></td>
+			<td>&nbsp;置顶 &nbsp;</td>
+			<td><input type="radio" name="attr" value="isvouch"{if($rs[attr] == "isvouch")} checked{end} /></td>
+			<td>&nbsp;推荐 &nbsp;</td>
+			<td><input type="radio" name="attr" value="isbest"{if($rs[attr] == "isbest")} checked{end} /></td>
+			<td>&nbsp;热销 &nbsp;</td>
+		</tr>
+		</table>
+	</div>
+	<div class="table">
+		<div class="left">排序：</div>
+		<select name="orderby" id="orderby">
+		<!-- $orderlist AS $key=>$value -->
+		<option value="{:$key}"{if($rs[orderby] == $key)} selected{end}>{:$value}</option>
+		<!-- end -->
+		</select>
+		<span class="clue_on">慎用随机排序！建议有memcache缓存的用户使用</span>
+		
+	</div>
+	<div class="table">
+		<div class="left">数据类型：</div>
+		<table cellpadding="0" cellspacing="0">
+		<tr>
+			<td><input type="radio" name="datatype" value="list"{if($rs[datatype] == "list" || !$rs[datatype])} checked{end} /></td>
+			<td>&nbsp;主题 &nbsp;</td>
+			<td><input type="radio" name="datatype" value="cate"{if($rs[datatype] == "cate")} checked{end} /></td>
+			<td>&nbsp;分类（有子类调子类，无子类调同级分类） &nbsp;</td>
+		</tr>
+		</table>
+	</div>
+</div>
+
+<div id="inc_sql_html">
+	<div class="table">
+		<div class="left">SQL读取方式：</div>
+		<table cellpadding="0" cellspacing="0">
+		<tr>
+			<td><select name="sql_maxcount" id="sql_maxcount">
+			<option value="2">取得多条数据</option>
+			<option value="1"{if($rs[maxcount] == 1)} selected{end}>只取一条数据</option>
+			</select></td>
+		</tr>
+		</table>
+	</div>
+	<div class="table">
+		<div class="left">代码：</div>
+		<table cellpadding="0" cellspacing="0">
+		<tr>
+			<td><textarea style="width:620px;height:200px;" name="sql_typetext" id="sql_typetext">{:$rs[typetext]}</textarea></td>
+		</tr>
+		</table>
+	</div>
+</div>
+
+<div id="inc_code_html">
+	<div class="table">
+		<div class="left">
+			<div style="padding-bottom: 3px;">代码：</div>
+			<input type="hidden" id="typetext_tmp_id" name="typetext_tmp_id">
+		</div>
+		<table cellpadding="0" cellspacing="0">
+		<tr>
+			<td>{:sys_fckeditor('typetext',$rs[typetext],'240px','640px',true)}</td>
+		</tr>
+		</table>
+	</div>
+</div>
+
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<input type="submit" class="btn3" id="_phpok_submit" name="article_submit" value=" 提交 ">
+</div>
+
+</form>
+
+<script type="text/javascript">
+function to_intype(val)
+{
+	if(val == "sign")
+	{
+		$("#inc_sql_html").hide();
+		$("#inc_code_html").hide();
+		$("#inc_usr_html").show();
+	}
+	else if(val == "sql")
+	{
+		$("#inc_sql_html").show();
+		$("#inc_code_html").hide();
+		$("#inc_usr_html").hide();
+	}
+	else if(val == "html")
+	{
+		$("#inc_sql_html").hide();
+		$("#inc_code_html").show();
+		$("#inc_usr_html").hide();
+	}
+}
+function to_submit()
+{
+	var name = getid("title").value;
+	if(!name)
+	{
+		alert("名称不允许为空");
+		getid("title").focus();
+		return false;
+	}
+	<!-- if(!$id) -->
+	var identifier = getid("identifier").value;
+	if(!identifier)
+	{
+		alert("标识符不允许为空");
+		getid("identifier").focus();
+		return false;
+	}
+	var chk_url = "{:site_url('phpok,chk_identifier')}identifier="+EncodeUtf8(identifier);
+	var msg = get_ajax(chk_url);
+	if(msg != "ok")
+	{
+		if(!msg) msg = "Error: 检测失败，请检查";
+		alert(msg);
+		return false;
+	}
+	<!-- end -->
+	getid("_phpok_submit").disabled = true;
+	return true;
+}
+{if($id)}
+to_intype("{:$rs[intype]}");
+{else}
+to_intype("sign");
+{end}
+</script>
+<!-- inc:footer -->

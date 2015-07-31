@@ -1,0 +1,38 @@
+<!-- inc:header -->
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; 插件管理</span></td>
+		<td align="right"><a href="{:site_url('plugin,check')}" class="button">检查未安装插件</a></td>
+	</tr>
+	</table>
+</div></div>
+<div class="notice"><div class="p">插件是对PHPOK系统现有功能上的一些扩展，PHPOK插件系统，没有单独管理功能！必须配合已有的模块执行</div></div>
+<div class="main">
+<table width="100%" style="layout:fixed;" cellpadding="0" cellspacing="0">
+<tr>
+	<td class="t_sub" width="50px">ID</td>
+    <td class="t_sub" width="40px">状态</td>
+	<td class="t_sub">名称</td>
+    <td class="t_sub" width="80px">标识符</td>
+	<td class="t_sub" width="40px">排序</td>
+	<td class="t_sub" width="50px">版本</td>
+	<td class="t_sub" width="120px">操作</td>
+</tr>
+<!-- $rslist AS $key=>$value -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)">
+	<td align="center" class="tc_left">{:$value[id]}</td>
+	<td align="center" class="tc_right" id="status_{:$value[id]}"><!-- if($ifcheck) --><a href="javascript:to_status({:$value[id]},{:intval($value[status])});void(0);" class="status{:intval($value[status])}"></a><!-- else --><a href="javascript:alert('你没有权限执行此操作！');void(0);" class="status{:intval($value[status])}"></a><!-- end --></td>
+	<td class="tc_right" style="line-height:150%;padding:1px 5px;">{:$value[title]}<!-- if($value[note]) --><div class="clue_on">{:nl2br($value[note])}</div><!-- end --></td>
+	<td class="tc_right" align="center">{:$value[identifier]}</td>
+	<td align="center" class="tc_right">{:intval($value[taxis])}</td>
+	<td align="center" class="tc_right">{:$value[version]}</td>
+	<td align="center" class="tc_right">
+		<input type="button" value="编辑" class="btn2" {if($ifmodify)}onclick="to_modify('{:$value[id]}')"{else}disabled{end} />
+		<input type="button" value="删除" class="btn2" {if($ifdel)}onclick="to_uninstall('{:$value[id]}','{:$value[title]}')"{else}disabled{end} />
+	</td>
+</tr>
+<!-- end -->
+</table>
+</div>
+<!-- inc:footer -->

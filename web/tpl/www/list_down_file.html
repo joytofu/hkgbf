@@ -1,0 +1,53 @@
+<!-- inc:head -->
+<!--if($_SESSION["username"]==false)-->
+  <script language=javascript>
+window.alert('您还没有登录，请先登录!');
+window.location.href='index.php?c=list&cs=yuangong&login';
+</script>
+<!--end-->
+<!-- inc:banner-->
+<!--if($p==false)-->
+  <script language=javascript>
+window.location.href='index.php?c=list&ms=yuangonguser&p=205';
+</script>
+
+<!--end-->
+<div class="main">
+   <div class="left">
+      <div class="left1">
+         <div class="lefttop">{:$m_rs[title]}</div>
+         <div class="leftmain">
+       <!-- inc:inc/userlist2-->
+         </div>
+      </div>
+<!-- inc:inc/left-->
+   </div>
+   <!--run:-->
+   if($p){
+  
+$result2=mysql_query("select * from juniu_cate where id='$p'");
+while ($rs2=mysql_fetch_array($result2)){
+	$pp=$rs2['cate_name'];
+	}
+   }
+
+   <div class="right">
+      <div class="righttop"><div class="ll">{:$pp}</div><div class="rr">您当前的位置是：<a href="{:$_sys[siteurl]}">网站首页</a> > {:$m_rs[title]} > {:$pp}</div></div>
+      
+      <div class="rightmain">
+          <!-- $rslist AS $key=>$value -->
+          <li style=" float:left; width:100%; height:30px; line-height:30px; border-bottom:1px dashed #CCCCCC">
+              <span style="float:right">&nbsp;{:date("Y-m-d",$value[post_date])}</span><a href="{:site_url('download','id='.$value[down])}" style="{:$value[style]}" title="{:$value[title]}">▶ {:$value[title]}</a></li>
+          <!-- end -->
+          </ul>
+          <!-- inc:inc/pagelist -->
+      </div>
+      
+   </div>
+   
+   
+   
+</div>
+
+
+<!-- inc:foot -->

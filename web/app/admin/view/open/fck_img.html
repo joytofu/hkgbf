@@ -1,0 +1,286 @@
+<!-- inc:header -->
+<script type="text/javascript">
+var fck_id = "#{:$fck_id}";
+var input_id = fck_id + "_tmp_id";
+var base_url = "{:base_url()}";
+
+var Editor = parent.$(fck_id)[0].xheditor;
+
+function clickpic(id)
+{
+	//读取原有表单中的数据
+	var vid = parent.$(input_id).val();
+	if(vid)
+	{
+		var n_vid = join_str(vid,id);
+	}
+	else
+	{
+		var n_vid = id;
+	}
+	//重新写入
+	parent.$(input_id).attr("value",n_vid);
+	//预览数据
+	view_picture(n_vid);
+}
+
+
+function pl_add(tid)
+{
+	var new_id = join_checkbox(tid);
+	var old_id = parent.$(input_id).val();
+	if(old_id)
+	{
+		var n_vid = join_str(old_id,new_id);
+	}
+	else
+	{
+		var n_vid = new_id;
+	}
+	//重新写入
+	parent.$(input_id).attr("value",n_vid);
+	view_picture(n_vid);
+}
+
+function view_picture(n_vid)
+{
+	if(!n_vid || n_vid =="" || n_vid == "undefined")
+	{
+		parent.$(input_id).attr("value","")
+		getid("p_show_view").style.display = "none";
+		getid("p_show_submit").style.display = "none";
+		return true;
+	}
+	var url = "{:site_url('open,ajax_preview_img')}idstring="+n_vid;
+	get_ajax(url,view_picture_ajax);
+}
+
+//异步处理
+function view_picture_ajax(msg)
+{
+	if(msg == "empty")
+	{
+		view_picture("");
+		return true;
+	}
+	var array = $.evalJSON(msg);
+	//通过Ajax获取图片列表
+	var v_html = '<div class="open_list"><table width="100%"><tr>';
+	for(var i=0;i<array.length;i++)
+	{
+		var tmp_i = i+1;
+		var srcurl = array[i]["url"];
+		if(!srcurl || srcurl == "" || srcurl == "undefined")
+		{
+			srcurl = "images/nopic.gif";
+		}
+		v_html += "<td class=\"open_td_out\" onmouseover=\"this.className='open_td_over'\" onmouseout=\"this.className='open_td_out'\"><div align='center'><img src='"+srcurl+"' width='80px' height='80px' /></div><div style='padding-top:3px;text-align:center;'><input type='checkbox' value='"+array[i]["id"]+"'>";
+		v_html += " <input type='text' style='width:35px;' id='sort_"+array[i]["id"]+"' value='"+tmp_i+"'></div></td>";
+		if(tmp_i%5 == "")
+		{
+			v_html += "</tr><tr>";
+		}
+	}
+	v_html += "</tr></table></div>";
+	//预览
+	getid("p_show_view").style.display = "";
+	getid("p_show_view").innerHTML = v_html;
+	getid("p_show_submit").style.display = "";
+	return true;
+}
+
+//更新排序
+function sort_order()
+{
+	var id = join_checkbox("p_show_view","all");//读取全部
+	if(!id)
+	{
+		alert("找不到相关信息排序");
+		return false;
+	}
+	var taxis = new Array();
+	var id_list = id.split(",");
+	var id_len = id_list.length;
+	var m = 1;
+	for(var i=0;i<id_len;i++)
+	{
+		var tt = document.getElementById("sort_"+id_list[i]);
+		if(tt)
+		{
+			taxis[m] = "taxis["+id_list[i]+"]="+tt.value;
+			m++;
+		}
+	}
+	var taxis_string = taxis.join("&");
+	if(!taxis_string)
+	{
+		hiAlert("没有找到排序信息~");
+		return false;
+	}
+	//执行排序操作
+	var url = "{:site_url('open,sort_order')}"+taxis_string;
+	var msgid = get_ajax(url);//执行操作
+	if(msgid != "error")
+	{
+		parent.$(input_id).attr("value",msgid);
+		view_picture(msgid);
+		return true;
+	}
+	else
+	{
+		alert("排序操作出错，请检查");
+		return false;
+	}
+}
+
+//删除图片操作
+function del_selected()
+{
+	var id = join_checkbox("p_show_view","all");//读取全部
+	if(!id)
+	{
+		alert("找不到相关信息");
+		return false;
+	}
+	//读取已选中的
+	var del_id = join_checkbox("p_show_view","checked");
+	if(!del_id)
+	{
+		alert("请选中要删除的图片");
+		return false;
+	}
+	var n_id = new Array();
+	var id_list = id.split(",");
+	var del_id_list = del_id.split(",");
+	var id_len = id_list.length;
+	var del_len = del_id_list.length;
+	var m = 0;
+	for(var i = 0;i<id_len;i++)
+	{
+		var myid = id_list[i];
+		for(var n=0;n<del_len;n++)
+		{
+			if(myid == del_id_list[n])
+			{
+				myid = "delete";
+			}
+		}
+		if(myid && myid != "delete")
+		{
+			n_id[m] = myid;
+			m++;
+		}
+	}
+	var new_id = n_id.join(",");
+	if(new_id)
+	{
+		parent.$(input_id).attr("value",new_id);
+	}
+	view_picture(new_id);
+	return true;
+}
+
+//提交信息
+function ok()
+{
+	var n_vid = parent.$(input_id).attr("value");
+	if(!n_vid)
+	{
+		var con = confirm("没有找到图片，确定关闭吗");
+		if(con != "0")
+		{
+			parent.Layer.over();
+			return true;
+		}
+		return true;
+	}
+	var img_type = getid("gd_type").value;
+	var url = "{:site_url('open,fck_img')}idstring="+n_vid+"&gd_type="+img_type+"&";
+	var msg = get_ajax(url);
+	if(msg == "empty")
+	{
+		parent.$(input_id).attr("value","");
+		ok();
+		return true;
+	}
+	var array = $.evalJSON(msg);
+	var len = array.length;
+	var i_html = "";
+	for(var i=0;i<len;i++)
+	{
+		var srcurl = array[i]["url"];
+		if(srcurl && srcurl != "undefined")
+		{
+			i_html += '<img src="'+base_url+srcurl+'" border="0" /><br />';
+		}
+	}
+	//写入信息中
+	Editor.pasteHTML(i_html);
+	parent.$(input_id).attr("value","");
+	callback(null);
+	return true;
+}
+</script>
+<!-- inc:swfupload -->
+<div class="main bd_none">
+<div id="p_show_view" style="display:none;"></div>
+<div id="p_show_submit" style="display:none;text-align:left;padding:2px auto;">
+<table>
+<tr>
+	<!-- if($gdlist) -->
+		<td>类型：</td>
+		<td>
+			<select name="gd_type" id="gd_type">
+			<!-- $gdlist AS $key=>$value -->
+				<!-- if($value[status]) -->
+				<option value="{:$value[pictype]}">{:$value[picsubject]}</option>
+				<!-- end -->
+			<!-- end -->
+			<option value="">原图</option>
+			</select>
+		</td>
+	<!-- else -->
+	<input type="hidden" id="gd_type" name="gd_type" value="">
+	<!-- end -->
+	<td><input type="button" value="全选" onclick="select_all('p_show_view');" class="btn2"></td>
+	<td><input type="button" value="反选" onclick="select_anti('p_show_view');" class="btn2"></td>
+	<td><input type="button" value="不选" onclick="select_none('p_show_view');" class="btn2"></td>
+	<td><input type="button" value="提交" onclick="ok();" class="btn2"></td>
+	<td><input type="button" value="排序" onclick="sort_order();" class="btn2"></td>
+	<td><input type="button" value="删除" onclick="del_selected()" class="btn2"></td>
+</tr>
+</table>
+</div>
+
+<div id="list_pic_show" class="open_list">
+<table width="100%" style="layout:fixed;">
+<tr>
+	<!-- $rslist AS $key=>$value -->
+	<td class="open_td_out" onmouseover="this.className='open_td_over'" onmouseout="this.className='open_td_out'">
+		<div class="list-img"><img src="{:$value[thumb]}" width="80px" height="80px" id="thumb_{:$value[id]}" class="hand" onclick="clickpic('{:$value[id]}');" title="上传时间：{:date('Y-m-d H:i:s',$value[postdate])}&#13;&#10;文件名称：{:$value[title] ? $value[title] : basename($value[filename])}" /></div>
+		<div class="input"><input type="checkbox" value="{:$value[id]}" align="absmiddle" /> {:$value[title] ? sys_cutstring($value[title],10,'…') : sys_cutstring(basename($value[filename]),10,'…')}</div>
+	</td>
+	<!-- row:5 -->
+	<!-- end -->
+</tr>
+</table>
+</div>
+
+<div style="padding:2px;">
+	<input type="button" value="全选" onclick="select_all('list_pic_show');" class="btn2">
+	<input type="button" value="反选" onclick="select_anti('list_pic_show');" class="btn2">
+	<input type="button" value="不选" onclick="select_none('list_pic_show');" class="btn2">
+	<input type="button" value="选五个" onclick="select_not_all('list_pic_show');" class="btn3">
+	<input type="button" value="添加" onclick="pl_add('list_pic_show');" class="btn2">
+</div>
+
+</div>
+<!-- if($pagelist) --><div class="table">{:$pagelist}</div><!-- end -->
+<script type="text/javascript">
+var t_id = 	parent.$(input_id).attr("value");
+if(t_id)
+{
+	view_picture(t_id);
+}
+</script>
+<!-- inc:footer_open -->

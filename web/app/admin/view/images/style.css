@@ -1,0 +1,134 @@
+*{margin:0;padding:0;}
+body{background: #E6E6E6;font:normal 12px "Microsoft YaHei","Tahoma","Arial";_overflow-x:"hidden";}
+a:link{color: #000000;text-decoration: none;}
+a:visited{color: #000000;text-decoration: none;}
+a:hover{color: #ff0000;text-decoration: underline;}
+select{border:1px #fff solid;}
+input{background:url("icons.gif") bottom left repeat-x;}
+
+/*常用按钮图标*/
+a.btn{background:url("icons.gif") no-repeat;width:16px;height:16px;display:block;float:left;margin-left:3px;margin-right:2px;}
+a.add{background-position:0 0;}
+a.edit{background-position:-16px 0;}
+a.del{background-position:-32px 0;}
+a.del2{background-position:-16px -32px;}
+a.key{background-position:-48px 0;}
+a.none{background-position:right -70px;}
+a.reply{background-position:0 -48px;}
+a.prev{background-position:-64px 0;}
+a.folder{background-position:-48px -96px;}
+a.sqlback{background-position:0 -112px;}
+a.status1{background:url("icons.gif") 0 -48px;width:16px;height:16px;margin:0 3px;display:block;}
+a.status1{background:url("icons.gif") 0 -16px;width:16px;height:16px;margin:0 3px;display:block;}
+a.status0{background:url("icons.gif") -16px -16px;width:16px;height:16px;margin:0 3px;display:block;}
+a.piclink{background-position:-16px -112px;}
+a.pic_gd{background-position:-32px -112px;}
+a.pic_del{background-position:-48px -112px;}
+a.copy{background-position:-64px -48px;}
+
+/*列表中常用到的input框样式*/
+input.list_short_input{width:45px;text-align:center;}
+
+
+.hander{cursor:pointer}
+.f-left{float:left;}
+.f-right{float:right}
+.clear{clear:both;height:0;}
+
+input.btn2{background-position:-120px -40px;width:40px;height:20px;line-height:20px;text-align:center;border:0;margin:0;padding:0;}
+input.btn3{background-position:-100px -20px;width:60px;height:20px;line-height:20px;text-align:center;border:0;margin:0;padding:0;}
+input.btn4{background-position:-80px 0;width:80px;height:20px;line-height:20px;text-align:center;border:0;margin:0;padding:0;}
+input.btn9{background-position:0 -142px;height:20px;border:1px #D2D2D2 solid;margin:0;padding:0;}
+input.catebtn{background:url("catebtn.gif") no-repeat;width:300px;text-align:left;text-indent:4px;height:21px;overflow:hidden;border:0;margin:0;padding:0;line-height:21px;}
+
+#foot{position:relative;clear:both;text-align:center;margin:5px auto;width:99%;}
+#foot p{line-height:130%;margin:1px;padding:5px 0px;}
+
+img{border:0}
+form{margin:0;padding:0}
+
+.pagelist{margin:2px 3px;padding:1px;border:0px}
+.pagelist .n{border:1px #DDDDDD solid;padding:0 5px;background:#FFFFFF;font-size:11px;}
+.pagelist .m{border:1px #FF0000 solid;padding:0 5px;background:#DFDFDF;color:red;font-size:11px;}
+.pagelist a{font-size:11px;font-family:"Arial","Tahoma","Microsoft YaHei"}
+
+.clear{clear:both}
+.none{display:none}
+
+
+.t_sub{background:#5B5B5B;color:white;height:25px;text-align:center}
+.tc_left{border-left:1px #333333 solid;border-right:1px #333333 solid;border-bottom:1px #0C5870 solid}
+.tc_right{border-right:1px #333333 solid;border-bottom:1px #333333 solid}
+.tr_over{background-color:#52EBC9;height:23px}
+.tr_out{height:23px}
+
+.notice{position:relative;clear:both;margin:0;height:29px;background:url("desktop.jpg") bottom center repeat-x;}
+.notice .p{margin:1px;padding:2px;line-height:23px;}
+.notice a.button{padding:2px 4px 0px 21px;background:url("comment.gif") no-repeat 2px center;}
+
+.main{position:relative;clear:both;margin:2px auto;border:1px solid #333333;width:99%;}
+.main span.tips{cursor:default;}
+.main ol li{margin-left:40px;line-height:22px;}
+.main_bg{background:#5B5B5B}
+.bd_none{border:0}
+
+/* 电子商务表单的样式 */
+.biz{width:600px;border:1px solid #ccc;background:#efefef;line-height:160%;padding:5px 10px;}
+.biz_title{height:26px;line-height:26px;margin-left:15px;font-weight:bold;color:red;}
+.biz_div{height:26px;line-height:26px;}
+
+.table{margin:1px auto;width:99%;clear:both;padding-top:3px;}
+.table .disabled{color:#4C4C4C;background:#AFAFAF;}
+.table1{margin:1px auto;width:99%;}
+.table .left{float:left;width:110px;*width:115px;text-align:right;padding:3px 1px;}
+.table .right{float:left;text-align:left;padding:3px 1px;}
+.table .right td.td{height:25px;text-align:center;}
+.table1 .left{float:left;width:145px;*width:150px;text-align:right;padding:1px;}
+.table1 .right{float:left;text-align:left;padding:1px;}
+.hand{cursor:pointer;}
+.clear{clear:both}
+.none{display:none}
+.clue_on{color:#808080}
+.red{color:red;}
+.darkred{color:darkred;}
+.darkblue{color:darkblue}
+.padding_left{padding-left:22px;line-height:130%}
+.long_input{width:300px}
+.short_input{width:75px}
+.center{text-align:center;}
+.submit{padding:0px 4px;*padding:2px 4px 0 4px;font-size:12px;background-color:#ece9d8;border-width:1px;}
+
+.tab{border-bottom:1px solid #353535;position:relative;clear:both;margin:auto;width:99%;margin-top:5px;}
+.tab .over{text-align:center;background:#8E8E8E;font-weight:bold;border:1px solid #666666;border-bottom:0px;cursor:pointer;height:25px;padding-left:10px;padding-right:10px;}
+.tab .out{text-align:center;border:1px solid #666666;border-bottom:0px;cursor:pointer;height:25px;padding-left:10px;padding-right:10px;}
+
+.open_list td{text-align:center;border:1px solid #CCC;padding-top:5px;}
+.open_list td.open_td_over{background:#CECECE;}
+.open_list td.open_td_out{background:none;}
+.open_list .list-img{}
+.open_list .input{overflow:hidden;height:18px;margin:3px;white-space:nowrap;}
+
+/* swfupload 上传涉及到的样式效果 */
+.swfupload_progress{padding:1px;}
+.progressWrapper {overflow: hidden;}
+.progressContainer {margin: 5px;padding: 4px;border: solid 1px #E8E8E8;background-color: #F7F7F7;overflow: hidden;}
+.progressName {font-size: 8pt;font-weight: 700;color: #555;height: 14px;text-align: left;white-space: nowrap;overflow: hidden;}
+.progressBarInProgress,.progressBarComplete,.progressBarError{font-size: 0;width: 0%;height: 2px;background-color: blue;margin-top: 2px;}
+.progressBarComplete {width: 100%;background-color: green;visibility: hidden;}
+.progressBarError {width: 100%;background-color: red;visibility: hidden;}
+.progressBarStatus {margin-top: 2px;width: 337px;font-size: 7pt;font-family: Arial;text-align: left;white-space: nowrap;}
+a.progressCancel {font-size: 0;display: block;height: 14px;width: 14px;background-image: url(cancelbutton.gif);background-repeat: no-repeat;background-position: -14px 0px;float: right;}
+a.progressCancel:hover {background-position: 0px 0px;}
+
+
+/* smartMenu.css	by zhangxinxu */
+.smart_menu_box{display:none; width:140px; position:absolute; z-index:201105;}
+.smart_menu_body{padding:1px; border:1px solid #B8CBCB; background-color:#fff; -moz-box-shadow:2px 2px 5px #666; -webkit-box-shadow:2px 2px 5px #666; box-shadow:2px 2px 5px #666;}
+.smart_menu_ul{margin:0; padding:0; list-style-type:none;}
+.smart_menu_li{position:relative;}
+.smart_menu_a{display:block; height:25px; line-height:24px; padding:0 5px 0 25px; color:#000; font-size:12px; text-decoration:none; overflow:hidden;}
+.smart_menu_a:hover, .smart_menu_a_hover{background-color:#348CCC; color:#fff; text-decoration:none;}
+.smart_menu_li_separate{line-height:0; margin:3px; border-bottom:1px solid #B8CBCB; font-size:0;}
+.smart_menu_triangle{width:0; height:0; border:5px dashed transparent; border-left:5px solid #666; overflow:hidden; position:absolute; top:7px; right:5px;}
+.smart_menu_a:hover .smart_menu_triangle, .smart_menu_a_hover .smart_menu_triangle{border-left-color:#fff;}
+.smart_menu_li_hover .smart_menu_box{top:-1px; left:130px;}

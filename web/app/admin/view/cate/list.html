@@ -1,0 +1,50 @@
+<!-- inc:header -->
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; 分类管理</span></td>
+		<td align="right"><a href="{:site_url('cate,set')}" class="button">添加新分类</a></td>
+	</tr>
+	</table>
+</div></div>
+
+<div class="main">
+<table width="100%" style="layout:fixed;" cellpadding="0" cellspacing="0">
+<tr>
+	<td class="t_sub" width="50px">ID</td>
+	<td class="t_sub" width="35px">状态</td>
+	<td class="t_sub" width="120px">模块</td>
+	<td class="t_sub">名称</td>
+	<td class="t_sub" width="55px">分页数</td>
+	<td class="t_sub" width="55px">排序</td>
+	<td class="t_sub" width="64px">操作</td>
+</tr>
+<!-- $catelist AS $key=>$value -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)">
+	<td align='center' class="tc_left">{:$value[id]}</td>
+	<!-- run:$status = intval($value[status]) -->
+	<td align="center" class="tc_right" id="status_{:$value[id]}"><a href="javascript:cate_status({:$value[id]},{:$status});void(0);" class="status{:$status}"></a></td>
+	<td align="center" class="tc_right">{:$value[title] ? $value[title] : '-'}</td>
+	<td align='left' class="tc_right" style="{:$value[style]};padding:2px 0;">&nbsp;{:$value[space]}{:$value[cate_name]} <span class="clue_on">[{:$value[identifier]}]</span><!-- if($value[ifspec]) -->【单页信息】<!-- end --></td>
+	<!-- if($ifmodify) -->
+	<td align="center" class="tc_right"><!-- if(!$value[ifspec]) --><input type="text" class="list_short_input" value="{:$value[psize]}" onblur="update_psize({:$value[id]},this.value)" /><!-- else -->-<!-- end --></td>
+	<td align="center" class="tc_right"><input type="text" class="list_short_input" value="{:$value[taxis]}" onblur="update_taxis({:$value[id]},this.value)" /></td>
+	<!-- else -->
+	<td align="center" class="tc_right"><!-- if(!$value[ifspec]) -->{:intval($value[psize])}<!-- else -->-<!-- end --></td>
+	<td align="center" class="tc_right">{:intval($value[taxis])}</td>
+	<!-- end -->
+	<td align="center" class="tc_right">
+		<a href="{:site_url('cate,set')}cateid={:$value[id]}" class="btn add" title="添加子分类"></a>
+		<a href="{:site_url('cate,set')}id={:$value[id]}" class="btn edit" title="编辑当前分类"></a>
+		<a href="javascript:cate_del({:$value['id']});void(0);" class="btn del" title="删除当前分类"></a>
+	</td>
+</tr>
+<!-- end -->
+</table>
+</div>
+
+<div class="notice"><div class="p">
+	友情提示：【修改分页数及排序，无需更新，当光标离开即自动更新】<span id="cate_update_ajax_ok"></span>
+</div></div>
+
+<!-- inc:footer -->

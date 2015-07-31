@@ -1,0 +1,94 @@
+<textarea id="{var}" name="{var}" style="width:{width};height:{height};">{defaultvalue}</textarea>
+<input type='hidden' name='{var}_tmp_id' id='{var}_tmp_id' value=''>
+<script type="text/javascript" src="libs/xheditor/xheditor_plugins/highlight/highlight.js"></script>
+<script type="text/javascript">
+var show_html = "{show_html}";
+var editor_{var};
+$(pageInit_{var});
+function pageInit_{var}()
+{
+	//自定义工具
+	var mytools = "Source,Preview,|,Cut,Copy,Paste,Pastetext,|,";
+	mytools += "Bold,Italic,Underline,Strikethrough,|,";
+	mytools += "Align,List,Outdent,Indent,|,";
+	mytools += "Link,Unlink,Hr,|,";
+	mytools += "phpok_special,Img,Flash,phpok_img,|,";
+	mytools += "Fontface,FontSize,FontColor,BackColor,|,";
+	mytools += "SelectAll,Removeformat,About";
+	var divw = $(window).width() * 0.7;
+	var divh = $(window).height() * 0.8;
+	if(divw<560) divw = 560;
+	if(divh<450) divh = 450;
+	var extend_img = "fck_id={var}&type=img";
+	var img_url = get_url("open,fck",extend_img);
+	var extend_att = "fck_id={var}&type=download";
+	var att_url = get_url("open,fck",extend_att);
+	var extend_video = "fck_id={var}&type=video";
+	var video_url = get_url("open,fck",extend_video);
+	var allPlugin={
+		phpok_img:{c:'plugin plugin_img',t:'服务器图片',e:function(){var _this = this;_this.showIframeModal('服务器图片',img_url,function(v){},divw,divh);}},
+		phpok_list1:{c:'plugin plugin_list1',t:'数字列表',e:function(){this.pasteHTML(this._exec('insertOrderedList'))}},
+		phpok_list2:{c:'plugin plugin_list2',t:'符号列表',e:function(){this.pasteHTML(this._exec('insertUnorderedList'))}},
+		phpok_sub:{c:'plugin plugin_sub',t:'下标',e:function(){this.pasteHTML(this._exec('subscript'))}},
+		phpok_sup:{c:'plugin plugin_sup',t:'上标',e:function(){this.pasteHTML(this._exec('superscript'))}},
+		phpok_special:{c:'plugin plugin_special',t:'特殊符号',h:1,e:function(){
+			var _this=this;
+			var s_char = "&pound;<>英镑,";s_char += "&yen;<>人民币,";s_char += "&cent;<>美分,";
+			s_char += "&#36;<>美元,";s_char += "&euro;<>欧元,";
+			s_char += "&trade;<>商标,";s_char += "&copy;<>版权,";s_char += "&reg;<>已注册,";
+			s_char += "&#215;<>乘号,";s_char += "&#247;<>除号,";s_char += "&plusmn;<>正负,";
+			s_char += "&deg;<>度数,";s_char += "&ne;<>不等于,";s_char += "&le;<>小于等于,";
+			s_char += "&ge;<>大于等于,";s_char += "&perp;<>垂直,";s_char += "&infin;<>无限大,";
+			s_char += "&permil;<>千分比";s_char += "&pi;<>圆周率,";s_char += "&larr;<>向左箭头,";
+			s_char += "&uarr;<>向上箭头,";s_char += "&rarr;<>向右箭头,";s_char += "&darr;<>向下箭头,";
+			s_char += "&harr;<>双向箭头,";s_char += "&spades;<>黑桃,";s_char += "&clubs;<>梅花,";
+			s_char += "&hearts;<>红心,";s_char += "&diams;<>方块,";s_char += "&Omega;<>欧姆,";
+			s_char += "&iquest;<>倒问号,";s_char += "&sect;<>章节,";s_char += "&laquo;<>双左箭头,";
+			s_char += "&raquo;<>双右箭头,";
+			var char_array = s_char.split(",");
+			var char_length = char_array.length;
+			var char_html = "<table><tr>";
+			var i_m = 0;
+			for(var i=0;i<char_length;i++)
+			{
+				var val = char_array[i].length>0 ? char_array[i] : "";
+				if(val)
+				{
+					i_m++;
+					var val_array = val.split("<>");
+					var val_value = val_array[0];
+					var val_title = val_array[1];
+					char_html += '<td><a id="special_charset_'+i+'" special_value="'+val_value+'" ';
+					char_html += 'href="javascript:;void(0);"';
+					if(val_title && val_title != "undefined")
+					{
+						char_html += ' title="'+val_title+'"';
+					}
+					char_html += '>';
+					char_html += val_value + "</a></td>";
+					if(i_m%8 === 0)
+					{
+						char_html += "</tr><tr>";
+					}
+				}
+			}
+			char_html += "</tr></table>";
+			var jHtml = $('<div class="char_p"></div>');
+			var jList = $(char_html).click(function(ev){
+				ev=ev.target;
+				var jA=$(ev);
+				if(!$.nodeName(ev,'A'))return;
+				_this.pasteText(jA.attr('special_value'));
+				_this.hidePanel();return false;
+			}).mousedown(_this.returnFalse);
+			jHtml.append(jList);
+			_this.showPanel(jHtml);
+		}}
+	};
+	editor_{var} = $('#{var}').xheditor({plugins:allPlugin,tools:mytools,internalScript:true,inlineScript:true,linkTag:true,loadCSS:"libs/xheditor/xheditor_plugins/highlight/style.css"});
+	if(show_html == "true")
+	{
+		$("#{var}")[0].xheditor.toggleSource(true);
+	}
+}
+</script>

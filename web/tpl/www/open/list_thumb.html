@@ -1,0 +1,34 @@
+<!-- inc:open/header -->
+<script type="text/javascript">
+var iframe_id = "{:$iframe_id}";
+if(iframe_id)
+{
+	var p_pre = parent.$("#"+iframe_id).contents().find("#{:$input_view}");
+	var p_val = parent.$("#"+iframe_id).contents().find("#{:$input_id}");
+}
+else
+{
+	var p_pre = parent.$("#{:$input_view}");
+	var p_val = parent.$("#{:$input_id}");
+}
+function clickpic(id,view)
+{
+	p_val.attr("value",id);
+	var viewhtml = '<img src="'+view+'" class="hand" width="80px" height="80px" onclick="phpjs_preview(\''+id+'\')" />';
+	p_pre.html(viewhtml);
+	parent.Layer.over();
+}
+</script>
+<!-- inc:open/swfupload -->
+<div class="main">
+<table width="100%" style="layout:fixed;">
+<tr>
+	<!-- $rslist AS $key=>$value -->
+	<td style="text-align:center;padding-top:5px;"><img src="{:$value[thumb]}" width="80px" height="80px" class="hand" onclick="clickpic('{:$value[id]}',this.src);" title="上传时间：{:date('Y-m-d H:i:s',$value[postdate])}&#13;&#10;文件名称：{:$value[title] ? $value[title] : basename($value[filename])}" /></td>
+	<!-- row:5 -->
+	<!-- end -->
+</tr>
+</table>
+</div>
+<!-- if($pagelist) --><div class="table">{:$pagelist}</div><!-- end -->
+<!-- inc:open/footer -->

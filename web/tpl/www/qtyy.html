@@ -1,0 +1,84 @@
+ <form action="dealbx2.php" onsubmit="return check()" name="form1" id="form1" method="post">
+ <input type="hidden" name="cc" value="11" id="cc">
+ 
+<table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#cccccc" id="ngf">
+  <tr>
+    <td>预约日期：</td>
+    <td><input type="text" class="textbb1" name="yyrq" id="yyrq">&nbsp;<span class="redbb">*</span></td>
+  </tr>
+  <tr>
+    <td>预约内容：</td>
+    <td><input type="text" class="textbb1" name="yynr" id="yynr">&nbsp;<span class="redbb">*</span> 例如邮寄合同，预约开户</td>
+  </tr>
+  
+  <tr>
+    <td>联系人：</td>
+    <td><input type="text" class="textbb1" name="fullname" id="fullname">&nbsp;<span class="redbb">*</span></td>
+
+  </tr>
+  
+  <tr>
+    <td>联系电话：</td>
+    <td><input type="text" class="textbb1" name="mobile" id="mobile">&nbsp;<span class="redbb">*</span></td>
+  </tr>
+  
+  <tr>
+    <td>联系地址：</td>
+    <td><input type="text" class="textbb1" name="address" id="address">&nbsp;<span class="redbb">*</span></td>
+  </tr>
+
+  
+  <tr>
+    <td>备注信息：</td>
+    <td>
+   <textarea class="textbb5" name="content" id="content"></textarea>
+</td>
+  </tr>
+   
+</table>
+
+            
+            <p align="center" style="padding-top:30px; padding-bottom:20px;"><input name="button" type="image" src="images/tjxx.jpg" /></p>
+            
+            </form>          
+           <script type="text/javascript">
+function check()
+{
+	if (document.form1.yyrq.value=="")
+{
+window.alert("请输入预约日期       ");
+document.form1.yyrq.focus();
+return false;
+}
+if (document.form1.yynr.value=="")
+{
+window.alert("请输入预约内容!!       ");
+document.form1.yynr.focus();
+return false;
+}
+	
+if (document.form1.fullname.value=="")
+{
+window.alert("请输入联系人姓名!!       ");
+document.form1.fullname.focus();
+return false;
+}
+
+
+if (document.form1.mobile.value=="")
+{
+window.alert("请输入联系电话       ");
+document.form1.mobile.focus();
+return false;
+}
+
+if (document.form1.address.value=="")
+{
+window.alert("请输入联系地址      ");
+document.form1.address.focus();
+return false;
+}
+
+
+}
+</script>                 

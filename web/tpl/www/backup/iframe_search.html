@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><!-- if($sitetitle) -->{:$sitetitle} - <!-- end -->{:$_sys[sitename]}<!-- if($_sys[seotitle]) --> -- {:$_sys[seotitle]}<!-- end --></title>
+<meta name="keywords" content="{:$_sys[keywords]},qinggan,phpok">
+<meta name="description" content="{:$_sys[description]} - PHPOK.COM">
+<script type="text/javascript">
+var base_file = "{:$_sys[siteurl]}{:HOME_PAGE}";
+var base_url = "{:$_sys[siteurl]}{:$sys_app->url}";
+var base_ctrl = "{:$sys_app->config->c}";
+var base_func = "{:$sys_app->config->f}";
+var base_dir = "{:$sys_app->config->d}";
+</script>
+<style type="text/css">
+body{background:{:$bgcolor};font-size:12px;}
+input{width:120px;}
+select{width:120px;}
+.table{margin:1px auto;width:99%;clear:both;}
+.table .left{float:left;width:60px;text-align:right;padding:3px 1px;}
+.table .right{float:left;text-align:left;padding:3px 1px;}
+.but01{background:url('images/but_bg02.jpg') no-repeat;width:50px;height:20px;line-height:18px;border:0;margin:0;padding:0;}
+.btn2{width:40px;height:20px;line-height:18px;border:1px solid #ccc;}
+.long_input{width:300px;}
+.short_input{width:50px;}
+.keywords{width:100px;}
+.clue_on{font-size:12px;color:#484848}
+.red{font-size:12px;color:red;}
+</style>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="js/php.js"></script>
+<script type="text/javascript">
+function to_submit()
+{
+	$("#_to_url").attr("value",top.location);
+	return true;
+}
+//if (self.location == top.location)
+//{
+//	direct("{:$_sys[site_url]}");
+//}
+</script>
+</head>
+
+<body>
+<form method="post" action="{:site_url('search')}" target="_top" onsubmit="return to_submit()">
+<input type="hidden" id="_to_url" name="_to_url" value="" />
+<input type="hidden" id="mid" name="mid" value="{:$mid}" />
+<!-- if($catelist) -->
+<div class="table">
+	<div class="left">分类：</div>
+	<div class="right">
+	<select name="cateid" id="cateid">
+	<option value="">请选择……</option>
+	<!-- $catelist AS $key=>$value -->
+	<option value="{:$value[id]}"{if($cateid == $value[id])} selected{end}>{:$value[space]}{:$value[cate_name]}</option>
+	<!-- end -->
+	</select>
+	</div>
+</div>
+<!-- end -->
+<!-- $rslist AS $key=>$value -->
+{:$value}
+<!-- end -->
+<div class="table">
+	<div class="left">&nbsp;关键字：</div>
+	<input type="text" id="keywords" name="keywords" value="{:$keywords}" class="keywords" />
+</div>
+
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<input type="submit" class="but01" id="_phpok_submit" value=" 提交 ">
+</div>
+</form>
+<script type="text/javascript">
+<!-- $jslist AS $key=>$value -->
+	<!-- if($value[input] == "opt") -->
+	phpjs_parent_opt('{:$value[default_val]}','{:$value[identifier]}','{:$value[id]}','{:$value[link_id]}');
+	<!-- end -->
+<!-- end -->
+</script>
+</body>
+</html>

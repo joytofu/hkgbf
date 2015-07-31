@@ -1,0 +1,25 @@
+<!-- inc:head -->
+<div class="body">
+	<div class="left">
+		<!-- inc:inc/catelist -->
+		<!-- inc:inc/usercp -->
+		<!-- inc:inc/left -->
+	</div>
+	<div class="right">
+		<div class="vmenu"><h3>{:$rs[cate_name]}</h3></div>
+		<div class="box">
+			<ul class="picture">
+			<!-- $rslist AS $key=>$value -->
+			<li>
+				<div><a href="{:msg_url($value)}" title="{:$value[title]}"><img src="{:$value[picture]}" border="0" alt="{:$value[title]}" /></a></div>
+				<div><a href="{:msg_url($value)}" title="{:$value[title]}">{:sys_cutstring($value[title],17)}</a></div>
+			</li>
+			<!-- end -->
+			</ul>
+			<div class="clear line"></div>
+			<!-- inc:inc/pagelist -->
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<!-- inc:foot -->

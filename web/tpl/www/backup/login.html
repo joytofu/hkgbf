@@ -1,0 +1,49 @@
+<!-- inc:head -->
+<div class="body">
+	<div class="left">
+		<!-- inc:inc/left -->
+	</div>
+	<div class="right">
+		<div class="vmenu"><h3>会员登录</h3></div>
+		<div class="box pd5">
+			<form method="post" action="{:site_url('login,ok','',false)}" onsubmit="return login_chk();">
+			<table width="100%">
+			<tr>
+				<td align="right" height="35px">账号：</td>
+				<td><input type="text" id="username" name="username" class="input_login" /></td>
+			</tr>
+			<tr>
+				<td align="right" height="35px">密码：</td>
+				<td><input type="password" id="password" name="password" class="input_login" /></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td height="50px"><input type="submit" class="but01" value="会员登录" id="_phpok_submit" />&nbsp;&nbsp;<input type="button" value="会员注册" class="but01" onclick="direct('{:site_url('register','',false)}')" />&nbsp; <a href="{:site_url('login,getpass','',false)}">忘记密码？</a></td>
+			</tr>
+			</table>
+			</form>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<script type="text/javascript">
+function login_chk()
+{
+	var username = getid("username").value;
+	var password = getid("password").value;
+	if(!username || !password)
+	{
+		alert("账号或密码不能为空");
+		if(!username)
+		{
+			getid("username").focus();
+		}
+		else
+		{
+			getid("password").focus();
+		}
+		return false;
+	}
+}
+</script>
+<!-- inc:foot -->

@@ -1,0 +1,33 @@
+<!-- inc:header -->
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; <a href="{:site_url('payment')}">付款方式</a> &nbsp;&raquo; 添加/编辑字段属性</span></td>
+		<td align="right"><a href="{:site_url('payment,fields')}id={:$id}" class="button">属性列表</a></td>
+	</tr>
+	</table>
+</div></div>
+
+<form method="post" action="{:site_url('payment,fields_ok')}id={:$id}&tid={:$trs[id]}" onsubmit="return to_setfields('{:$trs[id]}','{:$id}')">
+<div class="table">
+	<div class="left"><span class="red">*</span> 标识串：</div>
+	<input type="text" name="code" id="code" value="{:$trs[code]}">
+	<span class="clue_on">限字母、下划线及数字，且必须是字母开头</span>
+</div>
+<div class="table">
+	<div class="left"><span class="red">*</span> 名称：</div>
+	<input type="text" name="title" id="title" value="{:$trs[title]}">
+	<span class="clue_on"> 名称不允许为空</span>
+</div>
+<div class="table">
+	<div class="left">值：</div>
+	<input type="text" name="val" id="val" value="{:$trs[val]}" class="long_input">
+	<span class="clue_on"></span>
+</div>
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<input type="submit" class="btn3" id="_phpok_submit" name="article_submit" value=" 提交 ">
+</div>
+
+</form>
+<!-- inc:footer -->

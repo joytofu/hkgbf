@@ -1,0 +1,49 @@
+<!-- inc:head -->
+<div class="body">
+	<div class="left"><!-- inc:inc/left --></div>
+	<div class="right">
+		<div class="vmenu"><h3>取回密码</h3></div>
+		<div class="box">
+			<form method="post" action="{:site_url('login,getpasschk')}" onsubmit="return chk_getpass();">
+			<table width="100%">
+			<tr>
+				<td align="right">账号：</td>
+				<td><input type="text" id="username" name="username" class="input_login" /></td>
+			</tr>
+			<tr>
+				<td align="right">邮箱：</td>
+				<td><input type="text" id="email" name="email" class="input_login" /></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td><input type="submit" value="取回密码" id="phpok_submit" class="but01" /></td>
+			</tr>
+			</form>
+			</table>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<script type="text/javascript">
+function chk_getpass()
+{
+	var username = getid("username").value;
+	var email = getid("email").value;
+	if(!username || !email)
+	{
+		alert("账号或邮箱不能为空");
+		if(!username)
+		{
+			getid("username").focus();
+		}
+		else
+		{
+			getid("email").focus();
+		}
+		return false;
+	}
+	getid("phpok_submit").disabled =true;
+	return true;
+}
+</script>
+<!-- inc:foot -->

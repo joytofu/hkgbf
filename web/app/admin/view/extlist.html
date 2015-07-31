@@ -1,0 +1,22 @@
+<!-- 扩展字段内容 -->
+<!-- $ext_list AS $key=>$value -->
+<!-- run:$_field_name = $value[identifier]; -->
+<div class="table">
+	<div class="left"><!-- if($value[if_must]) --><span class="red">* </span><!-- end -->{:$value[sub_left] ? $value[sub_left] : $value[title]}：</div>
+	<!-- if($value[input] == 'text' -->
+	<input type="text" name="{:$_field_name}" id="{:$_field_name}" value="{:$rs[$_field_name]}">
+	<!-- elseif($value[input] == 'radio') -->
+		<!-- run:$_selected = $rs[$_field_name] ? $rs[$_field_name] : $value[default_val]; -->
+		<!-- run:$_select_list = explode("\n",$value[list_val]); -->
+		<!-- $_select_list AS $k=>$v -->
+			<!-- run:$__exp = explode(",",$v); -->
+			<!-- run:$__exp[1] = $__exp[1] ? __exp[1] : $__exp[0]; -->
+				<input type="radio" name="{$_field_name}" value="{:$__exp[0]}"{if($__exp[0] == $_selected)} checked{end}>
+		<!-- end -->
+		<!-- run:unset($_select_list) -->
+	<!-- end -->
+	<!-- if($value['sub_note']) -->
+	<span class="clue_on"> {:$value[sub_note]}</span>
+	<!-- end -->
+</div>
+<!-- end -->

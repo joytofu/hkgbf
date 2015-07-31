@@ -1,0 +1,17 @@
+
+ <!-- run:$catelist = phpok_s_catelist('yuangongcaozuocaidan','ts') -->  
+
+	<!-- $catelist AS $key=>$value -->
+<li><a href="index.php?c=list&ms=yuangonguser&p={:$value[id]}" <!--if($p==$value[id])-->id="hov"<!--end-->>+&nbsp;&nbsp;{:$value[cate_name]}</a></li>
+
+	
+     <!--end-->
+     
+     <li style="background:#eee"><a><strong>员工自助</strong></a></li>
+ <!-- run:$catelist = phpok_s_catelist('xingzhengzhuanqu','ts') -->  
+
+	<!-- $catelist AS $key=>$value -->
+<li><a href="index.php?c=list&ms=yuangonguser&p={:$value[id]}" <!--if($p==$value[id])-->id="hov"<!--end-->>+&nbsp;&nbsp;{:$value[cate_name]}</a></li>
+
+	
+     <!--end-->

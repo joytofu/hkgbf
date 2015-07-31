@@ -1,0 +1,5 @@
+您好，管理员：<br />
+<blockquote>
+	客户 {:$rs[fullname]} 于 {:date("Y-m-d H:i:s",$rs[postdate])} 创建订单，具体请查看：<br />
+	<a href="{:$_sys[siteurl]}{:site_url('checkout,info')}sn={:$rs[sn]}&pass={:$rs[pass]}" target="_blank">{:$_sys[siteurl]}{:site_url('checkout,info')}sn={:$rs[sn]}&pass={:$rs[pass]}</a>
+</blockquote>

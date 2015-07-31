@@ -1,0 +1,111 @@
+<!-- inc:header -->
+<script type="text/javascript">
+function test_link()
+{
+	var url = "{:site_url('collection,url','id='.$id)}&listurl=";
+	var linkurl = $("#testing_linkurl").attr("value");
+	if(!linkurl)
+	{
+		alert("请输入要测试的采集网址");
+		return false;
+	}
+	url += encode_utf8(linkurl);
+	get_ajax(url,test_link_ajax);
+	$("#test_status").show();
+}
+function test_link_ajax(msg)
+{
+	if(msg)
+	{
+		var rs = JSON.parse(msg);
+		if(rs["status"] == "error")
+		{
+			$("#content").attr("value",rs["note"]);
+		}
+		else
+		{
+			var len = rs["content"].length;
+			var array = new Array();
+			for(var i=0;i<len;i++)
+			{
+				array[i] = rs["content"][i]["title"]+"|||"+rs["content"][i]["url"];
+			}
+			$("#content").attr("value",array.join("\n"));
+		}
+		$("#test_status").hide();
+	}
+}
+
+function test_msg()
+{
+	var url = "{:site_url('collection,content','id='.$id)}&msgurl=";
+	var linkurl = $("#testing_linkurl").attr("value");
+	if(!linkurl)
+	{
+		alert("请输入要测试的采集网址");
+		return false;
+	}
+	url += encode_utf8(linkurl);
+	get_ajax(url,test_msg_ajax);
+	$("#test_status").show();
+}
+
+function test_msg_ajax(msg)
+{
+	if(msg)
+	{
+		//alert("MSG:"+msg);
+		//return false;
+		var rs = JSON.parse(msg);
+		if(rs["status"] == "error")
+		{
+			$("#content").attr("value",rs["note"]);
+		}
+		else
+		{
+			var len = rs["content"].length;
+			var array = new Array();
+			for(var i=0;i<len;i++)
+			{
+				array[i] = rs["content"][i]["title"]+"（"+rs["content"][i]["identifier"]+"）："+rs["content"][i]["content"];
+			}
+			$("#content").attr("value",array.join("\n"));
+		}
+		$("#test_status").hide();
+	}
+}
+
+</script>
+
+<div class="notice"><div class="p">&nbsp;&raquo; {:$rs[title]} &raquo; 采集测试</span></div></div>
+<style type="text/css">
+.cj_result{font-size:12px;line-height:150%;}
+</style>
+<table width="99%" height="100%">
+<tr>
+	<td>
+		<table>
+		<tr>
+			<td><input type="text" id="testing_linkurl" class="long_input"></td>
+			<td><input type="button" value="采集网址" class="btn4" onclick="test_link()" /></td>
+			<td><input type="button" value="采集内容" class="btn4" onclick="test_msg()" /></td>
+			<td id="test_status" style="display:none;"><img src="images/loading.gif" /></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+<tr>
+	<td><textarea id="content" class="cj_result"></textarea></td>
+</tr>
+</table>
+<script type="text/javascript">
+$(function(){
+	var p_width = parent.$("#DOMWindow").width();
+	var p_height = parent.$("#DOMWindow").height();
+	$("#testing_linkurl").css("width",(parseInt(p_width)-220).toString() + "px");
+	$("#content").css("width",(parseInt(p_width)-20).toString() + "px");
+	$("#content").css("height",(parseInt(p_height)-70).toString() + "px");
+
+});
+</script>
+<!-- inc:footer_open -->

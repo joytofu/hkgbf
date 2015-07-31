@@ -1,0 +1,49 @@
+<!-- inc:head -->
+<div class="body">
+	<div class="left">
+		<!-- inc:inc/catelist -->
+		<!-- inc:inc/usercp -->
+		<!-- inc:inc/left -->
+	</div>
+	<div class="right">
+		<div class="vmenu"><h3>友情链接</h3></div>
+		<div class="box">
+			<ul class="picture">
+			<!-- $rslist AS $key=>$value -->
+			<li><a href="{:$value[link_url]}" title="{:$value[title]}"{if($value[target])} target="_blank"{end}>{:sys_cutstring($value[title],17)}</a></li>
+			<!-- end -->
+			</ul>
+			<div class="clear"></div>
+			<!-- inc:inc/pagelist -->
+		</div>
+		<div id="post_link"></div>
+	</div>
+	<div class="clear"></div>
+</div>
+<script type="text/javascript">
+function js_link(rs,id)
+{
+	getid(id).innerHTML = rs;
+}
+function to_submit()
+{
+	var subject = getid("subject").value;
+	if(!subject)
+	{
+		alert("网站名称不允许为空");
+		getid("subject").focus();
+		return false;
+	}
+	var link_url = getid("link_url").value;
+	if(!link_url)
+	{
+		alert("请填写网站地址");
+		return false;
+	}
+	getid("_phpok_submit").disabled = true;
+	return true;
+}
+func_php("post&ms=link",js_link,"post_link");
+</script>
+
+<!-- inc:foot -->

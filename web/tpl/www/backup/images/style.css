@@ -1,0 +1,172 @@
+body{ color:#666; font-family:"Microsoft Yahei","宋体","Tahoma","Arial"; font-size:12px; margin:0; padding:0;}
+ul,h1,h2,h3,h4,h5,h6,p,li{margin:0;padding:0;list-style:none;}
+form{margin:0;padding:0;}
+img{border:0;}
+a{text-decoration:none; color:#393939;}
+a:hover{color:#1E619D;}
+h3.protitle{font-size:14px;color:#003A75;line-height:150%;}
+.clear{ clear:both; height:0; line-height:0; font-size:0;}
+.line{height:7px;line-height:0;font-size:0;display:block;}
+.pd5{padding:5px;}
+.lh{line-height:150%;}
+.red{color:red;}
+.hand{cursor:pointer;}
+.price{color:red;font-weight:bold;}
+.buy{ width:75px; height:28px; border:none; background:url(but_bg06.jpg) no-repeat;}
+.con{width:75px; height:28px; border:none; background:url(but_bg05.jpg) no-repeat;}
+.but01{ width:64px; height:24px; border:none; background:url(but_bg01.jpg) no-repeat;}
+.long_input{width:360px;}
+.input_login{height:16px; background:url(input_bg01.jpg) repeat-x; border:1px solid #a9d9f4; width:150px;}
+.img_selected{border:3px solid #1E619D}
+.img_no_select{border:3px solid #B8D5F1}
+
+/*头部样式*/
+.header{ height:119px; background:url(top_bg.jpg) repeat-x; padding:7px 0 0 0;}
+.header .logo{ width:937px; margin:0 auto; padding:0 0 0 13px;height:82px;overflow:hidden;}
+.header .logo span{ float:right; color:#1381ce; margin:8px 3px 0 0;}
+.header .logo span a{ color:#1381ce; margin:0 5px;}
+
+/* 导航菜单 */
+ul.menu{width:930px; height:37px; margin:0 auto; padding:0 0 0 20px;list-style:none;}
+ul.menu li{float:left;}
+ul.menu li a{ width:85px; height:24px; display:block; text-align:center; color:#fff; background:url(menu_bg02.jpg) no-repeat; padding:13px 0 0 0;}
+ul.menu li a:hover{ color:#1381ce; font-weight:bold; background:url(menu_bg01.jpg) no-repeat;}
+ul.menu .li_a a{ color:#1381ce; font-weight:bold; background:url(menu_bg01.jpg) no-repeat;}
+
+.vmenu{background:url("vmenu.jpg") no-repeat;height:40px;position:relative;}
+.vmenu h3{width:550px;font-size:14px;color:#1E619D;line-height:38px;height:40px;float:left;margin:0 16px;}
+.vmenu .more{background:url("more.gif") no-repeat;width:37px;height:13px;float:right;margin:13px;display:block;}
+.vmenu .apply{float:right;margin:13px;width:60px;}
+/* 左侧样式 */
+.body{width:950px; margin:10px auto;}
+.body .left{float:left;width:240px;}
+.body .left h3.title{height:32px; background:url(h3_bg01.jpg) no-repeat; font-size:14px; color:#3388d8; padding-left:15px;line-height:32px;}
+.body .left .content{border:1px solid #dae9f8;margin-bottom: 10px;padding:5px 7px;}
+.body .left .content h3{font-size:12px;line-height:160%;background:url("comment.gif") left center no-repeat;padding-left:14px;}
+.body .left .content h3 a{color:#3388d8}
+.body .left .content .msg{text-indent:24px;line-height:160%;word-wrap: break-word;word-break: normal;}
+
+/* 左侧分类列表 */
+.body .left ul.catelist{list-style:none;padding:0;margin:0;}
+.body .left ul.catelist li{height:23px;line-height:23px;background:url("lead.gif") left center no-repeat;padding-left:20px;}
+.body .left ul.catelist li.son{margin-left:24px;}
+
+/*右侧关于我们样式*/
+.body .right{float:right;width:700px;}
+.body .right .me{width:700px;height:220px; background:url(bg.jpg) no-repeat;overflow:hidden;position:relative;margin-bottom:10px;}
+.body .right .me .aboutus{ float:left; width:330px; line-height:20px; margin:15px 10px 0 15px;height:190px;overflow:hidden;}
+.body .right .me .aboutus h3{ font-size:14px; color:#1E619D; line-height:14px;}
+.body .right .me .banner{ float:right;width:330px;height:190px;overflow:hidden;margin:15px 15px 15px 0;}
+.body .right .box{position:relative;border:1px solid #dae9f8;border-top:0;padding-top:4px;margin-bottom:10px;margin-top:-1px;}
+.body .right .date{text-align:center;border-top:1px solid #E6F0FB;border-bottom:1px solid #E6F0FB;height:26px;line-height:26px;}
+.body .right ul.picture{list-style:none;padding:0;margin:0;}
+.body .right ul.picture li{float:left;width:131px;text-align:center;line-height:150%;padding:5px 0;border:1px solid #EBEBEB;margin-left:5.5px;margin-top:6px;}
+.body .right ul.newslist{list-style:none;padding:0;margin:0}
+.body .right ul.newslist li{border-bottom:1px dashed #EBEBEB;line-height:23px;height:23px;padding-left:28px;background:url("news.gif") 10px center no-repeat;margin-left:7px;margin-right:5px;}
+.body .right ul.newslist .date{float:right;margin-right:5px;display:block;border:0;height:23px;line-height:23px;}
+.body .right .content{line-height:160%;padding:5px;text-indent:24px;}
+.body .right h1{text-align:center;height:40px;line-height:40px;font-size:18px;letter-spacing:3px;color:#1E619D;}
+.body .right .note{text-indent:2em;padding:3px;margin:5px 0;border:1px solid #E6F0FB;background:#EEF4FF;line-height:160%;}
+.body .right .proimg{float:left;width:435px;overflow:hidden;}
+.body .right .protxt{float:left;width:252px;}
+.body .right .protxt h3{font-size:14px;}
+.body .right .line1{border-bottom:1px solid #B3CDFF;background:#EEF4FF;padding:3px 5px 1px 7px;height:26px;line-height:26px;margin-bottom:5px;}
+.body .right .line2{border-bottom:1px solid #B3CDFF;padding:3px 5px 1px 7px;height:24px;line-height:24px;margin-bottom:3px;}
+.body .right .msg{padding:5px 15px;}
+
+/* 首页产品列表 */
+ul.indexpro{margin:0;padding:0;list-style:none;}
+ul.indexpro li{float:left;width:340px;margin-left:5px;margin-bottom:5px;color:#17677E;height:136px;overflow:hidden;}
+ul.indexpro li a{color:#17677E;}
+ul.indexpro li .img{width:120px;text-align:center;}
+ul.indexpro li .img img{width:100px;height:100px;border:1px solid #dddddd;padding:2px;}
+ul.indexpro li div.line1{border-bottom:1px solid #B3CDFF;background:#EEF4FF;padding:3px 5px 1px 7px;height:26px;line-height:26px;margin-bottom:5px;}
+ul.indexpro li div.line2{border-bottom:1px solid #B3CDFF;padding:3px 5px 1px 7px;height:24px;line-height:24px;margin-bottom:3px;}
+
+
+
+/* 客服QQ样式 */
+#qqonline_float{width:111px;position:fixed;*_position:absolute;right:10px;top:100px;}
+#qqonline_float .qq-top{background:url("qq-top.gif") no-repeat;height:59px;}
+#qqonline_float .qq-bottom{background:url("qq-bottom.gif") no-repeat;height:26px;}
+#qqonline_float .qq-list{background:url("qq-middle.jpg") repeat-y;}
+#qqonline_float .myqq{text-align:center;padding-top:3px;padding-bottom:3px;}
+
+/* 新闻列表样式 */
+ul.news{list-style:none;padding:0;margin:0;}
+ul.news li{background:url("news.gif") left center no-repeat;margin:0 5px;padding-left:16px;line-height:22px;height:22px;}
+/* 会员菜单样式 */
+ol.usercp{list-style:none;padding:0;margin:0;padding-left:33px;}
+
+/*首页样式*/
+
+
+
+.none {display:none;}
+
+/* 列表分页 */
+.pagelist{margin:5px auto;padding:5px 0; text-align:center;}
+.pagelist a{padding:3px 8px; margin:0 2px; border:1px solid #dddddd; color:#666;font-weight:bold;}
+.pagelist a:hover{color:#3388d8;}
+.pagelist a.hover{color:#3388d8;background:#eee;}
+
+/* 内容分页 */
+.content-page{border-top:1px solid #dae9f8;margin-top:7px;padding-top:5px;margin-bottom:5px;}
+.content-page a{display:block;padding:1px 10px;border:1px solid #dddddd;margin-right:5px;color:#666;font-weight:bold;}
+.content-page a.now{background:#eee;color:#3388d8;}
+.content-page a:hover{color:#3388d8;}
+
+/*底部样式*/
+.copyright{ width:950px; margin:10px auto;}
+.link{ background:url(link_bg.jpg) repeat-x; height:39px;}
+.link h3{ float:left; width:91px; height:26px; padding:13px 0 0 22px; background:url(link_left_bg.jpg) no-repeat; font-size:14px; color:#3388d8;}
+.link span{ float:left; margin:14px 0 0 0;}
+.link span a{ margin:0 8px;}
+.link .more{ height:25px; padding:14px 20px 0 0;float:right; font-weight:bold; color:#3388d8; background:url(link_right_bg.jpg) top right no-repeat;}
+.copyright .bottom{ text-align:center; line-height:20px; font-family:Arial; padding:5px 0;}
+
+
+/* 自定义模块涉及到的样式 */
+.table{margin:1px auto;width:99%;clear:both;}
+.table .left{float:left;width:20%;text-align:right;padding:3px 1px;}
+.table .right{float:left;text-align:left;padding:3px 1px;width:68%;}
+.clue_on{color:#808080}
+.btn2{width:40px;height:20px;line-height:18px;border:1px solid #ccc;}
+.short_input{width:50px;}
+
+
+
+/* 订单中涉及到的CSS */
+.t_sub{height:23px;text-align:center;border-bottom:1px solid #003A75;background:#97BEF4;}
+
+/* 鼠标移过去的特效 */
+.tr_out{height:23px;}
+.tr_over{height:23px;background:#BFD8F9;}
+
+/* 站内通知 */
+.notice_content{margin-left:10px;width:215px;}
+ul.notice{margin:0;padding:0;list-style:none;}
+ul.notice li{line-height:160%;}
+ul.notice li.title{background:url("news.gif") left center no-repeat;padding-left:8px;}
+ul.notice li.title a{font-weight:bold;}
+ul.notice li.msg{text-indent:24px;padding-left:16px;}
+
+/* 产品列表 */
+ul.prolist{margin:0;padding:0;list-style:none;}
+ul.prolist li{margin-bottom:5px;color:#17677E;overflow:hidden;border-bottom:1px dashed #B3CDFF;padding-bottom:5px;}
+ul.prolist li a{color:#17677E;}
+ul.prolist li .img{width:140px;text-align:center;}
+ul.prolist li .img img{width:120px;height:120px;border:1px solid #dddddd;padding:2px;}
+ul.prolist li div.line1{border-bottom:1px solid #B3CDFF;background:#EEF4FF;padding:3px 5px 1px 7px;height:26px;line-height:26px;margin-bottom:5px;}
+ul.prolist li div.line2{border-bottom:1px solid #B3CDFF;padding:3px 5px 1px 7px;height:24px;line-height:24px;margin-bottom:3px;}
+ul.prolist li div.note2{padding:3px 5px 1px 7px;line-height:24px;margin-bottom:3px;}
+
+/* 回复 */
+.reply{margin:5px 15px;padding:3px 5px;border:1px solid #DDD;line-height:150%;}
+
+/* 人才招聘 */
+.itable{border-collapse:collapse;empty-cells:hide;}
+.itable td{border-bottom:1px solid #dae9f8;color:#333333;padding:6px 10px;}
+.t_title{font-weight:bold;font-size:14px;color:red;}
+
+@import url("calendar.css");

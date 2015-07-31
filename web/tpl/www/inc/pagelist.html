@@ -1,0 +1,7 @@
+<div class="clear"></div>
+<div class="page"><!--if($total>0)-->
+	共有记录：{:$total}个  <!-- $pagelist AS $key=>$value -->
+	<span><a href="{:$value[url]}"{if($value[status])} class="hover"{end}>{:$value[name]}</a></span>
+	<!-- end --><!--else-->暂无信息<!-- end -->
+</div>
+

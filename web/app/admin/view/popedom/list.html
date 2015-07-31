@@ -1,0 +1,56 @@
+<!-- inc:header -->
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; 权限代码列表</span></td>
+		<td>
+			<select name="groupid" id="groupid">
+			<option value="0">全部</option>
+			<!-- $grouplist AS $key=>$value -->
+			<option value="{:$value[id]}"{if($value[id] == $groupid)} selected{end}>{:$value[title]}</option>
+			<!-- end -->
+			</select>
+			<input type="button" value="搜索" class="btn2" onclick="to_search();">
+		</td>
+		<td align="right"><a href="javascript:set(0);void(0);" class="button">添加新权限脚本</a></td>
+	</tr>
+	</table>
+</div></div>
+
+<div class="main">
+<table width="100%" style="layout:fixed;" cellpadding="0" cellspacing="0">
+<tr>
+	<td width="8%" class="t_sub">ID</td>
+	<td width="5%" class="t_sub">状态</td>
+	<td class="t_sub">名称</td>
+	<td width="15%" class="t_sub">标识</td>
+	<td width="45px" class="t_sub">操作</td>
+</tr>
+<!-- $rslist AS $key=>$value -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)">
+	<td align='center' class="tc_left" height="25px">{:$value[id]}</td>
+	<td align="center" class="tc_right" id="status_{:$value['id']}"><a href="javascript:status({:$value[id]},{:intval($value['status'])});void(0);" class="status{:intval($value['status'])}"></a></td>
+	<td  align='left' class="tc_right">&nbsp;{:$value[m_title]}：{:$value[title]}<!-- if($value[content]) --><span class="clue_on"> （{:$value[content]}）</span><!-- end --></td>
+	<td align="center" class="tc_right">{:$value[m_identifier]}:{:$value[identifier]}</td>
+	<td align="center" class="tc_right">
+		<a href="javascript:set({:$value[id]});void(0);" class="btn edit" title="编辑"></a>
+		<a href="javascript:to_delete({:$value['id']});void(0);" class="btn del" title="删除"></a>
+	</td>
+</tr>
+<!-- end -->
+</table>
+</div>
+<!-- if($pagelist) --><div class="table">{:$pagelist}</div><!-- end -->
+<script type="text/javascript">
+function to_search()
+{
+	var url = "{:site_url('popedom,index')}";
+	var groupid = getid("groupid").value;
+	if(groupid>0)
+	{
+		url += "groupid="+groupid+"&";
+	}
+	direct(url);
+}
+</script>
+<!-- inc:footer -->

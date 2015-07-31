@@ -1,0 +1,47 @@
+<!-- inc:header -->
+<script type="text/javascript">
+function to_link(id,subtitle)
+{
+	parent.$("#title_id").attr("value",id);
+	parent.$("#title").attr("value",subtitle);
+	parent.Layer.over();
+}
+</script>
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="130px"><span class="lead">&nbsp;&raquo; 主题</span></td>
+		<form method="post" action="{:site_url('link,email')}">
+		<td align="left">
+			搜索：<input type="text" name="keywords" id="keywords" value="{:$keywords}">
+			<input type="submit" class="btn2" value="查询">
+		</td>
+		</form>
+	</tr>
+	</table>
+</div></div>
+
+<div class="main">
+<table width="100%" style="layout:fixed;" cellpadding="0" cellspacing="0">
+<tr>
+	<td class="t_sub" width="50px">ID</td>
+	<td class="t_sub" width="35px">状态</td>
+	<td class="t_sub" width="130px">模块</td>
+	<td class="t_sub">名称</td>
+	<td class="t_sub" width="110px">发布时间</td>
+	<td class="t_sub" width="60px">操作</td>
+</tr>
+<!-- $rslist AS $key=>$value -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)">
+	<td align='center' class="tc_left">{:$value[id]}</td>
+	<td align="center" class="tc_right"><a class="status{:intval($value['status'])}"></a></td>
+	<td class="tc_right" align='center'>{:$value[m_title]}</td>
+	<td align='left' class="tc_right" style="{:$value[style]};padding:2px 0;">&nbsp;<!-- if($value[thumb]) --><span class="darkblue">【图文】</span><!-- end -->{:$value[title]}<!-- if($value[virtual]) --> <span class="red">虚拟产品</span><!-- end --><!-- if($value[istop]) --> <span class="red">[顶]</span><!-- end --><!-- if($value[isvouch]) --> <span class="darkblue">[荐]</span><!-- end --><!-- if($value[isbest]) --> <span class="darkred">[精]</span><!-- end --></td>
+	<td  align='center' class="tc_right">{:date('Y-m-d H:i',$value[post_date])}</td>
+	<td align="center" class="tc_right"><input type="button" value="选择" onclick="to_link('{:$value['id']}','{:$value[title]}')" class="btn2" /></td>
+</tr>
+<!-- end -->
+</table>
+</div>
+<div class="table">{:$pagelist}</div>
+<!-- inc:footer_open -->

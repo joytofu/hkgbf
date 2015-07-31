@@ -1,0 +1,10 @@
+         <!--run:$attr = phpok_c_list("wendangziliao","100","","post_desc")-->
+          <ul>
+          <!-- $attr[rslist] AS $key=>$value -->
+          <li style=" float:left; width:100%; height:30px; line-height:30px; border-bottom:1px dashed #CCCCCC">
+              <span style="float:right">&nbsp;{:date("Y-m-d",$value[post_date])}</span><a href="{:site_url('download','id='.$value[down_file])}" style="{:$value[style]}" title="{:$value[title]}">▶ {:$value[title]}</a></li>
+          <!-- end -->
+          </ul>
+         <!--run:unset($attr)-->
+
+

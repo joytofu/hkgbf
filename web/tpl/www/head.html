@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><!-- if($sitetitle) -->{:$sitetitle} - <!-- end --><!-- if($_sys[seotitle]) --> {:$_sys[seotitle]} - <!-- end -->{:$_sys[sitename]}</title>
+<!-- if($_sys[google_site_verification]) --><meta name="google-site-verification" content="{:$_sys[google_site_verification]}" /><!-- end -->
+<!-- if($_sys[yahoo_site_key]) --><meta name="y_key" content="{:$_sys[yahoo_site_key]}" /><!-- end -->
+<!-- if($_sys[ms_site_validate]) --><meta name="msvalidate.01" content="{:$_sys[ms_site_validate]}" /><!-- end -->
+<!-- if($_sys[baidu_union_verify]) --><meta name="baidu_union_verify" content="{:$_sys[baidu_union_verify]}" /><!-- end -->
+<meta name="keywords" content="{:$_sys[keywords]}">
+<meta name="description" content="{:$_sys[description]}">
+<link href="images/style.css" rel="stylesheet" type="text/css" />
+    <link href="images/button.css" rel="stylesheet" type="text/css">
+    <link href="images/manhuaDate.1.0.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+</script>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?f1204f4e3bb08e74a69a54b2dee3cc9d";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+</head>
+
+<body>
+
+<div id="head">
+  <div class="ssearch">
+  <form method="post" action="{:site_url('search')}" name="formx"id="formx"  onsubmit="return to_submit()">
+  
+  <input name="bgui" type="image" src="images/sbutton.jpg" style="float:right" />
+    <input onblur="this.style.color='#999';if(this.value=='') this.value='输入关键字...';" 
+onkeyup="if(event.keyCode==13){doSearch();}" onfocus="this.style.color='#000';if(this.value=='输入关键字...') this.value='';" value="输入关键字..."  name="keywords" class="stext">
+
+
+</form>
+  </div>
+  <div class="ssr" <!--if($_SESSION["username"])-->style="width:auto;"<!--end--> >
+  
+    <form name="form" id="form">
+    <!--if($_SESSION["username"])-->欢迎您：{:$_SESSION["username"]}，<a href="index.php?c=msg&id={:$_SESSION["userid"]}">会员中心</a> | <a href="index.php?c=msg&ts=exit">注销退出</a><!--else-->
+      <select name="jumpMenu" id="jumpMenu" onchange="MM_jumpMenu('parent',this,0)">
+       <option>登录</option>
+        <option value="index.php?c=list&cs=hezuohuoban&login">合作伙伴</option>
+        <option value="index.php?c=list&cs=kehu&login">客户</option>
+        <option value="index.php?c=list&cs=yuangong&login">员工</option>
+      </select> | <a href="index.php?c=register&k=kehu">注册</a><!--end--> | <a href="http://mail.hkgbf.com" target="_blank">企业邮箱</a>
+    </form>
+  </div>
+
+</div>
+<div id="top">
+<div class="top">
+<div class="logo"><a href="{:$_sys[siteurl]}" title="{:$_sys[sitename]}"><img src="{:$_sys[logo] ? $_sys[logo] : 'images/logo.png'}" alt="{:$_sys[sitename]}" /></a></div>
+<div class="rtop">
+
+<!-- run:$menulist = phpok_menu($id,$cid,$mid) -->
+		<!-- $menulist AS $key=>$value -->
+<a href="{:$value[link]}"{if($value[target])} target="_blank"{end} title="{:$value[title]}" {if($value[my_highlight])}id=menubg{end}>{:$value[title]}</a>
+		<!-- end -->
+		<!-- run:unset($menulist) -->
+
+
+</div>
+</div></div>

@@ -1,0 +1,53 @@
+<!-- inc:header -->
+<script type="text/javascript">
+var input_id = "{:$input_id}";
+function to_link(sign,id,msign)
+{
+	if(sign)
+	{
+		var d_url = "{index_php}?{control_trigger}=list&cs="+sign;
+		var w_url = "cs-"+sign+".html";
+		var j_url = "{site_html}"+msign+"/"+sign+"/index.html";
+	}
+	else
+	{
+		var d_url = "{index_php}?{control_trigger}=list&cid="+id;
+		var w_url = "cid-"+id+".html";
+		var j_url = "{site_html}"+msign+"/cateid-"+id+"/index.html";
+	}
+	if(input_id == "link,link_rewrite,link_html")
+	{
+		parent.$("#link").attr("value",d_url);
+		parent.$("#link_rewrite").attr("value",w_url);
+		parent.$("#link_html").attr("value",j_url);
+	}
+	else
+	{
+		parent.$("#"+input_id).attr("value","index.php?c=list&cs="+sign);
+	}
+	parent.Layer.over();
+}
+</script>
+<div class="main">
+<table width="100%" style="layout:fixed;" cellpadding="0" cellspacing="0">
+<tr>
+	<td class="t_sub" width="40px">ID</td>
+	<td class="t_sub" width="35px">状态</td>
+	<td class="t_sub" width="120px">模块</td>
+	<td class="t_sub">名称</td>
+	<td class="t_sub" width="35px">排序</td>
+	<td class="t_sub" width="60px">操作</td>
+</tr>
+<!-- $catelist AS $key=>$value -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)">
+	<td align='center' class="tc_left">{:$value[id]}</td>
+	<td align="center" class="tc_right"><a class="status{:intval($value['status'])}"></a></td>
+	<td align="center" class="tc_right">{:$value[title] ? $value[title] : '-'}</td>
+	<td align='left' class="tc_right" style="{:$value[style]};padding:2px 0;">&nbsp;{:$value[space]}{:$value[cate_name]}</td>
+	<td align="center" class="tc_right">{:$value[taxis] ? $value[taxis] : '-'}</td>
+	<td align="center" class="tc_right"><input type="button" value="提交" onclick="to_link('{:$value[identifier]}','{:$value['id']}','{:$value[m_sign]}')" class="btn2" /></td>
+</tr>
+<!-- end -->
+</table>
+</div>
+<!-- inc:footer_open -->

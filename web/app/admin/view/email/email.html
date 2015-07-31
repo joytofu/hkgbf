@@ -1,0 +1,62 @@
+<!-- inc:header -->
+<script type="text/javascript">
+function to_submit()
+{
+	var email = $("#email").attr("value");
+	if(!email)
+	{
+		alert("邮箱不能为空");
+		return false;
+	}
+	var tid = $("#title").attr("value");
+	if(!tid)
+	{
+		alert("请设置要发送的主题！");
+		return false;
+	}
+	var msg = $('#content').val();
+	if(!msg)
+	{
+		alert("内容不允许为空");
+		return false;
+	}
+	$("#_phpok_submit").attr("disabled",true);
+}
+</script>
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; 单封邮件发送 【<a href="{:site_url('email')}">邮件群发</a>】</span></td>
+	</tr>
+	</table>
+</div></div>
+
+<form method="post" action="{:site_url('email,send')}" onsubmit="return to_submit();">
+
+<div class="table">
+	<div class="left">邮箱：</div>
+	<input type="text" name="email" id="email" class="long_input">
+	<span class="clue_on"> 多个邮箱用英文“;“分开</span>
+</div>
+
+<div class="table">
+	<div class="left">邮件主题：</div>
+	<input type="text" name="title" id="title" class="long_input">
+</div>
+
+<div class="table">
+	<div class="left">内容：</div>
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td>{:sys_fckeditor('content','','330px','630px')}</td>
+	</tr>
+	</table>
+</div>
+
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<input type="submit" class="btn2" id="_phpok_submit" name="article_submit" value="提交">
+</div>
+
+</form>
+<!-- inc:footer -->

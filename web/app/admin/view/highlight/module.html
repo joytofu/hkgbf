@@ -1,0 +1,36 @@
+<!-- inc:header -->
+<script type="text/javascript">
+function to_set(id)
+{
+	parent.getid("highlight_id").value = id;
+	show_highlight("module",id);
+	parent.Layer.over();
+}
+function show_highlight(h_type,h_id)
+{
+	var url = base_file + "?" + base_ctrl + "=menu&"+base_func+"=highlight&htype="+encode_utf8(h_type)+"&hid="+encode_utf8(h_id);
+	get_ajax(url,parent.js_show_highlight);
+}
+</script>
+<div class="main">
+<table width="100%" style="layout:fixed;" cellpadding="0" cellspacing="0">
+<tr>
+	<td width="8%" class="t_sub">ID</td>
+	<td width="5%" class="t_sub">状态</td>
+	<td class="t_sub">名称</td>
+	<td class="t_sub">排序</td>
+	<td width="10%" class="t_sub">操作</td>
+</tr>
+<!-- $rslist AS $key=>$value -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)">
+	<td align='center' class="tc_left" height="25px">{:$value[id]}</td>
+	<td align="center" class="tc_right"><a class="status{:intval($value['status'])}"></a></td>
+	<td  align='left' class="tc_right">&nbsp;{:$value[title]}</td>
+	<td align="center" class="tc_right">{:$value[taxis]}</td>
+	<td align="center" class="tc_right"><input type="button" value="提交" onclick="to_set('{:$value[id]}')" class="btn2" /></td>
+</tr>
+<!-- end -->
+</table>
+</div>
+<div class="table">{:$pagelist}</div>
+<!-- inc:footer_open -->

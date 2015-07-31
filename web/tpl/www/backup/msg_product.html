@@ -1,0 +1,59 @@
+<!-- inc:head -->
+<link rel="stylesheet" type="text/css" href="images/lightbox.css" />
+<script type="text/javascript" src="images/lightbox.js"></script>
+<script type="text/javascript">
+$(function() {
+	$('#gallery a').lightBox({
+		imageLoading: 'images/lightbox-btn-loading.gif',
+		imageBtnClose: 'images/lightbox-btn-close.gif',
+		imageBtnPrev: 'images/lightbox-btn-prev.gif',
+		imageBtnNext: 'images/lightbox-btn-next.gif'
+	});
+});
+</script>
+<div class="body">
+	<div class="left">
+		<!-- inc:inc/catelist -->
+		<!-- inc:inc/usercp -->
+		<!-- inc:inc/left -->
+	</div>
+	<div class="right">
+		<div class="vmenu"><h3>{:$cate_rs[cate_name]}</h3></div>
+		<div class="box msg">
+			<h1>{:$rs[title]}</h1>
+			<div class="date">
+				发布时间：{:date("Y-m-d",$rs[post_date])}，查看次数：{:$rs[hits]}
+				<!-- if($rs[price]>0) -->，价格：<span class="price">{:sys_format_price($rs[price],$rs[price_currency])}</span><!-- end -->
+			</div>
+			<!-- if($rs[note]) --><div class="note">{:$rs[note]}</div><!-- end -->
+			<div class="content">
+				<table width="100%">
+				<tr>
+					<td width="50%"><strong>产品编号：</strong>{:$rs[pronum]}</td>
+					<td><strong>产品规格：</strong>{:$rs[prostd]}</td>
+				</tr>
+				</table>
+				{:$rs[content]}
+			</div>
+		</div>
+		<!-- if($rs[propic]) -->
+		<div class="vmenu"><h3>产品图片</h3></div>
+		<div class="box msg">
+			<ul class="picture" id="gallery">
+			<!-- $rs[propic] AS $key=>$value -->
+			<li>
+				<div><a href="{:$value[gd][big]}" title="{:$value[title]}"><img src="{:$value[gd][thumb]}" border="0" alt="{:$value[title]}" /></a></div>
+			</li>
+			<!-- end -->
+			</ul>
+			<div class="clear"></div>
+		</div>
+		<!-- end -->
+		<div align="center">
+			<input type="button" value="在线购买" class="buy" onclick="addcart('{:$rs[id]}')" />
+			<input type="button" value="产品咨询" class="con" onclick="direct('{:site_url('post,set','ms=xunjia&tid='.$rs[id].'&title='.rawurlencode($rs[title]))}')" />
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<!-- inc:foot -->

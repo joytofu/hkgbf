@@ -1,0 +1,89 @@
+<!-- inc:head -->
+<script type="text/javascript" src="js/php.js"></script>
+<div class="body">
+	<div class="left">
+		<!-- inc:inc/usercp -->
+		<!-- inc:inc/left -->
+	</div>
+	<div class="right">
+		<div class="vmenu"><h3><font color="#FF0000">{:$_SESSION[user_name]}</font>，您好</h3></div>
+		<div class="box pd5">
+			<form method="post" action="{:site_url('usercp,info')}" onsubmit="return check_usercp();">
+
+			<div class="table">
+				<div class="left"><span class="red">*</span> Email：</div>
+				<input type="text" name="email" id="email" value="{:$rs[email]}" class="input_login"> &nbsp;
+				<span class="red">*</span> 邮箱不允许为空
+			</div>
+
+			<input type="hidden" name="thumb_id" id="thumb_id" value="{:$rs[thumb_id]}">
+			<div class="table">
+				<div class="left">
+					<div style="padding-bottom:3px;">会员头像：</div>
+					<div style="padding-bottom:3px;"><input type="button" class="btn2" value="选择" onclick="phpjs_img('thumb_id','thumb_view');" /> &nbsp;</div>
+					<input type="button" value="删除" class="btn2" onclick="phpjs_clear_img('thumb_id','thumb_view')" /> &nbsp;
+				</div>
+				<table cellpadding="0" cellspacing="0">
+				<tr>
+					<td align="left" id="thumb_view"><!-- if($rs[picture]) --><img src="{:$rs[picture]}" width="80px" height="80px" border="0" /><!-- else --><img src="images/nopic.gif" border="0" /><!-- end --></td>
+				</tr>
+				</table>
+			</div>
+
+
+			<!-- $extlist_must AS $key=>$value -->
+			{:$value}
+			<!-- end -->
+
+
+			<div class="table">
+				<div class="left">&nbsp;</div>
+				<input type="submit" id="phpok_submit" value="提 交" class="but01">
+			</div>
+			</form>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<script type="text/javascript">
+<!-- $extlist AS $key=>$value -->
+	<!-- if($value[input] == "opt") -->
+	phpjs_parent_opt('{:$value[default_val]}','{:$value[identifier]}','{:$value[id]}','{:$value[link_id]}');
+	<!-- elseif($value[input] == "img") -->
+	phpjs_viewpic('{:$value[default_val]}','{:$value[identifier]}');
+	<!-- elseif($value[input] == "download") -->
+	phpjs_viewdown('{:$value[default_val]}','{:$value[identifier]}');
+	<!-- elseif($value[input] == "video") -->
+	phpjs_viewvideo('{:$value[default_val]}','{:$value[identifier]}');
+	<!-- end -->
+<!-- end -->
+
+function check_usercp()
+{
+	var email = getid("email").value;
+	if(!email)
+	{
+		alert("邮箱不允许为空！");
+		return false;
+	}
+	var str_reg=/^\w+((-\w+)|(\.\w+))*\@{1}\w+\.{1}\w{2,4}(\.{0,1}\w{2}){0,1}/ig;
+	if(email.search(str_reg) == -1)
+	{
+		alert("邮箱格式不正确！");
+		return false;
+	}
+	<!-- $extlist AS $key=>$value -->
+	<!-- if($value[if_must] && $value[input] != "radio" && $value[input] != "checkbox") -->
+	var {:$value[identifier]} = $("#{:$value[identifier]}").val();
+	if(!{:$value[identifier]})
+	{
+		alert("{:$value['error_note'] ? $value['error_note'] : '所有加红色星号信息均必须填写'}");
+		return false;
+	}
+	<!-- end -->
+	<!-- end -->
+	$("#phpok_submit").attr("disabled",true);
+	return true;
+}
+</script>
+<!-- inc:foot -->

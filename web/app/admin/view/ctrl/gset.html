@@ -1,0 +1,53 @@
+<!-- inc:header -->
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; 添加/修改模块组</span></td>
+		<td align="right"><a href="{:site_url('ctrl')}" class="button">返回模块列表</a></td>
+	</tr>
+	</table>
+</div></div>
+<form method="post" action="{:site_url('ctrl,gsetok')}id={:$id}" onsubmit="return gchk('{:$id}');">
+<div class="table">
+	<div class="left"><span class="red">*</span> 模块组名：</div>
+	<input type="text" id="title" name="title" value="{:$rs[title]}" />
+</div>
+<div class="table">
+	<div class="left"><span class="red">*</span> 状态：</div>
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td><input type="radio" name="status" value="1"{if($rs[status])} checked{end}></td>
+		<td>正常&nbsp;</td>
+		<td><input type="radio" name="status" value="0"{if(!$rs[status])} checked{end}></td>
+		<td>隐藏&nbsp;</td>
+	</tr>
+	</table>
+</div>
+<div class="table">
+	<div class="left">排序：</div>
+	<input type="text" id="taxis" name="taxis" value="{:$rs[taxis] ? $rs[taxis] : '255'}" class="short_input" />
+	<span class="clue_on"> 值越小越往前靠</span>
+</div>
+<input type="hidden" id="js_function" name="js_function" value="" />
+
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<input type="submit" value="提 交" class="btn3" id="phpok_submit" />
+	<br /><br />
+</div>
+
+</form>
+
+<script type="text/javascript">
+function gchk()
+{
+	var subject = getid("title").value;
+	if(!subject)
+	{
+		alert("模块组名不允许为空！");
+		return false;
+	}
+	getid("phpok_submit").disabled = true;
+}
+</script>
+<!-- inc:footer -->

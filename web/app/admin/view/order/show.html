@@ -1,0 +1,79 @@
+<!-- inc:header -->
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; 订单信息</span></td>
+	</tr>
+	</table>
+</div></div>
+
+<div class="table"><div class="left">订单编号：</div>{:$rs[sn]}</div>
+<div class="table"><div class="left">状态：</div><!-- if(!$rs[status]) --><span class="red">未审核</span><!-- else -->已审核<!-- end --></div>
+<div class="table"><div class="left">价格：</div>{:$rs[price_currency]} {:$rs[price]}</div>
+<div class="table"><div class="left">下单时间：</div>{:date('Y-m-d H:i',$rs[postdate])}</div>
+<div class="table"><div class="left">&nbsp;</div><a href="{:$indexphp}?c=checkout&f=info&sn={:$rs[sn]}&pass={:$rs[pass]}" target="_blank">前台查看</a></div>
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; 订单人信息</span></td>
+	</tr>
+	</table>
+</div></div>
+<div class="table"><div class="left">姓名：</div>{:$rs[fullname]}</div>
+<div class="table"><div class="left">邮箱：</div>{:$rs[email]}</div>
+<div class="table"><div class="left">备注：</div>{:$rs[note]}</div>
+<!-- if($rs[pay_type] && $pay_rs) -->
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; 付款信息</span></td>
+	</tr>
+	</table>
+</div></div>
+<div class="table"><div class="left">付款状态：</div><!-- if($rs[pay_status]) -->已付款<!-- else --><span class="red">未付款</span><!-- end --></div>
+<div class="table"><div class="left">付款方式：</div>{:$pay_rs[title]}</div>
+<div class="table"><div class="left">付款时间：</div>{:date("Y-m-d H:i:s",$rs[pay_date])}</div>
+<div class="table"><div class="left">付款金额：</div>{:$rs[pay_currency]} {:$rs[pay_price]}</div>
+<!-- end -->
+
+<!-- if($address[billing]) -->
+<div class="notice"><div class="p">&nbsp;&raquo; 账单地址信息</div></div>
+<div class="table"><div class="left">姓名：</div>{:$address[billing][fullname]}</div>
+<div class="table"><div class="left">电话：</div>{:$address[billing][tel]}</div>
+<div class="table"><div class="left">国家：</div>{:$address[billing][country]}</div>
+<div class="table"><div class="left">地址：</div>{:$address[billing][address]}</div>
+<div class="table"><div class="left">邮编：</div>{:$address[billing][zipcode]}</div>
+<div class="table"><div class="left">Email：</div>{:$address[billing][email]}</div>
+<div class="table"><div class="left">留言：</div>{:$address[billing][note]}</div>
+<!-- end -->
+<div class="notice"><div class="p">&nbsp;&raquo; 收货人信息</div></div>
+<div class="table"><div class="left">姓名：</div>{:$address[shipping][fullname]}</div>
+<div class="table"><div class="left">电话：</div>{:$address[shipping][tel]}</div>
+<div class="table"><div class="left">国家：</div>{:$address[shipping][country]}</div>
+<div class="table"><div class="left">地址：</div>{:$address[shipping][address]}</div>
+<div class="table"><div class="left">邮编：</div>{:$address[shipping][zipcode]}</div>
+<div class="table"><div class="left">Email：</div>{:$address[shipping][email]}</div>
+<div class="table"><div class="left">留言：</div>{:$address[shipping][note]}</div>
+
+<div class="notice"><div class="p">&nbsp;&raquo; 订单产品信息</div></div>
+<div class="main">
+<table width="100%" style="layout:fixed;" cellpadding="0" cellspacing="0">
+<tr>
+	<td class="t_sub" width="50px">ID</td>
+	<td class="t_sub">产品名称</td>
+	<td class="t_sub" width="150px">单价</td>
+	<td class="t_sub" width="100px">购买数量</td>
+</tr>
+<!-- $rslist AS $key=>$value -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)">
+	<td align="center" class="tc_left">{:$value[id]}</td>
+	<td class="tc_right">&nbsp;{:$value[title]}</td>
+	<td align="center" class="tc_right">{:$value[price_currency]} {:$value[price]}</td>
+	<td class="tc_right" align="center">{:$value[amount]}</td>
+</tr>
+<!-- end -->
+</table>
+</div>
+
+
+<!-- inc:footer_open -->

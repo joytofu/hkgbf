@@ -1,0 +1,289 @@
+<!-- inc:header -->
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="130px"><span class="lead">&nbsp;&raquo; 添加/修改方案</span></td>
+		<td align="right"><a href="{:site_url('gd')}" class="button">图片方案列表</a></td>
+	</tr>
+	</table>
+</div></div>
+
+
+<form method="post" action="{:site_url('gd,setok')}id={:$id}" onsubmit="return to_setgd('{:$id}')">
+<div class="table">
+	<div class="left"><span class="red">*</span> 名称：</div>
+	<input type="text" name="picsubject" id="picsubject" value="{:$rs[picsubject]}">
+	<span class="clue_on"> 名称不允许为空</span>
+</div>
+<div class="table">
+	<div class="left"><span class="red">*</span> 标识：</div>
+	<!-- if($id) -->
+	<input type="text" name="pictype" value="{:$rs[pictype]}" disabled>
+	<span class="clue_on"> [标识符禁止使用]</span>
+	<!-- else -->
+	<input type="text" name="pictype" id="pictype" class="short_input">
+	<input type="button" class="btn2" value="检测" onclick="to_chk('pictype','true')" />
+	<span class="clue_on">[仅限英文字母、下划线和数字且第一个字符不能为数字]</span>
+	<!-- end -->
+</div>
+<div class="table">
+	<div class="left"><span class="red">*</span> 图片质量：</div>
+	<select name="quality" id="quality">
+	<option value="60"{if($rs[quality] == "60")} selected{end}>较小文件</option>
+	<option value="80"{if($rs[quality] == "80")} selected{end}>较大品质</option>
+	<option value="100"{if($rs[quality] == "100")} selected{end}>百分百精度</option>
+	</select>
+	<span class="clue_on"> [该功能仅限jpg格式有效]</span>
+</div>
+<div class="table">
+	<div class="left">宽度：</div>
+	<input type="text" name="width" id="width" value="{:$rs[width]}" class="short_input">
+	<span class="clue_on">[设置生成的图片宽度，仅支持数字]</span>
+</div>
+<div class="table">
+	<div class="left">高度：</div>
+	<input type="text" name="height" id="height" value="{:$rs[height]}" class="short_input">
+	<span class="clue_on">[设置生成的图片高度，仅支持数字]</span>
+</div>
+<div class="table">
+	<div class="left">版权图片：</div>
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td><input type="text" name="water" id="water" class="long_input" value="{:$rs[water]}"></td>
+		<td>&nbsp;</td>
+		<td>
+			<input type="button" class="btn2" value="选择" onclick="phpjs_onepic('water')">
+			<input type="button" class="btn2" value="预览" onclick="phpjs_onepic_view('water')">
+			<input type="button" class="btn2" value="清空" onclick="phpjs_onepic_clear('water')">
+		</td>
+	</tr>
+	</table>
+</div>
+<div class="table">
+	<div class="left">版权透明度：</div>
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td>
+			<select name="trans" id="trans">
+			<option value="0">完全透明</option>
+			<option value="10"{if($rs[trans] == '10')} selected{end}>10</option>
+			<option value="20"{if($rs[trans] == '20')} selected{end}>20</option>
+			<option value="30"{if($rs[trans] == '30')} selected{end}>30</option>
+			<option value="40"{if($rs[trans] == '40')} selected{end}>40</option>
+			<option value="50"{if($rs[trans] == '50' || !$rs[trans])} selected{end}>50（半透明）</option>
+			<option value="60"{if($rs[trans] == '60')} selected{end}>60</option>
+			<option value="70"{if($rs[trans] == '70')} selected{end}>70</option>
+			<option value="80"{if($rs[trans] == '80')} selected{end}>80</option>
+			<option value="90"{if($rs[trans] == '90')} selected{end}>90</option>
+			<option value="100"{if($rs[trans] == '100')} selected{end}>不透明</option>
+			</select>
+		</td>
+		<td class="clue_on">&nbsp;[值越大，透明度越低，完全透明等同于不使用版权图片]</td>
+	</tr>
+	</table>
+</div>
+
+<div class="table">
+	<div class="left">图片位置：</div>
+	<table style="border:1px #DDD solid;">
+	<tr>
+		<td><input type="radio" name="picposition" value="top-left"{if($rs[picposition] == 'top-left')} checked{end}></td>
+		<td><input type="radio" name="picposition" value="top-middle"{if($rs[picposition] == 'top-middle')} checked{end}></td>
+		<td><input type="radio" name="picposition" value="top-right"{if($rs[picposition] == 'top-right')} checked{end}></td>
+	</tr>
+	<tr>
+		<td><input type="radio" name="picposition" value="middle-left"{if($rs[picposition] == 'middle-left')} checked{end}></td>
+		<td><input type="radio" name="picposition" value="middle-middle"{if($rs[picposition] == "middle-middle" || !$rs[picposition])} checked{end}></td>
+		<td><input type="radio" name="picposition" value="middle-right"{if($rs[picposition] == 'middle-right')} checked{end}></td>
+	</tr>
+	<tr>
+		<td><input type="radio" name="picposition" value="bottom-left"{if($rs[picposition] == 'bottom-left')} checked{end}></td>
+		<td><input type="radio" name="picposition" value="bottom-middle"{if($rs[picposition] == 'bottom-middle')} checked{end}></td>
+		<td><input type="radio" name="picposition" value="bottom-right"{if($rs[picposition] == 'bottom-right')} checked{end}></td>
+	</tr>
+	</table>
+</div>
+
+<div class="table">
+	<div class="left">生成方式：</div>
+	<select name="cuttype" id="cuttype">
+	<option value="0"{if(!$rs[cuttype])} selected{end}>缩放法</option>
+	<option value="1"{if($rs[cuttype] == 1)} selected{end}>裁剪法</option>
+	<option value="2"{if($rs[cuttype] == 2)} selected{end}>智能缩放法</option>
+	</select>
+	<span class="clue_on">使用智能缩放法生成出来的图片高度不受设置限制，适用内容中插入图片！</span>
+</div>
+
+<div class="table">
+	<div class="left">边框设置：</div>
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td>
+			<select name="border" id="border">
+			<option value="1">使用边框</option>
+			<option value="0"{if(!$rs[border])} selected{end}>禁用边框</option>
+			</select>
+		</td>
+		<td>&nbsp;</td>
+		<td><input type="text" id="bordercolor" name="bordercolor" value="{:$rs[bordercolor]}" class="short_input" /></td>
+		<td>&nbsp;</td>
+		<td class="clue_on">[不清楚，请点此<a href="http://www.phpok.com" target="_blank">查看帮助</a>]</td>
+		<td>&nbsp;</td>
+	</tr>
+	</table>
+</div>
+<div class="table">
+	<div class="left">填充色：</div>
+	<input type="text" name="bgcolor" id="bgcolor" class="short_input" value="{:$rs[bgcolor]}">
+	<span class="clue_on"> [代码如：FFFFFF（白色） 000000（黑色）]</span>
+</div>
+
+<div class="table">
+	<div class="left">间距设置：</div>
+	<input type="text" name="padding" id="padding" class="short_input" value="{:$rs[padding]}">
+	<span class="clue_on"> [可以为0，建议设置1]</span>
+</div>
+
+<div class="table">
+	<div class="left">背景图片：</div>
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td><input type="text" name="bgimg" id="bgimg" class="long_input" value="{:$rs[bgimg]}"></td>
+		<td>&nbsp;</td>
+		<td>
+			<input type="button" class="btn2" value="选择" onclick="phpjs_onepic('bgimg')">
+			<input type="button" class="btn2" value="预览" onclick="phpjs_onepic_view('bgimg')">
+			<input type="button" class="btn2" value="清空" onclick="phpjs_onepic_clear('bgimg')">
+		</td>
+	</tr>
+	</table>
+</div>
+
+<div class="table">
+	<div class="left">状态：</div>
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td><input type="radio" name="status" value="1"{if($rs[status])} checked{end} /></td>
+		<td>使用&nbsp;</td>
+		<td><input type="radio" name="status" value="0"{if(!$rs[status])} checked{end} /></td>
+		<td>禁用</td>
+		<td class="clue_on">&nbsp;[不使用当前图片生成方案请设置为禁用，反之设为使用]</td>
+	</tr>
+	</table>
+</div>
+
+<div class="table">
+	<div class="left">编辑器：</div>
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td><input type="radio" name="edit_default" value="1"{if($rs[edit_default])} checked{end} /></td>
+		<td>使用&nbsp;</td>
+		<td><input type="radio" name="edit_default" value="0"{if(!$rs[edit_default])} checked{end} /></td>
+		<td>禁用</td>
+		<td class="clue_on">&nbsp;[创建的方案是否允许在编辑器中使用！]</td>
+	</tr>
+	</table>
+</div>
+
+<div class="table">
+	<div class="left">排序：</div>
+	<input type="text" name="taxis" id="taxis" class="short_input" value="{:$rs[taxis]}">
+	<span class="clue_on"> [设置排序可以优先生成相关，此功能仅限排序，无其他作用]</span>
+</div>
+
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<input type="submit" id="qgbutton" class="btn3" value="提 交">
+</div>
+</form>
+
+<script type="text/javascript">
+var gd_url = base_file + "?"+base_ctrl+"=gd&"+base_func+"=";
+//检测标识串是否有被使用
+function to_chk(pic,rAlert)
+{
+	var m = getid(pic).value;
+	if(!m)
+	{
+		alert("Error: 错误，标识符不允许为空");
+		return false;
+	}
+	var url = gd_url + "gd_chk&pictype="+EncodeUtf8(m);
+	var msg = get_ajax(url);
+	if(!rAlert || rAlert == "" || rAlert == "undefined")
+	{
+		rAlert = "true";
+	}
+	if(msg == "ok")
+	{
+		if(rAlert == "true")
+		{
+			alert("当前标识符："+m+" 可以使用");
+		}
+		return true;
+	}
+	else
+	{
+		if(!msg) msg = "Error: 操作有误";
+		alert(msg);
+		return false;
+	}
+}
+//[对输入的数据进行检测]
+function to_setgd(id)
+{
+	if(!id || id == "0" || id == "undefined" || id == "")
+	{
+		//[检测唯一标识串]
+		var chk = to_chk("pictype","false");
+		if(!chk)
+		{
+			alert("检测标识符不过关");
+			return false;
+		}
+	}
+	//
+	var subject = getid("picsubject").value;
+	if(!subject || subject == "undefined")
+	{
+		alert("方案标题不允许为空");
+		return false;
+	}
+	var dwidth = getid("width").value;
+	if(!dwidth || dwidth == "undefined")
+	{
+		alert("宽度不允许为空");
+		return false;
+	}
+	else
+	{
+		dwidth = parseInt(dwidth);
+		if(isNaN(dwidth))
+		{
+			alert("宽度必须是数字");
+			return false;
+		}
+	}
+	var dheight = getid("width").value;
+	if(!dheight || dheight == "undefined")
+	{
+		alert("高度不允许为空");
+		return false;
+	}
+	else
+	{
+		dheight = parseInt(dheight);
+		if(isNaN(dheight))
+		{
+			alert("高度必须是数字");
+			return false;
+		}
+	}
+	getid("qgbutton").disabled = true;
+	return true;
+}
+$("#bordercolor").icolor({onSelect:function(c){var new_c = c.replace('#','');this.$t.val(new_c);}});	
+$("#bgcolor").icolor({onSelect:function(c){var new_c = c.replace('#','');this.$t.val(new_c);}});	
+</script>
+
+<!-- inc:footer -->

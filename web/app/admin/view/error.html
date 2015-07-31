@@ -1,0 +1,29 @@
+<!-- inc:header -->
+<style type="text/css">
+.error{position:absolute;top:30%;left:50%;margin:-40px 0 0 -230px;width:460px;height:80px;border:1px solid #8F8F8F;}
+.error .div{background:#D6D6D6;line-height:130%;margin:1px;padding:5px;border:1px #FFF solid;height:66px;text-align:center}
+.error .div p{line-height:150%;padding-top:5px;}
+#foot{position:absolute;margin:0 auto;left:50%;top:30%;width:600px;margin:-35px 0 0 -300px;}
+</style>
+<div class="error">
+	<div class="div">
+		<!-- if($error_url) -->
+		<p style="padding-top:10px;">{:$msg}</p>
+		<p><a href="{:$error_url}">{:$error_note}</a></p>
+		<!-- else -->
+		<p style="padding:24px 0px;">{:$msg}</p>
+		<!-- end -->
+	</div>
+</div>
+<!-- if($error_url) -->
+<script type="text/javascript">
+var url = "{:$error_url}";
+var micro_time = "{:$micro_time}";
+window.setTimeout("refresh()",micro_time);
+function refresh()
+{
+	direct(url);
+}
+</script>
+<!-- end -->
+<!-- inc:footer_open -->

@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><!-- if($sitetitle) -->{:$sitetitle} - <!-- end -->{:$_sys[sitename]}<!-- if($_sys[seotitle]) --> -- {:$_sys[seotitle]}<!-- end --> -- Powered by phpok.com</title>
+<meta name="keywords" content="{:$_sys[keywords]},qinggan,phpok">
+<meta name="description" content="{:$_sys[description]} - PHPOK.COM">
+<script type="text/javascript">
+var base_file = "{:$_sys[siteurl]}{:HOME_PAGE}";
+var base_url = "{:$_sys[siteurl]}{:$sys_app->url}";
+var base_ctrl = "{:$sys_app->config->c}";
+var base_func = "{:$sys_app->config->f}";
+var base_dir = "{:$sys_app->config->d}";
+var iframe_id = "__{:$m_rs[identifier]}__iframepage";
+</script>
+<style type="text/css">
+body{background:{:$bgcolor};font-size:12px;}
+.table{margin:1px auto;width:99%;clear:both;}
+.table .left{float:left;width:20%;text-align:right;padding:3px 1px;}
+.table .right{float:left;text-align:left;padding:3px 1px;width:68%;}
+.btn2{width:40px;height:20px;line-height:18px;border:1px solid #ccc;}
+.long_input{width:300px;}
+.short_input{width:50px;}
+.clue_on{font-size:12px;color:#484848}
+.red{font-size:12px;color:red;}
+</style>
+<link rel="stylesheet" type="text/css" href="images/calendar.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="js/php.js"></script>
+<script type="text/javascript" src="libs/xheditor/xheditor.js"></script>
+<script type="text/javascript">
+if (self.location == top.location)
+{
+	direct("{:$_goback}");
+}
+</script>
+</head>
+
+<body>
+<form method="post" action="{:site_url('post,setok')}id={:$id}&module_id={:$module_id}" onsubmit="return to_submit();" target="_top">
+<input type="hidden" id="_to_url" name="_to_url" value="{:$_goback}" />
+<div class="table">
+	<div class="left"><span class="red">*</span> {:$m_rs[title_nickname] ? $m_rs[title_nickname] : '主题'}：</div>
+	<div class="right"><input type="text" name="subject" id="subject" class="long_input"></div>
+	<div class="clear"></div>
+</div>
+<!-- if($m_rs[if_url_m]) -->
+<div class="table">
+	<div class="left"><span class="red">*</span> 链接网址：</div>
+	<input type="text" name="link_url" id="link_url" class="long_input" value="{:$rs[link_url]}">
+	<select name="target" id="target">
+	<option value="0">当前窗口</option>
+	<option value="1">新窗口</option>
+	</select>
+</div>
+<!-- end -->
+<!-- if($ifcate) -->
+<div class="table">
+	<div class="left"><span class="red">*</span> 分类：</div>
+	{:$cate_html}
+</div>
+<!-- end -->
+<!-- if($m_rs[if_thumb]) -->
+<input type="hidden" name="thumb_id" id="thumb_id" value="{:$rs[thumb_id]}">
+<div class="table">
+	<div class="left">
+		<div style="padding-bottom:3px;"><!-- if($m_rs[if_thumb_m]) --><span class="red">*</span> <!-- end -->缩略图：</div>
+		<div style="padding-bottom:3px;"><input type="button" class="btn2" value="选择" onclick="phpjs_img('thumb_id','thumb_view');" /> &nbsp;</div>
+		<input type="button" value="删除" class="btn2" onclick="phpjs_clear_img('thumb_id','thumb_view')" /> &nbsp;
+	</div>
+	<!-- run:$thumb = $rs[thumb] ? $rs[thumb] : "ima"."ges/nopic.gif" -->
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td align="left" id="thumb_view"><img src="{:$thumb}" border="0" width="80px" height="80px" /></td>
+	</tr>
+	</table>
+</div>
+<!-- end -->
+
+
+<!-- $extlist_must AS $key=>$value -->
+{:$value}
+<!-- end -->
+
+<div {if(!$m_rs[if_biz])} style="display:none;"{end}>
+	<div class="table">
+		<div class="left">售价：</div>
+		<input type="text" name="price" id="price" value="{:$rs[price]}">
+		<span class="clue_on"> RMB</span>
+	</div>
+	<div class="table">
+		<div class="left">虚拟产品：</div>
+		<input type="checkbox" name="virtual" id="virtual" value="1"{if($rs[virtual])} checked{end}>
+		<span class="clue_on"> 如果该产品是虚拟产品，请打上勾（购买虚拟产品不需填写地址，不计运费）</span>
+	</div>
+	<div class="table">
+		<div class="left">特价：</div>
+		<input type="checkbox" name="ifspecial" id="ifspecial" value="1"{if($rs[ifspecial])} checked{end}>
+		<span class="clue_on"> 如果该价格是特价产品，请打上勾</span>
+	</div>
+	<div class="table">
+		<div class="left">免费：</div>
+		<input type="checkbox" name="free" id="free" value="1"{if($rs[free])} checked{end}>
+		<span class="clue_on"> 如果该产品免费，请打上勾</span>
+	</div>
+	<div class="table">
+		<div class="left">重量：</div>
+		<input type="text" name="weight" id="weight" class="short_input" value="{:$rs[weight]}">
+		<span class="clue_on"> 单位是：Kg</span>
+	</div>
+</div>
+
+
+
+<!-- if(function_exists("imagecreate") && defined("SYS_VCODE_USE") && SYS_VCODE_USE == true) -->
+<div class="table">
+	<div class="left">验证码：</div>
+	<div class="right">
+		<input name="sys_check" id="sys_check" type="text" style="width:50px;" />
+		<span id="phpok_update_code"><img src="{:site_url('login,codes')}" border="0" align="absmiddle" style="cursor:pointer;" onclick="phpok_update_code()"></span>
+	</div>
+	<div class="clear"></div>
+</div>
+<!-- else -->
+<input type="hidden" id="hidden" value="sys_check" name="sys_check" id="chk" />
+<!-- end -->
+
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<input type="submit" class="but01" id="_phpok_submit" value=" 提交 ">
+</div>
+</form>
+<script type="text/javascript">
+<!-- $extlist AS $key=>$value -->
+	<!-- if($value[input] == "opt") -->
+	phpjs_parent_opt('{:$value[default_val]}','{:$value[identifier]}','{:$value[id]}','{:$value[link_id]}');
+	<!-- elseif($value[input] == "img") -->
+	phpjs_viewpic('{:$value[default_val]}','{:$value[identifier]}');
+	<!-- elseif($value[input] == "download") -->
+	phpjs_viewdown('{:$value[default_val]}','{:$value[identifier]}');
+	<!-- elseif($value[input] == "video") -->
+	phpjs_viewvideo('{:$value[default_val]}','{:$value[identifier]}');
+	<!-- end -->
+<!-- end -->
+
+function to_submit()
+{
+	var subject = $("#subject").val();
+	if(!subject)
+	{
+		alert("主题不允许为空");
+		getid("subject").focus();
+		return false;
+	}
+	//判断核心模块是否必填
+	<!-- if($ifcate) -->
+	var cate_id = getid("cate_id").value;
+	if(!cate_id || cate_id == "0")
+	{
+		alert("请选择分类");
+		return false;
+	}
+	<!-- end -->
+	<!-- if($m_rs[if_thumb] && $m_rs[if_thumb_m]) -->
+	var thumb_id = getid("thumb_id").value;
+	if(!thumb_id)
+	{
+		alert("请选择缩略图信息");
+		return false;
+	}
+	<!-- end -->
+	var chkcode = $("#sys_check").val();
+	if(!chkcode)
+	{
+		alert("验证码不允许为空！");
+		return false;
+	}
+	<!-- $extlist AS $key=>$value -->
+	<!-- if($value[if_must] && $value[input] != "radio" && $value[input] != "checkbox") -->
+		var {:$value[identifier]} = $("#{:$value[identifier]}").val();
+		if(!{:$value[identifier]})
+		{
+			alert("{:$value['error_note'] ? $value['error_note'] : '加红色星号信息均必须填写'}");
+			return false;
+		}
+	<!-- end -->
+	<!-- end -->
+	getid("_phpok_submit").disabled = true;
+	return true;
+}
+</script>
+
+</body>
+</html>

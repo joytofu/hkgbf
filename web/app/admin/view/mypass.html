@@ -1,0 +1,66 @@
+<!-- inc:header -->
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; 修改个人密码</td>
+	</tr>
+	</table>
+</div></div>
+
+<form method="post" action="{:site_url('mypass,setok')}" onsubmit="return to_submit();">
+<div class="table">
+	<div class="left"><span class="red">*</span> 旧密码：</div>
+	<input type="password" name="oldpass" id="oldpass" value="">
+</div>
+
+
+<div class="table">
+	<div class="left"><span class="red">*</span> 新密码：</div>
+	<input type="password" name="newpass" id="newpass" value="">
+</div>
+
+<div class="table">
+	<div class="left"><span class="red">*</span> 确认密码：</div>
+	<input type="password" name="chkpass" id="chkpass" value="">
+</div>
+
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<input type="submit" class="btn2" id="_phpok_submit" name="article_submit" value="提交">
+</div>
+
+</form>
+
+<script type="text/javascript">
+function to_submit()
+{
+	var oldpass = getid("oldpass").value;
+	if(!oldpass)
+	{
+		alert("旧密码不允许为空");
+		getid("oldpass").focus();
+		return false;
+	}
+	var newpass = getid("newpass").value;
+	if(!newpass)
+	{
+		alert("新密码不允许为空");
+		getid("newpass").focus();
+		return false;
+	}
+	var chkpass = getid("chkpass").value;
+	if(!chkpass)
+	{
+		alert("验证密码不允许为空");
+		getid("chkpass").focus();
+		return false;
+	}
+	if(chkpass != newpass)
+	{
+		alert("两次输入的新密码不一致！");
+		return false;
+	}
+	getid("_phpok_submit").disabled = true;
+}
+</script>
+<!-- inc:footer -->

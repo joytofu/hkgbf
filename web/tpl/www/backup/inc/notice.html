@@ -1,0 +1,14 @@
+<!-- run:$notice = phpok("notice") -->
+<!-- if($notice[rslist]) -->
+<h3 class="title">{:$notice[me][title]}</h3>
+<div class="content">
+	<div id="notice_marquee">
+		<!-- $notice[rslist] AS $key=>$value -->
+		<h3><a href="{:msg_url($value)}" title="{:$value[title]}">{:$value[title]}</a></h3>
+		<div class="msg">{:$value[note]}</div>
+		<!-- end -->
+	</div>
+</div>
+<script type="text/javascript">new Marquee("notice_marquee","top",null,226,150,null,null,600);</script>
+<!-- end -->
+<!-- run:unset($notice) -->

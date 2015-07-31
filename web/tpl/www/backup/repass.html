@@ -1,0 +1,72 @@
+<!-- inc:head -->
+<div class="body">
+	<div class="left">
+		<!-- inc:inc/left -->
+	</div>
+	<div class="right">
+		<div class="vmenu"><h3>重设密码</h3></div>
+		<div class="box pd5">
+			<form method="post" action="{:site_url('login,update_pass')}" onsubmit="return chk_getpass();">
+			<table width="100%">
+			<tr>
+				<td align="right" width="110px">验证串：</td>
+				<td><input type="text" id="chkcode" name="chkcode" class="input_login" value="{:$chkcode}" style="width:245px" /></td>
+			</tr>
+			<tr>
+				<td align="right">账号：</td>
+				<td><input type="text" id="username" name="username" class="input_login" value="{:$username}" /></td>
+			</tr>
+			<tr>
+				<td align="right">新密码：</td>
+				<td><input type="password" id="newpass" name="newpass" class="input_login" /></td>
+			</tr>
+			<tr>
+				<td align="right">确认密码：</td>
+				<td><input type="password" id="chkpass" name="chkpass" class="input_login" /></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td><input type="submit" value="重设密码" id="phpok_submit" class="but01" /></td>
+			</tr>
+			</table>
+			</form>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<script type="text/javascript">
+function chk_getpass()
+{
+	var username = getid("username").value;
+	var chkcode = getid("chkcode").value;
+	if(!username || !chkcode)
+	{
+		alert("账号或验证串不能为空");
+		if(!username)
+		{
+			getid("username").focus();
+		}
+		else
+		{
+			getid("chkcode").focus();
+		}
+		return false;
+	}
+	//检测密码是否为空
+	var newpass = getid("newpass").value;
+	var chkpass = getid("chkpass").value;
+	if(!newpass || !chkpass)
+	{
+		alert("密码不允许为空！");
+		return false;
+	}
+	if(newpass != chkpass)
+	{
+		alert("两次输入密码不一致！");
+		return false;
+	}
+	getid("phpok_submit").disabled =true;
+	return true;
+}
+</script>
+<!-- inc:foot -->

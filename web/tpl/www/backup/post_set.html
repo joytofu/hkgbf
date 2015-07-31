@@ -1,0 +1,75 @@
+<!-- inc:head -->
+<script type="text/javascript" src="js/php.js"></script>
+<div class="body">
+	<div class="left">
+		<!-- inc:inc/usercp -->
+		<!-- inc:inc/left -->
+	<div>
+	<div class="right">
+		<div class="vmenu"><h3>{:$m_rs[title]}</h3></div>
+		<div class="box pd5">
+			<form method="post" action="{:site_url('post,setok')}id={:$id}&module_id={:$module_id}" onsubmit="return to_submit();">
+			<input type="hidden" id="_to_url" name="_to_url" value="{:$referurl}" />
+			<div class="table">
+				<div class="left"><span class="red">*</span> {:$m_rs[title_nickname] ? $m_rs[title_nickname] : '主题'}：</div>
+				<div class="right"><input type="text" name="subject" id="subject" class="long_input" value="{:$subject}"></div>
+				<div class="clear"></div>
+			</div>
+			<!-- $extlist_must AS $key=>$value -->
+			{:$value}
+			<!-- end -->
+
+			<!-- inc:inc/vcode -->
+
+			<div class="table">
+				<div class="left">&nbsp;</div>
+				<input type="submit" class="but01" id="_phpok_submit" value=" 提交 ">
+			</div>
+			</form>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<script type="text/javascript">
+<!-- $extlist AS $key=>$value -->
+	<!-- if($value[input] == "opt") -->
+	phpjs_parent_opt('{:$value[default_val]}','{:$value[identifier]}','{:$value[id]}');
+	<!-- elseif($value[input] == "img") -->
+	phpjs_viewpic('{:$value[default_val]}','{:$value[identifier]}');
+	<!-- elseif($value[input] == "download") -->
+	phpjs_viewdown('{:$value[default_val]}','{:$value[identifier]}');
+	<!-- elseif($value[input] == "video") -->
+	phpjs_viewvideo('{:$value[default_val]}','{:$value[identifier]}');
+	<!-- end -->
+<!-- end -->
+
+function to_submit()
+{
+	var subject = getid("subject").value;
+	if(!subject)
+	{
+		alert("主题不允许为空");
+		getid("subject").focus();
+		return false;
+	}
+	<!-- $extlist AS $key=>$value -->
+	<!-- if($value[if_must] && $value[input] != "radio" && $value[input] != "checkbox") -->
+		<!-- if($value[input] != "edit") -->
+		var {:$value[identifier]} = getid("{:$value[identifier]}").value;
+		<!-- else -->
+		var oEditor_{:$value[identifier]} = FCKeditorAPI.GetInstance('{:$value[identifier]}');
+		var {:$value[identifier]} = oEditor_{:$value[identifier]}.GetXHTML(true);
+		<!-- end -->
+		if(!{:$value[identifier]})
+		{
+			alert("{:$value['error_note'] ? $value['error_note'] : '所有加红色星号信息均必须填写'}");
+			return false;
+		}
+	<!-- end -->
+	<!-- end -->
+	getid("_phpok_submit").disabled = true;
+	return true;
+}
+</script>
+
+<!-- inc:foot -->

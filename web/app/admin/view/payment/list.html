@@ -1,0 +1,37 @@
+<!-- inc:header -->
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="130px"><span class="lead">&nbsp;&raquo; 付款方式列表</span></td>
+		<td align="right"><a href="{:site_url('payment,set')}" class="button">添加付款方式</a></td>
+	</tr>
+	</table>
+</div></div>
+
+<div class="main">
+<table width="100%" style="layout:fixed;" cellpadding="0" cellspacing="0">
+<tr>
+	<td class="t_sub" width="50px">ID</td>
+	<td class="t_sub" width="35px">状态</td>
+	<td class="t_sub">名称</td>
+	<td class="t_sub" width="80px">标识</td>
+	<td class="t_sub" width="40px">排序</td>
+	<td class="t_sub" width="65px">操作</td>
+</tr>
+<!-- $rslist AS $key=>$value -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)">
+	<td align='center' class="tc_left">{:$value[id]}</td>
+	<td align="center" class="tc_right"><a href="javascript:to_status({:$value[id]});void(0);" class="status{:intval($value['status'])}"></a></td>
+	<td class="tc_right">&nbsp;{:$value[title]}</td>
+	<td class="tc_right" align='center'>{:$value[code]}</td>
+	<td align='center' class="tc_right">{:$value[taxis]}</td>
+	<td align="center" class="tc_right">
+		<a href="{:site_url('payment,set')}id={:$value[id]}" class="btn edit" title="编辑"></a>
+		<a href="{:site_url('payment,fields')}id={:$value[id]}" class="btn key" title="字段管理"></a>
+		<a href="javascript:to_del({:$value['id']});void(0);" class="btn del" title="删除"></a>
+	</td>
+</tr>
+<!-- end -->
+</table>
+</div>
+<!-- inc:footer -->

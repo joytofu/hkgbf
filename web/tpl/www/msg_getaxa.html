@@ -1,0 +1,73 @@
+<!-- inc:head -->
+
+<!-- inc:banner-->
+<link href="images/bootstrap.min.css" rel="stylesheet" type="text/css">
+<div class="main">
+   <div class="left">
+      <div class="left1">
+         <div class="lefttop">{:$m_rs[title]}</div>
+         <div class="leftmain">
+       <!-- inc:inc/cp-->
+         </div>
+      </div>
+      <!-- inc:inc/left-->
+ 
+   </div>
+
+   <div class="right">
+      <div class="righttop"><div class="ll">基金产品库</div><div class="rr">您当前的位置是：<a href="{:$_sys[siteurl]}">网站首页</a> > {:$m_rs[title]} > 环球基金 > 基金产品库</div></div>
+
+      <div class="rightmain">
+          <!--run:-->
+          $url="http://traveleuro.xyz/getaxa.json";
+          $ch = curl_init();
+          curl_setopt($ch,CURLOPT_URL,$url);
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+          curl_setopt($ch,CURLOPT_HEADER,0);
+          $res=curl_exec($ch);
+          $output=json_decode($res,true);
+          curl_close($ch);
+          <!--/run-->
+          <div class="panel-group" id="accordion" style="width:60%">
+              <!--循环85只基金-->
+              <!--run:-->
+              $i=1;
+              $panel="<div class='panel panel-default'>";
+
+              foreach($output[composites][0][data][productGroups] AS $key1=>$val1){
+                echo $panel;
+                  $panel_head="<div class='panel-heading collapsed' style='box-shadow: 1px 2px 7px;' data-toggle='collapse' data-parent='#accordion' href='#c$i'>
+                  <h4 class='panel-title'>
+                      <a data-toggle='collapse' data-parent='#accordion' href='#c$i' style='color:black;font-weight:700;'>
+                          $val1[title]
+                      </a>
+                  </h4>
+              </div>";
+                  echo $panel_head;
+
+               echo "<div id='c$i' class='panel-collapse collapse'>
+                  <div class='bg2'>
+                      <div class='in_box'>
+                          <ul>";
+                              foreach($val1[products] AS $key2=>$val2){
+                              echo "<li><a href=$val2[url] target='_blank'>$val2[title]</a></li>";
+                              }
+                          echo "</ul>
+                      </div>
+                  </div>
+                </div>";
+
+              echo "</div>";
+              $i++;
+              }
+<!--/run-->
+          </div>
+      </div>
+   </div>
+</div>
+<script type="text/javascript" src="images/jquery.min.js"></script>
+<script type="text/javascript" src="images/collapse.js"></script>
+<script type="text/javascript" src="images/transition.js"></script>
+
+
+<!-- inc:foot -->

@@ -1,0 +1,48 @@
+<!-- inc:header -->
+<script type="text/javascript">
+function to_link()
+{
+	var id = join_checkbox();
+	if(!id)
+	{
+		alert("没有选择要关联的主题");
+		return false;
+	}
+	parent.phpjs_viewmodule(id,"{:$input_id}");
+	parent.Layer.over();
+}
+</script>
+
+<div class="main">
+<table width="100%" style="layout:fixed;" cellpadding="0" cellspacing="0">
+<tr>
+	<td class="t_sub" width="35px">&nbsp;</td>
+	<td class="t_sub" width="50px">ID</td>
+	<td class="t_sub" width="35px">状态</td>
+	<td class="t_sub">名称</td>
+	<td class="t_sub" width="110px">发布时间</td>
+</tr>
+<!-- $rslist AS $key=>$value -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)">
+	<td align='center' class="tc_left"><input type="checkbox" value="{:$value[id]}" id="check_id_{:$value[id]}" /></td>
+	<td align='center' class="tc_right">{:$value[id]}</td>
+	<td align="center" class="tc_right"><a class="status{:intval($value['status'])}"></a></td>
+	<td align='left' class="tc_right" style="padding:2px 0;">&nbsp;<!-- if($value[thumb]) --><span class="darkblue">【图文】</span><!-- end --><span id="subject_{:$value[id]}" style="{:$value[style]}">{:$value[title]}</span><!-- if($value[virtual]) --> <span class="red">虚拟产品</span><!-- end --><!-- if($value[istop]) --> <span class="red">[顶]</span><!-- end --><!-- if($value[isvouch]) --> <span class="darkblue">[荐]</span><!-- end --><!-- if($value[isbest]) --> <span class="darkred">[精]</span><!-- end --></td>
+	<td  align='center' class="tc_right">{:date('Y-m-d H:i',$value[post_date])}</td>
+</tr>
+<!-- end -->
+</table>
+</div>
+
+<div style="padding:2px;">
+	<input type="button" value="全选" onclick="select_all();" class="btn2">
+	<input type="button" value="反选" onclick="select_anti();" class="btn2">
+	<input type="button" value="不选" onclick="select_none();" class="btn2">
+	&nbsp; &nbsp;
+	<input type="button" value="添加" onclick="to_link();" class="btn2">
+	&nbsp;
+	<input type="button" value="关闭" onclick="parent.Layer.over();" class="btn2">
+</div>
+
+<div class="table">{:$pagelist}</div>
+<!-- inc:footer_open -->

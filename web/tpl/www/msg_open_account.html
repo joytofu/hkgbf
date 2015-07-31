@@ -1,0 +1,146 @@
+<!-- inc:head -->
+
+<!-- inc:banner-->
+
+
+<div class="main">
+   <div class="left">
+      <div class="left1">
+         <div class="lefttop">{:$m_rs[title]}</div>
+         <div class="leftmain">
+       <!-- inc:inc/catelist-->
+         </div>
+      </div>
+   </div>
+   
+   <div class="right">
+      <div class="righttop"><div class="ll">预约开户</div><div class="rr">您当前的位置是：<a href="{:$_sys[siteurl]}">网站首页</a> > {:$m_rs[title]} > 预约开户</div></div>
+      
+      <div class="rightmain">
+          <div class="feedback">
+
+              <form id="form1" name="form1" method="post" onsubmit="return check()" action="submit.php">
+                  <input name="title" type="text" id="title"  value="预约开户"   style="display:none"/>
+                  <p style="height:20px; margin-bottom:15px; line-height:20px; font-size:16px;"><img src="images/w4.jpg" style="margin-right:10px; height:20px;" align="left">预约电话：4006-822-812</p>
+                  <p class="wz">联系人 <span class="red">*</span></p>
+                  <p class="wk"><input type="text" name="fullname" id="fullname" class="text" placeholder='请输入联系人姓名'></p>
+                  <p class="wz">联系电话 <span class="red">*</span></p>
+                  <p class="wk"><input type="text" name="mobile" id="mobile" class="text" placeholder='请输入联系电话'></p>
+                  <p class="wz">身份证号码 <span class="red">*</span></p>
+                  <p class="wk"><input type="text" name="sfz" id="sfz" class="text" placeholder='请输入身份证号码'></p>
+                  <p class="wz">电子邮箱 <span class="red">*</span></p>
+                  <p class="wk"><input type="text" name="email" id="email" class="text" placeholder='请输入电子邮箱'></p>
+                  <p class="wz">联系地址 <span class="red">*</span></p>
+                  <p class="wk"><input type="text" name="address" id="address" class="text" placeholder='请输入联系地址'></p>
+                  <p class="wz">学历</p>
+                  <p class="wk"><input type="text" name="xueli" id="xueli" class="text" placeholder='请输入学历'></p>
+                  <p class="wz">客户经理</p>
+                  <p class="wk"><input type="text" name="jingli" id="jingli" class="text" placeholder='没有可不填'></p>
+                  <p class="wz">备注</p>
+                  <p class="wk"><textarea name="content" cols="50" class="text2" rows="10" id="content"></textarea></p>
+                  <p class="wz" style="margin-top:30px;"><input type="image" name="imageField" id="imageField" src="images/button.jpg" /></p>
+
+
+              </form>
+
+              <script type="text/javascript">
+                  function check()
+                  {
+                      if (document.form1.fullname.value=="请输入联系人")
+                      {
+                          window.alert("请输入联系人!       ");
+                          document.form1.fullname.focus();
+                          return false;
+                      }
+
+                      if (document.form1.mobile.value=="请输入联系电话")
+                      {
+                          window.alert("请输入联系电话   ");
+                          document.form1.mobile.focus();
+                          return false;
+                      }
+//
+                      String.prototype.Trim = function() {
+                          var m = this.match(/^\s*(\S+(\s+\S+)*)\s*$/);
+                          return (m == null) ? "" : m[1];
+                      }
+                      String.prototype.isMobile = function() {
+                          return (/^(?:18\d|14\d|13\d|15[123456789])-?\d{5}(\d{3}|\*{3})$/.test(this.Trim()));
+                      }
+                      String.prototype.isTel = function()
+                      {
+//"兼容格式: 国家代码(2到3位)-区号(2到3位)-电话号码(7到8位)-分机号(3位)"
+                          //return (/^(([0\+]\d{2,3}-)?(0\d{2,3})-)?(\d{7,8})(-(\d{3,}))?$/.test(this.Trim()));
+                          return (/^(([0\+]\d{2,3}-)?(0\d{2,3}))(\d{7,8})(-(\d{3,}))?$/.test(this.Trim()));
+                      }
+
+                      with(document.form1){
+                          if (mobile.value.isMobile()||mobile.value.isTel())  {
+
+                          }
+                          else {
+                              alert("请输入正确的电话号码或手机\n\n例如:020123456789或13534596987");
+                              mobile.focus();
+                              return false;
+
+                          }
+                      }
+//
+
+                      if (document.form1.sfz.value=="请输入身份证号码")
+                      {
+                          window.alert("请输入身份证号码   ");
+                          document.form1.sfz.focus();
+                          return false;
+                      }
+
+                      if (document.form1.email.value=="请输入电子邮箱")
+                      {
+                          window.alert("请输入电子邮箱 ");
+                          document.form1.email.focus();
+                          return false;
+                      }
+
+                      var temp = document.getElementById("email");
+                      var myreg = /(\S)+[@]{1}(\S)+[.]{1}(\w)+/;
+                      if(temp.value!="")
+                      {
+                          if(!myreg.test(temp.value))
+                          {
+                              window.alert("您的E-mail格式有误，请重新输入!!       ");
+                              document.form1.email.focus();
+                              return false;
+                          }
+
+                      }
+
+                      if (document.form1.address.value=="请输入联系地址")
+                      {
+                          window.alert("请输入联系地址");
+                          document.form1.address.focus();
+                          return false;
+                      }
+                      /*
+                       if (document.form1.xueli.value=="请输入学历")
+                       {
+                       window.alert("请输入学历 ");
+                       document.form1.xueli.focus();
+                       return false;
+                       }*/
+
+
+                  }
+              </script>
+
+          </div>
+
+      </div>
+      
+   </div>
+   
+   
+   
+</div>
+
+
+<!-- inc:foot -->

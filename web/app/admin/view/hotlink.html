@@ -1,0 +1,11 @@
+<ul>
+	<!-- $rslist AS $key=>$value -->
+	<li><a href="javascript:;void(0);" title="{:$value[title]}" onclick="add_hotpanel('{:$value[id]}','{:$value[title]}','{:$value[linkurl]}')"><table>
+		<tr>
+			<td><img src="images/ico/{:$value[ico] ? $value[ico] : 'list.gif'}" /></td>
+			<td>{:$value[title]}</td>
+		</tr>
+		</table></a>
+	</li>
+	<!-- end -->
+</ul>

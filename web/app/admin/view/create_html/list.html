@@ -1,0 +1,103 @@
+<!-- inc:header -->
+<!-- if($site_config[site_type] != "html") -->
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead red">&nbsp;&raquo; 非静态页模式，生成的HTML页可能会有问题，建议仅限用于生成站点地图</span></td>
+	</tr>
+	</table>
+</div></div>
+<!-- end -->
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; 静态页生成（新版使用Ajax原理访问页面后存储相应的HTML页面）</span></td>
+	</tr>
+	</table>
+</div></div>
+
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<input type="button" value="首页生成" onclick="index_html('{:$indexphp}?langid={:$langid}')" class="btn4" />
+</div>
+
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td>{:$cate_html} <input type="button" value="列表生成" onclick="list_html();" class="btn4" /></td>
+	</tr>
+	<tr>
+		<td height="25px">起始ID：<input type="text" id="startid" name="startid" class="short_input" /> <span class="clue_on">空或0表示从头开始</span></td>
+	</tr>
+	<tr>
+		<td height="25px">结束ID：<input type="text" id="endid" name="endid" class="short_input" /> <span class="clue_on">空或0表示直到结束ID</span></td>
+	</tr>
+	<tr>
+		<td><input type="button" value="内容生成" onclick="msg_html();" class="btn4" /></td>
+	</tr>
+	</table>
+</div>
+<br />
+
+<div class="table">
+	<div class="left red">实时进度：</div>
+	<span id="creat_html_status" style="line-height:25px;">&nbsp;</span>
+</div>
+
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; 站点地图，<a href="http://www.phpok.com/help_sitemap.html" target="_blank">点这里查看登记站点地图</a></span></td>
+	</tr>
+	</table>
+</div></div>
+
+<div class="table">
+	<div class="left">谷歌地图：</div>
+	<div class="right">
+		<table width="100%" cellpadding="0" cellspacing="0">
+		<tr>
+			<td><a href="{:$siteurl}{:$indexphp}?c=sitemap&f=sitemap" target="_blank">{:$siteurl}{:$indexphp}?c=sitemap&f=sitemap</a></td>
+		</tr>
+		</table>
+	</div>
+	<div class="clear"></div>
+</div>
+<div class="table">
+	<div class="left">百度地图：</div>
+	<div class="right">
+		<table width="100%" cellpadding="0" cellspacing="0">
+		<tr>
+			<td><a href="{:$siteurl}{:$indexphp}?c=sitemap&f=baidu" target="_blank">{:$siteurl}{:$indexphp}?c=sitemap&f=baidu</a></td>
+		</tr>
+		</table>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div class="table">
+	<div class="left">ROR地图：</div>
+	<div class="right">
+		<table width="100%" cellpadding="0" cellspacing="0">
+		<tr>
+			<td><a href="{:$siteurl}{:$indexphp}?c=sitemap&f=ror" target="_blank">{:$siteurl}{:$indexphp}?c=sitemap&f=ror</a></td>
+		</tr>
+		</table>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div class="table">
+	<div class="left">Urllist地图：</div>
+	<div class="right">
+		<table width="100%" cellpadding="0" cellspacing="0">
+		<tr>
+			<td><a href="{:$siteurl}{:$indexphp}?c=sitemap&f=urllist" target="_blank">{:$siteurl}{:$indexphp}?c=sitemap&f=urllist</a></td>
+		</tr>
+		</table>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<!-- inc:footer -->

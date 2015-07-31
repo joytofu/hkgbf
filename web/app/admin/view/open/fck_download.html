@@ -1,0 +1,33 @@
+<!-- inc:header -->
+<script type="text/javascript">
+var fck_id = "#{:$fck_id}";
+var input_id = fck_id + "_tmp_id";
+
+function click_video(id)
+{
+	var i_html = "[download:"+id+"]";
+	parent.$(fck_id)[0].xheditor.pasteHTML(i_html);
+	parent.$(input_id).attr("value","");
+	callback(null);
+	return true;
+}
+</script>
+<!-- inc:swfupload -->
+<div class="main">
+<table width="100%" style="layout:fixed;" cellpadding="0" cellspacing="0">
+<tr>
+	<td class="t_sub" style="width:10%">ID</td>
+	<td class="t_sub">名称</td>
+	<td class="t_sub" style="width:140px">上传时间</td>
+</tr>
+<!-- $rslist AS $key=>$value -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)" onclick="click_video('{:$value[id]}')" style="cursor:pointer;">
+	<td align='center' class="tc_left">&nbsp;{:$value[id]}&nbsp;</td>
+	<td align='left' class="tc_right" style="padding:2px auto;">&nbsp;{:$value[title] ? $value[title] : basename($value[filename])}</td>
+	<td align="center" class="tc_right">&nbsp;{:date('Y-m-d H:i:s',$value[postdate])}&nbsp;</td>
+</tr>
+<!-- end -->
+</table>
+</div>
+<!-- if($pagelist) --><div class="table">{:$pagelist}</div><!-- end -->
+<!-- inc:footer_open -->

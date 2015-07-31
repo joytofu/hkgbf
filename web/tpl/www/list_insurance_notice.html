@@ -1,0 +1,48 @@
+
+<!-- inc:head -->
+
+<!-- inc:banner-->
+<!--run:-->
+require_once('libs/checkLogined.php');
+if($_SESSION['username']==""&&$_COOKIE['username']==""){
+alertMes("您还没有登录，请先登录","index.php?c=list&cs=kehu&login");
+exit;
+}
+<!--/run-->
+<div class="main">
+   <div class="left">
+      <div class="left1">
+         <div class="lefttop">{:$m_rs[title]}</div>
+         <div class="leftmain">
+       <!-- inc:inc/cp-->
+         </div>
+      </div>
+<!-- inc:inc/left-->
+   </div>
+   
+   <div class="right">
+      <div class="righttop"><div class="ll">{:$rs[cate_name]}</div><div class="rr">您当前的位置是：<a href="{:$_sys[siteurl]}">网站首页</a> > {:$m_rs[title]}<!--if($cs<>"pros")--> > {:$rs[cate_name]}<!--end--></div></div>
+      
+      <div class="rightmain">
+       <!-- $rslist AS $key=>$value -->
+        <div class="pro">
+        <!--if($value[picture])-->
+        <img src="{:$value[picture]}" width="80" height="80">
+        <!--end-->
+    <div class="ptitle"><a href="{:msg_url($value)}" target="_blank" title="{:$value[title]}">• {:$value[title]}</a></div>
+    <div class="ptime">[{:date("Y-m-d",$value[post_date])}]</div>
+ </div>
+
+<!--END-->
+
+      <!-- inc:inc/pagelist -->
+      </div>
+      
+   </div>
+   
+   
+   
+</div>
+
+
+<!-- inc:foot -->

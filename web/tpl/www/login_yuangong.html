@@ -1,0 +1,57 @@
+<!-- inc:head -->
+<!--if($_SESSION["username"])-->
+  <script language=javascript>
+window.alert('您已经登录了，请直接进入会员中心!');
+window.location.href='index.php?c=msg&id={:$_SESSION["userid"]}';
+</script>
+<!--run:-->
+exit;
+<!--/run-->
+<!--end-->
+<div class="denglu">
+
+   <div class="denglu_11">
+
+         <div class="denglu_32">
+            <form method="post" action="login.php" name="form1" id="form1" onsubmit="return check()">
+            <input type="hidden" id="cc" value="3" name="cc">
+ <p>用户名:</p>
+<input type="text" id="username" name="username" class="text131" style="margin-bottom:10px">
+<p>密码:</p>
+<input type="password" id="password" name="password" class="text131" style="margin-bottom: 15px">
+                <input type="text" id="ac" name="ac" class="ac_staff" style="margin-right:7px" placeholder="请输入验证码">
+                <img style="margin-right:10px" class="ac_img" id="auth_code" src="auth_code.php?ac=0.5223117575515062" height="40px" width="80px">
+                <span><a href="javascript:void(0)" onclick="document.getElementById('auth_code').src='auth_code.php?ac='+Math.random()">看不清</a></span>
+<div class="clear"></div>
+<p style="height:25px; line-height:25px; margin-top:10px;">
+
+<input type="image" name="imageField" id="imageField" src="images/login2.jpg" align="right" style="margin-right:55px;" />
+
+</p>
+
+
+  </form>
+  
+     </div>
+   </div>
+   
+</div>
+<div class="clear"></div>
+<!-- inc:foot -->
+<script type="text/javascript">
+function check()
+{
+if (document.form1.username.value=="用户名")
+{
+window.alert("请输入用户名   ");
+document.form1.username.focus();
+return false;
+}
+if (document.form1.password.value=="密码")
+{
+window.alert("请输入登录密码 ");
+document.form1.password.focus();
+return false;
+}
+}
+</script>

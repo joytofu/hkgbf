@@ -1,0 +1,295 @@
+<!-- inc:header -->
+<script type="text/javascript">
+function to_view(id)
+{
+	var st = $("#status_"+id).text();
+	if(st == "未发布")
+	{
+		$("#subject_"+id).css("color","red");
+	}
+	var url = "{:site_url('collection,show')}id="+id;
+	Layer.init(url,550,400);
+}
+
+function to_del(id)
+{
+	var qc = confirm("确定要删除吗？删除后，数据会被清空且不能恢复！");
+	if(qc != "0")
+	{
+		var url = "{:site_url('collection,list_del')}";
+		url += "id="+id;
+		var msg = get_ajax(url);
+		if(msg == "ok")
+		{
+			alert("删除成功！");
+			direct(window.location.href);
+			return false;
+		}
+		else
+		{
+			if(!msg) msg = "Error:删除失败！";
+			alert(msg);
+			return false;
+		}
+	}
+	return false;
+}
+
+function to_del_selected()
+{
+	var id = join_checkbox();
+	if(!id)
+	{
+		alert("请选择要删除的项目！");
+		return false;
+	}
+	to_del(id);
+}
+function re_collection()
+{
+	var id = join_checkbox();
+	if(!id)
+	{
+		alert("请选择要执行的项目！");
+		return false;
+	}
+	var url = "{:site_url('collection,re_content')}idstring=";
+	url += encode_utf8(id);
+	$("#collection_status").html("正在执行初始化……");
+	get_ajax(url,end_re_collection);
+}
+function end_re_collection(msg)
+{
+	if(msg)
+	{
+		if(msg == "ok")
+		{
+			$("#collection_status").html("初始化完毕，请稍候，即将开始采集……");
+			eval_js(1,cj_content);
+		}
+		else
+		{
+			alert("MSG:"+msg);
+			return false;
+		}
+	}
+}
+function cj_content()
+{
+	var id = join_checkbox();
+	if(!id)
+	{
+		alert("请选择要执行的项目！");
+		return false;
+	}
+	var idlist = id.split(",");
+	var start_count = $("#start_count").attr("value");
+	if(!idlist[start_count] || idlist[start_count] == "undefined")
+	{
+		alert("采集完成，请检查");
+		//direct(window.location.href);
+		return true;
+	}
+	var tid = idlist[start_count];
+	//开始采集内容
+	var cid = $("#cateid_"+tid).val();
+	var url = "{:site_url('collection,content2')}id="+cid+"&tid="+tid;
+	get_ajax(url,next_cj_content,tid);
+}
+
+function next_cj_content(msg,tid)
+{
+	if(msg)
+	{
+		var rs = JSON.parse(msg);
+		if(rs["status"] == "ok")
+		{
+			$("#collection_status").html(rs["note"]);
+			var start_count = $("#start_count").attr("value");
+			$("#start_count").attr("value",(parseInt(start_count)+1));
+			$("#status_"+tid).html("<span class='darkblue'>未发布</span>");
+			eval_js(1,cj_content);
+		}
+		else
+		{
+			$("#collection_status").html(rs["note"]);
+		}
+	}
+}
+function cj_post()
+{
+	var id = join_checkbox();
+	if(!id)
+	{
+		alert("请选择要执行的项目！");
+		return false;
+	}
+	var qc = confirm("确定要执行发布吗？在执行发布过程中，请不要关闭浏览器！");
+	if(qc == "0")
+	{
+		return false;
+	}
+	var cid = $("#cateid_"+id).val();
+	var gourl = "{:site_url('collection,post')}id="+cid+"&tid="+encode_utf8(id);
+	direct(gourl);
+	return true;
+}
+
+function clear_post()
+{
+	var id = join_checkbox();
+	if(!id)
+	{
+		alert("请选择要执行的项目！");
+		return false;
+	}
+	var qc = confirm("确定要取消该采集已发布的标记吗？更新后，如执行采集入库，将会重新执行！");
+	if(qc == "0")
+	{
+		return false;
+	}
+	var gourl = "{:site_url('collection,clear_post')}idstring="+encode_utf8(id);
+	var msg = get_ajax(gourl);
+	if(msg == "ok")
+	{
+		alert("已将选定主题标记为未发布！");
+		direct(window.location.href);
+		return true;
+	}
+	else
+	{
+		if(!msg) msg = "Error: 操作错误！";
+		alert(msg);
+		return false;
+	}
+}
+
+function set_post()
+{
+	var id = join_checkbox();
+	if(!id)
+	{
+		alert("请选择要执行的项目！");
+		return false;
+	}
+	var qc = confirm("确定要将该主题设置为已发布吗？更新后，该主题将不再入库！");
+	if(qc == "0")
+	{
+		return false;
+	}
+	var gourl = "{:site_url('collection,set_post2')}idstring="+encode_utf8(id);
+	var msg = get_ajax(gourl);
+	if(msg == "ok")
+	{
+		alert("已将选定主题标记为已发布！");
+		direct(window.location.href);
+		return true;
+	}
+	else
+	{
+		if(!msg) msg = "Error: 操作错误！";
+		alert(msg);
+		return false;
+	}
+}
+
+function to_search()
+{
+	var keytype = $("#keytype").val();
+	var keyword = $("#keywords").val();
+	if(!keytype)
+	{
+		alert("请选择字段类型！");
+		return false;
+	}
+	if(!keyword)
+	{
+		alert("请输入要搜索的关键字！");
+		return false;
+	}
+	var url = "{:site_url('collection,list')}id={:$id}&keytype="+encode_utf8(keytype)+"&keywords="+encode_utf8(keyword);
+	direct(url);
+}
+</script>
+<input type="hidden" id="start_count" value="0" />
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td>&nbsp;&raquo; <a href="{:site_url('collection')}">采集信息管理</a>
+			<!-- if($id) -->
+			&raquo; <a href="{:site_url('collection,list')}id={:$id}">{:$rs[title]}</a>
+			<!-- else -->
+			&raquo; <a href="{:site_url('collection,list')}">未采集（发布）内容</a>
+			<!-- end -->
+			&raquo; 采集的内容管理
+		</td>
+		<!-- if($id) -->
+		<td align="right">
+			<table cellpadding="1" cellspacing="1">
+			<tr>
+				<td>搜索：</td>
+				<td><select id="keytype">
+					<option value="">请选择……</option>
+					<!-- $taglist AS $key=>$value -->
+						<!-- if($value[tags_type] == "var") -->
+						<option value="{:$value[identifier]}"{if($value[identifier] == $keytype)} selected{end}>{:$value[title]}</option>
+						<!-- end -->
+					<!-- end -->
+				</select></td>
+				<td><input type="text" id="keywords" value="{:$keywords}" /></td>
+				<td><input type="button" value="搜索" onclick="to_search()" class="btn2" /></td>
+			</tr>
+			</table>
+		</td>
+		<!-- end -->
+	</tr>
+	</table>
+</div></div>
+
+<div class="main">
+<table width="100%" style="layout:fixed;" cellpadding="0" cellspacing="0">
+<tr>
+	<td class="t_sub" width="20px">&nbsp;</td>
+	<td class="t_sub" width="60px">状态</td>
+	<td class="t_sub">主题</td>
+	<td class="t_sub">网址</td>
+	<td class="t_sub" width="45px">操作</td>
+</tr>
+<!-- $rslist AS $key=>$value -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)">
+	<td align='center' class="tc_left"><input type="checkbox" value="{:$value[id]}" /></td>
+	<input type="hidden" id="cateid_{:$value[id]}" value="{:$value[cid]}" />
+	<td align='center' class="tc_right" id="status_{:$value[id]}"><!-- if($value[status] == 2) -->已发布<!-- elseif($value[status] == 1) --><span class="darkblue">未发布</span><!-- else --><span class="red">未采集</span><!-- end --></td>
+	<td align='left' class="tc_right" id="subject_{:$value[id]}">&nbsp;【{:$value[id]}】{:$value[title]}</td>
+	<td align='left' class="tc_right">&nbsp;<a href="{:$value[url]}" target="_blank">{:$value[url]}</a></td>
+	<td align="center" class="tc_right">
+		<a href="javascript:to_view({:$value['id']});void(0);" class="btn reply" title="查看"></a>
+		<a href="javascript:to_del({:$value['id']});void(0);" class="btn del" title="删除"></a>
+	</td>
+</tr>
+<!-- end -->
+<tr class="tr_out">
+	<td class="tc_left tc_right" colspan="6">
+		<table>
+		<tr>
+			<td><input type="button" value="全选" onclick="select_all()" class="btn2"></td>
+			<td><input type="button" value="全不选" onclick="select_none()" class="btn3"></td>
+			<td><input type="button" value="反选" onclick="select_anti()" class="btn2"></td>
+			<td><input type="button" value="重新采集" onclick="re_collection()" class="btn4"></td>
+			<td><input type="button" value="发布" onclick="cj_post()" class="btn2"></td>
+			<td><input type="button" value="标记未发布" onclick="clear_post()" class="btn9"></td>
+			<td><input type="button" value="标记已发布" onclick="set_post()" class="btn9"></td>
+			<td><input type="button" value="删除" onclick="to_del_selected()" class="btn2"></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+<tr class="tr_out">
+	<td class="tc_left tc_right" colspan="5">
+	&nbsp;执行进度：<span class="darkblue" id="collection_status"></span>
+	</td>
+</tr>
+</table>
+</div>
+<!-- if($pagelist) --><div class="table">{:$pagelist}</div><!-- end -->
+<!-- inc:footer -->

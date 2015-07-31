@@ -1,0 +1,145 @@
+<!-- if($catelist) -->
+<div class="table">
+	<div class="left">分类：</div>
+	<select name="out_cateid" id="out_cateid">
+		<option value="">全部分类</option>
+		<!-- $catelist AS $key=>$value -->
+		<option value="{:$value[id]}">{:$value[space]}{:$value[cate_name]}</option>
+		<!-- end -->
+	</select>
+</div>
+<!-- else -->
+<input type="hidden" id="out_cateid" name="out_cateid" value="empty" />
+<!-- end -->
+
+<!-- if($m_rs[if_biz]) -->
+<div class="table">
+	<div class="left">货币：</div>
+	<div class="right">
+		<select name="out_currency" id="out_currency">
+			<!-- $currency_list AS $key=>$value -->
+			<option value="{:$value[code]}">{:$value[title]}【{:$value[code]}】</option>
+			<!-- end -->
+		</select>
+	</div>
+	<div class="clear"></div>
+</div>
+<!-- else -->
+<input type="hidden" id="out_currency" name="out_currency" value="CNY" />
+<!-- end -->
+
+<div id="out_field_list">
+	<div class="table">
+		<div class="left">核心字段：</div>
+		<div class="right">
+			<div class="main">
+			<table cellpadding="1" cellspacing="0">
+			<tr>
+				<td class="t_sub" width="22px">&nbsp;</td>
+				<td class="t_sub" width="300px">名称</td>
+			</tr>
+			<tr>
+				<td class="td"><input type="checkbox" name="out_idlist[]" value="id" id="out_idlist_id" checked disabled /></td>
+				<td><label for="out_idlist_id">ID号 [id]</label></td>
+			</tr>
+			<!-- if($m_rs[if_thumb]) -->
+			<tr>
+				<td class="td"><input type="checkbox" name="out_idlist[]" value="thumb" id="out_idlist_thumb" /></td>
+				<td><label for="out_idlist_thumb">图片 [thumb]</label></td>
+			</tr>
+			<!-- end -->
+			<tr>
+				<td class="td"><input type="checkbox" name="out_idlist[]" value="title" id="out_idlist_title" checked disabled /></td>
+				<td><label for="out_idlist_title">{:$m_rs[title_nickname] ? $m_rs[title_nickname] : '主题'} [title]</label></td>
+			</tr>
+			<!-- if($m_rs[if_subtitle]) -->
+			<tr>
+				<td class="td"><input type="checkbox" name="out_idlist[]" value="subtitle" id="out_idlist_subtitle" /></td>
+				<td><label for="out_idlist_subtitle">{:$m_rs[subtitle_nickname] ? $m_rs[subtitle_nickname] : '副主题'} [subtitle]</label></td>
+			</tr>
+			<!-- end -->
+			<!-- if($catelist) -->
+			<tr>
+				<td class="td"><input type="checkbox" name="out_idlist[]" value="cate_name" id="out_idlist_cate_name" checked /></td>
+				<td><label for="out_idlist_cate_name">主分类 [cate_name]</label></td>
+			</tr>
+			<!-- end -->
+			<!-- if($m_rs[if_url_m]) -->
+			<tr>
+				<td class="td"><input type="checkbox" name="out_idlist[]" value="link_url" id="out_idlist_link_url" /></td>
+				<td><label for="out_idlist_link_url">链接网址 [link_url]</label></td>
+			</tr>
+			<!-- end -->
+			<tr>
+				<td class="td"><input type="checkbox" name="out_idlist[]" value="seotitle" id="out_idlist_seotitle" /></td>
+				<td><label for="out_idlist_seotitle">SEO标题 [seotitle]</label></td>
+			</tr>
+			<tr>
+				<td class="td"><input type="checkbox" name="out_idlist[]" value="keywords" id="out_idlist_keywords" /></td>
+				<td><label for="out_idlist_keywords">SEO关键字 [keywords]</label></td>
+			</tr>
+			<tr>
+				<td class="td"><input type="checkbox" name="out_idlist[]" value="description" id="out_idlist_description" /></td>
+				<td><label for="out_idlist_description">SEO描述 [description]</label></td>
+			</tr>
+			<!-- if($m_rs[if_des]) -->
+			<tr>
+				<td class="td"><input type="checkbox" name="out_idlist[]" value="note" id="out_idlist_note" /></td>
+				<td><label for="out_idlist_note">摘要 [note]</label></td>
+			</tr>
+			<!-- end -->
+			<tr>
+				<td class="td"><input type="checkbox" name="out_idlist[]" value="hits" id="out_idlist_hits" /></td>
+				<td><label for="out_idlist_hits">查看次数 [hits]</label></td>
+			</tr>
+			<tr>
+				<td class="td"><input type="checkbox" name="out_idlist[]" value="post_date" id="out_idlist_post_date" /></td>
+				<td><label for="out_idlist_post_date">发布时间 [post_date]</label></td>
+			</tr>
+			<tr>
+				<td class="td"><input type="checkbox" name="out_idlist[]" value="taxis" id="out_idlist_taxis" /></td>
+				<td><label for="out_idlist_taxis">排序 [taxis]</label></td>
+			</tr>
+			<!-- if($m_rs[if_biz]) -->
+			<tr>
+				<td class="td"><input type="checkbox" name="out_idlist[]" value="price" id="out_idlist_price" /></td>
+				<td><label for="out_idlist_price">价格 [price]</label></td>
+			</tr>
+			<tr>
+				<td class="td"><input type="checkbox" name="out_idlist[]" value="weight" id="out_idlist_weight" /></td>
+				<td><label for="out_idlist_weight">重量 [weight]</label></td>
+			</tr>
+			<tr>
+				<td class="td"><input type="checkbox" name="out_idlist[]" value="qty" id="out_idlist_qty" /></td>
+				<td><label for="out_idlist_qty">数量 [qty]</label></td>
+			</tr>
+			<!-- end -->
+			</table>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+
+	<!-- if($key_list) -->
+	<div class="table">
+		<div class="left">扩展字段：</div>
+		<div class="right">
+			<div class="main">
+			<table cellpadding="1" cellspacing="0">
+			<tr>
+				<td class="t_sub" width="22px">&nbsp;</td>
+				<td class="t_sub" width="300px">名称</td>
+			</tr>
+			<!-- $key_list AS $key=>$value -->
+			<tr>
+				<td class="td"><input type="checkbox" name="out_idlist[]" value="{:$value[identifier]}" id="out_idlist_ext_{:$value[id]}" /></td>
+				<td><label for="out_idlist_ext_{:$value[id]}">{:$value[title]} [{:$value[identifier]}]</label></td>
+			</tr>
+			<!-- end -->
+			</table>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<!-- end -->
+
+</div>

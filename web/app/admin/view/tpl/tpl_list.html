@@ -1,0 +1,75 @@
+<!-- inc:header -->
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">
+		&nbsp;&raquo; <a href="{:site_url('tpl')}">风格管理</a>
+		&nbsp;&raquo; <a href="{:site_url('tpl,list')}id={:$id}">风格文件列表</a> <span class="red">{:$rs[title]}</span>
+		<!-- $leader AS $key=>$value -->
+		&nbsp;&raquo; <a href="{:$value[url]}">{:$value[subject]}</a>
+		<!-- end -->
+		</span></td>
+		<td align="right"><a href="{:site_url('tpl,tpl_set')}id={:$id}&parent={:rawurlencode($parent)}" class="button">新建模板文件</a></td>
+	</tr>
+	</table>
+</div></div>
+
+<div class="main">
+<table width="100%" style="layout:fixed;" cellpadding="0" cellspacing="0">
+<tr>
+	<td class="t_sub" width="50px">类型</td>
+	<td class="t_sub">名称</td>
+	<td class="t_sub" width="80px">大小</td>
+	<td class="t_sub" width="45px">操作</td>
+</tr>
+<!-- $dirlist AS $key=>$value -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)">
+	<td align='center' class="tc_left"><img src="images/filetype/dir.gif" border="0" /></td>
+	<td align='left' class="tc_right">&nbsp;{:$value[filename]}</td>
+	<td align='center' class="tc_right">&nbsp;-&nbsp;</td>
+	<td class="tc_right">
+		<a href="{:$value[url]}" class="btn folder" title="编辑"></a>
+		<a href="javascript:del('{:$value[filename]}');void(0);" class="btn del" title="删除"></a>
+	</td>
+</tr>
+<!-- end -->
+<!-- $rslist AS $key=>$value -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)">
+	<td align='center' class="tc_left"><img src="images/filetype/{:$value[filetype]}.gif" border="0" /></td>
+	<td align='left' class="tc_right">&nbsp;{:$value[filename]}</td>
+	<td align='center' class="tc_right">&nbsp;{:$value[filesize]}&nbsp;</td>
+	<td class="tc_right">
+		<a href="{:$value[url]}" class="btn edit" title="编辑"></a>
+		<a href="javascript:del('{:$value[filename]}');void(0);" class="btn del" title="删除"></a>
+	</td>
+</tr>
+<!-- end -->
+</table>
+</div>
+<script type="text/javascript">
+function del(id)
+{
+	if(!id)
+	{
+		alert("操作非法");
+		return false;
+	}
+	var q = confirm("确定要删除此信息吗？删除后是不能恢复的\n\n如果删除的是文件夹，将同时删除文件夹下的内容，请慎用");
+	if(q != 0)
+	{
+		var url = base_url + base_func + "=ajax_file_del&id={:$id}&parent={:rawurlencode($parent)}&tplfile="+EncodeUtf8(id);
+		var msg = get_ajax(url);
+		if(!msg) msg = "error: 操作非法";
+		if(msg == "ok")
+		{
+			direct(window.location.href);
+		}
+		else
+		{
+			alert(msg);
+			return false;
+		}
+	}
+}
+</script>
+<!-- inc:footer -->

@@ -1,0 +1,42 @@
+<!-- inc:head -->
+<div class="body">
+	<div class="left">
+		<!-- inc:inc/catelist -->
+		<!-- inc:inc/usercp -->
+		<!-- inc:inc/left -->
+	</div>
+	<div class="right">
+		<div class="vmenu"><h3>{:$cate_rs[cate_name]}</h3></div>
+		<div class="box pd5">
+			<h1>{:$rs[title]}</h1>
+			<div class="date">发布时间：{:date("Y-m-d",$rs[post_date])} &nbsp; 点击率：{:$rs[hits]}</div>
+			<!-- if($rs[note]) --><div class="note">{:$rs[note]}</div><!-- end -->
+			<!-- if($rs[bigpic]) -->
+			<ul class="piclist">
+				<!-- $rs[bigpic] AS $key=>$value -->
+				<li><div align="center"><img src="{:$value[gd][big]}" alt="{:$rs[title]}" /></div></li>
+				<!-- end -->
+			</ul>
+			<!-- end -->
+			<!-- if($rs[content]) --><div class="content">{:$rs[content]}</div><!-- end -->
+		</div>
+		<!-- run:$np_list = phpok_next_prev($rs[id],$rs[cate_id]) -->
+		<!-- if($np_list) -->
+		<table width="100%">
+		<!-- $np_list[next] AS $key=>$value -->
+		<tr>
+			<td>下一主题：<a href="{:msg_url($value)}" title="{:$value[title]}">{:$value[title]}</a></td>
+		</tr>
+		<!-- end -->
+		<!-- $np_list[prev] AS $key=>$value -->
+		<tr>
+			<td>上一主题：<a href="{:msg_url($value)}" title="{:$value[title]}">{:$value[title]}</a></td>
+		</tr>
+		<!-- end -->
+		</table>
+		<!-- end -->
+		<!-- run:unset($np_list) -->
+	</div>
+	<div class="clear"></div>
+</div>
+<!-- inc:foot -->

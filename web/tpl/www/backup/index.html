@@ -1,0 +1,62 @@
+<!-- inc:head -->
+<script type="text/javascript" src="js/msclass.js"></script>
+<div class="body">
+	<div class="left">
+		<!-- inc:inc/notice -->
+		<!-- inc:inc/usercp -->
+		<!-- inc:inc/left -->
+	</div>
+	<div class="right">
+		<div class="me">
+			<!-- run:$aboutus = phpok_msg("aboutus") -->
+			<div class="aboutus">
+				<h3>{:$aboutus[title]}</h3>
+				<p>{:nl2br($aboutus[note])}</p>
+			</div>
+			<div class="banner">{:phpok_plugin('picplay')}</div>
+		</div>
+		<!-- run:$hotpic = phpok("hotpic") -->
+		<!-- if($hotpic[rslist]) -->
+		<div class="vmenu"><h3>{:$hotpic[me][cate_name]}</h3></div>
+		<div class="box">
+			<ul class="picture">
+			<!-- $hotpic[rslist] AS $key=>$value -->
+			<li>
+				<div><a href="{:msg_url($value)}" title="{:$value[title]}"><img src="{:$value[picture]}" border="0" alt="{:$value[title]}" /></a></div>
+				<div><a href="{:msg_url($value)}" title="{:$value[title]}">{:sys_cutstring($value[title],17)}</a></div>
+			</li>
+			<!-- end -->
+			</ul>
+			<div class="clear line"></div>
+		</div>
+		<!-- end -->
+		<!-- run:unset($hotpic) -->
+		<!-- run:$products = phpok("product") -->
+		<!-- if($products[rslist]) -->
+		<div class="vmenu"><h3>{:$products[me][cate_name]}</h3></div>
+		<div class="box">
+			<ul class="indexpro">
+			<!-- $products[rslist] AS $key=>$value -->
+			<li>
+				<table width="100%">
+				<tr>
+					<td class="img"><a href="{:msg_url($value)}" title="{:$value[title]}"><img src="{:$value[picture]}" border="0" alt="{:$value[title]}" /></a></td>
+					<td valign="top">
+						<div class="line1">名称：<a href="{:msg_url($value)}" title="{:$value[title]}" style="{:$value[style]}">{:sys_cutstring($value[title],17)}</a></div>
+						<div class="line2">编号：<strong>{:$value[pronum]}</strong></div>
+						<div class="line2">规格：{:$value[prostd]}</div>
+						<!-- if($value[price]>0) --><div class="line2">售价：<span class="red">{:sys_format_price($value[price],$value[price_currency])}</span></div><!-- end -->
+					</td>
+				</tr>
+				</table>
+			</li>
+			<!-- end -->
+			</ul>
+			<div class="clear line"></div>
+		</div>
+		<!-- end -->
+		<!-- run:unset($products) -->
+	</div>
+	<div class="clear"></div>
+</div>
+<!-- inc:foot -->

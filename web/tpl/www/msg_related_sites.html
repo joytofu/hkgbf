@@ -1,0 +1,35 @@
+<!-- inc:head -->
+
+<!-- inc:banner-->
+
+
+<div class="main">
+   <div class="left">
+      <div class="left1">
+         <div class="lefttop">{:$m_rs[title]}</div>
+         <div class="leftmain">
+       <!-- inc:inc/catelist-->
+         </div>
+      </div>
+   </div>
+
+    <!--run:$sites = phpok_c_list("related_sites","1","","post_desc")-->
+    
+   <div class="right">
+      <div class="righttop"><div class="ll">{:$sites[rs][title]}</div><div class="rr">您当前的位置是：<a href="{:$_sys[siteurl]}">网站首页</a> > {:$m_rs[title]} > {:$sites[rs][title]}</div></div>
+      
+      <div class="rightmain">
+
+          {:$sites[rs][content]}
+ 
+      </div>
+      
+   </div>
+
+    <!--run:unset($sites)-->
+   
+   
+</div>
+
+
+<!-- inc:foot -->

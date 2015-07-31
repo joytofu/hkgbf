@@ -1,0 +1,39 @@
+<!-- inc:head -->
+
+<!-- inc:banner-->
+
+
+<div class="main">
+   <div class="left">
+      <div class="left1">
+         <div class="lefttop">{:$m_rs[title]}</div>
+         <div class="leftmain">
+       <!-- inc:inc/catelist-->
+         </div>
+      </div>
+      <!-- inc:inc/left-->
+      
+   </div>
+   
+   <div class="right">
+      <div class="righttop"><div class="ll">{:$m_rs[title]}</div><div class="rr">您当前的位置是：<a href="{:$_sys[siteurl]}">网站首页</a> > {:$m_rs[title]} > {:$cate_rs[cate_name]}</div></div>
+      
+      <div class="rightmain">
+     
+      <p align="center" style="font-size:16px; font-weight:bold; color:#333; margin-bottom:0px;">{:$rs[title]}</p>
+ <p align="center">发表日期：{:date("Y-m-d h:i:s",$rs[post_date])}&nbsp;&nbsp;&nbsp; 阅读次数：{:$rs[hits]}&nbsp;&nbsp;&nbsp;来源：香港巨牛金融集团</p>
+<div id="dzxxx"> {:$rs[content]}</div>
+
+     
+     
+      
+      </div>
+      
+   </div>
+   
+   
+   
+</div>
+
+
+<!-- inc:foot -->

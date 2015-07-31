@@ -1,0 +1,11 @@
+<!-- if($cid) -->
+<!-- run:$_list = phpok("list","cid=".$cid) -->
+<!-- if($_list[rslist]) -->
+
+		<!-- $_list[rslist] AS $key=>$value -->
+		<li><a <!--if($value[lianjie])-->href="{:$value[lianjie]}"<!--else-->href="{:msg_url($value)}" <!--end--> title="{:$value[title]}" id="{:$value[id] == $id ? 'hov' : 'parent'}">{:$value[title]}</a></li>
+		<!-- end -->
+
+<!-- end -->
+<!-- run:unset($_list) -->
+<!-- end -->

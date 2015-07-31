@@ -1,0 +1,6 @@
+<select name="excelfile" id="excelfile">
+	<option value="">请选择要导入的文件</option>
+	<!-- $rslist AS $key=>$value -->
+	<option value="{:$value[id]}"{if($key<1)} selected{end}>{:$value[title] ? $value[title] : basename($value[filename])}【{:date("Y-m-d H:i:s",$value[postdate])}】</option>
+	<!-- end -->
+</select>

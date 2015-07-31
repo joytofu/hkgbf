@@ -1,0 +1,44 @@
+<!-- inc:header -->
+
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; <a href="{:site_url('list')}module_id={:$module_id}&">{:$m_rs[title]}</a> &raquo; 请选择分类</span></td>
+	</tr>
+	</table>
+</div></div>
+
+
+
+<div id="_msg_main">
+
+	<div class="table">
+		<div class="left"><span class="red">*</span> 请选择分类：</div>
+		{:$cate_html}
+	</div>
+
+</div>
+
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<input type="button" class="btn3" id="_phpok_submit" name="article_submit" value="提交" onclick="to_next()">
+</div>
+
+</form>
+
+<script type="text/javascript">
+function to_next()
+{
+	var url = "{:site_url('list,set')}module_id={:$module_id}&cateid=";
+	var cate_id = $("#cate_id").attr("value");
+	if(!cate_id || parseInt(cate_id)<1)
+	{
+		alert("请选择分类！");
+		return false;
+	}
+	url+= cate_id;
+	direct(url);
+}
+to_next();
+</script>
+<!-- inc:footer -->

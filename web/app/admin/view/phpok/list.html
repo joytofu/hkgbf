@@ -1,0 +1,121 @@
+<!-- inc:header -->
+<script type="text/javascript" src="js/smart-menu.js"></script>
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="130px"><span class="lead">&nbsp;&raquo; 数据调用中心</span></td>
+		<form method="post" action="{:site_url('phpok')}">
+		<td align="left">
+			搜索：<input type="text" name="keywords" id="keywords" value="{:$keywords}">
+			<input type="submit" class="btn2" value="查询">
+		</td>
+		</form>
+		<td align="right"><a href="{:site_url('phpok,set')}module_id={:$m_rs[id]}&" class="button">创建新的数据调用</a></td>
+	</tr>
+	</table>
+</div></div>
+
+<div class="main">
+<table width="100%" style="layout:fixed;" cellpadding="0" cellspacing="0">
+<tr>
+	<td class="t_sub" width="50px">ID</td>
+	<td class="t_sub" width="35px">状态</td>
+	<td class="t_sub">主题</td>
+	<td class="t_sub" width="150px">标识符</td>
+	<td class="t_sub" width="45px">操作</td>
+</tr>
+<!-- $rslist AS $key=>$value -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)" id="list_module_{:$value[id]}">
+	<td align='center' class="tc_left">{:$value[id]}</td>
+	<td align="center" class="tc_right" id="status_{:$value['id']}"><a href="javascript:status({:$value[id]},{:intval($value['status'])});void(0);" class="status{:intval($value['status'])}"></a></td>
+	<td align='left' class="tc_right">&nbsp;{:$value[title]}<!-- if($value[note]) --><span class="clue_on"> {:$value[note]}</span><!-- end --></td>
+	<td align='center' class="tc_right">{:$value[identifier]}</td>
+	<td align="center" class="tc_right">
+		<a href="{:site_url('phpok,set')}module_id={:$m_rs[id]}&id={:$value[id]}" class="btn edit" title="编辑"></a>
+		<a href="javascript:del({:$value['id']});void(0);" class="btn del" title="删除"></a>
+	</td>
+</tr>
+<script type="text/javascript">
+var right_menu = [[
+	{
+		text:"设为快捷键",
+		func:function(){
+			parent.$.phpok.shortcut_ajax($.str.encode('{:$value[title]}'),$.str.encode("{admin}?{c}=phpok&{f}=set&id={:$value[id]}"));
+		}
+	},{
+		text:"编辑(E)",
+		func:function(){
+			direct("{:site_url('phpok,set')}module_id={:$m_rs[id]}&id={:$value[id]}");
+		}
+	},{
+		text:"删除(D)",
+		func:function(){
+			del("{:$value['id']}");
+		}
+	}
+]];
+$("#list_module_{:$value[id]}").smartMenu(right_menu, {name: "list_module_{:$value[id]}"});
+right_menu = null;
+</script>
+<!-- end -->
+</table>
+</div>
+<!-- if($pagelist) --><div class="table">{:$pagelist}</div><!-- end -->
+<script type="text/javascript">
+function view(id)
+{
+	var url = "{:site_url('phpok,view')}id="+id;
+	Layer.init(url,550,400);
+}
+
+function del(id)
+{
+	if(!id)
+	{
+		alert("操作非法");
+		return false;
+	}
+	var q = confirm("确定要删除此信息吗？删除后是不能恢复的");
+	if(q != 0)
+	{
+		var url = base_url + base_func + "=ajax_del&id="+id;
+		var msg = get_ajax(url);
+		if(!msg) msg = "error: 操作非法";
+		if(msg == "ok")
+		{
+			direct(window.location.href);
+		}
+		else
+		{
+			alert(msg);
+			return false;
+		}
+	}
+}
+
+//更改权限状态
+function status(id,t)
+{
+	if(!id)
+	{
+		alert("操作非法");
+		return false;
+	}
+	var url = base_url + base_func + "=ajax_status&id="+id;
+	var msg = get_ajax(url);
+	if(msg == "ok")
+	{
+		var n_t = t == 1 ? 0 : 1;
+		$("#status_"+id+" > a").attr("class","status"+n_t);
+		$("#status_"+id+" > a").attr("href","javascript:status("+id+","+n_t+");void(0)");
+		return true;
+	}
+	else
+	{
+		if(!msg) msg = "error: 操作非法";
+		alert(msg);
+		return false;
+	}
+}
+</script>
+<!-- inc:footer -->

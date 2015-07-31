@@ -1,0 +1,84 @@
+<!-- inc:header -->
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; <a href="{:site_url('datalink')}">数据连动管理</a> &raquo; 添加/编辑信息</span></td>
+	</tr>
+	</table>
+</div></div>
+
+<form method="post" action="{:site_url('datalink,setok')}id={:$id}" onsubmit="return set_chk();">
+<div class="table">
+	<div class="left">组ID：</div>
+	<select name="gid" id="gid" {if($id)}disabled{else}onchange="load_change(this.value)"{end}>
+		<option value="">请选择组</option>
+		<!-- $grouplist AS $key=>$value -->
+		<option value="{:$value[id]}"{if($value[id] == $rs[gid])} selected{end}>{:$value[title]}</option>
+		<!-- end-->
+	</select>
+</div>
+
+<div class="table">
+	<div class="left">父级ID：</div>
+	<span id="parent_id"><select name="pid" id="pid"{if($id)} disabled{end}>
+		<option value="0">设为父级</option>
+		<!-- $plist AS $key=>$value -->
+		<option value="{:$value[id]}"{if($value[id] == $rs[pid])} selected{end}>{:$value[title]}</option>
+		<!-- end-->
+	</select>
+	</span>
+</div>
+
+
+<div class="table">
+	<div class="left"><span class="red">*</span> 值：</div>
+	<input type="text" name="val" id="val" value="{:$rs[val]}">
+</div>
+<div class="table">
+	<div class="left"><span class="red">*</span> 名称：</div>
+	<input type="text" name="title" id="title" value="{:$rs[title]}">
+</div>
+<div class="table">
+	<div class="left">排序：</div>
+	<input type="text" name="taxis" id="taxis" value="{:$rs[taxis] ? intval($rs[taxis]) : '255'}">
+</div>
+
+
+<div class="table">
+	<div class="left"></div>
+	<input type="submit" class="btn2" id="phpok_submit" value="提交">
+</div>
+</form>
+
+
+<script type="text/javascript">
+function load_change(val)
+{
+	var url = "{:site_url('datalink,ajax_parent')}gid="+val;
+	var msg = get_ajax(url);
+	getid("parent_id").innerHTML = msg;
+	return true;
+}
+function set_chk()
+{
+	//获取标题
+	var title = getid("title").value;
+	var val = getid("val").value;
+	if(!title || !val)
+	{
+		alert("名称和值不允许为空");
+		return false;
+	}
+	//判断是否是管理组
+	{if(!$id)}
+	var gid = getid("gid").value;
+	if(!gid || gid == "0")
+	{
+		alert("请选择一个组");
+		return false;
+	}
+	{end}
+	getid("phpok_submit").disabled = true;
+}
+</script>
+<!-- inc:footer -->

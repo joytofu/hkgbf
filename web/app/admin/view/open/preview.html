@@ -1,0 +1,49 @@
+<!-- inc:header -->
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; 预览 &nbsp; 上传时间：{:date("Y-m-d H:i:s",$rs[postdate])}，ID：{:$rs[id]}，文件名：{:basename($rs[filename])}</span></td>
+		<td align="right"><img src='images/del.gif' border='0' onclick='parent.Layer.over();' title='点此关闭'>&nbsp;</td>
+	</tr>
+	</table>
+</div></div>
+<!-- if($ftype == "video") -->
+<!-- run:$pre_image = $rs[flv_pic] ? $rs[flv_pic] : $_sys[video_image] -->
+<div id="video_player" style="text-align:center;"></div>
+<script type="text/javascript">
+$(document).ready(function(){
+	loadjs("js/jquery.media.js",function(){
+	
+		$.media.init({
+			"url": "{:$rs[filename]}",
+			"width": "{:$_sys[video_width]}",
+			"height": "{:$_sys[video_height]}",
+			"image": "{:$pre_image}",
+			"id": "video_player"	
+		});
+	});
+
+
+});
+</script>
+<!-- elseif($ftype == "img") -->
+<div style="padding:1px 5px;"><img src="{:$rs[filename]}" /></div>
+	<!-- $rslist AS $key=>$value -->
+	<div style="padding:1px 5px;"><img src="{:$value[filename]}" /></div>
+	<!-- end -->
+<script type="text/javascript">
+$(document).ready(function() {
+	var maxwidth=520;
+	$("img").each(function(){
+		if (this.width>maxwidth) this.width = maxwidth;
+	});
+});
+</script>
+<!-- else -->
+<div style="padding:5px;">附件名：{:$rs[title]}</div>
+<div style="padding:5px;">上传时间：{:date("Y-m-d H:i:s",$rs[postdate])}</div>
+<div style="padding:1px 5px;">附件路径：<a href="{:$rs[filename]}">{:$rs[filename]}</a></div>
+<div style="padding:3px 5px;color:red;">如需下载，请右键点击右存为即可！</div>
+<!-- end -->
+
+<!-- inc:footer_open -->

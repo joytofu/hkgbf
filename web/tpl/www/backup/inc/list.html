@@ -1,0 +1,14 @@
+<!-- if($cid) -->
+<!-- run:$_list = phpok("list","cid=".$cid) -->
+<!-- if($_list[rslist]) -->
+<h3 class="title">{:$_list[me][cate_name]}</h3>
+<div class="content">
+	<ul class="catelist">
+		<!-- $_list[rslist] AS $key=>$value -->
+		<li class="{:$value[id] == $id ? 'parent_over' : 'parent'}"><a href="{:msg_url($value)}" title="{:$value[title]}">{:$value[title]}</a></li>
+		<!-- end -->
+	</ul>
+</div>
+<!-- end -->
+<!-- run:unset($_list) -->
+<!-- end -->

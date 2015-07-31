@@ -1,0 +1,35 @@
+<!-- inc:head -->
+
+<!-- inc:banner-->
+
+
+<div class="main">
+   <div class="left">
+      <div class="left1">
+         <div class="lefttop">{:$m_rs[title]}</div>
+         <div class="leftmain">
+       <!-- inc:inc/cp-->
+         </div>
+      </div>
+      <!-- inc:inc/left-->
+ 
+   </div>
+
+   <div class="right">
+      <div class="righttop"><div class="ll">国际期货</div><div class="rr">您当前的位置是：<a href="{:$_sys[siteurl]}">网站首页</a> > {:$m_rs[title]} > 国际期货</div></div>
+
+       <!--run:$global_future = phpok_msg("global_future")-->
+
+       <div class="rightmain">
+           {:$global_future[content]}
+       </div>
+       <!--run:unset($global_future)-->
+      
+   </div>
+
+   
+   
+</div>
+
+
+<!-- inc:foot -->

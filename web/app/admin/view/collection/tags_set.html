@@ -1,0 +1,183 @@
+<!-- inc:header -->
+<script type="text/javascript">
+function to_submit()
+{
+	var name = getid("title").value;
+	if(!name)
+	{
+		alert("标签名不允许为空");
+		getid("title").focus();
+		return false;
+	}
+	var identifier = getid("identifier").value;
+	if(!identifier)
+	{
+		alert("标签变量不允许为空");
+		return false;
+	}
+	var tags_type = getid("tags_type").value;
+	if(tags_type == "string")
+	{
+		var rules = getid("rules").value;
+		if(!rules)
+		{
+			alert("固定值不允许为空");
+			getid("rules").focus();
+			return false;
+		}
+	}
+	getid("_phpok_submit").disabled = true;
+	return true;
+}
+
+function collection_type(val)
+{
+	if(val == "var")
+	{
+		$("#collection_string").hide();
+		$("#collection_var").show();
+	}
+	else
+	{
+		$("#collection_string").show();
+		$("#collection_var").hide();
+	}
+}
+
+function to_test(id)
+{
+	var url = "{:site_url('collection,test')}id="+id;
+	Layer.init(url,540,325);
+	return false;
+}
+</script>
+
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; <a href="{:site_url('collection')}">采集管理</a> &raquo; <a href="{:site_url('collection,tags_list','id='.$id)}">字段列表</a> &raquo; 添加/编辑字段信息 &nbsp; &nbsp; 【<a href="javascript:to_test('{:$id}');void(0);">测试采集</a>】</span></td>
+	</tr>
+	</table>
+</div></div>
+
+<form method="post" action="{:site_url('collection,tags_setok')}id={:$id}&tid={:$tid}" onsubmit="return to_submit();">
+<div class="table">
+	<div class="left"><span class="red">*</span> 标签名：</div>
+	<input type="text" name="title" id="title" value="{:$trs[title]}">
+</div>
+
+<div class="table">
+	<div class="left"><span class="red">*</span> 标签变量：</div>
+	<input type="text" name="identifier" id="identifier" value="{:$trs[identifier]}">
+	<select name="ifsystem" id="ifsystem">
+		<option value="list">核心表</option>
+		<option value="biz"{if($trs[ifsystem] == 'biz')} selected{end}>电子商务表</option>
+		<option value="ext"{if($trs[ifsystem] == 'ext')} selected{end}>扩展字段表【最长255字符】</option>
+		<option value="c"{if($trs[ifsystem] == 'c')} selected{end}>扩展内容表【大于255字符】</option>
+	</select>
+	<span class="clue_on">请选择字段对应的表，不清楚请查看官方手册帮助</span>
+</div>
+
+<div class="table">
+	<div class="left"><span class="red">*</span> 标签类型：</div>
+	<select name="tags_type" id="tags_type" onchange="collection_type(this.value)">
+		<option value="var">采集变量</option>
+		<option value="string"{if($trs[tags_type] == 'string')} selected{end}>固定值</option>
+	</select>
+	<span class="clue_on">请在创建时就设定好！</span>
+</div>
+
+<div id="collection_string">
+	<div class="table">
+		<div class="left">固定值：</div>
+		<input type="text" name="rules" id="rules" value="{:$trs[tags_type] == 'string' ? $trs[rules] : ''}" class="long_input">
+		<span class="clue_on">当标签为固定值时，需要在这里设置内容</span>
+	</div>
+</div>
+
+<div id="collection_var">
+	<div class="table">
+		<div class="left">开始字符串：<br /><br /><span class="red">(*)</span></div>
+		<textarea name="rules_start" id="rules_start" style="width:300px;height:60px;">{:$trs[rules_start]}</textarea>
+	</div>
+
+	<div class="table">
+		<div class="left">结束字符串：<br /><br /><span class="red">(*)</span></div>
+		<textarea name="rules_end" id="rules_end" style="width:300px;height:60px;">{:$trs[rules_end]}</textarea>
+	</div>
+
+
+	<div class="table">
+		<div class="left">HTML标签过滤：</div>
+		<table>
+		<tr>
+			<td><input type="checkbox" id="del_url" name="del_url"{if($trs[del_url])} checked{end} /></td><td>链接&nbsp;</td>
+			<td><input type="checkbox" id="del_font" name="del_font"{if($trs[del_font])} checked{end} /></td><td>字体&nbsp;</td>
+			<td><input type="checkbox" id="del_table" name="del_table"{if($trs[del_table])} checked{end} /></td><td>表格&nbsp;</td>
+			<td><input type="checkbox" id="del_span" name="del_span"{if($trs[del_span])} checked{end} /></td><td>Span&nbsp;</td>
+			<td><input type="checkbox" id="del_bold" name="del_bold"{if($trs[del_bold])} checked{end} /></td><td>加粗&nbsp;</td>
+			<td><input type="checkbox" id="del_html" name="del_html"{if($trs[del_html])} checked{end} /></td><td>所有HTML代码</td>
+		</tr>
+		</table>
+	</div>
+
+	<div class="table">
+		<div class="left">内容排除：</div>
+		<textarea id="del" name="del" style="width:530px;height:120px;">{:$trs[del]}</textarea>
+	</div>
+
+	<div class="table">
+		<div class="left">&nbsp;</div>
+		<span class="clue_on">一行一条排除记录，支持多行，支持 <span class="red">(*)</span>，要使用替换，请使用<span class="red">[:phpok:]</span>分隔！</span>
+	</div>
+
+	<div class="table">
+		<div class="left">分页设置：</div>
+		<table>
+		<tr>
+			<td>开始：<span class="red">(*)</span></td>
+			<td>结束：<span class="red">(*)</span></td>
+		</tr>
+		<tr>
+			<td><textarea id="suburl_start" name="suburl_start" style="width:200px;height:50px;" >{:$trs[suburl_start]}</textarea></td>
+			<td><textarea id="suburl_end" name="suburl_end" style="width:200px;height:50px;" >{:$trs[suburl_end]}</textarea></td>
+		</tr>
+		</table>
+	</div>
+	<div class="table">
+		<div class="left">&nbsp;</div>
+		<span class="clue_on">当前采集功能仅识别链接格式的分页，需要更强大的采集功能建议使用第三方采集器</span>
+	</div>
+</div>
+
+<div class="table">
+	<div class="left">发布格式化：</div>
+	<select name="post_save" id="post_save">
+		<option value="safe">实体HTML</option>
+		<option value="html"{if($trs[post_save] == 'html')} selected{end}>HTML发布</option>
+		<option value="int"{if($trs[post_save] == 'int')} selected{end}>整数型发布</option>
+		<option value="float"{if($trs[post_save] == 'float')} selected{end}>浮点型发布，适用价格</option>
+		<option value="datetime"{if($trs[post_save] == 'datetime')} selected{end}>将文本格式化为时间戳</option>
+		<option value="img"{if($trs[post_save] == 'img')} selected{end}>只提取图片存储【注意必须启用缩略图和多图功能】</option>
+	</select>
+</div>
+
+
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<input type="submit" class="btn3" id="_phpok_submit" name="article_submit" value=" 提交 ">
+</div>
+
+</form>
+
+	<!-- if($tid && $trs) -->
+		<script type="text/javascript">
+		collection_type("{:$trs[tags_type]}");
+		</script>
+	<!-- else -->
+		<script type="text/javascript">
+		collection_type("var");
+		</script>
+	<!-- end -->
+
+<!-- inc:footer -->

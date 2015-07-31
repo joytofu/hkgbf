@@ -1,0 +1,106 @@
+<!--run:--> 
+
+$result2=mysql_query("select * from juniu_list where id='$_SESSION[userid]'");
+while ($rs2=mysql_fetch_array($result2)){
+	$xtitle=$rs2['title'];
+    $xpass=$rs2['subtitle'];
+	}
+$result1=mysql_query("select * from juniu_list_ext  where id='$_SESSION[userid]' and field='fullname'");
+while ($rs1=mysql_fetch_array($result1)){
+	$xfullname=$rs1[val];
+}
+$result1=mysql_query("select * from juniu_list_ext  where id='$_SESSION[userid]' and field='mobile'");
+while ($rs1=mysql_fetch_array($result1)){
+	$xmobile=$rs1[val];
+}
+$result1=mysql_query("select * from juniu_list_ext  where id='$_SESSION[userid]' and field='email'");
+while ($rs1=mysql_fetch_array($result1)){
+	$xemail=$rs1[val];
+}
+
+    
+  <!--/run--> 
+   
+<p style="color:#F00; padding-bottom:10px; font-size:16px;">如需修改，请填写信息，然后提交</p>
+   <form action="staff_pass.php" onsubmit="return check()" name="form2" id="form2" method="post">
+ <input type="hidden" name="cc" value="{:$_SESSION[userid]}" id="cc">
+ 
+<table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#cccccc" id="ngf">
+  <tr>
+    <td width="115">账号：</td>
+    <td width="971">{:$xtitle}</td>
+  </tr>
+  
+  <tr>
+    <td>密码：</td>
+    <td><input type="password" class="textbb1" name="pass" id="pass" value="{:$xpass}">&nbsp;<span class="redbb">*</span></td>
+  </tr>
+  <tr>
+    <td>确认密码：</td>
+    <td><input type="password" class="textbb1" name="chkpass" id="chkpass"  value="{:$xpass}">&nbsp;<span class="redbb">*</span></td>
+  </tr>
+  
+  <tr>
+    <td>姓名：</td>
+    <td><input type="text" class="textbb1" name="fullname" id="fullname" value="{:$xfullname}">&nbsp;<span class="redbb">*</span></td>
+  </tr>
+
+    <tr>
+    <td>电话：</td>
+    <td><input type="text" class="textbb1" name="mobile" id="mobile" value="{:$xmobile}">&nbsp;<span class="redbb">*</span></td>
+  </tr>
+    <tr>
+    <td>邮箱：</td>
+    <td><input type="text" class="textbb1" name="email" id="email" value="{:$xemail}">&nbsp;<span class="redbb">*</span></td>
+  </tr>
+</table>
+
+            <p align="center" style="padding-top:30px; padding-bottom:20px;"><input name="button" type="image" src="images/tjxx.jpg" /></p>
+            
+            </form>          
+           <script type="text/javascript">
+function check()
+{
+	if (document.form2.pass.value=="")
+{
+window.alert("请输入密码    ");
+document.form2.pass.focus();
+return false;
+}
+if (document.form2.pass.value!=document.form2.chkpass.value)
+{
+window.alert("两次密码输入不一致      ");
+document.form2.chkpass.focus();
+return false;
+}
+if (document.form2.fullname.value=="")
+{
+window.alert("请输入姓名    ");
+document.form2.fullname.focus();
+return false;
+}
+if (document.form2.sfz.value=="")
+{
+window.alert("请输入身份证号码    ");
+document.form2.sfz.focus();
+return false;
+}
+
+
+if (document.form2.mobile.value=="")
+{
+window.alert("请输入电话    ");
+document.form2.mobile.focus();
+return false;
+}
+if (document.form2.email.value=="")
+{
+window.alert("请输入邮箱    ");
+document.form2.email.focus();
+return false;
+}
+
+
+
+}
+</script>                 

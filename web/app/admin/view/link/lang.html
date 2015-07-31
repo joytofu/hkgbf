@@ -1,0 +1,45 @@
+<!-- inc:header -->
+<script type="text/javascript">
+var input_id = "{:$input_id}";
+function to_link(sign,htmlurl,phpfile)
+{
+	var d_url = "{index_php}?langid="+sign;
+	var w_url = "index-"+sign+".html";
+	if(input_id == "link,link_rewrite,link_html")
+	{
+		parent.$("#link").attr("value",d_url);
+		parent.$("#link_rewrite").attr("value",w_url);
+		parent.$("#link_html").attr("value",htmlurl);
+	}
+	else
+	{
+		parent.$("#"+input_id).attr("value","index.php?langid="+sign);
+	}
+	parent.Layer.over();
+}
+</script>
+<div class="main">
+<table width="100%" style="layout:fixed;" cellpadding="0" cellspacing="0">
+<tr>
+	<td width="9%" class="t_sub">ID</td>
+	<td width="5%" class="t_sub">状态</td>
+	<td class="t_sub">名称</td>
+	<td class="t_sub">排序</td>
+	<td width="10%" class="t_sub">操作</td>
+</tr>
+<!-- $langlist AS $key=>$value -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)">
+	<td align='center' class="tc_left" height="25px">{:$value[langid]}</td>
+	<td align="center" class="tc_right"><a class="status{:intval($value['status'])}"></a></td>
+	<td  align='left' class="tc_right">&nbsp;{:$value[title]}</td>
+	<td align="center" class="tc_right">{:$value[taxis]}</td>
+	<td align="center" class="tc_right">
+		<!-- if($value[html]) -->
+		<input type="button" value="提交" onclick="to_link('{:$value[langid]}','{:$value[html]}','{:$value[phpfile]}')" class="btn2" />
+		<!-- else -->-<!-- end -->
+	</td>
+</tr>
+<!-- end -->
+</table>
+</div>
+<!-- inc:footer_open -->

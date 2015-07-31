@@ -1,0 +1,12 @@
+<script type="text/javascript">
+var swfurl = "images/player.swf";
+var xmlurl = encode_utf8("{:site_url('plugin','',true,'&')}plugin=xml&xml=play&phpok=picplayer");
+alert("XMLURL:"+xmlurl);
+var pic_width=330; //图片宽度
+var pic_height=190; //图片高度
+document.write('<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cabversion=6,0,0,0" width="'+ pic_width +'" height="'+ pic_height +'">');
+document.write('<param name="movie" value="'+swfurl+'?xml='+xmlurl+'">');
+document.write('<param name="quality" value="high"><param name="wmode" value="opaque">');
+document.write('<embed src="'+swfurl+'?xml='+xmlurl+'" wmode="opaque" quality="high" width="'+ pic_width +'" height="'+ pic_height +'" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />');
+document.write('</object>');
+</script>

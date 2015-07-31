@@ -1,0 +1,12 @@
+body{ background:#ededed; margin:0; padding:0; font-size:14px; font-family:"Microsoft Yahei","宋体","Tahoma","Arial"; color:#4d4d4d;}
+.top{ height:232px; background:url(top.jpg) center no-repeat; margin:0 auto;}
+.main{ height:240px; background:url(main_bg.jpg) repeat-x;}
+.box{ height:225px; background:url(main.jpg) center no-repeat; margin:0 auto; padding:15px 0 0 0;}
+.bottom{ background:url(bottom.jpg) center no-repeat; height:56px;}
+.user{ width:145px; height:27px; line-height:27px; border:1px solid #7ea3b8; padding:0 0 0 35px; font-size:14px;}
+.user_bg1{ background:url(user01.jpg) left no-repeat #fff;}
+.user_bg2{ background:url(user02.jpg) left no-repeat #fff;}
+.user_bg3{ width:64px; padding:0 0 0 2px;}
+.but{ width:136px; height:40px; background:url(but.png) no-repeat; border:none;}
+.lang{height:21px;border:1px solid #7ea3b8;}
+form{margin:0;padding:0}

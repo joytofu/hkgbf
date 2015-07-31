@@ -1,0 +1,67 @@
+<!-- inc:head -->
+<!--if($_SESSION["username"]==false)-->
+  <script language=javascript>
+window.alert('您还没有登录，请先登录!');
+window.location.href='index.php?c=list&cs=hezuohuoban&login';
+</script>
+<!--end-->
+<!-- inc:banner-->
+<!--if($p==false)-->
+  <script language=javascript>
+window.location.href='index.php?c=list&ms=hehbuser&p=1';
+</script>
+
+<!--end-->
+<div class="main">
+   <div class="left">
+      <div class="left1">
+         <div class="lefttop">{:$m_rs[title]}</div>
+         <div class="leftmain">
+       <!-- inc:inc/userlist-->
+         </div>
+      </div>
+<!-- inc:inc/left-->
+   </div>
+   <!--run:-->
+   if($p==2){
+   $pp="其他预约";
+   }
+   elseif($p==1){
+   $pp="保险签单预约";
+   }
+   else
+   {
+
+$result2=mysql_query("select * from juniu_cate where id='$p'");
+while ($rs2=mysql_fetch_array($result2)){
+	$pp=$rs2['cate_name'];
+	}
+
+   }
+   <!--/run-->
+   <div class="right">
+      <div class="righttop"><div class="ll">{:$pp}</div><div class="rr">您当前的位置是：<a href="{:$_sys[siteurl]}">网站首页</a> > {:$m_rs[title]} > {:$pp}</div></div>
+      
+      <div class="rightmain">
+ 
+<!--if($p==1)-->
+  <!-- inc:bxdyy-->
+<!--elseif($p==2)-->
+<!-- inc:qtyy-->
+<!--else-->
+ <!--if($g==1)-->
+    <!-- inc:xzzq-->
+ <!--else-->
+    <!-- inc:khzl-->
+  <!--end-->
+<!--end-->
+      </div>
+      
+   </div>
+   
+   
+   
+</div>
+
+
+<!-- inc:foot -->

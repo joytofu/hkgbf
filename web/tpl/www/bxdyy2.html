@@ -1,0 +1,232 @@
+<script type="text/javascript">
+<!--
+ function openwin(url,wwidth,wheight) 
+ {
+  var x=(screen.Width-wwidth)/2;
+  var y=(screen.Height-wheight)/2;
+  window.open(url, 'upload_photo', 'toolbars=0, scrollbars=0, location=0, statusbars=0, menubars=0, resizable=0, width='+wwidth+', height='+wheight+', left='+x+', top='+y);
+ }
+//-->
+</script>
+ <form action="dealbx4.php" onsubmit="return check()" name="form1" id="form1" method="post">
+
+<input type="hidden" name="cc" value="11" id="cc">
+<table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#cccccc" id="ngf">
+  <tr>
+    <td>到港日期：</td>
+    <td><input type="text" class="textbb1" name="dgrq" id="dgrq">&nbsp;<span class="redbb">*</span></td>
+    <td>离港日期：</td>
+    <td><input type="text" class="textbb1" name="lgrq" id="lgrq">&nbsp;<span class="redbb">*</span></td>
+  </tr>
+  <tr>
+    <td>行程联络人：</td>
+    <td><input type="text" class="textbb1" name="fullname" id="fullname">&nbsp;<span class="redbb">*</span></td>
+    <td>联络电话：</td>
+    <td><input type="text" class="textbb1" name="mobile" id="mobile">&nbsp;<span class="redbb">*</span></td>
+  </tr>
+  
+  <tr>
+    <td>预计过关时间：</td>
+    <td><input type="text" class="textbb1" name="ggsj" id="ggsj">&nbsp;<span class="redbb">*</span></td>
+    <td>预计抵达保险公司的时间：</td>
+    <td><input type="text" class="textbb1" name="ddsj" id="ddsj">&nbsp;<span class="redbb">*</span></td>
+  </tr>
+  
+  <tr>
+    <td>签单保险公司及分部：</td>
+    <td><input type="text" class="textbb1" name="bxgs" id="bxgs">&nbsp;<span class="redbb">*</span></td>
+    <td>总人数（包括客户和陪同者）：</td>
+    <td><input type="text" class="textbb1" name="zrs" id="zrs">&nbsp;<span class="redbb">*</span></td>
+  </tr>
+  
+
+  <tr>
+    <td>访港交通工具：</td>
+    <td colspan="3">
+    <input name="jtgj" id="jtgj" type="radio" value="火车" />&nbsp;火车&nbsp;&nbsp;
+    <input name="jtgj" id="jtgj" type="radio" value="跨境客车" />&nbsp;跨境客车&nbsp;&nbsp;
+    <input name="jtgj" id="jtgj" type="radio" value="大巴" />&nbsp;大巴&nbsp;&nbsp;
+    <input name="jtgj" id="jtgj" type="radio" value="飞机" />&nbsp;飞机&nbsp;航班编号
+    <input type="text" class="textbb3" name="jtgj2" id="jtgj2">&nbsp;
+    <input name="jtgj" id="jtgj" type="radio" value="其他" />&nbsp;其他&nbsp;<input type="text" class="textbb3" name="jtgj3" id="jtgj3">&nbsp;
+    <span class="redbb">*</span></td>
+  </tr>
+  <tr>
+    <td>访港关口：</td>
+    <td colspan="3">
+    <input name="fggk" type="radio" value="罗湖" />&nbsp;罗湖&nbsp;&nbsp;
+    <input name="fggk" type="radio" value="落马洲" />&nbsp;落马洲&nbsp;&nbsp;
+    <input name="fggk" type="radio" value="皇岗" />&nbsp;皇岗&nbsp;&nbsp;
+    <input name="fggk" type="radio" value="文锦渡" />&nbsp;文锦渡&nbsp;&nbsp;
+    <input name="fggk" type="radio" value="其他" />&nbsp;其他&nbsp;<input type="text" class="textbb3" name="fggk2" id="fggk2">&nbsp;
+    <span class="redbb">*</span></td>
+  </tr>
+  <tr>
+    <td>开户银行：</td>
+    <td><input type="text" class="textbb1" name="khyh" id="khyh">&nbsp;<span class="redbb">*</span></td>
+    <td>银行名称：</td>
+    <td><input type="text" class="textbb1" name="yhmc" id="yhmc">&nbsp;<span class="redbb">*</span></td>
+  </tr>
+  
+  <tr>
+    <td>其他特别安排：</td>
+    <td colspan="3">
+   <input type="text" class="textbb4" name="qtap" id="qtap">&nbsp;
+</td>
+  </tr>
+   <tr>
+    <td>附件：</td>
+    <td colspan="3">
+   <input type="text" class="textbb4" name="values" id="values">&nbsp;<a  onclick="openwin('select_pic.php',800,500)" style="cursor:pointer">选择</a>&nbsp;<span style="color:#F00">文件大小不能超过5MB</span>
+</td>
+  </tr>
+  <tr>
+    <td>备注信息：</td>
+    <td colspan="3">
+   <textarea class="textbb5" name="content" id="content"></textarea>
+</td>
+  </tr>
+   
+</table>
+
+            
+            <p align="center" style="padding-top:30px; padding-bottom:20px;"><input name="button" type="image" src="images/tjxx.jpg" /></p>
+            
+            </form>          
+         <script type="text/javascript">
+function check()
+{
+	if (document.form1.dgrq.value=="")
+{
+window.alert("请输入到港日期       ");
+document.form1.dgrq.focus();
+return false;
+}
+if (document.form1.lgrq.value=="")
+{
+window.alert("请输入离港日期       ");
+document.form1.lgrq.focus();
+return false;
+}
+
+	
+if (document.form1.fullname.value=="")
+{
+window.alert("请输入行程联络人!       ");
+document.form1.fullname.focus();
+return false;
+}
+
+if (document.form1.mobile.value=="")
+{
+window.alert("请输入联络电话       ");
+document.form1.mobile.focus();
+return false;
+}
+
+if (document.form1.ggsj.value=="")
+{
+window.alert("请输入预计过关时间     ");
+document.form1.ggsj.focus();
+return false;
+}
+
+if (document.form1.ddsj.value=="")
+{
+window.alert("请输入预计抵达保险公司的时间      ");
+document.form1.ddsj.focus();
+return false;
+}
+if (document.form1.bxgs.value=="")
+{
+window.alert("请输入签单保险公司及分部       ");
+document.form1.bxgs.focus();
+return false;
+}
+
+if (document.form1.zrs.value=="")
+{
+window.alert("请输入总人数（包括客户和陪同者）       ");
+document.form1.zrs.focus();
+return false;
+}
+
+var radios = document.getElementsByName("jtgj");
+ var planid;
+ var result = false;
+ for ( var i = 0; i < radios.length; i++) {
+  if (radios[i].checked) {
+   planid = radios[i].value;
+   result = true;
+   break;
+  }
+ }
+ // alert(planid);
+ if (!result) {
+  alert("请选择访港交通工具！")
+  return false;
+ } 
+ 
+ if(planid=="飞机"){
+	 
+	 if (document.form1.jtgj2.value=="")
+{
+window.alert("请输入飞机的航班编号 ");
+document.form1.jtgj2.focus();
+return false;
+}
+	 }
+	 
+	  if(planid=="其他"){
+	 
+	 if (document.form1.jtgj3.value=="")
+{
+window.alert("请输入交通工具名称 ");
+document.form1.jtgj3.focus();
+return false;
+}
+	 }
+      
+var radios = document.getElementsByName("fggk");
+ var planid0;
+ var result = false;
+ for ( var i = 0; i < radios.length; i++) {
+  if (radios[i].checked) {
+   planid0 = radios[i].value;
+   result = true;
+   break;
+  }
+ }
+ // alert(planid0);
+ if (!result) {
+  alert("请选择访港关口！")
+  return false;
+ } 
+ 
+	 
+	  if(planid0=="其他"){
+	 
+	 if (document.form1.fggk2.value=="")
+{
+window.alert("请输入访港关口名称 ");
+document.form1.fggk2.focus();
+return false;
+}
+	 }
+
+if (document.form1.khyh.value=="")
+{
+window.alert("请输入开户银行 ");
+document.form1.khyh.focus();
+return false;
+}
+if (document.form1.yhmc.value=="")
+{
+window.alert("请输入开户银行 ");
+document.form1.yhmc.focus();
+return false;
+}
+
+
+}
+</script>                 

@@ -1,0 +1,10 @@
+<!--run:-->
+header("content-Type: text/html; charset=Utf-8"); 
+session_start();   
+// 这种方法是将原来注册的某个变量销毁 
+unset($_SESSION['username']);   
+<!--/run-->
+<script language=javascript>
+window.alert('注销成功!');
+window.location.href='index.php';
+</script>

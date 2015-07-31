@@ -1,0 +1,60 @@
+Apache虚拟主机用户，使用.htaccess文件
+---------------------------------------------------------------------------------------------------------
+RewriteEngine  on
+RewriteBase /
+
+RewriteRule ^index\.html$					index.php [L]
+RewriteRule ^index-([a-z0-9])\.html$				index.php?langid=$1 [L]
+RewriteRule ^cid-([0-9]+)\.html$				index.php?c=list&cid=$1 [L]
+RewriteRule ^cid-([0-9]+)-([0-9]+)\.html$			index.php?c=list&cid=$1&pageid=$2 [L]
+RewriteRule ^cs-([a-z0-9A-Z\_]+)\.html$				index.php?c=list&cs=$1 [L]
+RewriteRule ^cs-([a-z0-9A-Z\_]+)-([0-9]+)\.html$		index.php?c=list&cs=$1&pageid=$2 [L]
+RewriteRule ^mid-([0-9]+)\.html$				index.php?c=list&mid=$1 [L]
+RewriteRule ^mid-([0-9]+)-([0-9]+)\.html$			index.php?c=list&mid=$1&pageid=$2 [L]
+RewriteRule ^ms-([a-z0-9A-Z\_]+)\.html$				index.php?c=list&ms=$1 [L]
+RewriteRule ^ms-([a-z0-9A-Z\_]+)-([0-9]+)\.html$		index.php?c=list&ms=$1&pageid=$2 [L]
+RewriteRule ^c([0-9]+)\.html$					index.php?c=msg&id=$1 [L]
+RewriteRule ^([a-z0-9A-Z\_\-]+)\.html$				index.php?c=msg&ts=$1 [L]
+---------------------------------------------------------------------------------------------------------
+
+
+Lighttpd的伪静态页规则：
+---------------------------------------------------------------------------------------------------------
+url.rewrite-final = (
+	"^/libs/([a-z0-9A-Z\_\-\/]+)\.html" =>"/libs/$1.html",
+	"^/index\.html$" => "/index.php",
+	"^/index-([a-z0-9])\.html$" => "/index.php?langid=$1",
+	"^/cid-([0-9]+)\.html$" => "/index.php?c=list&cid=$1",
+	"^/cid-([0-9]+)-([0-9]+)\.html$" => "/index.php?c=list&cid=$1&pageid=$2",
+	"^/cs-([a-z0-9A-Z\_]+)\.html$" => "/index.php?c=list&cs=$1",
+	"^/cs-([a-z0-9A-Z\_]+)-([0-9]+)\.html$" => "/index.php?c=list&cs=$1&pageid=$2",
+	"^/mid-([0-9]+)\.html$" => "/index.php?c=list&mid=$1",
+	"^/mid-([0-9]+)-([0-9]+)\.html$" => "/index.php?c=list&mid=$1&pageid=$2",
+	"^/ms-([a-z0-9A-Z\_]+)\.html$" => "/index.php?c=list&ms=$1",
+	"^/ms-([a-z0-9A-Z\_]+)-([0-9]+)\.html$" => "/index.php?c=list&ms=$1&pageid=$2",
+	"^/c([0-9]+)\.html$" => "/index.php?c=msg&id=$1",
+	"^/([a-z0-9A-Z\_\-]+)\.html$" => "/index.php?c=msg&ts=$1"
+)
+---------------------------------------------------------------------------------------------------------
+
+
+IIS里的Url Rewrite模块
+---------------------------------------------------------------------------------------------------------
+CacheClockRate 3600
+RepeatLimit 32
+
+RewriteRule ^(.*)/libs/(.*)\.html				$1/libs/$2\.html [L]
+RewriteRule ^(.*)/index\.html$					$1/index\.php [L]
+RewriteRule ^(.*)/index-([a-z0-9])\.html$			$1/index\.php\?langid=$2 [L]
+RewriteRule ^(.*)/cid-([0-9]+)\.html$				$1/index\.php\?c=list&cid=$2 [L]
+RewriteRule ^(.*)/cid-([0-9]+)-([0-9]+)\.html$			$1/index\.php\?c=list&cid=$2&pageid=$3 [L]
+RewriteRule ^(.*)/cs-([a-z0-9A-Z\_]+)\.html$			$1/index\.php\?c=list&cs=$2 [L]
+RewriteRule ^(.*)/cs-([a-z0-9A-Z\_]+)-([0-9]+)\.html$		$1/index\.php\?c=list&cs=$2&pageid=$3 [L]
+RewriteRule ^(.*)/mid-([0-9]+)\.html$				$1/index\.php\?c=list&mid=$2 [L]
+RewriteRule ^(.*)/mid-([0-9]+)-([0-9]+)\.html$			$1/index\.php\?c=list&mid=$2&pageid=$3 [L]
+RewriteRule ^(.*)/ms-([a-z0-9A-Z\_]+)\.html$			$1/index\.php\?c=list&ms=$2 [L]
+RewriteRule ^(.*)/ms-([a-z0-9A-Z\_]+)-([0-9]+)\.html$		$1/index\.php\?c=list&ms=$2&pageid=$3 [L]
+RewriteRule ^(.*)/c([0-9]+)\.html$				$1/index\.php\?c=msg&id=$2 [L]
+RewriteRule ^(.*)/([a-z0-9A-Z\_\-]+)\.html$			$1/index\.php\?c=msg&ts=$2 [L]
+
+

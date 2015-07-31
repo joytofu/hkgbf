@@ -1,0 +1,82 @@
+<table width="100%">
+<tr>
+	<td width="130px">ID号：</td>
+	<td>{:$rs[id]} <!-- if($rs[identifier]) -->【标识串：<span class="darkblue">{:$rs[identifier]}</span>】<!-- end --></td>
+</tr>
+<tr>
+	<td>{:$m_rs[title_nickname] ? $m_rs[title_nickname] : '主题'}：</td>
+	<td style="{:$rs[style]}">
+		{:$rs[title]}
+		<!-- if($rs[istop]) --> <span class="red">[顶]</span><!-- end -->
+		<!-- if($rs[isvouch]) --> <span class="darkblue">[荐]</span><!-- end -->
+		<!-- if($rs[isbest]) --> <span class="darkred">[热销]</span><!-- end -->
+	</td>
+</tr>
+<!-- if($cate_rs) -->
+<tr>
+	<td>分类：</td>
+	<td class="darkred">{:$cate_rs[cate_name]}</td>
+</tr>
+<!-- end -->
+
+<!-- if($ext_catelist) -->
+<tr>
+	<td>扩展分类：</td>
+	<td>
+		<!-- $ext_catelist AS $key=>$value -->
+		<div style="line-height:22px;height:22px;">{:$value[cate_name]}</div>
+		<!-- end -->
+	</td>
+</tr>
+<!-- end -->	
+<tr>
+	<td>发布时间：</td>
+	<td>{:date('Y-m-d H:i',$rs[post_date])}</td>
+</tr>
+<!-- if($rs[modify_date]) -->
+<tr>
+	<td>最后修改时间：</td>
+	<td>{:date('Y-m-d H:i',$rs[modify_date ])}</td>
+</tr>
+<!-- end -->
+<!-- if($m_rs[if_des]) -->
+<tr>
+	<td>代理商：</td>
+	<td>{:$rs[note]}</td>
+</tr>
+<!-- end -->
+<tr>
+	<td>查看次数：</td>
+	<td>{:$rs[hits]}</td>
+</tr>
+<!-- if($rs[thumb]) -->
+<tr>
+	<td>图片：</td>
+	<td><img src="{:$rs[thumb]}" /></td>
+</tr>
+<!-- end -->
+<!-- if($m_rs[if_biz]) -->
+<tr>
+	<td>售价：</td>
+	<td><!-- if($rs[price]) -->{:sys_format_price($rs[price],$rs[price_currency])}<!-- else -->未设定<!-- end --></td>
+</tr>
+	<!-- if($rs[weight]>0) -->
+	<tr>
+		<td>重量：</td>
+		<td>{:$rs[weight]} Kg</td>
+	</tr>
+	<!-- end -->
+	<!-- if($rs[is_qty]) -->
+	<tr>
+		<td>数量：</td>
+		<td>{:$rs[qty]} {:$rs[qty_unit]}</td>
+	</tr>
+	<!-- end -->
+<!-- end -->
+<!-- $extlist AS $key=>$value -->
+<tr>
+	<td>{:$value[title]}：</td>
+	<td>{:$value[default_val]}</td>
+</tr>
+<!-- end -->
+</table>

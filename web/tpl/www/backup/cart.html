@@ -1,0 +1,163 @@
+<!-- inc:head -->
+<div class="body">
+	<div class="left"><!-- inc:inc/usercp --><!-- inc:inc/left --></div>
+	<div class="right">
+		<div class="vmenu"><h3>购物车</h3></div>
+		<form method="post" action="{:site_url('checkout')}" onsubmit="return to_checkout('{if($rslist)}1{else}0{end}');">
+		<div class="box pd5">
+			<!-- if($rslist) -->
+			<div style="background:#97BEF4;">
+			<table width="100%" cellspacing="1">
+			<tr bgcolor="#DCE9FA">
+				<!-- if($_sys[cart_thumb]) -->
+				<th width="90px" align="center">图片</th>
+				<!-- end -->
+				<th align="center" height="28px">产品名称</th>
+				<th width="60px" align="center">数量</th>
+				<th width="100px" align="center">单价</th>
+				<th width="45px" align="center">删除</th>
+			</tr>
+			<!-- $rslist AS $key=>$value -->
+			<tr bgcolor="#FFFFFF">
+				<!-- if($_sys[cart_thumb]) -->
+					<!-- run:$value[picture] = $value[picture] ? $value[picture] : 'ima'.'ges/nopic.gif' -->
+					<td height="90px" align="center"><img src="{:$value[picture]}" width="80px" height="80px" alt="{:$value[title]}" /></td>
+				<!-- end -->
+				<td{if(!$_sys[cart_thumb])} height="25px"{end}>&nbsp;<img src="images/lead.gif" /> {:$value[title]}</td>
+				<td class="red" align="center">
+					<img src="images/minus.gif" class="hand" onclick="cart_minus('{:$value[id]}',{:$value[amount]});" />
+					&nbsp;{:$value[amount]}&nbsp;
+					<img src="images/plus.gif" class="hand" onclick="cart_plus('{:$value[id]}',{:$value[amount]});" />
+				</td>
+				<td align="center">{:sys_format_price($value[price],$value[price_currency])}</td>
+				<td align="center"><img src="images/del.gif" class="hand" onclick="cart_del('{:$value[id]}');" /></td>
+			</tr>
+			<!-- end -->
+			<tr bgcolor="#DCE9FA">
+				<td colspan="5">
+					<table width="100%">
+					<tr>
+						<td><button onclick="history.back();" type="button" class="btn" title="返回上一页"><span><span>返回上一页</span></span></button></td>
+						<td align="right">产品总价：&nbsp;{:sys_format_price($total_price,$_SESSION[currency_default][code])}</td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+			</table>
+			</div>
+			<!-- else -->
+			<div style="padding:10px;text-align:center;">购物车为空！</div>
+			<!-- end -->
+		</div>
+
+		<!-- if($_sys[cart_address]) -->
+		<script type="text/javascript">
+		function copy_address()
+		{
+			$("#s_fullname").attr("value",$("#b_fullname").val());
+			$("#s_tel").attr("value",$("#b_tel").val());
+			$("#s_country").attr("value",$("#b_country").val());
+			$("#s_address").attr("value",$("#b_address").val());
+			$("#s_zipcode").attr("value",$("#b_zipcode").val());
+			$("#s_email").attr("value",$("#b_email").val());
+			return true;
+		}
+		</script>
+		<div class="vmenu"><h3>填写账单地址</h3></div>
+		<div class="box pd5">
+			<table width="100%">
+			<tr>
+				<td width="120px" align="right"><span class="red">*</span> 姓名：</td>
+				<td><input type="text" id="b_fullname" name="b_fullname" value="{:$user_rs[fullname]}" /> 请填写账单接收人的姓名</td>
+			</tr>
+			<tr>
+				<td align="right"><span class="red">*</span> 电话：</td>
+				<td><input type="text" id="b_tel" name="b_tel" value="{:$user_rs[tel] ? $user_rs[tel] : $user_rs[mobile]}" /> 请填写联系电话或手机号</td>
+			</tr>
+			<input type="hidden" id="b_country" name="b_country" value="中国" />
+			<tr>
+				<td align="right"><span class="red">*</span> 地址：</td>
+				<td><input type="text" id="b_address" name="b_address" class="long_input" value="{:$user_rs[address]}" /> 填写账单投递地址</td>
+			</tr>
+			<tr>
+				<td align="right"><span class="red">*</span> 邮编：</td>
+				<td><input type="text" id="b_zipcode" name="b_zipcode" class="short_input" value="{:$user_rs[zipcode]}" /> 请填写邮编号码</td>
+			</tr>
+			<tr>
+				<td align="right">Email：</td>
+				<td><input type="text" id="b_email" name="b_email" value="{:$user_rs[email]}" /> 请填写账号接收人的邮箱</td>
+			</tr>
+			<tr>
+				<td align="right">备注：</td>
+				<td><textarea class="long_input" name="b_note" id="b_note" style="height:65px;"></textarea></td>
+			</tr>
+			<tr>
+				<td align="right">&nbsp;</td>
+				<td><input type="button" value="复制信息" onclick="copy_address()" /> 如果账单地址与收货人信息一致，请点这里直接复制</td>
+			</tr>
+			</table>
+		</div>
+		<!-- end -->
+
+		<div class="vmenu"><h3>收货人信息</h3></div>
+		<div class="box pd5">
+			<table width="100%">
+			<tr>
+				<td width="120px" align="right"><span class="red">*</span> 姓名：</td>
+				<td><input type="text" id="s_fullname" name="s_fullname" value="{:$user_rs[fullname]}" /> 请填写收货人的姓名</td>
+			</tr>
+			<tr>
+				<td align="right"><span class="red">*</span> 电话：</td>
+				<td><input type="text" id="s_tel" name="s_tel" value="{:$user_rs[tel]}" /> 请填写收货人的联系电话或手机号</td>
+			</tr>
+			<input type="hidden" id="s_country" name="s_country" value="中国" />
+			<tr>
+				<td align="right"><span class="red">*</span> 地址：</td>
+				<td><input type="text" id="s_address" name="s_address" class="long_input" value="{:$user_rs[address]}" /> 填写收货人的详细地址</td>
+			</tr>
+			<tr>
+				<td align="right"><span class="red">*</span> 邮编：</td>
+				<td><input type="text" id="s_zipcode" name="s_zipcode" class="short_input" value="{:$user_rs[zipcode]}" /> 请填写邮编号码</td>
+			</tr>
+			<tr>
+				<td align="right">Email：</td>
+				<td><input type="text" id="s_email" name="s_email" value="{:$user_rs[email]}" /> 请填写您的邮箱</td>
+			</tr>
+			<tr>
+				<td align="right">备注：</td>
+				<td><textarea class="long_input" name="s_note" id="s_note" style="height:65px;"></textarea></td>
+			</tr>
+			</table>
+		</div>
+		<div class="vmenu"><h3>确认购买</h3></div>
+		<div class="box pd5">
+			<table width="100%">
+			<tr>
+				<td width="120px" align="right">订单备注：</td>
+				<td><textarea class="long_input" name="note" id="note" style="height:65px;"></textarea></td>
+			</tr>
+			<tr>
+				<td align="right" valign="top">说明：</td>
+				<td class="red" style="line-height:150%;">您对订单有什么其他要求，请在这里填写</td>
+			</tr>
+			<tr>
+				<td align="right"><span class="red">*</span> Email：</td>
+				<td><input type="text" id="email" name="email" value="{:$user_rs[email]}" /> 请填写您的邮箱，以方便邮件通知</td>
+			</tr>
+			<!-- if(function_exists("imagecreate") && defined("SYS_VCODE_USE") && SYS_VCODE_USE == true) -->
+			<tr>
+				<td align="right">验证码：</td>
+				<td><input name="sys_check" id="sys_check" type="text" style="width:50px;" /> <span id="phpok_update_code"><img src="{:site_url('login,codes')}" border="0" align="absmiddle" style="cursor:pointer;" onclick="phpok_update_code()"></span></td>
+			</tr>
+			<!-- end -->
+			<tr>
+				<td align="right">&nbsp;</td>
+				<td><input type="submit" id="_phpok_submit" value="确认购买" /></td>
+			</tr>
+			</table>
+		</div>
+		</form>
+	</div>
+	<div class="clear"></div>
+</div>
+<!-- inc:foot -->

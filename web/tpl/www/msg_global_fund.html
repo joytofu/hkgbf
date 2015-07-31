@@ -1,0 +1,34 @@
+<!-- inc:head -->
+
+<!-- inc:banner-->
+
+
+<div class="main">
+   <div class="left">
+      <div class="left1">
+         <div class="lefttop">{:$m_rs[title]}</div>
+         <div class="leftmain">
+       <!-- inc:inc/cp-->
+         </div>
+      </div>
+      <!-- inc:inc/left-->
+ 
+   </div>
+
+   <div class="right">
+      <div class="righttop"><div class="ll">环球基金</div><div class="rr">您当前的位置是：<a href="{:$_sys[siteurl]}">网站首页</a> > {:$m_rs[title]} > 环球基金</div></div>
+
+       <!--run:$global_fund = phpok_c_list("global_fund","1")-->
+       <div class="rightmain">
+           {:$global_fund[rs][content]}
+       </div>
+       <!--run:unset($global_fund)-->
+      
+   </div>
+
+   
+   
+</div>
+
+
+<!-- inc:foot -->

@@ -1,0 +1,40 @@
+
+
+<div class="saixuan">
+
+   <div class="saixuan_1">
+     <li style="padding-left:0;">预期收益</li>
+     <li><a href="index.php?c=list&ms=search_2&qx={:$qx}&rg={:$rg}"   <!--if($ns==false)-->id="saixuan"<!--end-->>全部</a></li>
+       <!--run:$any = phpok_m_list('nianhua1',22)-->
+<!--$any[rslist] AS $key=>$value-->
+ <li><a href="index.php?c=list&ms=search_2&ns={:$value[id]}&qx={:$qx}&rg={:$rg}" <!--if($ns==$value[id])-->id="saixuan"<!--end-->>{:$value[title]}</a></li>
+               			<!-- end -->
+     
+   </div>
+   
+      <div class="saixuan_1">
+     <li style="padding-left:0;">基金期限</li>
+      <li><a href="index.php?c=list&ms=search_2&rg={:$rg}&ns={:$ns}"   <!--if($qx==false)-->id="saixuan"<!--end-->>全部</a></li>
+       <!--run:$any = phpok_m_list('xiangmu2',22)-->
+<!--$any[rslist] AS $key=>$value-->
+ <li><a href="index.php?c=list&ms=search_2&qx={:$value[id]}&ns={:$ns}&rg={:$rg}" <!--if($qx==$value[id])-->id="saixuan"<!--end-->>{:$value[title]}</a></li>
+               			<!-- end -->
+     
+   </div>
+
+  <div class="saixuan_1">
+     <li style="padding-left:0;">历史业绩</li><li><a href="index.php?c=list&ms=search_2&qx={:$qx}&ns={:$ns}"   <!--if($rg==false)-->id="saixuan"<!--end-->>全部</a></li>
+       <!--run:$any = phpok_m_list('rengou2',22)-->
+<!--$any[rslist] AS $key=>$value-->
+ <li><a href="index.php?c=list&ms=search_2&rg={:$value[id]}&qx={:$qx}&ns={:$ns}" <!--if($rg==$value[id])-->id="saixuan"<!--end-->>{:$value[title]}</a></li>
+               			<!-- end -->
+   </div>
+   
+   
+
+   
+   
+
+   
+</div>
+

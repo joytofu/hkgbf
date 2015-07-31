@@ -1,0 +1,40 @@
+<!-- inc:open/header -->
+<script type="text/javascript">
+var iframe_id = "{:$iframe_id}";
+if(iframe_id)
+{
+	var p_pre = parent.$("#"+iframe_id).contents().find("#{:$input_view}");
+	var p_val = parent.$("#"+iframe_id).contents().find("#{:$input_id}");
+}
+else
+{
+	var p_pre = parent.$("#{:$input_view}");
+	var p_val = parent.$("#{:$input_id}");
+}
+function click_down(id,view)
+{
+	p_val.attr("value",id);
+	var viewhtml = '<input type="button" value="详情" class="btn2" onclick="phpjs_preview(\''+id+'\',\'download\')"> 附件：<img src="ima'+'ges/download.gif" align="absmiddle" /> '+view;
+	p_pre.html(viewhtml);
+	parent.Layer.over();
+}
+</script>
+<!-- inc:open/swfupload -->
+<div class="main">
+<table width="100%" style="layout:fixed;" cellpadding="0" cellspacing="0">
+<tr>
+	<td class="t_sub" style="width:10%">ID</td>
+	<td class="t_sub">名称</td>
+	<td class="t_sub" style="width:140px">上传时间</td>
+</tr>
+<!-- $rslist AS $key=>$value -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)" onclick="click_down('{:$value[id]}','{:$value[title] ? $value[title] : basename($value[filename])}')" style="cursor:pointer;">
+	<td align='center' class="tc_left">&nbsp;{:$value[id]}&nbsp;</td>
+	<td align='left' class="tc_right">&nbsp;{:$value[title] ? $value[title] : basename($value[filename])}</td>
+	<td align="center" class="tc_right">&nbsp;{:date('Y-m-d H:i:s',$value[postdate])}&nbsp;</td>
+</tr>
+<!-- end -->
+</table>
+</div>
+<!-- if($pagelist) --><div class="table">{:$pagelist}</div><!-- end -->
+<!-- inc:open/footer -->

@@ -1,0 +1,21 @@
+<!-- inc:header -->
+<script type="text/javascript">
+function clickpic(val,view)
+{
+	parent.getid("{:$input_id}").value = val;
+	parent.Layer.over();
+}
+</script>
+<!-- inc:swfupload -->
+<div class="main">
+<table width="100%" style="layout:fixed;">
+<tr>
+	<!-- $rslist AS $key=>$value -->
+	<td style="text-align:center;padding-top:5px;"><img src="{:$value[thumb]}" class="hand" width="80px" height="80px" onclick="clickpic('{:$value[filename]}');" title="上传时间：{:date('Y-m-d H:i:s',$value[postdate])}&#13;&#10;文件名称：{:$value[title] ? $value[title] : basename($value[filename])}" /></td>
+	<!-- row:5 -->
+	<!-- end -->
+</tr>
+</table>
+</div>
+<!-- if($pagelist) --><div class="table">{:$pagelist}</div><!-- end -->
+<!-- inc:footer_open -->

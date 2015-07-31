@@ -1,0 +1,20 @@
+.plugin{background:transparent url("editor.gif") no-repeat;}
+.plugin_page{background-position:-340px 0}
+.plugin_img{background-position:-260px 0}
+.plugin_attach{background-position:-240px 0}
+.plugin_video{background-position:-140px 0}
+.plugin_date{background-position:-100px 0}
+.plugin_time{background-position:-320px 0}
+.plugin_left{background-position:0 0}
+.plugin_center{background-position:-20px 0}
+.plugin_right{background-position:-40px 0}
+.plugin_list1{background-position:-300px 0}
+.plugin_list2{background-position:-280px 0}
+.plugin_map{background-position:-160px 0}
+.plugin_special{background-position:-360px 0}
+.plugin_code{background-position:-180px 0}
+.plugin_sub{background-position:-380px 0}
+.plugin_sup{background-position:-400px 0}
+.char_p{padding:5px}
+.char_p a{display:block;width:20px;height:20px;line-height:20px;overflow:hidden;text-align:center;text-decoration:none;font-size:14px;}
+.char_p a:hover{background:#F6F6F6;}

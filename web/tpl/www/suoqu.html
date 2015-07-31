@@ -1,0 +1,173 @@
+<!-- inc:head -->
+
+<!-- inc:banner-->
+
+
+<div class="main">
+   <div class="left">
+      <div class="left1">
+         <div class="lefttop">{:$m_rs[title]}</div>
+         <div class="leftmain">
+       <!-- inc:inc/list-->
+         </div>
+      </div>
+<!-- inc:inc/left-->
+   </div>
+   
+   <div class="right">
+      <div class="righttop"><div class="ll">{:$rs[title]}</div><div class="rr">您当前的位置是：<a href="{:$_sys[siteurl]}">网站首页</a> > {:$m_rs[title]} > {:$rs[title]}</div></div>
+      
+      <div class="rightmain">
+ 
+   <div class="feedback">
+           
+            <form id="form1" name="form1" method="post" onsubmit="return check()" action="deal.php">
+              <p style="height:20px; margin-bottom:15px; line-height:20px; font-size:16px;"><img src="images/w4.jpg" style="margin-right:10px; height:20px;" align="left">索取电话：4006-822-812</p>
+              <p class="wz">联系人 <span class="red">*</span></p>
+              <p class="wk"><input type="text" name="fullname" id="fullname" class="text" onblur="this.style.color='#999';if(this.value=='') this.value='请输入联系人';" 
+onkeyup="if(event.keyCode==13){doSearch();}" onfocus="this.style.color='#000';if(this.value=='请输入联系人') this.value='';" value="请输入联系人"></p>
+              <p class="wz">联系电话 <span class="red">*</span></p>
+              <p class="wk"><input type="text" name="mobile" id="mobile" class="text" onblur="this.style.color='#999';if(this.value=='') this.value='请输入联系电话';" 
+onkeyup="if(event.keyCode==13){doSearch();}" onfocus="this.style.color='#000';if(this.value=='请输入联系电话') this.value='';" value="请输入联系电话"></p>
+              <p class="wz">被保险人称谓 <span class="red">*</span></p>
+              <p class="wk"><input type="text" name="bname" id="bname" class="text" onblur="this.style.color='#999';if(this.value=='') this.value='请输入被保险人真实姓名';" 
+onkeyup="if(event.keyCode==13){doSearch();}" onfocus="this.style.color='#000';if(this.value=='请输入被保险人真实姓名') this.value='';" value="请输入被保险人真实姓名"></p>
+               <p class="wz">出身日期 <span class="red">*</span></p>
+              <p class="wk"><input type="text" name="riqi" id="riqi" class="text" onblur="this.style.color='#999';if(this.value=='') this.value='格式为YYYY-MM-DD';" 
+onkeyup="if(event.keyCode==13){doSearch();}" onfocus="this.style.color='#000';if(this.value=='格式为YYYY-MM-DD') this.value='';" value="格式为YYYY-MM-DD"></p>
+              <p class="wz">性别 <span class="red">*</span></p>
+              <p class="wk"><input type="text" name="sex" id="sex" class="text" onblur="this.style.color='#999';if(this.value=='') this.value='请输入您的性别';" 
+onkeyup="if(event.keyCode==13){doSearch();}" onfocus="this.style.color='#000';if(this.value=='请输入您的性别') this.value='';" value="请输入您的性别"></p>
+              <p class="wz">邮箱地址 <span class="red">*</span></p>
+              <p class="wk"><input type="text" name="email" id="email" class="text" onblur="this.style.color='#999';if(this.value=='') this.value='请输入您的邮箱地址';" 
+onkeyup="if(event.keyCode==13){doSearch();}" onfocus="this.style.color='#000';if(this.value=='请输入您的邮箱地址') this.value='';" value="请输入您的邮箱地址"></p>
+              <p class="wz">保额目标 <span class="red">*</span></p>
+              <p class="wk"><input type="text" name="mubiao" id="mubiao" class="text" onblur="this.style.color='#999';if(this.value=='') this.value='请输入您期望的赔偿最高限额';" 
+onkeyup="if(event.keyCode==13){doSearch();}" onfocus="this.style.color='#000';if(this.value=='请输入您期望的赔偿最高限额') this.value='';" value="请输入您期望的赔偿最高限额"></p>
+              <p class="wz">保费预算 <span class="red">*</span></p>
+              <p class="wk"><input type="text" name="yusuan" id="yusuan" class="text" onblur="this.style.color='#999';if(this.value=='') this.value='请输入您的保费预算金额';" 
+onkeyup="if(event.keyCode==13){doSearch();}" onfocus="this.style.color='#000';if(this.value=='请输入您的保费预算金额') this.value='';" value="请输入您的保费预算金额"></p>
+              <p class="wz">投保目的</p>
+              <p class="wk"><input type="text" name="mudi" id="mudi" class="text" value="人寿"></p>
+
+
+              <p class="wz">备注</p>
+              <p class="wk"><textarea name="content" cols="50" class="text2" rows="10" id="content"></textarea></p>
+              <p class="wz" style="margin-top:30px;"><input type="image" name="imageField" id="imageField" src="images/button1.jpg" /></p>
+              
+              
+            </form>
+            
+            <script type="text/javascript">
+function check()
+{
+if (document.form1.fullname.value=="请输入联系人")
+{
+window.alert("请输入联系人!       ");
+document.form1.fullname.focus();
+return false;
+}
+
+if (document.form1.mobile.value=="请输入联系电话")
+{
+window.alert("请输入联系电话   ");
+document.form1.mobile.focus();
+return false;
+}
+
+//
+String.prototype.Trim = function() {
+var m = this.match(/^\s*(\S+(\s+\S+)*)\s*$/);
+return (m == null) ? "" : m[1];
+}
+String.prototype.isMobile = function() {
+return (/^(?:18\d|14\d|13\d|15[123456789])-?\d{5}(\d{3}|\*{3})$/.test(this.Trim()));
+}
+String.prototype.isTel = function()
+{
+//"兼容格式: 国家代码(2到3位)-区号(2到3位)-电话号码(7到8位)-分机号(3位)"
+    //return (/^(([0\+]\d{2,3}-)?(0\d{2,3})-)?(\d{7,8})(-(\d{3,}))?$/.test(this.Trim()));
+    return (/^(([0\+]\d{2,3}-)?(0\d{2,3}))(\d{7,8})(-(\d{3,}))?$/.test(this.Trim()));
+}
+
+with(document.form1){
+if (mobile.value.isMobile()||mobile.value.isTel())  {
+
+}
+else {
+alert("请输入正确的电话号码或手机\n\n例如:020123456789或13534596987");
+mobile.focus();
+return false;
+
+}
+}
+//
+
+
+if (document.form1.bname.value=="请输入被保险人真实姓名")
+{
+window.alert("请输入被保险人真实姓名   ");
+document.form1.bname.focus();
+return false;
+}
+
+if (document.form1.riqi.value=="格式为YYYY-MM-DD")
+{
+window.alert("请输入出身日期，格式为YYYY-MM-DD ");
+document.form1.riqi.focus();
+return false;
+}
+
+if (document.form1.sex.value=="请输入您的性别")
+{
+window.alert("请输入您的性别 ");
+document.form1.sex.focus();
+return false;
+}
+if (document.form1.email.value=="请输入您的邮箱地址")
+{
+window.alert("请输入您的邮箱地址 ");
+document.form1.email.focus();
+return false;
+}
+ var temp = document.getElementById("email");
+        var myreg = /(\S)+[@]{1}(\S)+[.]{1}(\w)+/;
+        if(temp.value!="")
+        {
+            if(!myreg.test(temp.value))
+            {
+               window.alert("您的E-mail格式有误，请重新输入!!       ");
+            document.form1.email.focus();
+return false;
+            }
+          
+        }
+
+if (document.form1.mubiao.value=="请输入您期望的赔偿最高限额")
+{
+window.alert("请输入您期望的赔偿最高限额");
+document.form1.mubiao.focus();
+return false;
+}
+
+if (document.form1.yusuan.value=="请输入您的保费预算金额")
+{
+window.alert("请输入您的保费预算金额");
+document.form1.yusuan.focus();
+return false;
+}
+}
+</script>
+            
+        </div>
+ 
+      </div>
+      
+   </div>
+   
+   
+   
+</div>
+
+
+<!-- inc:foot -->

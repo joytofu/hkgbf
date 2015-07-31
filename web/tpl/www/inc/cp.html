@@ -1,0 +1,18 @@
+
+        <!-- run:$catelist = phpok_s_catelist('pros','ts') -->  
+   
+	
+	<!-- $catelist AS $key=>$value -->
+<li><a href="{:list_url($value)}" id="{:$value[id] == $cid ? 'hov' : 'parent'}" title="{:$value[cate_name]}">+&nbsp;&nbsp;{:$value[cate_name]}</a></li>
+     <!-- run:$sonlist = phpok_s_catelist($value[id]) -->
+                         <!-- if($sonlist) -->
+	
+        <!-- $sonlist AS $k=>$v -->
+		<li id="erji"><a href="{:list_url($v)}" id="{:$v[id] == $cid ? 'hov' : 'son'}" title="{:$v[cate_name]}">·{:$v[cate_name]}</a></li>
+<!-- end -->
+			
+	
+         <!-- end -->
+        <!-- run:unset($sonlist) -->
+	
+     <!--end-->

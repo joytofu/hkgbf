@@ -1,0 +1,33 @@
+<!-- run:$news = phpok("news") -->
+<!-- if($news[rslist]) -->
+<h3 class="title">{:$news[me][cate_name]}</h3>
+<div class="content">
+	<ul class="news">
+		<!-- $news[rslist] AS $key=>$value -->
+		<li><a href="{:msg_url($value)}" title="{:$value[title]}">{:sys_cutstring($value[title],30,'…')}</a></li>
+		<!-- end -->
+	</ul>
+</div>
+<!-- end -->
+<!-- run:unset($news) -->
+
+<h3 class="title">站内搜索</h3>
+<div class="content">{:sys_search($mid,$cid,$keywords,$ext_keywords)}</div>
+
+
+<!-- run:$procate = phpok('procate') -->
+<!-- if($procate[rslist]) -->
+<h3 class="title">{:$procate[me][cate_name]}</h3>
+<div class="content">
+	<table width="100%">
+	<tr>
+		<!-- $procate[rslist] AS $key=>$value -->
+		<td align="center"><a href="{:list_url($value)}" title="{:$value[title]}">{:$value[cate_name]}</a></td>
+		<!-- row:2 -->
+		<!-- end -->
+	</tr>
+	</table>
+</div>
+<!-- end -->
+<!-- run:unset($procate) -->
+

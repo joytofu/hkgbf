@@ -1,0 +1,124 @@
+<!--run:--> 
+if ($xid)
+{
+$result2=mysql_query("select * from juniu_list where id='$xid'");
+while ($rs2=mysql_fetch_array($result2)){
+	$xtitle=$rs2['title'];
+	}
+$result1=mysql_query("select * from juniu_list_c  where id='$xid' and field='content'");
+while ($rs1=mysql_fetch_array($result1)){
+	$xcontent=$rs1[val];
+   
+	}
+    
+  <!--/run--> 
+  <p align="center" style="font-size:16px; font-weight:bold; color:#333; margin-bottom:0px;">{:$xtitle}</p>
+
+<div id="dzxxx"> {:$xcontent}</div>
+    
+<!--run:--> 
+}
+else{
+ require_once('app/conn.php');
+$p=$_GET["p"];
+
+$Page_size=12; 
+
+if($p){
+$result=mysql_query("select * from juniu_list where cate_id='$p' order by id desc");
+}
+
+else{
+$result=mysql_query("select * from juniu_list where module_id=129 order by id desc");
+}
+
+$count = mysql_num_rows($result); 
+$page_count = ceil($count/$Page_size); 
+
+$init=1; 
+$page_len=5; 
+$max_p=$page_count; 
+$pages=$page_count; 
+
+
+if(empty($_GET["page"])||$_GET["page"]<0){ 
+$page=1; 
+}else { 
+$page=$_GET['page']; 
+} 
+
+$offset=$Page_size*($page-1); 
+
+if($p){
+$sql="select * from juniu_list where cate_id='$p' order by id desc limit $offset,$Page_size"; 
+}
+else{
+$sql="select * from juniu_list where module_id=129 order by id desc limit $offset,$Page_size"; 
+}
+$result=mysql_query($sql,$webconn); 
+$key1=1;
+while ($row=mysql_fetch_array($result)) { 
+
+<!--/run-->
+
+    <div class="pro">
+    <div class="ptitle"><a href="index.php?c=list&ms=yuangonguser&g=1&p={:$row[cate_id]}&xid={:$row[id]}" target="_blank" title="{:$row[title]}">• {:$row[title]}</a></div>
+    <div class="ptime">[{:date("Y-m-d",$row[post_date])}]</div>
+ </div>
+
+        <!--run:--> 
+      
+} 
+if($count==0){
+echo "<p class=npop>没有符合条件的信息！</p>";
+
+}else{
+
+$page_len = ($page_len%2)?$page_len:$pagelen+1;//頁??? 
+$pageoffset = ($page_len-1)/2;//頁???左右偏移量 
+
+$key='<div class="clear"></div><div class="page">搜索结果总数：'; 
+$key.=$count; 
+$key.="&nbsp;&nbsp;&nbsp;&nbsp;$page/$pages &nbsp;&nbsp;&nbsp;&nbsp;"; //第几頁,共几頁 
+if($page!=1){ 
+$key.="<a href=".$_SERVER['PHP_SELF']."?c=list&ms=yuangonguser&g=1&p=".$p."&page=1>首页</a> "; //Frist 
+$key.="<a href=\"".$_SERVER['PHP_SELF']."?c=list&ms=yuangonguser&g=1&p=".$p."&page=".($page-1)."\">上页</a>"; //Back 
+}else { 
+$key.="首页 ";//Frist 
+$key.="上页"; //Back 
+} 
+if($pages>$page_len){ 
+//如果?前頁小于等于左偏移 
+if($page<=$pageoffset){ 
+$init=1; 
+
+$max_p = $page_len; 
+}else{//如果?前頁大于左偏移 
+//如果?前頁?右偏移超出最大分頁? 
+if($page+$pageoffset>=$pages+1){ 
+$init = $pages-$page_len+1; 
+}else{ 
+//左右偏移都存在?的?算 
+$init = $page-$pageoffset; 
+$max_p = $page+$pageoffset; 
+} 
+} 
+} 
+for($i=$init;$i<=$max_p;$i++){ 
+if($i==$page){ 
+$key.=' <span  style=color:red>'.$i.'</span>'; 
+} else { 
+$key.=" <a href=\"".$_SERVER['PHP_SELF']."?c=list&ms=yuangonguser&g=1&p=".$p."&page=".$i."\">".$i."</a>"; 
+} 
+} 
+if($page!=$pages){ 
+$key.="<a href=\"".$_SERVER['PHP_SELF']."?c=list&ms=yuangonguser&g=1&p=".$p."&page=".($page+1)."\">下页</a>";//Next 
+$key.="<a href=\"".$_SERVER['PHP_SELF']."?c=list&ms=yuangonguser&g=1&p=".$p."&page=".($page)."\">末页</a>";//Next 
+}else { 
+$key.="下页 ";//Next 
+$key.="末页"; //Last 
+} 
+
+echo $key<!--/run-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<!--run:--> echo "</div>"; } }<!--/run-->

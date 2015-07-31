@@ -1,0 +1,126 @@
+
+<!--run:$cate_name = $_GET['cs']-->
+<!--run:$svg = phpok_c_list($cate_name,"100","","post_asc")-->
+<script type="text/javascript">
+    $(function () {
+        Highcharts.setOptions({
+            lang: {
+                printChart:"打印图表",
+                downloadJPEG: "下载JPEG图片" ,
+                downloadPDF: "下载PDF文档"  ,
+                downloadPNG: "下载PNG图片"  ,
+                downloadSVG: "下载SVG矢量图" ,
+                exportButtonTitle: "导出图片"
+            }
+        });
+
+        $('#svg').highcharts({
+            credits:{
+                text:'巨牛金融',
+                href:'http://www.hkgbf.com/',
+                position:{                          // 位置设置
+                    align: 'right',
+                    x: 0,
+                    verticalAlign: 'bottom',
+                    y: -5
+                },
+                style: {                            // 样式设置
+                    cursor: 'pointer',
+                    color: 'red',
+                    fontSize: '14px'
+                }
+            },
+            chart: {
+                type: 'spline',
+                zoomType:'x',
+                plotBackgroundImage:'svg_bg.jpg'
+            },
+            title: {
+                text: '巨牛-'+title+'净值走势图',
+                style:{
+                    fontSize:'24px',
+                    fontWeight:'bold',
+                    fontFamily:'Microsoft YaHei'
+                }
+            },
+            subtitle: {
+                text: ''
+            },
+
+            xAxis: {
+                labels:{
+                    step:2,
+                    formatter: function () {
+                        return Highcharts.dateFormat('%m-%d', this.value);
+                    },
+                },
+                type: 'datetime',
+                dateTimeLabelFormats: { // don't display the dummy year
+                    day:'%d',
+                    month: '%m',
+                    year: '%Y'
+                }
+            },
+            yAxis: {
+                labels:{
+                    step:2
+                },
+                title: {
+                    text: '净值'
+                },
+
+                min: min
+            },
+            tooltip: {
+                shared: true,
+                crosshairs:true,
+                //xDateFormat: '<b>'+'数据日期:'+'</b>'+'%Y-%m-%d',
+                //pointFormat: '<span style="color:{series.color}">累计净值:</span>: <b>{point.y}</b><br/>'
+                //hearderFormat:'<b>'+'数据日期:'+'</b>'+Highcharts.dateFormat('%Y-%m-%d', this.x)+'<br>',
+                //pointFormat:'<b>'+'累计净值:'+'<br>'+point.y
+                formatter: function() {
+                    return '<b>'+ '数据日期:' +'</b>'+
+                            Highcharts.dateFormat('%Y-%m-%d', this.x) +'<br>'+ '<b>'+'最新净值:'+'</b>'+this.y+'<br>'+ '<b>'+'沪深300净值:'+'</b>'+this.points[1].y;
+                }
+            },
+
+            series: [{
+                name: '巨牛-'+title,
+                maker:{
+                    symbol:'diamond'
+                },
+                color: 'red',
+
+                data: [
+                    <!--run:-->
+                    foreach($svg[rslist] AS $key=>$value){
+            $date = explode("-",$value[title]);
+            $month=$date[1]-1;
+            $fundvalue=round($value[value],4);
+            echo "[Date.UTC($date[0],$month,$date[2]), $fundvalue],";}
+        <!--/run-->
+        ]
+    }, {
+        name: '沪深300',
+        color:'blue',
+        data:[
+            <!--run:-->
+            //$hs_index = array();
+            $hs_origin=$svg[rslist][0][hs300];
+    foreach($svg[rslist] AS $key=>$value)
+    {
+        $date = explode("-",$value[title]);
+        $month=$date[1]-1;
+        $hs_index = round($value[hs300]/$hs_origin,4);
+        echo  "[Date.UTC($date[0],$month,$date[2]),$hs_index],";}
+    <!--/run-->
+    ]
+    }]
+    });
+    });
+    var num='12';
+    var data=new Array();
+    data.push(parseInt(num));
+
+</script>
+<!--run:unset($svg)-->

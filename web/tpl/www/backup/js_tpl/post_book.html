@@ -1,0 +1,19 @@
+<div class="vmenu"><h3>{:$m_rs[title]} - 添加</h3></div>
+<div class="box pd5">
+	<form method="post" action="{:site_url('post,setok')}id={:$id}&module_id={:$module_id}" onsubmit="return to_submit();">
+	<input type="hidden" id="_to_url" name="_to_url" value="{:site_url('list','ms=book')}" />
+	<div class="table">
+		<div class="left"><span class="red">*</span> 主题：</div>
+		<input type="text" name="subject" id="subject" class="long_input">
+	</div>
+	<!-- $extlist_must AS $key=>$value -->
+	{:$value}
+	<!-- end -->
+
+	<!-- inc:inc/vcode -->
+
+	<div class="table">
+		<div class="left">&nbsp;</div>
+		<input type="submit" class="but01" id="_phpok_submit" value=" 提交 ">
+	</div>
+</div>

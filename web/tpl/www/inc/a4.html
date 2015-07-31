@@ -1,0 +1,114 @@
+<script type="text/javascript" src="images/rq.js">
+
+
+</script>
+<!--run:-->
+date_default_timezone_set('PRC');
+$n=$_GET["n"];
+if($n){
+$rzrq=$_GET["rzrq"];
+$ldrq=$_GET["ldrq"];
+$jshu=$_GET["jshu"];
+$rshu=$_GET["rshu"];
+$daima=$_GET["daima"];
+}else{
+$rzrq=date("Y-m-d");
+$jshu=1;
+$rshu=1;
+$ldrq=date("Y-m-d",strtotime("+1 day"));
+
+
+}
+
+//$Date_1=$ldrq;
+//
+//$Date_2=$rzrq;
+//$Date_List_a1=explode("-",$Date_1);
+//
+//$Date_List_a2=explode("-",$Date_2);
+//
+//$d1=mktime(0,0,0,$Date_List_a1[1],$Date_List_a1[2],$Date_List_a1[0]);
+//
+//$d2=mktime(0,0,0,$Date_List_a2[1],$Date_List_a2[2],$Date_List_a2[0]);
+//
+//$Days=round(($d1-$d2)/3600/24);
+//echo $Days;
+<!--/run-->
+<form action="cc1.php" name="form1" id="form1" method="post">
+ <div class="rsousuo" style="margin-top:0;">
+   <div class="rsousuo_top">重新搜索</div>
+   <div class="rsousuo_main">
+   <table width="100%" style="float:right" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>开会日期：<input type="text" class="text51" name="rzrq" value="{:$rzrq}" onclick="fPopCalendar(event,this,this)" onfocus="this.select()" readonly="readonly"></td>
+    <td>预订间数：<select name="jshu" class="text5">
+      <option value="1" <!--if($jshu==1)--> selected<!--end-->>1</option>
+      <option value="2" <!--if($jshu==2)--> selected<!--end-->>2</option>
+      <option value="3" <!--if($jshu==3)--> selected<!--end-->>3</option>
+      <option value="4" <!--if($jshu==4)--> selected<!--end-->>4</option>
+      <option value="5" <!--if($jshu==5)--> selected<!--end-->>5</option>
+
+    </select><input name="id" type="hidden" value="{:$id}"></td>
+    <td><input type="image" name="imageField" id="imageField" src="images/cx.jpg"></td>
+  </tr>
+
+</table>
+
+   </div>
+ </div>
+</form>
+
+<div class="cxjg">查询结果：<span style="float:right; text-align:right">开会日期：{:$rzrq}&nbsp;&nbsp;&nbsp;预订间数：{:$jshu}</span></div>
+<!--run:$any = phpok_s_catelist('hysyd',ts)-->
+  <!--$any AS $key=>$value-->
+ <div class="rsousuo">
+   <div class="rsousuo_top">{:$value[cate_name]}</div>
+   <div class="rsousuo_main">
+     <img src="{:$value[ico]}" style="float:left; width:210px; height:150px;">
+      <div class="xin_r">
+         <table width="100%" border="0" cellspacing="1" bgcolor="#006fa7" cellpadding="0" id="eerr">
+  <tr>
+    <td>价格名称</td>
+    <td>平均价票</td>
+    <td>早餐</td>
+    <td>支付方式</td>
+    <td>&nbsp;</td>
+  </tr>
+  <!--run:$new = phpok_c_list($value[identifier],255)-->
+<!--if($n)-->
+
+    <!--$new[rslist] AS $key=>$value-->
+<!--if($value[a0]==$Days)-->
+  <tr>
+    <td>{:$value[title]}</td>
+    <td>￥{:$value[a1]}</td>
+    <td>{:$value[a2]}</td>
+    <td>{:$value[a33]}</td>
+    <td><a target="_blank" href="index.php?c=msg&id={:$value[id]}&rzrq={:$rzrq}&jshu={:$jshu}">预订</a></td>
+  </tr>
+<!--end-->
+    <!--end-->
+    
+    <!--else-->
+        <!--$new[rslist] AS $key=>$value-->
+
+  <tr>
+    <td>{:$value[title]}</td>
+    <td>￥{:$value[a1]}</td>
+    <td>{:$value[a2]}</td>
+    <td>{:$value[a33]}</td>
+    <td><a target="_blank" href="index.php?c=msg&id={:$value[id]}&rzrq={:$rzrq}&ldrq={:$ldrq}&jshu={:$jshu}&rshu={:$rshu}">预订</a></td>
+  </tr>
+
+    <!--end-->
+    
+    <!--end-->
+    
+</table>
+
+     </div>
+   </div>
+ </div>  
+ 
+
+   <!--end-->

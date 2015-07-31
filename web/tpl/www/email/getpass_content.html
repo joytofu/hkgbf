@@ -1,0 +1,10 @@
+您好，{:$rs[name]}：<br />
+<blockquote>
+	您使用密码取回操作，请点击下面链接，重设密码<br />
+	<a href="{:$_sys[siteurl]}{:site_url('login,repass')}username={:rawurlencode($rs[name])}&chkcode={:$rs[chkcode]}" target="_blank">{:$_sys[siteurl]}{:site_url('login,repass')}username={:rawurlencode($rs[name])}&chkcode={:$rs[chkcode]}</a><br />
+	如果您无法显示网址，请在浏览器上输入以下地址：<br />
+	{:$_sys[siteurl]}{:site_url('login,repass')}<br />
+	1、在“验证串”中输入：<strong>{:$rs[chkcode]}</strong><br />
+	2、输入您的用户名<br />
+	3、输入新密码和确认密码
+</blockquote>

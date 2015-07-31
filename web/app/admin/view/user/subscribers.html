@@ -1,0 +1,166 @@
+<!-- inc:header -->
+
+<script type="text/javascript">
+
+function to_del(id)
+{
+	if(!id)
+	{
+		alert("操作非法");
+		return false;
+	}
+	var q = confirm("确定要删除此信息吗？删除后是不能恢复的");
+	if(q != 0)
+	{
+		var url = base_url + base_func + "=del&id="+id;
+		var msg = get_ajax(url);
+		if(!msg) msg = "error: 操作非法";
+		if(msg == "ok")
+		{
+			direct(window.location.href);
+		}
+		else
+		{
+			alert(msg);
+			return false;
+		}
+	}
+}
+
+function to_modify(id)
+{
+	if(!id)
+	{
+		alert("操作非法");
+		return false;
+	}
+	var url = base_url + base_func + "=setok&id="+id+"&";
+	var email = $("#email_"+id).attr("value");
+	if(!email)
+	{
+		alert("邮箱不允许为空！");
+		return false;
+	}
+	if(email.search(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/) != -1)
+	{
+		url += "email="+encode_utf8(email)+"&";
+	}
+	else
+	{
+		alert("邮箱格式不正确！");
+		return false;
+	}
+	var st = $("#status_"+id).attr("value");
+	url += "status="+encode_utf8(st);
+	var msg = get_ajax(url);
+	if(msg == "ok")
+	{
+		alert("邮箱："+email+" 更新操作成功！");
+		direct(window.location.href);
+		return true;
+	}
+	else
+	{
+		if(!msg) msg = "Error:更新失败！";
+		alert(msg);
+		return false;
+	}
+}
+
+function to_add(ss)
+{
+	var url = base_url + base_func + "=setok&";
+	var email = $("#email_"+ss).attr("value");
+	if(!email)
+	{
+		alert("邮箱不允许为空！");
+		return false;
+	}
+	if(email.search(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/) != -1)
+	{
+		url += "email="+encode_utf8(email)+"&";
+	}
+	else
+	{
+		alert("邮箱格式不正确！");
+		return false;
+	}
+	var st = $("#status_"+ss).attr("value");
+	url += "status="+encode_utf8(st);
+	var msg = get_ajax(url);
+	if(msg == "ok")
+	{
+		alert("邮箱："+email+" 添加操作成功！");
+		direct(window.location.href);
+		return true;
+	}
+	else
+	{
+		if(!msg) msg = "Error:添加失败！";
+		alert(msg);
+		return false;
+	}
+}
+
+</script>
+
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="130px"><span class="lead">&nbsp;&raquo; 订阅用户管理</span></td>
+		<td align="left">
+			搜索：<input type="text" name="keywords" id="keywords" value="{:$keywords}">
+			<input type="button" class="btn2" value="查询">
+		</td>
+	</tr>
+	</table>
+</div></div>
+
+<div class="main">
+<table width="100%" style="layout:fixed;" cellpadding="0" cellspacing="0">
+<tr>
+	<td class="t_sub" width="50px">ID</td>
+	<td class="t_sub" width="90px">状态</td>
+	<td class="t_sub">邮箱</td>
+</tr>
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)">
+	<td align='center' class="tc_left" height="30px">添加</td>
+	<td align="center" class="tc_right"><select name="status_top" id="status_top">
+		<option value="0">未确认</option>
+		<option value="1" selected>已确认</option>
+	</select></td>
+	<td align='left' class="tc_right">&nbsp;
+		<input type="text" id="email_top" />&nbsp;
+		<input type="button" value="添加" onclick="to_add('top')" class="btn2" />
+	</td>
+</tr>
+<!-- $rslist AS $key=>$value -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)">
+	<td align='center' class="tc_left">{:$value[id]}</td>
+	<td align="center" class="tc_right"><select name="status_{:$value[id]}" id="status_{:$value[id]}">
+		<option value="0">未确认</option>
+		<option value="1"{if($value[status])} selected{end}>已确认</option>
+	</select></td>
+	<td align='left' class="tc_right">&nbsp;
+		<input type="text" id="email_{:$value[id]}" value="{:$value[email]}" />&nbsp;
+		<input type="button" value="编辑" onclick="to_modify('{:$value[id]}')" class="btn2" />&nbsp;
+		<input type="button" value="删除" onclick="to_del('{:$value[id]}')" class="btn2" />&nbsp; &nbsp; <span class="clue_on">添加时间：{:date('Y-m-d H:i',$value[postdate])}</span>
+	</td>
+</tr>
+<!-- end -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)">
+	<td align='center' class="tc_left" height="30px">添加</td>
+	<td align="center" class="tc_right"><select id="status_bottom">
+		<option value="0">未确认</option>
+		<option value="1" selected>已确认</option>
+	</select></td>
+	<td align='left' class="tc_right">&nbsp;
+		<input type="text" id="email_bottom" />&nbsp;
+		<input type="button" value="添加" class="btn2" onclick="to_add('bottom')" />
+	</td>
+</tr>
+
+</table>
+</div>
+<!-- if($pagelist) --><div class="table">{:$pagelist}</div><!-- end -->
+<!-- inc:footer -->

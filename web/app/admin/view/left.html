@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>后台管理 -- www.phpok.com</title>
+<meta name="keywords" content="情感,企业,网站,建设,phpok,qinggan,phpok" />
+<meta name="description" content="企业网站建设用PHPOK3.0更简单！ - PHPOK.COM" />
+<meta http-equiv="expires" content="wed, 26 feb 1997 08:21:57 gmt" />
+<meta http-equiv="pragma" content="no-cach" />
+<script type="text/javascript">
+var base_file = "{:HOME_PAGE}";
+var base_url = "{:$sys_app->url}";
+var base_ctrl = "{:$sys_app->config->c}";
+var base_func = "{:$sys_app->config->f}";
+var base_dir = "{:$sys_app->config->d}";
+</script>
+<link href="images/left.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="images/global.js"></script>
+</head>
+<body>
+<div id="bodyid" style="padding-top:0px;">
+	<div style="height:5px;"></div>
+	<ol>
+		<!-- $rslist AS $key=>$value -->
+		<li class="son" id="son_{:$key}"><a href="javascript:change_this('{:$key}','{:$value['menu_url']}');void(0);" title="{:$value['note']}">{:$value[title]}</a></li>
+		<!-- end -->
+	</ol>
+</div>
+<script type="text/javascript">
+function change_this(high_id,url)
+{
+	var total = parseInt("{:count($rslist)}");
+	var class_name = "son";
+	for(var i=0;i<total;i++)
+	{
+		class_name = i == high_id ? "click" : "son";
+		getid("son_"+i).className = class_name;
+	}
+	if(url && url != "undefined")
+	{
+		window.parent.frames["frame_right"].location.href = url;
+	}
+}
+</script>
+</body>
+</html>

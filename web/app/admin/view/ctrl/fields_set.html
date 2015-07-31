@@ -1,0 +1,158 @@
+<!-- inc:header -->
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; 添加/修改字段</span></td>
+		<td align="right"><a href="{:site_url('ctrl,fields')}id={:$module_id}" class="button">返回字段列表</a></td>
+	</tr>
+	</table>
+</div></div>
+<form method="post" action="{:site_url('ctrl,fields_setok')}id={:$id}" onsubmit="return fields_chk('{:$id}');">
+<input type="hidden" name="module_id" id="module_id" value="{:$module_id}">
+<div class="table">
+	<div class="left"><span class="red">*</span> 标题：</div>
+	<input type="text" id="title" name="title" value="{:$rs[title]}" />
+</div>
+<div class="table">
+	<div class="left"><span class="red">*</span> 唯一标识：</div>
+	<input type="text" id="identifier" name="identifier" value="{:$rs[identifier]}" class="short_input" {if($id)} disabled{end} />
+	<span class="clue_on"> 唯一标识不允许为空，<span class="red">不要超过8位</span></span>
+</div>
+<div class="table">
+	<div class="left">左侧文字：</div>
+	<input type="text" id="sub_left" name="sub_left" value="{:$rs[sub_left]}" />
+	<span class="clue_on"> 用于左侧信息，为空使用标题</span>
+</div>
+<div class="table">
+	<div class="left">右侧备注：</div>
+	<input type="text" id="sub_note" name="sub_note" value="{:$rs[sub_note]}" class="long_input" />
+	<span class="clue_on"> 简单说明这个模块做什么，仅限后台使用</span>
+</div>
+<div class="table">
+	<div class="left"><span class="red">*</span> 表单控件：</div>
+	<select name="input" id="input" onchange="input_type(this.value)"{if($id)} disabled{end}>
+	<option value="">请选择表单控件</option>
+	<!-- $input_list AS $key=>$value -->
+	<option value="{:$key}"{if($key == $rs[input])} selected{end}>{:$value}</option>
+	<!-- end -->
+	</select>
+</div>
+<div class="table" id="input_width">
+	<div class="left">表单宽度：</div>
+	<input type="text" id="width" name="width" value="{:$rs[width]}" class="short_input" />
+	<span class="clue_on"> 宽度，示例：100px 或 98%</span>
+</div>
+<div class="table" id="input_height">
+	<div class="left">表单高度：</div>
+	<input type="text" id="height" name="height" value="{:$rs[height]}" class="short_input" />
+	<span class="clue_on"> 高度，示例：100px 或 98%</span>
+</div>
+<div class="table" id="input_defalt_val">
+	<div class="left">默认值：</div>
+	<input type="text" id="default_val" name="default_val" value="{:$rs[default_val]}" />
+	<span class="clue_on"> 设定一个默认值，仅限文本框、单选、复选及下拉表单中有效</span>
+</div>
+<div class="table" id="input_list_val">
+	<div class="left">值列表：</div>
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td><textarea id="list_val" name="list_val" style="width:300px;height:100px;">{:$rs[list_val]}</textarea></td>
+	</tr>
+	<tr>
+		<td style="padding-top:3px;">一行一个值，格式：<span class="red">值,显示值</span> 或是 <span class="red">值</span></td>
+	</tr>
+	</table>
+</div>
+
+<div class="table" id="input_link">
+	<div class="left">联动组：</div>
+	<select name="link_id" id="link_id">
+		<option value="0">请选择…</option>
+		<!-- $datalink AS $key=>$value -->
+		<option value="{:$value[id]}"{if($value[id] == $rs[link_id])} selected{end}>{:$value[title]}</option>
+		<!-- end -->
+	</select>
+</div>
+
+<div class="table" id="input_module">
+	<div class="left">模块：</div>
+	<select name="in_module_id" id="in_module_id">
+		<option value="0">请选择…</option>
+		<!-- $m_list AS $key=>$value -->
+		<option value="{:$value[id]}"{if($value[id] == $rs[link_id])} selected{end}>{:$value[title]}</option>
+		<!-- end -->
+	</select>
+</div>
+
+<div class="table">
+	<div class="left">必填：</div>
+	<input type="radio" name="if_must" value="1" id="if_must_1" onclick="if_must_set('1')">
+	支持 &nbsp; 
+	<input type="radio" name="if_must" value="0" id="if_must_0" onclick="if_must_set('0')">
+	不支持 &nbsp;
+</div>
+<div class="table" id="error_note_title">
+	<div class="left">错误提示：</div>
+	<input type="text" id="error_note" name="error_note" value="{:$rs[error_note]}" class="long_input" />
+	<span class="clue_on"> 此字段有误或为空时弹出的提示信息</span>
+</div>
+
+<div class="table">
+	<div class="left">HTML：</div>
+	<input type="radio" name="if_html" value="1"{if($rs[if_html])} checked{end}>
+	支持 &nbsp; 
+	<input type="radio" name="if_html" value="0"{if(!$rs[if_html])} checked{end}>
+	不支持 &nbsp; &nbsp;
+	<input type="checkbox" id="show_html" name="show_html"{if($rs[show_html])} checked{end} /> 显示源码
+	<span class="clue_on"> 仅限支持HTML且必须是可视化编辑器时有效</span>
+</div>
+<div class="table">
+	<div class="left">安全：</div>
+	<input type="checkbox" id="if_js" name="if_js"{if($rs[if_js])} checked{end} /> 支持 <span class="red">javascript frame iframe style</span>
+	<span class="clue_on"> 不推荐使用此功能，仅限支持HTML时有效</span>
+</div>
+<div class="table">
+	<div class="left">会员：</div>
+	<input type="radio" name="if_post" value="1"{if($rs[if_post])} checked{end}>
+	支持 &nbsp; 
+	<input type="radio" name="if_post" value="0"{if(!$rs[if_post])} checked{end}>
+	不支持 &nbsp;
+	<span class="clue_on"> 启用会员功能支持，将在会员中心显示，反之不显示</span>
+</div>
+<div class="table">
+	<div class="left">游客：</div>
+	<input type="radio" name="if_guest" value="1"{if($rs[if_guest])} checked{end}>
+	支持 &nbsp; 
+	<input type="radio" name="if_guest" value="0"{if(!$rs[if_guest])} checked{end}>
+	不支持 &nbsp;
+	<span class="clue_on"> 启用游客功能支持，游客才有发布功能，所有信息均需<span class="red">审核</span></span>
+</div>
+
+<div class="table">
+	<div class="left">搜索：</div>
+	<input type="radio" name="if_search" value="1"{if($rs[if_search])} checked{end}>
+	支持 &nbsp; 
+	<input type="radio" name="if_search" value="0"{if(!$rs[if_search])} checked{end}>
+	不支持 &nbsp;
+	<span class="clue_on"> 仅限<span class="red">文本框，单选框，下垃菜单，文本区域，下拉菜单，联动选择，内联模块</span>有效</span>
+</div>
+
+
+<div class="table">
+	<div class="left">排序：</div>
+	<input type="text" id="taxis" name="taxis" value="{:$rs[taxis] ? $rs[taxis] : '255'}" class="short_input" />
+	<span class="clue_on"> 值越小越往前靠</span>
+</div>
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<input type="submit" value="提 交" class="btn3" />
+	<br /><br />
+</div>
+
+</form>
+<script type="text/javascript">
+if_must_set("{:$rs[if_must]}");
+input_type("{:$rs[input]}");
+</script>
+
+<!-- inc:footer -->

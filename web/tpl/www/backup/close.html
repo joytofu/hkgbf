@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>{:$_sys[sitename]}<!-- if($_sys[seotitle]) --> -- {:$_sys[seotitle]}<!-- end --> -- Powered by phpok.com</title>
+<meta name="keywords" content="{:$_sys[keywords]},qinggan,phpok">
+<meta name="description" content="{:$_sys[description]} - PHPOK.COM">
+<!-- if($_sys[siteurl]) -->
+<base href="{:$_sys[siteurl]}" />
+<!-- end -->
+<style type="text/css">
+.error{position:absolute;top:30%;left:50%;margin:-120px 0 0 -300px;width:600px;height:80px;border:1px solid #1496C0;}
+.error .div{background:#D6F1FA;line-height:130%;margin:1px;padding:5px;border:1px #FFF solid;height:66px;text-align:center}
+.error .div p{line-height:150%;padding:12px 0px 24px 0px;font-size:14px;}
+.foot{position:absolute;margin:0 auto;left:50%;top:30%;width:600px;margin:-35px 0 0 -300px;border:1px solid #1496C0;}
+.foot p{font:normal 11px Tahoma,Arial;text-align:center;background:#D6F1FA;line-height:130%;margin:1px;padding:5px 0px;border:1px #FFF solid;}
+</style>
+</head>
+<body>
+<div class="error">
+	<div class="div"><p>{:$_sys[close_reason]}</p></div>
+</div>
+<div class="foot">
+	<p>{:sys_debug()}<br />Powered by PHPOK.COM, Version:{:VERSION}, CopyRight &copy; 2004-2009 All rights reserved.</p>
+</div>
+<script type="text/javascript">
+function kill_errors()
+{
+	return true;
+}
+window.onerror = kill_errors;
+</script>
+</body>
+</html>

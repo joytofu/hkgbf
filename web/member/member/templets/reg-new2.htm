@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>" />
+<title><?php echo $cfg_webname; ?>- 完善详细资料</title>
+<link href="/tpl/www/images/style.css" rel="stylesheet" type="text/css" />
+<link href="templets/style/login.css" rel="stylesheet" type="text/css" />
+<script src="templets/js/j.js" language="javascript" type="text/javascript"></script>
+<script type="text/javascript" src="templets/js/main.js"></script>
+<script type="text/javascript" src="templets/js/calendar/calendar.js"></script>
+<script src="templets/js/base.js" language="javascript" type="text/javascript"></script>
+<script type="text/javascript" language="javascript">
+<!--
+var reMethod = "<?php echo ($cfg_soft_lang == 'utf-8') ? 'POST' : 'GET';?>",pwdmin = <?php echo $cfg_mb_pwdmin; ?>;
+
+function changeAuthCode() {
+	var num = 	new Date().getTime();
+	var rand = Math.round(Math.random() * 10000);
+	num = num + rand;
+	$('#ver_code').css('visibility','visible');
+	if ($("#vdimgck")[0]) {
+		$("#vdimgck")[0].src = "../include/vdimgck.php?tag=" + num;
+	}
+	return false;	
+}
+
+function hideVc()
+{
+	$('#ver_code').css('visibility','hidden');
+}
+
+
+$(document).ready(function(){ 
+	$("#vdcode").focus(function(){
+	  var leftpos = $("#vdcode").position().left;
+	  var toppos = $("#vdcode").position().top - 42;
+	  $('#ver_code').css('left', leftpos+'px');
+	  $('#ver_code').css('top', toppos+'px');
+	  $('#ver_code').css('visibility','visible');
+	});
+	$("input[type='password']").click(function(){
+	  hideVc()
+	});
+	$("#txtUsername").click(function(){
+	  hideVc()
+	});
+	$("input[type='radio']").focus(function(){
+	  hideVc()
+	});
+	/*
+	$("#vdcode").blur(function(){
+		  $('#ver_code').css('visibility','hidden');
+	});
+	*/
+})
+
+-->
+</script>
+</head>
+<style type="text/css">
+<!--
+.vermenu{
+	background:#FFFFFF none repeat scroll 0 0;
+	border:1px solid #EEEEEE;
+	position:absolute;
+	top: 208px;
+}
+body{ font-family:"微软雅黑"; background:#fff}
+-->
+</style>
+<body>
+
+<div id="head">
+  <div class="ssearch">
+  <form method="post" action="/index.php?c=search&amp;" name="formx"id="formx"  onsubmit="return to_submit()">
+  
+  <input name="bgui" type="image" src="/tpl/www/images/sbutton.jpg" style="float:right" />
+    <input onblur="this.style.color='#999';if(this.value=='') this.value='输入关键字...';" 
+onkeyup="if(event.keyCode==13){doSearch();}" onfocus="this.style.color='#000';if(this.value=='输入关键字...') this.value='';" value="输入关键字..."  name="keywords" class="stext">
+
+
+</form>
+  </div>
+  <div class="ssr">
+  
+    <form name="form" id="form" style="display:none">
+          <select name="jumpMenu" id="jumpMenu" onchange="MM_jumpMenu('parent',this,0)">
+       <option>登录</option>
+        <option value="index.php?c=list&cs=hezuohuoban&login">合作伙伴</option>
+        <option value="index.php?c=list&cs=kehu&login">客户</option>
+        <option value="index.php?c=list&cs=yuangong&login">员工</option>
+      </select></form><a href="../member/login.php" target="_blank">登录</a> | <a href="../member/index_do.php?fmdo=user&dopost=regnew" >注册</a> | <a href="mailto:test@info.com">企业邮箱</a>
+    
+  </div>
+
+</div>
+<div id="top">
+<div class="top">
+<div class="logo"><a href="/index.php" title="香港巨牛金融集团"><img src="/upfiles/2015/04/18/bc842ad568f4d050.png" alt="香港巨牛金融集团" /></a></div>
+<div class="rtop">
+
+		<a href="/index.php" title="首页" id=menubg>首页</a>
+		<a href="http://www.hkgbi.com" target="_blank" title="阳光私募" >阳光私募</a>
+		<a href="/index.php?c=list&amp;cs=pros" title="产品库" >产品库</a>
+		<a href="/index.php?c=msg&amp;ts=down" title="服务中心" >服务中心</a>
+		<a href="/index.php?c=msg&amp;ts=aboutus" title="关于巨牛" >关于巨牛</a>
+		<a href="/index.php?c=list&amp;ms=joinus" title="加入我们" >加入我们</a>
+		<a href="/index.php?c=msg&amp;ts=contact" title="联系我们" >联系我们</a>
+		<a href="/index.php?c=list&amp;ms=kaihui" title="预约开户" >预约开户</a>
+				
+
+</div>
+</div></div>
+
+<div id="login" class="bor" >
+  <div class="<?php echo ($cfg_mb_reginfo == 'Y')? '' : 's';?>tip2"></div>
+  <div class="theme fLeft">
+    <form method="post" action="reg_new.php" id="regUser" name="form1">
+      <input type="hidden" value="reginfo" name="dopost"/>
+      <input type="hidden" value="2" name="step"/>
+      <input type="hidden" value="<?php echo $membermodel->modid;?>" name="modid"/>
+      <p style="text-align: right;" class="mB10"/>
+    <?php
+        echo '<ul>';
+        echo '<li><div class="lform">'.$cfg_ml->M_UserName.'</div><span>用户名：</span></li>';
+        echo '<li><div class="lform">'.$cfg_ml->M_MbType.'</div><span>会员类型：</span></li>';
+        echo $postform;
+        echo '</ul>';
+    ?>
+      <ul>
+        <li><span>&nbsp;</span>
+          <button type="submit" id="btnSignCheck" class="buttonGreen142">完 成 注 册</button>
+        </li>
+      </ul>
+    </form>
+  </div>
+  <br class="clear"/>
+</div>
+<script language="javascript" type="text/javascript">
+	window.onload=function (){
+		setInterval("document.getElementById('time').innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());",1000);
+	}
+</script>
+<div class="footer bor">
+  <div class="fLeft mL10"></div>
+  <div class="fRight mR10" id="time">  </div>
+</div>
+<div class="index_1">
+  <a style="cursor:pointer" onmouseover="gg1()" onmouseout="gg2()"><img src="/tpl/www/images/w1.jpg"></a>
+  <a href="http://www.sina.com.cn/" target="_blank"><img style="margin:0 50px;" src="/tpl/www/images/w2.jpg"></a>
+ <a href="tencent://message/?uin=1337330816&amp;Site=im.qq.com&amp;Menu=yes" onfocus="blur()" target="_blank"><img src="/tpl/www/images/w3.jpg"></a>
+ <p id="none"><img src="/upfiles/2015/04/18/7cfef120a38caeca.png" width="88" style="margin-right:220px;"></p>
+</div>
+<script>
+function gg1(){
+x=document.getElementById("none")  //找到元素
+x.style.display="block";
+}
+
+function gg2(){
+x=document.getElementById("none")  //找到元素
+x.style.display="none";
+}
+
+</script>
+
+<div class="index_2">全国热线：4006-822-812</div>
+
+
+<div class="foot" style="margin-bottom:100px;">
+ <a href="/index.php?c=msg&amp;ts=contact">联系我们</a> | <a href="/index.php?c=msg&amp;id=2563&amp;">使用条款</a> | <a href="/index.php?c=msg&amp;id=2697&amp;">隐私条款</a> | <a href="/index.php?c=msg&amp;id=2698&amp;">风险提示</a> | <a href="/index.php?c=list&amp;ms=joinus">加入巨牛</a> | <a href="/index.php?c=msg&amp;ts=aboutus&amp;">关于巨牛</a><br />Copyright&copy;1990-2015HKGBF All rights reseved 粤ICP备11064298号<br />香港巨牛金融集团版权所有 
+
+</div>
+
+<div id="bottom" style="position:fixed; bottom:0; left:0; width:100%; z-index:99999">
+  <div class="bottom">
+     <a href="/index.php?c=list&cs=kehu&login"><img src="/tpl/www/images/f1.jpg"></a>     <a href="/index.php?c=msg&ts=down&"><img src="/tpl/www/images/f2.jpg"></a>
+     <a href="/index.php?c=list&ms=kaihui"><img src="/tpl/www/images/f3.jpg"></a>
+     <a href="/index.php?c=msg&ts=suoqu"><img src="/tpl/www/images/f4.jpg"></a>
+     <a href="/index.php?c=msg&ts=contact"><img src="/tpl/www/images/f5.jpg"></a>
+  </div>
+</div>
+
+
+</body>
+</html>

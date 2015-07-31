@@ -1,0 +1,25 @@
+<!-- inc:header -->
+<script type="text/javascript">
+function clickpic(id,view)
+{
+	parent.getid("{:$input_id}").value = id;
+	var viewhtml = '<img src="'+view+'" class="hand" width="80px" height="80px" onclick="phpjs_preview(\''+id+'\')" />';
+	parent.getid("{:$input_view}").innerHTML = viewhtml;
+	parent.Layer.over();
+}
+</script>
+<!-- inc:swfupload -->
+<div class="main bd_none">
+<div id="list_pic_show" class="open_list">
+<table width="100%" style="layout:fixed;">
+<tr>
+	<!-- $rslist AS $key=>$value -->
+	<td class="open_td_out" onmouseover="this.className='open_td_over'" onmouseout="this.className='open_td_out'" style="padding-bottom:5px;"><img src="{:$value[thumb]}" width='80px' height='80px' class="hand" onclick="clickpic('{:$value[id]}',this.src);" title="上传时间：{:date('Y-m-d H:i:s',$value[postdate])}&#13;&#10;文件名称：{:$value[title] ? $value[title] : basename($value[filename])}" /></td>
+	<!-- row:5 -->
+	<!-- end -->
+</tr>
+</table>
+</div>
+</div>
+<!-- if($pagelist) --><div class="table">{:$pagelist}</div><!-- end -->
+<!-- inc:footer_open -->

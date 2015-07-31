@@ -1,0 +1,250 @@
+<!-- inc:header -->
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="130px"><span class="lead">&nbsp;&raquo; 添加/修改导航</span></td>
+		<td align="right"><a href="{:site_url('menu')}" class="button">导航列表</a></td>
+	</tr>
+	</table>
+</div></div>
+
+
+<form method="post" action="{:site_url('menu,setok')}id={:$id}" onsubmit="return to_setok('{:$id}')">
+<div class="table">
+	<div class="left"><span class="red">*</span> 名称：</div>
+	<input type="text" name="title" id="title" value="{:$rs[title]}">
+	<span class="clue_on"> 名称不允许为空</span>
+</div>
+
+<div class="table">
+	<div class="left">图片[A]：</div>
+	<input type="text" name="picurl" id="picurl" value="{:$rs[picurl]}" class="long_input clue_on" readonly>
+	<input type="button" class="btn2" value="选择" onclick="phpjs_onepic('picurl')">
+	<input type="button" class="btn2" value="预览" onclick="phpjs_onepic_view('picurl')">
+	<input type="button" class="btn2" value="清空" onclick="phpjs_onepic_clear('picurl')">
+</div>
+
+<div class="table">
+	<div class="left">图片[Hover]：</div>
+	<input type="text" name="picover" id="picover" value="{:$rs[picover]}" class="long_input clue_on" readonly>
+	<input type="button" class="btn2" value="选择" onclick="phpjs_onepic('picover')">
+	<input type="button" class="btn2" value="预览" onclick="phpjs_onepic_view('picover')">
+	<input type="button" class="btn2" value="清空" onclick="phpjs_onepic_clear('picover')">
+</div>
+
+<div class="table">
+	<div class="left">父级菜单：</div>
+	<!-- if($id) -->
+		<!-- if(!$rs[parentid]) -->
+		<select name="parentid" id="parentid"><option value="0">设为根级分类</option></select>
+		<!-- else -->
+		<select name="parentid" id="parentid">
+			<!-- $parentlist AS $key=>$value -->
+			<option value="{:$value[id]}"{if($rs[parentid] == $value['id'])} selected{end}>{:$value[title]}</option>
+			<!-- end -->
+		</select>
+		<!-- end -->
+	<!-- else -->
+		<select name="parentid" id="parentid">
+			<option value="0">设为根级分类</option>
+			<!-- $parentlist AS $key=>$value -->
+			<option value="{:$value[id]}">{:$value[title]}</option>
+			<!-- end -->
+		</select>
+	<!-- end -->
+</div>
+<div class="table">
+	<div class="left"><span class="red">*</span> 动态页链接：</div>
+	<input type="text" name="link" id="link" value="{:$rs[link]}" class="long_input">
+</div>
+<div class="table">
+	<div class="left">伪静态链接：</div>
+	<input type="text" name="link_rewrite" id="link_rewrite" value="{:$rs[link_rewrite]}" class="long_input">
+</div>
+<div class="table">
+	<div class="left">静态页链接：</div>
+	<input type="text" name="link_html" id="link_html" value="{:$rs[link_html]}" class="long_input">
+</div>
+<div class="table">
+	<div class="left">链接格式：</div>
+	<input type="button" class="btn2" value="首页" onclick="to_home()" />
+	<input type="button" class="btn3" value="购物车" onclick="to_cart()" />
+	<input type="button" class="btn3" value="语言包" onclick="to_link('lang')" />
+	<input type="button" class="btn2" value="模块" onclick="to_link('module')" />
+	<input type="button" class="btn2" value="分类" onclick="to_link('cate')" />
+	<input type="button" class="btn2" value="主题" onclick="to_link('subject')" />
+	<span class="clue_on">不清楚如何创建链接，请点击按钮进行选择</span>
+</div>
+<input type="hidden" id="highlight_id" name="highlight_id" value="{:$rs[highlight_id]}" />
+<div class="table">
+	<div class="left">高亮：</div>
+	<table>
+	<tr>
+		<td>
+			<select name="highlight" id="highlight" onchange="to_highlight(this.value);">
+				<option value="">默认</option>
+				<option value="index"{if($rs[highlight] == "index")} selected{end}>首页</option>
+				<option value="cart"{if($rs[highlight] == "cart")} selected{end}>购物车</option>
+				<option value="module"{if($rs[highlight] == "module")} selected{end}>模块</option>
+				<option value="cate"{if($rs[highlight] == "cate")} selected{end}>分类</option>
+				<option value="subject"{if($rs[highlight] == "subject")} selected{end}>主题</option>
+			</select>
+		</td>
+		<td id="highlight_set" style="display:none;"><input type="button" class="btn2" value="设置" onclick="set_highlight()" />&nbsp;</td>
+		<td id="highlight_note" style="display:none;"></td>
+	</tr>
+	</table>
+</div>
+<script type="text/javascript">
+function set_highlight()
+{
+	var h_type = getid("highlight").value;
+	if(h_type == "module" || h_type == "cate" || h_type == "subject")
+	{
+		var h_id = getid("highlight_id").value;
+		var url = base_file + "?" + base_ctrl + "=highlight&"+base_func+"="+h_type+"&id="+encode_utf8(h_id);
+		Layer.init(url,550,400);
+	}
+}
+function to_highlight(val)
+{
+	if(val == "module" || val == "cate" || val == "subject")
+	{
+		getid("highlight_set").style.display = "";
+		getid("highlight_note").style.display = "";
+		var h_id = getid("highlight_id").value;
+		if(h_id)
+		{
+			show_highlight(val,h_id);
+		}
+	}
+	else
+	{
+		getid("highlight_set").style.display = "none";
+		getid("highlight_note").style.display = "none";
+	}
+}
+function show_highlight(h_type,h_id)
+{
+	var url = base_file + "?" + base_ctrl + "=menu&"+base_func+"=highlight&htype="+encode_utf8(h_type)+"&hid="+encode_utf8(h_id);
+	get_ajax(url,js_show_highlight);
+}
+function js_show_highlight(msg)
+{
+	if(msg == "empty")
+	{
+		getid("highlight_note").innerHTML = "";
+		getid("highlight_id").value = "";
+	}
+	else if(msg == "hidden")
+	{
+		getid("highlight_note").style.display = "none";
+		getid("highlight_id").value = "";
+	}
+	else if(msg == "error")
+	{
+		getid("highlight_note").innerHTML = "";
+		getid("highlight_id").value = "";
+	}
+	else
+	{
+		if(msg)
+		{
+			getid("highlight_note").innerHTML = msg;
+		}
+	}
+}
+<!-- if($rs[highlight_id] && in_array($rs["highlight"],array("cate","module","subject"))) -->
+getid("highlight_set").style.display = "";
+getid("highlight_note").style.display = "";
+show_highlight("{:$rs['highlight']}","{:$rs[highlight_id]}")
+<!-- end -->
+</script>
+
+
+<div class="table">
+	<div class="left">打开方式：</div>
+	<table>
+	<tr>
+		<td><input type="radio" name="target" value="1"{if($rs[target])} checked{end} /></td>
+		<td>新窗口&nbsp;</td>
+		<td><input type="radio" name="target" value="0"{if(!$rs[target])} checked{end} /></td>
+		<td>原窗口</td>
+	</tr>
+	</table>
+</div>
+
+<div class="table">
+	<div class="left">状态：</div>
+	<table>
+	<tr>
+		<td><input type="radio" name="status" value="1"{if($rs[status])} checked{end} /></td>
+		<td>使用&nbsp;</td>
+		<td><input type="radio" name="status" value="0"{if(!$rs[status])} checked{end} /></td>
+		<td>停用&nbsp; &nbsp;</td>
+		<td class="clue_on">此链接暂时不使用时，请设置【停用】</td>
+	</tr>
+	</table>
+</div>
+
+
+<div class="table">
+	<div class="left">提示：</div>
+	<input type="text" name="note" id="note" value="{:$rs[note]}" class="long_input">
+	<span class="clue_on">[鼠标移到菜单时的文字提示，为空使用标题提示]</span>
+</div>
+
+<div class="table">
+	<div class="left">排序：</div>
+	<input type="text" name="taxis" id="taxis" value="{:$rs[taxis] ? $rs[taxis] : 255}" class="short_input">
+	<span class="clue_on">[请填写排序值，最大为255，值越小越往前靠]</span>
+</div>
+
+<div class="table">
+	<div class="left">&nbsp;</div>
+	<input type="submit" id="qgbutton" value="提 交" class="btn3">
+</div>
+</form>
+
+<script type="text/javascript">
+var gd_url = base_file + "?"+base_ctrl+"=menu&"+base_func+"=";
+//[对输入的数据进行检测]
+function to_setok(id)
+{
+	var subject = getid("title").value;
+	if(!subject || subject == "undefined")
+	{
+		alert("标题不允许为空");
+		return false;
+	}
+	var linkurl = getid("link").value;
+	if(!linkurl || linkurl == "undefined")
+	{
+		alert("网址不允许为空");
+		return false;
+	}
+	getid("qgbutton").disabled = true;
+	return true;
+}
+function to_link(t)
+{
+	var turl = base_file + "?"+base_ctrl+"=link&"+base_func+"="+t;
+	Layer.init(turl,550,400);
+}
+function to_home()
+{
+	getid("link").value = "{index_php}";
+	getid("link_rewrite").value = "index.html";
+	getid("link_html").value = "{site_html}";
+	return true;
+}
+function to_cart()
+{
+	getid("link").value = "{index_php}?{control_trigger}=cart";
+	getid("link_rewrite").value = "{index_php}?{control_trigger}=cart";
+	getid("link_html").value = "{site_url}{index_php}?{control_trigger}=cart";
+	return true;
+}
+</script>
+
+<!-- inc:footer -->

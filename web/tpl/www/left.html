@@ -1,0 +1,22 @@
+<div id="left">
+<div id="PARENT1">
+<ul id="zuoa0">
+
+<li style="background:#101439"><a style="font-weight:bold">产品目录</a></li>
+
+   <!-- run:$catelist = phpok_s_catelist('pros','ts') -->  
+	<!-- $catelist AS $key=>$value -->
+  <li><a href="{:list_url($value)}" title="{:$value[cate_name]}">{:$value[cate_name]}</a></li>
+     <!--end-->
+</ul>
+</div>
+<div id="leftmain">
+  <div class="contact">
+     <div class="contact_top">联系我们</div>
+     <div class="contact_main" >
+	<!-- run:$dibu = phpok_msg("contactus") -->
+{:nl2br($dibu[note])}
+</div>
+  </div>
+  
+</div></div>

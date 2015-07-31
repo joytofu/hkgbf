@@ -1,0 +1,94 @@
+ Array
+(
+    [me] => Array
+        (
+            [id] => 261
+            [identifier] => tianzi_stock_thumb
+            [langid] => zh
+            [cate_name] => 天子港股一号缩略图
+            [parentid] => 259
+            [module_id] => 138
+            [tpl_index] => 
+            [tpl_list] => 
+            [tpl_file] => 
+            [if_index] => 0
+            [taxis] => 1
+            [status] => 1
+            [if_hidden] => 0
+            [seotitle] => 
+            [keywords] => 
+            [description] => 
+            [ifspec] => 0
+            [note] => 
+            [psize] => 30
+            [inpic] => big
+            [linkurl] => 
+            [target] => 0
+            [ordertype] => post_date:desc
+            [subcate] => 
+            [ico] => 
+            [small_pic] => 
+            [medium_pic] => 
+            [big_pic] => 
+            [fields] => 
+        )
+
+    [rslist] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 3166
+                    [module_id] => 138
+                    [cate_id] => 261
+                    [title] => 2
+                    [subtitle] => 
+                    [style] => 
+                    [status] => 1
+                    [hidden] => 0
+                    [link_url] => 
+                    [target] => 0
+                    [author] => kcswag
+                    [author_type] => admin
+                    [seotitle] => 
+                    [keywords] => 
+                    [description] => 
+                    [note] => 
+                    [identifier] => 
+                    [hits] => 0
+                    [good_hits] => 0
+                    [bad_hits] => 0
+                    [post_date] => 1435737711
+                    [modify_date] => 1435738895
+                    [thumb_id] => 532
+                    [istop] => 0
+                    [isvouch] => 0
+                    [isbest] => 0
+                    [langid] => zh
+                    [points] => 0
+                    [ip] => 113.111.253.10
+                    [replydate] => 0
+                    [taxis] => 0
+                    [htmltype] => cateid
+                    [tplfile] => 
+                    [star] => 0
+                    [price] => 0
+                    [price_currency] => 
+                    [weight] => 0
+                    [qty] => 0
+                    [is_qty] => 0
+                    [qty_unit] => 
+                    [s_rg] => 0
+                    [s_qx] => 0
+                    [s_ns] => 0
+                    [rg] => 
+                    [qx] => 
+                    [ns] => 
+                    [youxiang] => 
+                    [hy] => 
+                    [picture] => upfiles/2015/07/01/big_532.png
+                   
+                )
+
+        )
+
+)

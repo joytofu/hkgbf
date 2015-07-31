@@ -1,0 +1,29 @@
+<li><a href="index.php?c=list&ms=kehuuser&p=1" <!--if($p==1)-->id="hov"<!--end-->>+&nbsp;&nbsp;个人资料</a></li>
+<li><a href="index.php?c=list&ms=kehuuser&p=2" <!--if($p==2)-->id="hov"<!--end-->>+&nbsp;&nbsp;产品信息</a></li>
+<li><a href="index.php?c=list&ms=kehuuser&p=3" <!--if($p==3)-->id="hov"<!--end-->>+&nbsp;&nbsp;保险签单预约</a></li>
+ <!-- run:$catelist = phpok_s_catelist('qtlbxx','ts') -->  
+
+	<!-- $catelist AS $key=>$value -->
+<li><a href="index.php?c=list&ms=kehuuser&p={:$value[id]}" <!--if($p==$value[id])-->id="hov"<!--end-->>+&nbsp;&nbsp;{:$value[cate_name]}</a></li>
+
+	
+     <!--end-->
+
+<li style="background:#eee"><a><strong>通知</strong></a></li>
+ <!-- run:$catelist = phpok_s_catelist('kehutongzhi','ts') -->  
+
+	<!-- $catelist AS $key=>$value -->
+<li><a href="index.php?c=list&ms=kehuuser&p={:$value[id]}&g=1" <!--if($p==$value[id])-->id="hov"<!--end-->>+&nbsp;&nbsp;{:$value[cate_name]}</a></li>
+
+	
+     <!--end-->
+
+
+<li style="background:#eee"><a><strong>荐股信息</strong></a></li>
+ <!-- run:$catelist = phpok_s_catelist('jianguxinxi','ts') -->  
+
+	<!-- $catelist AS $key=>$value -->
+<li><a href="index.php?c=list&ms=kehuuser&p={:$value[id]}" <!--if($p==$value[id])-->id="hov"<!--end-->>+&nbsp;&nbsp;{:$value[cate_name]}</a></li>
+
+	
+     <!--end-->

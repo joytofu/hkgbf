@@ -1,0 +1,118 @@
+<!-- inc:head -->
+<!--if($_SESSION["username"])-->
+  <script language=javascript>
+window.alert('您已经登录了，请直接进入会员中心!');
+window.location.href='index.php?c=msg&id={:$_SESSION["userid"]}';
+</script>
+<!--run:-->
+exit;
+<!--/run-->
+<!--end-->
+<div class="denglu">
+
+   <div class="denglu_1">
+   <div style="float:left; width:510px;">
+    <p style="font-size:20px; color:#000; margin-bottom:20px;">用户注册</p>
+    
+     <table width="100%" border="0" cellspacing="2" cellpadding="0" bgcolor="#FFFFFF" id="cfg1">
+     
+  <form method="post" action="reg.php" name="form2" id="form2" onsubmit="return check1()">
+  <input type="hidden" value="{:$k}" name="cate" id="cate">
+    <tr>
+    <td width="23%" align="right"><span style="color:#F00">*</span>用户名：</td>
+    <td width="77%"><input type="text"  name="name" id="name"  class="text17"></td>
+  </tr>
+  <tr>
+    <td align="right"><span style="color:#F00">*</span>登录密码：</td>
+    <td><input type="password" name="newpass" id="newpass" class="text17"></td>
+  </tr>
+    <tr>
+    <td align="right"><span style="color:#F00">*</span>确认密码：</td>
+    <td><input type="password" name="chkpass" id="chkpass" class="text17"></td>
+  </tr>
+  <tr>
+    <td align="right"><span style="color:#F00">*</span>姓名：</td>
+    <td><input type="text" name="fullname" id="fullname" class="text17"></td>
+  </tr>
+   <tr>
+    <td align="right"><span style="color:#F00">*</span>身份证号码：</td>
+    <td><input type="text" name="sfz" id="sfz" class="text17"></td>
+  </tr>
+   <tr>
+    <td align="right"><span style="color:#F00">*</span>电话：</td>
+    <td><input type="text" name="mobile" id="mobile" class="text17" ></td>
+  </tr>
+   <tr>
+    <td align="right"><span style="color:#F00">*</span>邮箱：</td>
+    <td><input type="text" name="email" id="email" class="text17"></td>
+  </tr>
+    
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td> <input type="image" name="imageField" id="imageField" src="images/reg.jpg" style="margin-right:20px;" align="left" />&nbsp;</td>
+  </tr>
+ 
+     
+  </form>
+</table>
+     </div>
+     <div style="background:url(images/bgh.jpg); width:342px; height:540px; margin-right:50px; float:right">
+     <p align="center" style="font-size:18px; padding-top:70px; color:#333">已注册？现在就 <a href="index.php?c=list&cs=kehu&login" style="color:#F00">登录</a></p>
+   </div>
+   
+</div>
+<!-- inc:foot -->
+<script type="text/javascript">
+function check1()
+{
+if (document.form2.name.value=="")
+{
+window.alert("请输入用户名 ");
+document.form2.name.focus();
+return false;
+}
+
+
+if (document.form2.newpass.value=="")
+{
+window.alert("请输入密码    ");
+document.form2.newpass.focus();
+return false;
+}
+if (document.form2.newpass.value!=document.form2.chkpass.value)
+{
+window.alert("两次密码输入不一致      ");
+document.form2.chkpass.focus();
+return false;
+}
+if (document.form2.fullname.value=="")
+{
+window.alert("请输入姓名    ");
+document.form2.fullname.focus();
+return false;
+}
+
+if (document.form2.sfz.value=="")
+{
+window.alert("请输入身份证号码    ");
+document.form2.sfz.focus();
+return false;
+}
+
+
+if (document.form2.mobile.value=="")
+{
+window.alert("请输入电话    ");
+document.form2.mobile.focus();
+return false;
+}
+if (document.form2.email.value=="")
+{
+window.alert("请输入邮箱    ");
+document.form2.email.focus();
+return false;
+}
+
+
+}
+</script>

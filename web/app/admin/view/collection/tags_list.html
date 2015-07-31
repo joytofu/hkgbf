@@ -1,0 +1,58 @@
+<!-- inc:header -->
+<script type="text/javascript">
+function collection_modify(id)
+{
+	var url = "{:site_url('collection,tags_set')}";
+	url += "tid="+id;
+	direct(url);
+}
+function collection_del(id)
+{
+	var qc = confirm("确定要删除该字段配置吗？\n\n删除后将同时删除已采集到的字段，请慎用！");
+	if(qc != "0")
+	{
+		var url = "{:site_url('collection,tags_del')}";
+		url += "id="+id;
+		direct(url);
+		return true;
+	}
+	return false;
+}
+function to_test(id)
+{
+	var url = "{:site_url('collection,test')}id="+id;
+	Layer.init(url,540,325);
+	return false;
+}
+</script>
+<div class="notice"><div class="p">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><span class="lead">&nbsp;&raquo; <a href="{:site_url('collection')}">采集信息管理</a> &raquo; {:$rs[title]}  &raquo; 字段列表 &nbsp; &nbsp; 【<a href="javascript:to_test('{:$id}');void(0);">测试采集</a>】</span></td>
+		<td align="right"><a href="{:site_url('collection,tags_set','id='.$id)}" class="button">添加新字段</a></td>
+	</tr>
+	</table>
+</div></div>
+
+<div class="main">
+<table width="100%" style="layout:fixed;" cellpadding="0" cellspacing="0">
+<tr>
+	<td class="t_sub" width="50px">ID</td>
+	<td class="t_sub">主题</td>
+	<td class="t_sub">变量</td>
+	<td class="t_sub" width="120px">操作</td>
+</tr>
+<!-- $rslist AS $key=>$value -->
+<tr class="tr_out" onMouseOver="over_tr(this)" onMouseOut="out_tr(this)">
+	<td align='center' class="tc_left">{:$value[id]}</td>
+	<td align='left' class="tc_right">&nbsp;{:$value[title]}</td>
+	<td align='left' class="tc_right">&nbsp;{:$value[identifier]}</td>
+	<td align="center" class="tc_right">
+		<input type="button" class="btn2" value="编辑" onclick="collection_modify('{:$value[id]}')" />
+		<input type="button" class="btn2" value="删除" onclick="collection_del('{:$value[id]}')" />
+	</td>
+</tr>
+<!-- end -->
+</table>
+</div>
+<!-- inc:footer -->
