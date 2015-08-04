@@ -73,18 +73,18 @@
     <div class="index_news" style="float:right">
       <div class="news_top"><a href="index.php?c=list&cs=shichangdongtai">市场动态</a></div>
       <div class="clear"></div>   
-            <!--run:$any = phpok_c_list('shichangdongtai',2,'','','isvouch')-->
-<!--$any[rslist] AS $key=>$value-->
-<A title="{:$value[title]}" href="{:msg_url($value)}" target="_blank"><img src="{:$value[picture]}"></a>
+            <!--run:$mt = phpok_c_list('shichangdongtai','1','','post_desc','isvouch')-->
+
+<A title="{:$mt[rs][title]}" href="index.php?c=msg&id={:$mt[rs][id]}&" target="_blank"><img src="{:$mt[rs][picture]}"></a>
       <div class="news_main">
-         <div class="ititle" style="height:auto;overflow:visible"><A title="{:$value[title]}" href="{:msg_url($value)}" target="_blank">{:$value[title]}</A></div>
+         <div class="ititle" style="height:auto;overflow:visible"><A title="{:$mt[rs][title]}" href="index.php?c=msg&id={:$mt[rs][id]}&" target="_blank">{:$mt[rs][title]}</A></div>
          <div class="news_txt">
-           {:$value[note]}
+           {:$mt[rs][note]}
          </div>
-         <div class="i_more"><A title="{:$value[title]}" href="{:msg_url($value)}" target="_blank" style="color:#376db7">了解更多>></a></div>
+         <div class="i_more"><A title="{:$mt[rs][title]}" href="index.php?c=msg&id={:$mt[rs][id]}&" target="_blank" style="color:#376db7">了解更多>></a></div>
       </div>
 
-<!-- end -->
+
        
    </div>
 
