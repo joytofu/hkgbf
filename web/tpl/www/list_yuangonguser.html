@@ -36,14 +36,17 @@ while ($rs2=mysql_fetch_array($result2)){
       <div class="righttop"><div class="ll">{:$pp}</div><div class="rr">您当前的位置是：<a href="{:$_sys[siteurl]}">网站首页</a> > {:$m_rs[title]} > {:$pp}</div></div>
       
       <div class="rightmain">
- 
+
+
 <!--if($p==207)-->
 <!-- inc:tsjy-->
 <!--elseif($p==263)-->
 <!--inc:staff_info-->
 <!--elseif($p==200)-->
 <!--inc:wendangziliao-->
-<!--else-->
+<!--elseif($p==277)-->
+<!--inc:internal_table-->
+ <!--else-->
     <!-- inc:xzzq3-->
 
 <!--end-->

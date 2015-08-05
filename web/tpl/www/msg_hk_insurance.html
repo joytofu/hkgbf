@@ -17,9 +17,9 @@
 
    <div class="right">
       <div class="righttop"><div class="ll">香港保险</div><div class="rr">您当前的位置是：<a href="{:$_sys[siteurl]}">网站首页</a> > {:$m_rs[title]} > 香港保险</div></div>
-<!--run:$hk_insurance = phpok_c_list("xianggangbaoxian","1")-->
+<!--run:$hk_insurance = phpok_msg("hk_insurance")-->
       <div class="rightmain">
-          {:$hk_insurance[rs][content]}
+          {:$hk_insurance[content]}
       </div>
       <!--run:unset($hk_insurance)-->
    </div>
