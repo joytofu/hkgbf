@@ -2,20 +2,35 @@
  <div id="banner">
  <div id="flashBg" >
 <div id="flashLine">
-<div id="flash">
+<!--<div id="flash">
+&lt;!&ndash; run:$kflist = phpok('picplayer') &ndash;&gt;
+	&lt;!&ndash; $kflist[rslist] AS $key=>$value &ndash;&gt;
+    <div class="huir" {if($value[target])} target="_blank" {end} id="flash{:$key+1}"  style="background-image: url({:$value[picture]});&lt;!&ndash;if($key==0)&ndash;&gt;display: block; &lt;!&ndash;else&ndash;&gt; display: none;&lt;!&ndash;end&ndash;&gt; background-position: 50% 0%; padding-top:100px; background-repeat: no-repeat no-repeat; height:490px; " name="#0b0b0b">
+        <div style="width:1200px; margin:0 auto; height:100%; overflow:hidden; line-height:50px;">
+        {:$value[content]}
+        </div>
+    </div>
+    &lt;!&ndash; end &ndash;&gt;
+    <div class="flash_bar">
+        &lt;!&ndash; run:$kflist = phpok('picplayer') &ndash;&gt;
+        &lt;!&ndash; $kflist[rslist] AS $key=>$value &ndash;&gt;
+        <div &lt;!&ndash;if($key==0)&ndash;&gt;class="dq" &lt;!&ndash;else&ndash;&gt; class="no"&lt;!&ndash;end&ndash;&gt;  id="f{:$key+1}" onclick="changeflash({:$key+1})"></div>
+        &lt;!&ndash; end &ndash;&gt;
+    </div>-->
+    <div id="flash">
         <!-- run:$kflist = phpok('picplayer') -->
-	<!-- $kflist[rslist] AS $key=>$value -->
-<a href="{:$value[link_url]}" {if($value[target])} target="_blank" {end} id="flash{:$key+1}"  style="background-image: url({:$value[picture]});<!--if($key==0)-->display: block; <!--else--> display: none;<!--end--> background-position: 50% 0%; background-repeat: no-repeat no-repeat; " name="#0b0b0b"></a>		
-    	<!-- end -->
+        <!-- $kflist[rslist] AS $key=>$value -->
+        <div class="huir" {if($value[target])} target="_blank" {end} id="flash{:$key+1}"  style="background-image: url({:$value[picture]});<!--if($key==0)-->display: block; <!--else--> display: none;<!--end--> background-position: 50% 0%; padding-top:100px; background-repeat: no-repeat no-repeat; height:490px; " name="#0b0b0b">
+            <div style="width:1200px; margin:0 auto; height:100%; overflow:hidden; line-height:50px;">{:$value[content]}</div>
+        </div>
+        <!-- end -->
 
-  <div class="flash_bar">
-	
-
-<!-- run:$kflist = phpok('picplayer') -->
-	<!-- $kflist[rslist] AS $key=>$value -->
-    <div <!--if($key==0)-->class="dq" <!--else--> class="no"<!--end-->  id="f{:$key+1}" onclick="changeflash({:$key+1})"></div>
-    	<!-- end -->
-  </div>
+        <div class="flash_bar" style="height:55px">
+            <!-- run:$kflist = phpok('picplayer') -->
+            <!-- $kflist[rslist] AS $key=>$value -->
+            <div <!--if($key==0)-->class="dq" <!--else--> class="no"<!--end-->  id="f{:$key+1}" onclick="changeflash({:$key+1})"></div>
+        <!-- end -->
+    </div>
 </div>
 </div>
 </div>

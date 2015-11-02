@@ -8,7 +8,7 @@ $pass=$_POST["newpass"];
 $fullname=$_POST["fullname"];
 
 $mobile=$_POST["mobile"];
-$sfz=$_POST["sfz"];
+//$sfz=$_POST["sfz"];
 
 $email=$_POST["email"];
 
@@ -62,9 +62,9 @@ $mobile = $_POST["mobile"];
 $aa="mobile";
 mysql_query("INSERT INTO juniu_list_ext(id,field,val) VALUES ('$rsid','$aa','$mobile')");
 
-$sfz = $_POST["sfz"];
+/*$sfz = $_POST["sfz"];
 $aa="sfz";
-mysql_query("INSERT INTO juniu_list_ext(id,field,val) VALUES ('$rsid','$aa','$sfz')");
+mysql_query("INSERT INTO juniu_list_ext(id,field,val) VALUES ('$rsid','$aa','$sfz')");*/
 
 
 $email = $_POST["email"];
