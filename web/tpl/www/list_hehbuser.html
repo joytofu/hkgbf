@@ -29,6 +29,14 @@ window.location.href='index.php?c=list&ms=hehbuser&p=1';
    elseif($p==1){
    $pp="保险签单预约";
    }
+   elseif($p==3){
+    $pp="渠道信息";}
+   elseif($p==4){
+    $pp="通讯录";}
+   elseif($p==5){
+    $pp=="投诉建议";}
+   elseif($p==6){
+    $pp=="保险建议书系统";}
    else
    {
 
@@ -45,15 +53,27 @@ while ($rs2=mysql_fetch_array($result2)){
       <div class="rightmain">
  
 <!--if($p==1)-->
-  <!-- inc:bxdyy-->
+   <!-- inc:bxdyy-->
 <!--elseif($p==2)-->
-<!-- inc:qtyy-->
-<!--else-->
- <!--if($g==1)-->
-    <!-- inc:xzzq-->
+   <!-- inc:qtyy-->
+<!--elseif($p==3)-->
+   <!-- inc:staff_info-->
+<!--elseif($p==4)-->
+   <!-- inc:address_book-->
+<!--elseif($p==5)-->
+   <!-- inc:tsjy-->
+<!--elseif($p==6)-->
+   <!-- inc:insurance_system-->
+<!--elseif($p==200)-->
+   <!--inc:wendangziliao-->
+<!--elseif($p==277)-->
+   <!--inc:internal_table-->
+<!--elseif($p==202)-->
+   <!-- inc:notice_for_agents-->
+<!--elseif($p==201)-->
+   <!--inc:xzzq3-->
  <!--else-->
     <!-- inc:khzl-->
-  <!--end-->
 <!--end-->
       </div>
       
